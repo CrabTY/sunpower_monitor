@@ -1,0 +1,15 @@
+-- Slot index for the panel read models.
+--
+-- schema.sql creates this index for a fresh database; an existing one only gets
+-- it from this file. Run once, from workers/ingest:
+--
+--   npx wrangler d1 execute sunpower-monitor --remote --file ../../workers/migrations/2026-09-21-panel-sample-slot-index.sql
+--
+-- The dashboard reads the newest stored slot (MAX(slot_ts) for one collector)
+-- and every slot inside a requested day. The primary key is
+-- (collector_id, panel_id, slot_ts), so neither query can seek past the first
+-- column: each page load scanned the whole partition. On 2026-09-21 that, plus
+-- the Live page's per-minute history poll, exhausted the free plan's 5M row
+-- reads for the day and every dashboard read returned HTTP 500 until midnight
+-- UTC. The index is additive and safe to keep.
+CREATE INDEX IF NOT EXISTS panel_sample_by_slot ON panel_sample (collector_id, slot_ts, panel_id);

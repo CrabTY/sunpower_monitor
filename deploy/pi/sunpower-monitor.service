@@ -1,0 +1,30 @@
+# Optional direct Python service. Do not run alongside the Docker Compose collector.
+[Unit]
+Description=SunPower PVS6 read-only collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sunpower
+Group=sunpower
+WorkingDirectory=/opt/sunpower-monitor
+Environment=PYTHONPATH=/opt/sunpower-monitor
+EnvironmentFile=/etc/sunpower-monitor/collector.env
+ExecStart=/usr/bin/python3 -m collector.main --db /var/lib/sunpower-monitor/queue.sqlite3
+Restart=always
+RestartSec=5
+
+# The queue and the anonymous panel mapping are the only writable state.
+StateDirectory=sunpower-monitor
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/sunpower-monitor
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target

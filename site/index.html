@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN" data-title-zh="PVS6 的能源历史" data-title-en="PVS6 energy history">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent history and panel monitoring for SunPower PVS6 systems without batteries. Project background, alternatives, hardware requirements, and setup.">
+  <meta name="theme-color" content="#f7f6ef">
+  <title>SunPower Monitor · PVS6 的能源历史</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231e3c31'/%3E%3Ctext x='20' y='29' text-anchor='middle' font-size='30' fill='%23f9b342'%3E✳%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="introduction.css">
+  <script src="introduction.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main"><span lang="zh-CN">跳到正文</span><span lang="en">Skip to content</span></a>
+  <header class="site-header wrap">
+    <a class="brand" href="index.html"><span class="brand-sun" aria-hidden="true">✳</span><span>sunpower<span class="brand-sub">monitor</span></span></a>
+    <div class="nav-strip"><nav aria-label="Main navigation / 主导航">
+      <a href="index.html" aria-current="page"><span lang="zh-CN">总览</span><span lang="en">Overview</span></a>
+      <a href="getting-started.html"><span lang="zh-CN">开始使用</span><span lang="en">Setup</span></a>
+      <a href="compare.html"><span lang="zh-CN">方案对比</span><span lang="en">Compare</span></a>
+      <a href="project.html"><span lang="zh-CN">项目说明</span><span lang="en">Project</span></a>
+    </nav></div>
+    <div class="header-actions">
+      <div class="languages" role="group" aria-label="Language / 语言">
+        <button type="button" data-language="zh-CN" aria-pressed="true">中文</button><span aria-hidden="true">/</span><button type="button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="repo-link" href="https://github.com/CrabTY/sunpower_monitor">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+<section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span><span lang="zh-CN">专为 SunPower PVS6 · 无电池系统</span><span lang="en">FOR SUNPOWER PVS6 · WITHOUT BATTERIES</span></p>
+        <h1 id="hero-title"><span lang="zh-CN">让家里的阳光，<br>变成<span class="highlight">看得懂的电。</span></span><span lang="en">Your solar.<br>Your history.<br><span class="highlight">A clearer picture.</span></span></h1>
+        <p class="hero-description"><span lang="zh-CN">实时查看发电与用电，回看能源历史，比较每块面板的表现。直接读取 PVS6，把记录保存在自己的 Cloudflare 账号中。</span><span lang="en">See live energy flow, revisit your history, and compare every panel. Read directly from PVS6 and keep the record in your own Cloudflare account.</span></p>
+        <div class="hero-buttons"><a class="button primary" href="getting-started.html"><span lang="zh-CN">开始使用</span><span lang="en">Get started</span><span aria-hidden="true">↗</span></a><a class="text-link" href="demo/?scenario=day"><span lang="zh-CN">体验在线演示</span><span lang="en">Try the live demo</span><span aria-hidden="true">↗</span></a></div>
+        <p class="hero-note">SunPower PVS6 <span aria-hidden="true">·</span> Always-on collector <span aria-hidden="true">·</span> Cloudflare</p>
+      </div>
+      <figure class="hero-preview">
+        <div class="sun-disc" aria-hidden="true"></div>
+        <div class="browser-frame"><div class="browser-bar"><span class="window-dots" aria-hidden="true">● ● ●</span><span>SunPower Monitor / Live</span><span class="frame-tag">READ ONLY</span></div><a href="assets/live.png" aria-label="Live screenshot / 查看实时界面截图" data-screenshot aria-haspopup="dialog"><img src="assets/live.png" width="1440" height="1080" alt="Live 仪表盘：太阳能发电、家庭用电、电网方向和当日曲线 / Live dashboard with solar, home use, grid direction and the daily curve" fetchpriority="high"></a></div>
+        <figcaption><span class="caption-dot" aria-hidden="true"></span><span lang="zh-CN">实际界面截图 · 模拟数据 · 点击图片查看</span><span lang="en">Actual interface · simulated readings · select image to view</span></figcaption>
+      </figure>
+    </section>
+<div class="principles wrap">
+      <p><span class="principle-symbol" aria-hidden="true">↗</span><span lang="zh-CN">直接读取 PVS6</span><span lang="en">Straight from your PVS6</span></p>
+      <p><span class="principle-symbol" aria-hidden="true">◎</span><span lang="zh-CN">仅授权用户可见</span><span lang="en">Authorized access only</span></p>
+      <p><span class="principle-symbol" aria-hidden="true">≈</span><span lang="zh-CN">外网中断，仍可记录</span><span lang="en">Records without internet</span></p>
+      <p><span class="principle-symbol" aria-hidden="true">◷</span><span lang="zh-CN">数据缺口如实保留</span><span lang="en">Gaps stay visible</span></p>
+    </div>
+<section class="background wrap section" id="background" aria-labelledby="background-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">WHY THIS EXISTS</p><h2 id="background-title"><span lang="zh-CN">从查看实时，到保留自己的历史。</span><span lang="en">From live readings to your own history.</span></h2></div>
+        <p class="section-intro"><span lang="zh-CN">这个项目起于一个家庭需求：为已经安装的 SunPower PVS6，保留自己的<span class="keep-together">长期记录。</span></span><span lang="en">One household’s need: keep an independent, lasting record of an installed SunPower PVS6 system.</span></p>
+      </div>
+<div class="feature-grid"><article class="feature"><p class="feature-label">2024 / SUNPOWER</p><h3><span lang="zh-CN">设备仍在，服务已变。</span><span lang="en">Equipment stays. Services change.</span></h3><p><span lang="zh-CN">原 SunPower 于 2024 年 8 月申请破产保护。已安装的系统，仍需要持续监控与长期记录。</span><span lang="en">The former SunPower filed for Chapter 11 in August 2024. Installed systems still need monitoring and a lasting record.</span></p><a class="text-link" href="https://www.sec.gov/Archives/edgar/data/867773/000086777324000086/spwr-20240802.htm"><span lang="zh-CN">SEC 公告</span><span lang="en">SEC filing</span> ↗</a></article><article class="feature"><p class="feature-label">TODAY / SUNSTRONG</p><h3><span lang="zh-CN">实时之外，还需要历史。</span><span lang="en">Live readings are only the start.</span></h3><p><span lang="zh-CN">SunStrong 实时监控免费，历史分析属于高级功能，租赁客户例外。本项目让你独立保留记录。</span><span lang="en">SunStrong lists live monitoring as Basic and history as Premium, with exceptions for lease customers. Keep an independent record.</span></p><a class="text-link" href="https://sunstrongmanagement.com/help-center/"><span lang="zh-CN">官方说明 · 2026-09-29</span><span lang="en">Official features · 2026-09-29</span> ↗</a></article><article class="feature"><p class="feature-label">THIS PROJECT / PVS6</p><h3><span lang="zh-CN">保留记录，理解变化。</span><span lang="en">Keep records. Understand changes.</span></h3><p><span lang="zh-CN">在自己的账号中保存发电和用电历史。回看每天的变化，把短暂波动放回更长的时间里理解。</span><span lang="en">Keep production and consumption history in your own account. Revisit daily changes and put short fluctuations in a longer context.</span></p><a class="text-link" href="project.html"><span lang="zh-CN">项目的设计思路</span><span lang="en">How it works</span> ↗</a></article></div>
+    </section>
+<section class="explore wrap section" id="explore" aria-labelledby="explore-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / A CLOSER LOOK</p><h2 id="explore-title"><span lang="zh-CN">从此刻，到每一天。</span><span lang="en">From right now<br>to the bigger picture.</span></h2></div><p class="section-intro"><span lang="zh-CN">不只是几个数字。把发电、用电、天气和面板表现放在一起，理解家里发生了什么。</span><span lang="en">More than a set of numbers. Connect production, consumption, weather, and panel performance to understand your home.</span></p></div>
+      <div class="feature-grid">
+        <article class="feature"><p class="feature-label"><span class="feature-number">01</span> LIVE</p><h3><span lang="zh-CN">电，现在流向哪里？</span><span lang="en">Where is your power going?</span></h3><p><span lang="zh-CN">查看当前发电、家庭负载和电网方向。用当日功率曲线，追踪从日出到此刻的变化。</span><span lang="en">Check solar, home load and grid direction. Follow the daily power curve from sunrise to the latest reading.</span></p><a class="text-link" href="assets/live.png" data-screenshot aria-haspopup="dialog"><span lang="zh-CN">查看实时界面</span><span lang="en">View the live screen</span><span aria-hidden="true">↗</span></a></article>
+        <article class="feature"><p class="feature-label"><span class="feature-number">02</span> HISTORY</p><h3><span lang="zh-CN">每一度电，都有来去。</span><span lang="en">Every day tells a story.</span></h3><p><span lang="zh-CN">按日、周、月、年回看能源记录。切换功率与电量，结合天气查看用电来源和去向。</span><span lang="en">Review days, weeks, months and years. Switch power and energy, add weather, and trace energy sources and destinations.</span></p><a class="text-link" href="#history-screen"><span lang="zh-CN">查看历史界面</span><span lang="en">Explore energy history</span><span aria-hidden="true">↓</span></a></article>
+        <article class="feature"><p class="feature-label"><span class="feature-number">03</span> PANELS</p><h3><span lang="zh-CN">认识屋顶上的每一块。</span><span lang="en">Know every panel up there.</span></h3><p><span lang="zh-CN">比较所有面板的功率曲线与状态。选中单块面板，查看它的历史记录和每日发电表现。</span><span lang="en">Compare panel power curves and reporting states. Select an individual panel to inspect its history and daily production.</span></p><a class="text-link" href="#panels-screen"><span lang="zh-CN">查看面板界面</span><span lang="en">Meet your panels</span><span aria-hidden="true">↓</span></a></article>
+      </div>
+      <div class="screenshot-grid">
+        <figure id="history-screen"><div class="image-heading"><span>HISTORY / <span lang="zh-CN">能源历史</span><span lang="en">ENERGY OVER TIME</span></span><span aria-hidden="true">↗</span></div><a href="assets/history.png" data-screenshot aria-haspopup="dialog"><img src="assets/history.png" width="1440" height="1080" alt="History 界面：时间范围、能源总量和功率趋势 / History screen with time ranges, energy totals and power trends" loading="lazy"></a><figcaption><span lang="zh-CN">选择时间范围，再拖动区间查看电量。截图使用模拟数据。</span><span lang="en">Choose a period, then select an interval to inspect its energy. Simulated readings shown.</span></figcaption></figure>
+        <figure id="panels-screen"><div class="image-heading"><span>PANELS / <span lang="zh-CN">面板表现</span><span lang="en">PANEL PERFORMANCE</span></span><span aria-hidden="true">↗</span></div><a href="assets/panels.png" data-screenshot aria-haspopup="dialog"><img src="assets/panels.png" width="1440" height="1080" alt="Panels 界面：多块面板的功率曲线和状态选择 / Panels screen with individual power curves and panel states" loading="lazy"></a><figcaption><span lang="zh-CN">点选一块面板，查看它自己的记录。截图使用模拟数据。</span><span lang="en">Select a panel to see its own recorded history. Simulated readings shown.</span></figcaption></figure>
+      </div>
+      <p class="feature-footnote"><span lang="zh-CN">实际界面 · 模拟数据。数据含义与功能边界见</span><span lang="en">Actual interface · simulated readings. For data definitions and feature limits, see</span> <a href="project.html#data-boundaries"><span lang="zh-CN">项目说明</span><span lang="en">Project notes</span> ↗</a></p>
+
+
+    </section>
+<section class="begin wrap section" id="prepare"><div class="section-heading"><div><p class="eyebrow">GET STARTED</p><h2><span lang="zh-CN">准备好这三样，就可以开始。</span><span lang="en">Three things to get started.</span></h2></div><a class="button primary" href="getting-started.html"><span lang="zh-CN">查看安装步骤</span><span lang="en">Setup guide</span> ↗</a></div><dl class="requirements preparation-list"><div><dt><span lang="zh-CN">24 小时开机的机器</span><span lang="en">An always-on machine</span></dt><dd><span lang="zh-CN">树莓派、小主机或 NAS，支持 Docker。</span><span lang="en">A Raspberry Pi, mini PC or NAS with Docker.</span></dd></div><div><dt><span lang="zh-CN">Cloudflare 账号</span><span lang="en">A Cloudflare account</span></dt><dd><span lang="zh-CN">托管网页、接口与 D1 历史数据库。</span><span lang="en">Hosts the dashboard, APIs and D1 history database.</span></dd></div><div><dt><span lang="zh-CN">GitHub 账号</span><span lang="en">A GitHub account</span></dt><dd><span lang="zh-CN">登录仪表盘；安装时按指引注册 OAuth App。</span><span lang="en">Signs into the dashboard; register an OAuth App during setup.</span></dd></div></dl><p class="setup-footnote"><span lang="zh-CN">还在选择方案？</span><span lang="en">Still choosing a solution?</span> <a href="compare.html"><span lang="zh-CN">与 Home Assistant、Sunflower 和 SunStrong 对比</span><span lang="en">Compare Home Assistant, Sunflower and SunStrong</span> ↗</a></p></section>
+  </main>
+  <footer class="site-footer wrap"><a class="footer-brand" href="index.html">✳ SunPower Monitor</a><p><span lang="zh-CN">独立项目 · 不隶属于 SunPower 或 SunStrong · MIT 许可</span><span lang="en">Independent project · not affiliated with SunPower or SunStrong · MIT license</span></p><a href="https://github.com/CrabTY/sunpower_monitor/blob/main/README.md"><span lang="zh-CN">项目文档</span><span lang="en">Documentation</span> ↗</a></footer>
+  <dialog id="image-viewer" class="image-viewer" aria-labelledby="image-viewer-title">
+    <div class="viewer-toolbar"><h2 id="image-viewer-title"><span lang="zh-CN">图片预览</span><span lang="en">Image preview</span></h2><div class="viewer-actions"><a id="image-original" href="assets/live.png" target="_blank" rel="noopener"><span lang="zh-CN">查看原图</span><span lang="en">View original</span> <span aria-hidden="true">↗</span></a><form method="dialog"><button type="submit" autofocus><span lang="zh-CN">关闭</span><span lang="en">Close</span> <span aria-hidden="true">×</span></button></form></div></div>
+    <figure><img alt=""><figcaption></figcaption></figure>
+    <p class="viewer-help"><span lang="zh-CN">按 Esc 或点击空白处关闭</span><span lang="en">Esc or click outside to close</span></p>
+  </dialog>
+</body>
+</html>

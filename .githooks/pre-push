@@ -1,0 +1,58 @@
+#!/bin/sh
+set -eu
+cd "$(git rev-parse --show-toplevel)"
+
+while read -r local_ref local_oid remote_ref remote_oid; do
+  [ "$remote_ref" = refs/heads/main ] || continue
+  case "$local_oid" in *[!0]*) ;; *) continue ;; esac
+
+  graphify_command=$(command -v graphify) || {
+    echo "Graphify is required to push main. See CONTRIBUTING.md for setup." >&2
+    exit 1
+  }
+  snapshot_parent=$(mktemp -d "${TMPDIR:-/tmp}/sunpower-graph.XXXXXX")
+  trap 'rm -rf -- "$snapshot_parent"' 0
+  trap 'exit 1' HUP INT TERM
+  snapshot="$snapshot_parent/sunpower_monitor"
+  mkdir "$snapshot" "$snapshot_parent/previous"
+  git archive --output="$snapshot_parent/source.tar" "$local_oid"
+  tar -xf "$snapshot_parent/source.tar" -C "$snapshot"
+  for file in graph.json graph.html GRAPH_REPORT.md; do
+    if [ -f "$snapshot/graphify-out/$file" ]; then
+      cp "$snapshot/graphify-out/$file" "$snapshot_parent/previous/$file"
+    fi
+  done
+
+  (
+    cd "$snapshot"
+    unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_COMMON_DIR
+    unset GIT_OBJECT_DIRECTORY GIT_ALTERNATE_OBJECT_DIRECTORIES
+    PYTHONHASHSEED=0 GRAPHIFY_NO_TIPS=1 GRAPHIFY_OUT=graphify-out "$graphify_command" update .
+  )
+  changed=0
+  for file in graph.json graph.html GRAPH_REPORT.md; do
+    test -s "$snapshot/graphify-out/$file"
+    cmp -s "$snapshot/graphify-out/$file" "$snapshot_parent/previous/$file" || changed=1
+  done
+  [ "$changed" = 1 ] || continue
+
+  if [ "$(git rev-parse HEAD)" != "$local_oid" ]; then
+    echo "Check out $local_ref in its worktree to update its graph, then retry the push." >&2
+    exit 1
+  fi
+  for file in graph.json graph.html GRAPH_REPORT.md; do
+    path="graphify-out/$file"
+    if ! git diff --quiet -- "$path" || ! git diff --cached --quiet -- "$path" ||
+       { [ -e "$path" ] && ! git ls-files --error-unmatch -- "$path" >/dev/null 2>&1; }; then
+      echo "Commit or stash existing changes to $path first; the hook will not overwrite them." >&2
+      exit 1
+    fi
+  done
+  mkdir -p graphify-out
+  for file in graph.json graph.html GRAPH_REPORT.md; do
+    cp "$snapshot/graphify-out/$file" "graphify-out/$file"
+  done
+  echo "Main's graph was updated from the commit being pushed. Push paused." >&2
+  echo "Commit the three graphify-out results, then retry git push." >&2
+  exit 1
+done

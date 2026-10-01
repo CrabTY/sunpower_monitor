@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f4f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d151d" media="(prefers-color-scheme: dark)" />
+    <title>Solar monitor</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <main class="page page-live">
+      <nav class="nav">
+        <span class="brand"><span class="brand-mark" aria-hidden="true">✳</span> SUNPOWER <span class="brand-divider">/</span> MONITOR</span>
+        <a href="/" aria-current="page">Live</a>
+        <a href="/history.html">History</a>
+        <a href="/panels.html">Panels</a>
+        <a href="/settings.html">Settings</a>
+      </nav>
+
+      <header class="head" id="content" tabindex="-1">
+        <div><span class="eyebrow">Energy journal / Live</span><h1>Power, right now.</h1><p class="head-subtitle">Production, home use, and grid direction.</p></div>
+        <p class="state" id="state" role="status">Loading…</p>
+      </header>
+
+      <p class="banner" id="banner" role="alert" hidden></p>
+
+      <section class="onboarding" id="onboarding" hidden>
+        <h2>Waiting for the site</h2>
+        <ul class="steps" id="steps"></ul>
+        <p class="note">
+          Each step turns on from stored cloud state. Nothing here is simulated, and a panel
+          list that has not arrived is not the same as panels being offline.
+        </p>
+      </section>
+
+      <div class="live-summary">
+      <section class="chart-card flow-card" aria-label="Current power flow">
+        <div class="chart-heading"><h2 class="chart-title">Current power flow</h2><a href="/history.html#composition">Energy mix →</a></div>
+        <div class="flow">
+          <div class="flow-node"><span class="note">Solar</span><strong id="flow-pv">—</strong></div>
+          <svg class="energy-link" id="flow-solar-link" viewBox="0 0 160 60" aria-hidden="true">
+            <path class="track" d="M14 30H146"></path>
+            <g class="forward-motion">
+              <path class="travel-line" d="M14 30H146"></path>
+              <path class="arrow-head" d="m138 23 9 7-9 7"></path>
+              <circle class="flow-dot" r="5">
+                <animateMotion dur="1.8s" repeatCount="indefinite" path="M14 30H146"></animateMotion>
+              </circle>
+            </g>
+          </svg>
+          <div class="flow-node"><span class="note">Home load (estimated)</span><strong id="flow-home">—</strong></div>
+          <svg class="energy-link grid-link" id="flow-grid-link" viewBox="0 0 160 60" aria-hidden="true">
+            <path class="track" d="M14 30H146"></path>
+            <g class="forward-motion">
+              <path class="travel-line" d="M14 30H146"></path>
+              <path class="arrow-head" d="m138 23 9 7-9 7"></path>
+              <circle class="flow-dot" r="5">
+                <animateMotion dur="1.8s" repeatCount="indefinite" path="M14 30H146"></animateMotion>
+              </circle>
+            </g>
+            <g class="reverse-motion">
+              <path class="travel-line" d="M14 30H146"></path>
+              <path class="arrow-head" d="m22 23-9 7 9 7"></path>
+              <circle class="flow-dot" r="5">
+                <animateMotion dur="1.8s" repeatCount="indefinite" path="M146 30H14"></animateMotion>
+              </circle>
+            </g>
+          </svg>
+          <div class="flow-node"><span class="note" id="flow-grid-label">Grid</span><strong id="flow-grid">—</strong></div>
+        </div>
+        <p class="legend" id="flow-note" hidden></p>
+      </section>
+      <section class="live-weather" aria-label="Today's forecast">
+        <div><span class="eyebrow">Today's forecast</span><strong id="weather-brief">Waiting for forecast</strong></div>
+        <div><span>Sunshine forecast</span><strong id="sunshine-brief">—</strong></div>
+      </section>
+      </div>
+
+      <p class="note-line" id="solar-note" hidden></p>
+
+      <section class="chart-card">
+        <div class="chart-heading">
+          <div><h2 class="chart-title" id="chart-title">Solar shape &amp; grid direction</h2>
+          <p class="chart-subtitle" id="weather-current">Forecast weather loading…</p></div>
+        </div>
+        <section class="controls" aria-label="Chart range">
+          <div class="control-group" id="ranges">
+            <button type="button" data-range="hour" aria-pressed="false">Last hour</button>
+            <button type="button" data-range="sofar" aria-pressed="true">Day so far</button>
+            <button type="button" data-range="daylight" aria-pressed="false">Daylight</button>
+            <button type="button" data-range="today" aria-pressed="false">Full day</button>
+          </div>
+          <div class="control-group" id="weathers" aria-label="Weather layer" hidden>
+            <button type="button" data-weather="cloud" aria-pressed="true">Cloud cover</button>
+            <button type="button" data-weather="temperature" aria-pressed="false">Temperature</button>
+          </div>
+          <details class="advanced">
+            <summary>Choose exact times</summary>
+            <form class="control-group custom" id="custom">
+              <label>From <input type="datetime-local" id="from" name="from" autocomplete="off" /></label>
+              <label>To <input type="datetime-local" id="to" name="to" autocomplete="off" /></label>
+              <button type="submit">Apply</button>
+            </form>
+          </details>
+        </section>
+        <div class="chart" id="chart"></div>
+        <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+        <p class="legend">
+          <span class="key key-solar" id="solar-key">Solar</span>
+          <span class="key key-import">Grid in</span>
+          <span class="key key-export">Grid out</span>
+          <span class="key key-weather" id="weather-key">Cloud cover %</span>
+          <span class="key key-gap">Failed / partial window</span>
+        </p>
+        <p class="legend" id="weather-legend" hidden></p>
+        <p class="legend" id="chart-state">Loading…</p>
+        <p class="legend" id="chart-detail" role="status">Tap or hover the chart to read one window. Keyboard: focus chart, then use arrow keys.</p>
+        <details class="advanced chart-details">
+          <summary>Energy, export and panel details</summary>
+          <section class="facts">
+            <p><span class="fact-label">Past 30 min · Mean export</span> <span id="export-mean30">—</span></p>
+            <p><span class="fact-label">Past 60 min · Mean export</span> <span id="export-mean60">—</span></p>
+            <p><span class="fact-label">Past 30 min · Lowest 5-min mean</span> <span id="export-low">—</span></p>
+            <p><span class="fact-label" id="energy-label">Solar energy today</span> <span id="range-energy">—</span></p>
+            <p><span class="fact-label">Panel status</span> <span id="panel-status">—</span></p>
+          </section>
+        </details>
+      </section>
+
+      <section class="facts summary-cards live-energy" aria-label="Energy in selected period">
+        <article><span>Solar produced</span><strong id="period-solar">—</strong></article>
+        <article><span>Home used · estimate</span><strong id="period-home">—</strong></article>
+        <article><span>Grid imported</span><strong id="period-import">—</strong></article>
+        <article><span>Grid exported</span><strong id="period-export">—</strong></article>
+      </section>
+      <details class="advanced live-meta">
+        <summary><span id="period-coverage">Waiting for complete readings</span><span>· Grid/home estimated</span><span>· Details</span></summary>
+        <p class="note"><span id="calibration-note">Loading calibration…</span> <a href="/settings.html">Settings</a></p>
+        <div class="facts">
+          <p><span class="fact-label">Readings</span><span id="reading-times">—</span></p>
+          <p id="last-known-row" hidden><span class="fact-label">Last known grid</span><span id="last-known">—</span></p>
+          <p><span class="fact-label">Lifetime solar</span><span id="lifetime">—</span></p>
+          <p><span class="fact-label">Weather details</span><span id="weather-now">—</span></p>
+          <p><span class="fact-label">Daylight</span><span id="daylight">—</span></p>
+        </div>
+      </details>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

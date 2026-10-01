@@ -1,0 +1,15 @@
+services:
+  collector:
+    image: sunpower-monitor-collector:${IMAGE_TAG:-local}
+    user: "${COLLECTOR_UID:?set COLLECTOR_UID}:${COLLECTOR_GID:?set COLLECTOR_GID}"
+    read_only: true
+    restart: unless-stopped
+    env_file:
+      - /etc/sunpower-monitor/collector.env
+    volumes:
+      - /var/lib/sunpower-monitor:/data
+      - /etc/sunpower-monitor/upload-token:/etc/sunpower-monitor/upload-token:ro
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL

@@ -1,0 +1,23 @@
+# Rendered to wrangler.toml by scripts/render-config.mjs (untracked).
+name = "{{INGEST_WORKER_NAME}}"
+main = "src/index.ts"
+compatibility_date = "2025-10-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "{{D1_DATABASE_NAME}}"
+database_id = "{{D1_DATABASE_ID}}"
+
+# Keep weather and daily rollups in separate invocations: D1's Free tier has a
+# 50-query limit per invocation, and a weather sync can use most of it.
+[triggers]
+crons = ["17 * * * *", "47 * * * *"]
+
+[vars]
+COLLECTOR_ID = "{{COLLECTOR_ID}}"
+DEPLOY_TAG = "{{DEPLOY_TAG}}"
+GIT_SHA = "{{GIT_SHA}}"
+
+# Secrets are set outside the repository, never here:
+#   npx wrangler secret put UPLOAD_TOKEN

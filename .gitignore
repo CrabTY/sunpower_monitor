@@ -1,0 +1,51 @@
+# Local telemetry and process state
+pilot-data/
+__pycache__/
+*.py[cod]
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
+# Local credentials and generated deployment files
+.env
+.env.*
+!.env.example
+.dev.vars*
+*.pem
+*.key
+.wrangler/
+node_modules/
+dist/
+web/chart-engine.bundle.js
+
+# Rendered deployment configs (values come from the untracked .env)
+workers/ingest/wrangler.toml
+workers/dashboard/wrangler.toml
+
+# Third-party repositories are local analysis copies, not project source
+references/
+
+# Household-specific deployment notes kept outside the public repository
+private/
+
+# Local UI review captures may contain household readings
+docs/*-local-*.jpg
+docs/panels-local-*.jpg
+docs/panel-study-*.jpg
+
+# Keep shareable graph results; local caches, metadata and dated backups stay local.
+graphify-out/cache/
+graphify-out/.*
+graphify-out/manifest.json
+graphify-out/20??-??-??/
+
+# Private reports, captures and scratch files stay in this checkout only.
+output/
+tmp/
+.codex/
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm

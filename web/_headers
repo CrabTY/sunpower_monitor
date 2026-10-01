@@ -1,0 +1,5 @@
+# Every page and asset is small and private; revalidate so a deploy is never
+# hidden behind a cached script. A 304 costs nothing next to debugging a page
+# that is running last release's JavaScript.
+/*
+  Cache-Control: no-cache

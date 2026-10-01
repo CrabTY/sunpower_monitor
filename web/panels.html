@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f4f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d151d" media="(prefers-color-scheme: dark)" />
+    <title>Panels — Solar monitor</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <main class="page page-panels">
+      <nav class="nav">
+        <span class="brand"><span class="brand-mark" aria-hidden="true">✳</span> SUNPOWER <span class="brand-divider">/</span> MONITOR</span>
+        <a href="/">Live</a>
+        <a href="/history.html">History</a>
+        <a href="/panels.html" aria-current="page">Panels</a>
+        <a href="/settings.html">Settings</a>
+      </nav>
+
+      <header class="head" id="content" tabindex="-1">
+        <div><span class="eyebrow">Energy journal / Panels</span><h1>Panels</h1><p class="head-subtitle">Current performance and recorded history for each panel.</p></div>
+        <p class="state" id="state" role="status">Loading…</p>
+      </header>
+
+      <p class="banner" id="banner" role="alert" hidden></p>
+
+      <section class="chart-card" id="panel-detail">
+        <div class="chart-heading">
+          <div><h2 class="chart-title" id="panel-title">All panel power · today</h2></div>
+          <div class="control-group custom" aria-label="Panel chart date">
+            <label><span>Date</span> <input type="date" id="panel-date" name="panel-date" autocomplete="off" aria-label="Date" /></label>
+            <button type="button" id="panel-today">Today</button>
+            <button type="button" id="all-panels" aria-pressed="true">All panels</button>
+          </div>
+        </div>
+        <p class="array-total" id="array-total"><span id="array-label">Panel production today</span><strong id="array-energy">—</strong><small id="array-coverage"></small></p>
+        <div class="panel-chart-stage">
+          <div class="chart" id="chart" role="group" tabindex="0" aria-label="Panel power over time; select a panel below or use arrow keys to inspect stored slots" aria-describedby="slot-state"></div>
+          <p class="panel-hover-label" id="panel-hover-label" hidden></p>
+        </div>
+        <p class="legend" id="chart-state">Loading…</p>
+        <p class="legend" id="slot-state">Point at the curve to read a slot.</p>
+      </section>
+
+      <section class="chart-card" id="panel-overview">
+        <h2 class="chart-title">Choose a panel <small>Power now · energy today</small></h2>
+        <p class="coverage-note" id="matrix-state">Loading…</p>
+        <details class="advanced" id="panel-picker" open>
+        <summary id="panel-picker-label">Choose a panel</summary>
+        <div class="panels" id="matrix" aria-live="polite"></div>
+        <p class="legend">
+          <span class="key key-producing">Producing now</span>
+          <span class="key key-done">Finished for today</span>
+          <span class="key" id="pending-key">No panel readings today</span>
+          <span class="key key-idle">No production recorded today</span>
+          <span class="key key-problem">Not reporting</span>
+        </p>
+        </details>
+        <div class="panel-detail-summary" id="panel-detail-summary" hidden></div>
+      </section>
+
+      <section class="chart-card" id="daily-card" hidden>
+        <h2 class="chart-title" id="daily-title">Daily production</h2>
+        <section class="controls" aria-label="Daily range">
+          <div class="control-group" id="daily-ranges">
+            <button type="button" data-days="7" aria-pressed="true">7 days</button>
+            <button type="button" data-days="30" aria-pressed="false">30 days</button>
+          </div>
+          <details class="advanced">
+          <summary>Weather and exact dates</summary>
+          <div class="control-group" id="daily-weathers" aria-label="Weather layer">
+            <button type="button" data-weather="cloud" aria-pressed="true">Cloud %</button>
+            <button type="button" data-weather="temperature" aria-pressed="false">Temperature °C</button>
+            <button type="button" data-weather="uv" aria-pressed="false">UV index</button>
+            <button type="button" data-weather="precipitation" aria-pressed="false">Precipitation mm</button>
+          </div>
+          <form class="control-group custom" id="daily-custom">
+            <label>From <input type="date" id="daily-from" name="daily-from" autocomplete="off" /></label>
+            <label>To <input type="date" id="daily-to" name="daily-to" autocomplete="off" /></label>
+            <button type="submit">Apply</button>
+          </form>
+          </details>
+        </section>
+        <div class="chart" id="daily-chart" role="group" tabindex="0" aria-label="Selected panel daily energy; use arrow keys for days" aria-describedby="daily-state"></div>
+        <p class="legend" id="daily-state">Loading…</p>
+        <p class="legend">
+          <span class="key key-solar">Stored counter per day</span>
+          <span class="key key-weather" id="daily-weather-key">Cloud cover %</span>
+          <span class="key key-faint">Partial day (less than half the daylight recorded)</span>
+        </p>
+      </section>
+
+      <details class="advanced diagnostics" id="panel-diagnostics" hidden>
+        <summary>Selected panel diagnostics</summary>
+        <section class="facts" id="facts"></section>
+      </details>
+
+      <details class="advanced foot">
+        <summary>How panel states work</summary>
+        <p>
+          One day, the site's own: the number is the reading at the latest stored slot, and never
+          the last value carried forward. Panels are recorded during daylight, so a night gap is
+          expected and is never drawn as 0 kW. Orange is producing now, blue worked today and
+          stopped (shading or the sun moving on), amber has produced nothing today, and purple is
+          not reporting while the rest of the array is — a stopped panel and a failed read look
+          alike from here, so both are purple. Playback reads stored five-minute samples only.
+        </p>
+      </details>
+    </main>
+    <script type="module" src="/panels.js"></script>
+  </body>
+</html>

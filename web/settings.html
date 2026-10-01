@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f4f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d151d" media="(prefers-color-scheme: dark)" />
+    <title>Settings — Solar monitor</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <main class="page page-settings">
+      <nav class="nav">
+        <span class="brand"><span class="brand-mark" aria-hidden="true">✳</span> SUNPOWER <span class="brand-divider">/</span> MONITOR</span>
+        <a href="/">Live</a>
+        <a href="/history.html">History</a>
+        <a href="/panels.html">Panels</a>
+        <a href="/settings.html" aria-current="page">Settings</a>
+      </nav>
+
+      <header class="head" id="content" tabindex="-1">
+        <div><span class="eyebrow">Energy journal / Settings</span><h1>System settings.</h1><p class="head-subtitle">Location, calibration, and connection details.</p></div>
+        <p class="state" id="state" role="status">Loading…</p>
+      </header>
+
+      <p class="banner" id="banner" role="alert" hidden></p>
+
+      <section class="chart-card">
+        <h2 class="chart-title">Grid calibration</h2>
+        <p class="note">Match grid and home estimates to your utility meter. Solar and panel readings stay as recorded.</p>
+        <form class="control-group custom" id="calibration-form" novalidate>
+          <label>PVS / utility grid flow (%)
+            <input type="number" id="grid-ratio" name="grid-ratio" min="10" max="200" step="0.1" required inputmode="decimal" autocomplete="off" aria-describedby="grid-ratio-error" />
+            <span class="field-error" id="grid-ratio-error" role="alert" hidden></span>
+          </label>
+          <button type="submit">Save calibration</button>
+        </form>
+        <p class="note" id="calibration-status" role="status">Loading calibration…</p>
+        <section class="facts" id="raw-readings"></section>
+        <p class="note">Stored readings stay unchanged.</p>
+        <details class="advanced settings-explanation">
+          <summary>How calibration works</summary>
+          <p class="note">PVS grid reading ÷ utility grid reading. At 46.5%, grid power is about 2.15× the PVS reading. Home use changes by the same correction. The saved ratio applies to past and future Live and History estimates after reload; 100% removes it.</p>
+        </details>
+      </section>
+
+      <section class="chart-card">
+        <h2 class="chart-title">Site location</h2>
+        <section class="facts" id="current"></section>
+        <details class="advanced" id="location-edit">
+          <summary>Change location</summary>
+          <div class="control-group" id="location-methods" role="group" aria-label="Choose how to set the location">
+            <button type="button" id="use-device">Use device location</button>
+            <button type="button" id="city-toggle" aria-expanded="false" aria-controls="city-entry">City or ZIP</button>
+          </div>
+          <div id="city-entry" hidden>
+            <form class="control-group custom" id="city-form">
+              <label>City or ZIP <input type="text" id="city" name="city" maxlength="100" autocomplete="off" aria-describedby="city-error" /><span class="field-error" id="city-error" role="alert" hidden></span></label>
+              <button type="submit">Find candidates</button>
+            </form>
+          </div>
+          <section class="candidates" id="candidates" aria-live="polite"></section>
+          <details class="advanced location-privacy">
+            <summary>Location and privacy details</summary>
+            <p class="note">Your city or ZIP is sent to a geocoding provider. Only confirmed approximate coordinates and time zone are stored, never the text you typed. Changing a confirmed location recalculates weather and daylight for history, so you'll confirm before replacing it.</p>
+          </details>
+        </details>
+      </section>
+
+      <details class="advanced diagnostics">
+        <summary>Collector diagnostics</summary>
+        <section class="chart-card">
+          <h2 class="chart-title">Status</h2>
+          <section class="facts" id="status"></section>
+        </section>
+        <section class="chart-card">
+          <h2 class="chart-title">Collector events</h2>
+          <section class="facts" id="events"></section>
+        </section>
+      </details>
+
+      <footer class="foot">
+        <p>
+          The Pi queue is never uploaded, so its backlog stays unknown here. Weather comes from
+          Open-Meteo (CC BY 4.0) for private non-commercial use.
+        </p>
+        <form class="control-group" method="post" action="/auth/logout"><button type="submit">Sign out</button></form>
+      </footer>
+    </main>
+    <script type="module" src="/settings.js"></script>
+  </body>
+</html>

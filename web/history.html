@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f4f7f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d151d" media="(prefers-color-scheme: dark)" />
+    <title>History — Solar monitor</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <main class="page page-history">
+      <nav class="nav">
+        <span class="brand"><span class="brand-mark" aria-hidden="true">✳</span> SUNPOWER <span class="brand-divider">/</span> MONITOR</span>
+        <a href="/">Live</a>
+        <a href="/history.html" aria-current="page">History</a>
+        <a href="/panels.html">Panels</a>
+        <a href="/settings.html">Settings</a>
+      </nav>
+
+      <header class="head" id="content" tabindex="-1">
+        <div><span class="eyebrow">Energy journal / History</span><h1>Energy, over time.</h1><p class="head-subtitle">Production, home use, and grid direction.</p></div>
+        <p class="state" id="state" role="status">Loading…</p>
+      </header>
+
+      <p class="banner" id="banner" role="alert" hidden></p>
+
+      <section class="controls period-controls" aria-label="Time selection">
+        <div class="period-heading"><div><span class="eyebrow">Selected period</span><h2 id="period-title">Today</h2></div></div>
+        <div class="scope-control">
+          <div class="scope-caption"><strong>View by</strong><span>Drag or choose a stop</span></div>
+          <input id="scope-slider" name="scope" class="scope-slider" type="range" min="0" max="3" step="1" value="0" autocomplete="off" aria-label="View by day, week, month, or year" />
+          <div class="control-group" id="ranges">
+            <button type="button" data-range="today" aria-pressed="true">Day</button>
+            <button type="button" data-range="7d" aria-pressed="false">Week</button>
+            <button type="button" data-range="30d" aria-pressed="false">Month</button>
+            <button type="button" data-range="12m" aria-pressed="false">Year</button>
+          </div>
+        </div>
+        <div class="period-footer"><div class="control-group" id="period-options" aria-label="Choose period"></div><div class="period-meta" id="period-span"></div></div>
+        <div class="control-group" id="metrics">
+          <button type="button" data-metric="power" aria-pressed="true">Power kW</button>
+          <button type="button" data-metric="energy" aria-pressed="false">Energy kWh</button>
+        </div>
+        <div class="control-group" id="weathers" aria-label="Weather layer">
+          <button type="button" data-weather="cloud" aria-pressed="true">Cloud cover</button>
+          <button type="button" data-weather="temperature" aria-pressed="false">Temperature</button>
+        </div>
+        <details class="advanced">
+          <summary>Choose exact times</summary>
+          <form class="control-group custom" id="custom">
+            <label>From <input type="datetime-local" id="from" name="from" autocomplete="off" /></label>
+            <label>To <input type="datetime-local" id="to" name="to" autocomplete="off" /></label>
+            <button type="submit">Apply</button>
+          </form>
+        </details>
+      </section>
+
+      <section class="facts summary-cards" id="summary" aria-label="Energy totals"></section>
+
+      <section class="chart-card" id="power-chart-card">
+        <div class="chart-heading">
+          <div><h2 class="chart-title" id="chart-title">Power</h2>
+          <p class="chart-subtitle" id="chart-subtitle">Solar and signed grid power share the kW axis; weather uses the right axis.</p></div>
+          <div class="control-group" id="daily-measure" aria-label="Daily energy measure" hidden>
+            <button type="button" data-measure="solar" aria-pressed="true">Solar</button>
+            <button type="button" data-measure="home" aria-pressed="false">Home</button>
+          </div>
+        </div>
+        <div class="chart-stage"><div class="chart" id="chart"></div><div class="interval-overlay" id="interval-overlay" aria-hidden="true" hidden></div></div>
+        <div class="daily-navigation" id="daily-navigation" hidden><button type="button" id="daily-prev" aria-label="Earlier days">‹ Earlier</button><span id="daily-window"></span><button type="button" id="daily-next" aria-label="Later days">Later ›</button></div>
+        <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+        <div class="interval-controls" id="interval-controls" hidden>
+          <div class="interval-range" id="interval-range"><div class="interval-track"><div class="interval-selection"></div></div><input id="interval-from" name="interval-from" type="range" min="0" max="0" value="0" autocomplete="off" aria-label="Selected interval start" /><input id="interval-to" name="interval-to" type="range" min="0" max="0" value="0" autocomplete="off" aria-label="Selected interval end" /></div>
+          <div class="interval-summary"><strong>Selected interval · energy</strong><span class="interval-values" id="interval-values"></span></div>
+        </div>
+        <p class="legend" id="power-legend">
+          <span class="key key-solar" id="solar-key">Solar</span>
+          <span class="key key-import">Grid in</span>
+          <span class="key key-export">Grid out</span>
+          <span class="key key-weather" id="weather-key">Cloud cover %</span>
+          <span class="key key-gap">Failed / partial window</span>
+        </p>
+        <p class="legend" id="energy-legend" hidden>
+          <span class="key key-solar">Solar</span>
+          <span class="key key-home">Home (estimated)</span>
+          <span class="key key-import">Grid in</span>
+          <span class="key key-export">Grid out</span>
+          <span class="key key-weather" id="weather-key-energy">Cloud cover %</span>
+          <span class="key key-gap">Failed / partial window</span>
+        </p>
+        <p class="legend" id="weather-legend" hidden></p>
+        <p class="legend" id="chart-note" hidden></p>
+        <section class="detail" id="detail" aria-live="polite">
+          <p>Tap or hover the chart to inspect a window. Keyboard: focus chart, then use arrow keys.</p>
+        </section>
+      </section>
+
+      <section class="chart-card composition-card" id="composition">
+        <h2 class="chart-title">Energy sources &amp; destinations</h2>
+        <p class="banner" id="energy-warning" hidden></p>
+        <div class="composition-grid"><div class="facts" id="energy-sources"></div><div class="facts" id="energy-destinations"></div></div>
+        <p class="legend" id="energy-note">Loading…</p>
+      </section>
+
+      <p class="note" id="calibration-note">Loading calibration…</p>
+
+      <footer class="foot">
+        <p>
+          Minute records cover all day; five-minute and daily views are weighted by valid samples. Energy is
+          an estimate from mean power over valid windows, not a metered total. Gaps stay empty.
+          Weather is an Open-Meteo model forecast on the same time axis, never a measured power value.
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="/history.js"></script>
+  </body>
+</html>

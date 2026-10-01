@@ -1,0 +1,41 @@
+{
+  "name": "sunpower-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read-only SunPower PVS6 collector, private dashboard, and Cloudflare ingest API",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build:web": "esbuild web/chart-engine.js --bundle --format=esm --minify --target=es2022 --outfile=web/chart-engine.bundle.js",
+    "check": "npm run build:web && npm run check:types && npm run check:units && npm run check:config && npm run check:web && npm run check:render && npm run check:preview && npm run check:site",
+    "check:types": "tsc -p workers/tsconfig.json",
+    "check:units": "node --test workers/dist/dashboard/test/*.test.js workers/dist/ingest/test/*.test.js",
+    "check:config": "node --test scripts/render-config.test.mjs && node scripts/github-user.mjs --check && node scripts/worker-origin.mjs --check && node scripts/cloudflare-account.mjs --check",
+    "check:web": "node web/check.js",
+    "check:render": "node scripts/page-render-check.mjs",
+    "check:preview": "node scripts/preview-client.js --check && node scripts/introduction-check.mjs",
+    "prepreview": "npm run build:web",
+    "preview": "node scripts/preview.mjs",
+    "check:month": "node scripts/month-check.mjs",
+    "check:local": "npm run check:types && node scripts/render-config.mjs && node scripts/local-cloud-check.mjs",
+    "config": "node scripts/render-config.mjs",
+    "build:site": "npm run build:web && npm run check:site",
+    "check:site": "node scripts/build-site.mjs && node scripts/site-check.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260924.1",
+    "@types/node": "^22.10.2",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.139.0"
+  },
+  "dependencies": {
+    "echarts": "^6.1.0"
+  },
+  "overrides": {
+    "undici": "7.29.1"
+  }
+}
