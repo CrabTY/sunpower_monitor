@@ -85,7 +85,7 @@ A release is ready for anonymous installation only after its source download and
 
 After the first upload, open the dashboard URL and sign in through GitHub. The Live page should show the latest readings. If it stays empty, inspect the container with `docker ps` and `docker logs sunpower-monitor-collector`, then use the [operations guide](operations.md).
 
-![Live dashboard with simulated solar and grid readings](screenshots/dashboard-preview.jpg)
+![Live dashboard with simulated solar and grid readings](../site/assets/live.png)
 
 This screenshot uses simulated readings. Missing or stale measurements appear as missing, not zero. The optional Settings page can add location for weather after the first upload; weather is separate from PVS measurements.
 

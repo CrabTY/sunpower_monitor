@@ -5,7 +5,9 @@
 [![Security checks](https://github.com/CrabTY/sunpower_monitor/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/CrabTY/sunpower_monitor/actions/workflows/security.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md) · [Introduction](site/) · [Demo preview](docs/preview.md#可直接托管的演示产物)
+[Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md) · [Local preview](docs/preview.md)
+
+> The introduction website and online demo are not hosted yet. The [local preview guide](docs/preview.md) shows how to open both on your computer.
 
 SunPower Monitor helps you see what your solar system is doing now, how its energy use changes over time, and how each panel performs. It reads your PVS6 on the home network, records history, and serves a dashboard you can open on a computer or phone, including when you are away from home.
 
@@ -64,7 +66,7 @@ Readings include freshness information. A stale or missing sample is not present
 
 ### History: energy over time
 
-![Energy history with production, home consumption, grid import and export, and visible data gaps](site/assets/history.png)
+![Seven-day energy history with daily solar production, grid import and export, and weather context](site/assets/history.jpg)
 
 Explore a day, week, month, year, or exact time range. Switch between power in kW and energy in kWh, inspect individual windows, and see the sources and destinations of energy. History starts when your collector begins recording; the dashboard does not retrieve earlier SunPower cloud history.
 
@@ -103,7 +105,7 @@ Only the collector contacts the PVS. It uploads over outbound HTTPS, so remote v
 ## Frequently asked questions
 
 **Can I use it without installing anything first?**
-A read-only simulated demo is ready to host alongside the introduction site; its public address is pending the first release. You can inspect the screenshots above or [preview the demo locally](docs/preview.md#可直接托管的演示产物). It uses the same dashboard code without a PVS, Cloudflare deployment, account, or household data.
+You can inspect the screenshots above or [run the read-only simulated demo locally](docs/preview.md#可直接托管的演示产物). The introduction website and online demo have not been hosted yet. It uses the same dashboard code without a PVS, Cloudflare deployment, account, or household data.
 
 **Does it run entirely offline?**
 PVS collection happens locally, but the hosted dashboard requires Cloudflare and an Internet connection. Historical records queue on the collector during a connection outage. Latest live snapshots are not replayed as history.
@@ -135,7 +137,7 @@ The [documentation index](docs/README.md) also links the bilingual introduction,
 
 ## Security
 
-The [security review](docs/security-review.md) records the source review, fixes, automated checks, and their limits. GitHub Actions is configured to run dependency auditing, Semgrep, and Gitleaks on pull requests, main updates, and weekly. The release workflow requires those checks before publishing artifacts. The new workflow has not yet run on GitHub; the badge reports workflow results when available, not a security certification.
+The [security review](docs/security-review.md) records the source review, fixes, automated checks, and their limits. GitHub Actions is configured to run dependency auditing, Semgrep, and Gitleaks on pull requests, main updates, and weekly. The release workflow requires those checks before publishing artifacts. These checks passed for the v0.1.0 release. The badge shows the latest main-branch results; passing checks are not a security certification.
 
 Keep deployment credentials and household telemetry private. Use GitHub private vulnerability reporting when enabled, and avoid posting sensitive details in public issues.
 

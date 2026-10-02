@@ -15,7 +15,7 @@ These documents describe the current installation and code. Start with the guide
 
 ## Separate introduction site
 
-The Chinese/English introduction lives in [site/](../site/), alongside its styles, script and simulated screenshots. Run `npm run preview` and open `http://127.0.0.1:4173/introduction/` to view it, or run `npm run build:site` and serve `dist/site/` to include the read-only simulated demo.
+The Chinese/English introduction source lives in [site/](../site/), alongside its styles, script and simulated screenshots. It is not an online website link; the introduction and demo have not been hosted yet. Run `npm run preview` and open `http://127.0.0.1:4173/introduction/` to view it, or run `npm run build:site` and serve `dist/site/` to include the read-only simulated demo.
 
 ## Images
 

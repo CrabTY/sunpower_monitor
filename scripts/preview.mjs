@@ -35,7 +35,7 @@ const server = createServer(async (request, response) => {
     : /^\/(history|panels|settings)$/.test(url.pathname) ? url.pathname.slice(1) + ".html"
       : url.pathname.slice(1);
   const file = !introduction && name === "__preview.js" ? resolve(here, "preview-client.js") : resolve(root, name);
-  if ((introduction && !/^((index|getting-started|compare|project)\.html|introduction\.(css|js)|assets\/(live|history|panels|mobile|ct-partial-coverage|ct-busbar-connection|ct-dual-branch)\.png)$/.test(name)) ||
+  if ((introduction && !/^((index|getting-started|compare|project)\.html|introduction\.(css|js)|assets\/(live|history|panels|mobile|ct-partial-coverage|ct-busbar-connection|ct-dual-branch)\.(png|jpg))$/.test(name)) ||
       (name !== "__preview.js" && !file.startsWith(root + sep))) {
     response.writeHead(404).end();
     return;

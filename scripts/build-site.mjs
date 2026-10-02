@@ -13,7 +13,7 @@ for (const name of ["index.html", "getting-started.html", "compare.html", "proje
   await cp(join(root, "site", name), join(output, name));
 }
 for (const name of await readdir(join(root, "site/assets"))) {
-  if (/^(live|history|panels|mobile|ct-partial-coverage|ct-busbar-connection|ct-dual-branch)\.png$/.test(name)) {
+  if (/^(live|history|panels|mobile|ct-partial-coverage|ct-busbar-connection|ct-dual-branch)\.(png|jpg)$/.test(name)) {
     await cp(join(root, "site/assets", name), join(output, "assets", name));
   }
 }
