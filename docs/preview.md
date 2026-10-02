@@ -44,3 +44,13 @@ python3 -m http.server 4174 --bind 127.0.0.1 --directory dist/site
 打开 <http://127.0.0.1:4174/>，从介绍页进入 Demo。`dist/site/` 是可删除、可重新生成的静态产物，不是第二套源代码；既可托管在域名根路径，也可托管在 GitHub Pages 的项目子路径。部署平台只需发布该目录，域名和 GitHub About 的 Website 地址在真正发布后设置。
 
 Demo 复用 `web/` 和同一份模拟数据，所有 API 均在浏览器内响应，不连接 PVS 或 Cloudflare。未模拟的网络请求被拒绝，Settings 控件与定位禁用；显示的坐标是旧金山市中心示例。生产仪表盘仍需登录，并使用用户自己的部署和数据。
+
+### GitHub Pages
+
+介绍站与模拟 Demo 使用同一仓库的 `.github/workflows/pages.yml`，只发布生成的 `dist/site/`。无需另建源码仓库、提交生成文件或维护 `gh-pages` 分支。
+
+Pages 尚未启用，在线地址尚未生效。仓库维护者需先满足 GitHub Pages 的套餐/可见性要求，并在 **Settings → Pages → Source** 选择 **GitHub Actions**。工作流不会改变仓库可见性，也不自动启用 Pages。
+
+Actions 中手动运行 `pages`，不勾选 `publish` 可验证安全检查、构建与临时 Pages artifact；勾选后才执行托管。首次上线后，公开仓库中影响站点的 main 更新会自动发布，安全检查失败时不会发布。私有仓库的 push 只验证构建，不自动发布。
+
+部署完成后，以工作流返回的实际 `page_url` 验证首页和 `demo/`，再填写 README 与 GitHub About 的真实链接。GitHub Pages 不读取 Cloudflare 的 `_headers` 文件；Demo 的网络限制通过 HTML CSP 和浏览器内替身实现，设置与真实定位仍禁用。

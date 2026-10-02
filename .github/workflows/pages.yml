@@ -1,0 +1,75 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/pages.yml
+      - .github/workflows/security.yml
+      - site/**
+      - web/**
+      - scripts/build-site.mjs
+      - scripts/site-check.mjs
+      - scripts/preview-client.js
+      - scripts/introduction-check.mjs
+      - package.json
+      - package-lock.json
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the checked site (requires Pages enabled)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  security:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/security.yml
+
+  build:
+    needs: security
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run check:preview
+      - run: npm run build:site
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: dist/site
+          retention-days: 1
+
+  deploy:
+    needs: build
+    # A private repository can validate the artifact without enabling a site.
+    # After public release, relevant main updates publish the same source build.
+    if: (github.event_name == 'push' && !github.event.repository.private) || (github.event_name == 'workflow_dispatch' && inputs.publish)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+        with:
+          enablement: false
+      - name: Publish the static site and simulated demo
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
