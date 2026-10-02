@@ -1,7 +1,7 @@
 # Graph Report - sunpower_monitor  (2026-10-01)
 
 ## Corpus Check
-- 81 files · ~219,396 words
+- 81 files · ~226,557 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 12 file(s) not represented in the graph (top: (none) 5, .example 4, .css 2)
 
@@ -342,9 +342,11 @@ Nodes (18): cell(), buttons, comparison, header, imageLinks, navigation, origina
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Contributing` connect `Contributing` to `docs/README.md`?**
-  _High betweenness centrality (0.390) - this node is a cross-community bridge._
+  _High betweenness centrality (0.389) - this node is a cross-community bridge._
 - **Why does `sql()` connect `local-cloud-check.mjs` to `Contributing`?**
-  _High betweenness centrality (0.390) - this node is a cross-community bridge._
+  _High betweenness centrality (0.388) - this node is a cross-community bridge._
+- **Why does `Main push graph updates` connect `Contributing` to `local-cloud-check.mjs`?**
+  _High betweenness centrality (0.388) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `CollectorTestCase` (e.g. with `Collector` and `PendingQueue`) actually correct?**
   _`CollectorTestCase` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 8 inferred relationships involving `Collector` (e.g. with `PVSError` and `PendingQueue`) actually correct?**
@@ -353,5 +355,3 @@ _Questions this graph is uniquely positioned to answer:_
   _`PendingQueue` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 4 inferred relationships involving `SiteMinute` (e.g. with `Collector` and `SiteSample`) actually correct?**
   _`SiteMinute` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `PATH`, `DASHBOARD_WORKER_NAME`, `INGEST_WORKER_NAME` to the rest of the system?**
-  _302 weakly-connected nodes found - possible documentation gaps or missing edges._

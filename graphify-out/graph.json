@@ -12259,7 +12259,7 @@
       "node_kind": "heading",
       "norm_label": "contributing",
       "source_file": "README.md",
-      "source_location": "L142"
+      "source_location": "L144"
     },
     {
       "id": "readme_dashboard_tour",
@@ -12271,7 +12271,7 @@
       "node_kind": "heading",
       "norm_label": "dashboard tour",
       "source_file": "README.md",
-      "source_location": "L57"
+      "source_location": "L59"
     },
     {
       "id": "readme_documentation",
@@ -12283,7 +12283,7 @@
       "node_kind": "heading",
       "norm_label": "documentation",
       "source_file": "README.md",
-      "source_location": "L123"
+      "source_location": "L125"
     },
     {
       "id": "readme_frequently_asked_questions",
@@ -12295,7 +12295,7 @@
       "node_kind": "heading",
       "norm_label": "frequently asked questions",
       "source_file": "README.md",
-      "source_location": "L103"
+      "source_location": "L105"
     },
     {
       "id": "readme_gateway_compatibility",
@@ -12307,7 +12307,7 @@
       "node_kind": "heading",
       "norm_label": "gateway compatibility",
       "source_file": "README.md",
-      "source_location": "L18"
+      "source_location": "L20"
     },
     {
       "id": "readme_history_energy_over_time",
@@ -12319,7 +12319,7 @@
       "node_kind": "heading",
       "norm_label": "history: energy over time",
       "source_file": "README.md",
-      "source_location": "L65"
+      "source_location": "L67"
     },
     {
       "id": "readme_how_it_works",
@@ -12331,7 +12331,7 @@
       "node_kind": "heading",
       "norm_label": "how it works",
       "source_file": "README.md",
-      "source_location": "L93"
+      "source_location": "L95"
     },
     {
       "id": "readme_installation",
@@ -12343,7 +12343,7 @@
       "node_kind": "heading",
       "norm_label": "installation",
       "source_file": "README.md",
-      "source_location": "L24"
+      "source_location": "L26"
     },
     {
       "id": "readme_live_power_right_now",
@@ -12355,7 +12355,7 @@
       "node_kind": "heading",
       "norm_label": "live: power right now",
       "source_file": "README.md",
-      "source_location": "L59"
+      "source_location": "L61"
     },
     {
       "id": "readme_panels_individual_output_and_recorded_history",
@@ -12367,7 +12367,7 @@
       "node_kind": "heading",
       "norm_label": "panels: individual output and recorded history",
       "source_file": "README.md",
-      "source_location": "L73"
+      "source_location": "L75"
     },
     {
       "id": "readme_security",
@@ -12379,7 +12379,7 @@
       "node_kind": "heading",
       "norm_label": "security",
       "source_file": "README.md",
-      "source_location": "L136"
+      "source_location": "L138"
     },
     {
       "id": "readme_set_up_your_dashboard",
@@ -12391,7 +12391,7 @@
       "node_kind": "heading",
       "norm_label": "set up your dashboard",
       "source_file": "README.md",
-      "source_location": "L37"
+      "source_location": "L39"
     },
     {
       "id": "readme_settings_location_and_calibration",
@@ -12403,7 +12403,7 @@
       "node_kind": "heading",
       "norm_label": "settings: location and calibration",
       "source_file": "README.md",
-      "source_location": "L89"
+      "source_location": "L91"
     },
     {
       "id": "readme_sunpower_monitor",
@@ -12427,7 +12427,7 @@
       "node_kind": "heading",
       "norm_label": "support and license",
       "source_file": "README.md",
-      "source_location": "L148"
+      "source_location": "L150"
     },
     {
       "id": "readme_what_you_need",
@@ -12439,7 +12439,7 @@
       "node_kind": "heading",
       "norm_label": "what you need",
       "source_file": "README.md",
-      "source_location": "L26"
+      "source_location": "L28"
     },
     {
       "id": "scripts_preview_client",
@@ -33678,7 +33678,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -33689,7 +33689,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L65",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -33700,7 +33700,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -33711,7 +33711,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L89",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -33722,7 +33722,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -33733,7 +33733,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -33744,7 +33744,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L103",
+      "source_location": "L105",
       "weight": 1.0
     },
     {
@@ -33755,7 +33755,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L123",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -33766,7 +33766,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L136",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -33777,7 +33777,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L142",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -33788,7 +33788,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L148",
+      "source_location": "L150",
       "weight": 1.0
     },
     {
@@ -33799,7 +33799,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L18",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -33810,7 +33810,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L24",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -33821,7 +33821,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L57",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -33832,7 +33832,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L93",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -43174,7 +43174,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L101",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -43185,7 +43185,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L121",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -43196,7 +43196,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L138",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -43207,7 +43207,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L144",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -43218,7 +43218,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L22",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -43229,7 +43229,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L39",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -43240,7 +43240,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -43251,7 +43251,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L55",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
