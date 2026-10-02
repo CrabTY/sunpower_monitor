@@ -119,7 +119,7 @@ echo "Open that link in your personal browser, enter the code, and approve Wrang
 echo "Keep this terminal open; it continues after approval."
 printf '\n'
 setup -it . npx wrangler login --device --browser=false
-account_id=$(setup -i . node scripts/cloudflare-account.mjs)
+account_id=$(setup -i . node scripts/install/cloudflare-account.mjs)
 if [[ -z "$account_id" ]]; then
   read -r -p "Cloudflare account ID from the list above: " account_id
 fi
@@ -149,7 +149,7 @@ printf '\nChoose the GitHub account that may sign into your private dashboard.\n
 printf 'A username or profile URL works even if your email is private.\n\n'
 while true; do
   read -r -p "GitHub username, profile URL, or email allowed to view the dashboard: " github_input
-  if github_user=$(setup -i . node scripts/github-user.mjs "$github_input"); then
+  if github_user=$(setup -i . node scripts/install/github-user.mjs "$github_input"); then
     IFS=$'\t' read -r github_login ALLOWED_USER_IDS <<< "$github_user"
     break
   fi
@@ -176,7 +176,7 @@ else
 fi
 [[ "$db_id" =~ ^[a-fA-F0-9-]{36}$ ]] || { echo "Could not determine the D1 database ID" >&2; exit 1; }
 export D1_DATABASE_ID=$db_id
-quiet_setup "Preparing deployment configuration" -i . node scripts/render-config.mjs
+quiet_setup "Preparing deployment configuration" -i . node scripts/install/render-config.mjs
 printf '\n'
 echo "This will deploy Workers named $INGEST_WORKER_NAME and $DASHBOARD_WORKER_NAME."
 read -r -p "Type DEPLOY to proceed (existing Workers with those names may be updated): " reply
@@ -185,8 +185,8 @@ quiet_setup "Applying the database schema" -i workers/ingest npx wrangler d1 exe
 quiet_setup "Deploying the upload service" -i workers/ingest npx wrangler deploy
 quiet_setup "Deploying the dashboard" -i workers/dashboard npx wrangler deploy
 
-ingest_url=$(setup -i . node scripts/worker-origin.mjs /state/deploy.ndjson "$INGEST_WORKER_NAME" ingest)
-dashboard_url=$(setup -i . node scripts/worker-origin.mjs /state/deploy.ndjson "$DASHBOARD_WORKER_NAME" dashboard "$DASHBOARD_HOST")
+ingest_url=$(setup -i . node scripts/install/worker-origin.mjs /state/deploy.ndjson "$INGEST_WORKER_NAME" ingest)
+dashboard_url=$(setup -i . node scripts/install/worker-origin.mjs /state/deploy.ndjson "$DASHBOARD_WORKER_NAME" dashboard "$DASHBOARD_HOST")
 section 4 "Browser task: set up GitHub login for your dashboard"
 cat <<GUIDE
 The cloud services are ready. Your dashboard needs its own GitHub login app.

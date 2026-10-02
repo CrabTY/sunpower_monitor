@@ -14,9 +14,9 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { signSession } from "../workers/dist/dashboard/src/session.js";
+import { signSession } from "../../workers/dist/dashboard/src/session.js";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const port = Number(process.env.CHECK_PORT ?? 8791);
 const sessionSecret = "local-check-session-secret";
 const collector = "check-pvs";

@@ -47,8 +47,8 @@ jobs:
           npm run check
           python3 -m unittest discover -s tests
           bash -n install.sh
-          python3 scripts/install-check.py
-          INSTALL_CHECK_USE_LOCAL_IMAGE=0 python3 scripts/install-check.py
+          python3 scripts/checks/install-check.py
+          INSTALL_CHECK_USE_LOCAL_IMAGE=0 python3 scripts/checks/install-check.py
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
       - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4
         with:
@@ -72,7 +72,7 @@ jobs:
         env:
           IMAGE_DIGEST: ${{ steps.collector.outputs.digest }}
         run: |
-          python3 scripts/prepare-release.py --revision "$RELEASE_TAG" --commit "$(git rev-parse HEAD)" \
+          python3 scripts/release/prepare-release.py --revision "$RELEASE_TAG" --commit "$(git rev-parse HEAD)" \
             --image "ghcr.io/crabty/sunpower-monitor-collector@$IMAGE_DIGEST"
           docker buildx imagetools inspect "ghcr.io/crabty/sunpower-monitor-collector@$IMAGE_DIGEST" --raw > dist/release/image-index.json
           python3 - <<'PY'

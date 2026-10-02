@@ -9,7 +9,7 @@ import tempfile
 
 
 def main():
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     names = ("graph.json", "graph.html", "GRAPH_REPORT.md")
     with tempfile.TemporaryDirectory(prefix="sunpower-hook-check-") as temporary:
         repo = Path(temporary) / "repo"

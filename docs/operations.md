@@ -21,7 +21,26 @@ Evaluate deployment only when the running source or required configuration chang
 
 Keep the queue, panel map, token, and ownership during an actual collector update. Compose requires `COLLECTOR_UID` and `COLLECTOR_GID`; use the account's actual IDs, including during rollback.
 
-Back up D1 before a cloud update and the SQLite queue before an image replacement. Apply the schema, deploy ingest, then deploy dashboard. Check version endpoints, anonymous access, an allowed user's login, fresh readings, panel history, location, and calibration afterward. Keep the previous Worker revision and image available for rollback. A rollback changes code, not database history.
+Back up D1 before a cloud update and the SQLite queue before an image replacement. Apply only the database changes required by the selected release (see below), deploy ingest, then deploy dashboard. Check version endpoints, anonymous access, an allowed user's login, fresh readings, panel history, location, and calibration afterward. Keep the previous Worker revision and image available for rollback. A rollback changes code, not database history.
+
+### Database upgrades
+
+The public installation baseline is v0.1.0. Its `workers/schema.sql` already
+contains the current panel diagnostics, known-panel table, slot index and
+calibration table. New installations use that schema; the repository does not
+automatically replay migration files.
+
+For an existing database, follow the selected release's migration instructions
+and check its actual tables, columns and indexes before applying changes.
+`CREATE TABLE IF NOT EXISTS` does not add columns to an existing table. Reapplying
+the base schema is not a substitute for an incremental upgrade, and repeating
+an `ALTER TABLE ... ADD COLUMN` migration can fail on an already upgraded database.
+
+Pre-v0.1.0 development migrations and a household-specific panel-ID repair have
+been archived locally by the maintainer. They are not part of the general public
+upgrade path. An older development installation needs an individually reviewed
+schema comparison and any required data backfill before updating its Workers.
+Back up first; do not apply another installation's panel-ID permutation.
 
 ## Verify a release
 

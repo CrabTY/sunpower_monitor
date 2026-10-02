@@ -1,7 +1,7 @@
 /**
  * Render the untracked wrangler configs from the tracked examples.
  *
- *   node scripts/render-config.mjs        # reads .env, writes each worker config
+ *   node scripts/install/render-config.mjs        # reads .env, writes each worker config
  *
  * Values come from the environment first (CI uses Actions secrets/vars) and
  * fall back to .env. Nothing here is committed: the rendered files are ignored.
@@ -11,7 +11,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
 function loadEnvFile(path) {
   if (!existsSync(path)) return {};

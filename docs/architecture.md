@@ -10,16 +10,15 @@ PVS-reported home load depends on the installed CT coverage. It is not an indepe
 
 ## Components and boundaries
 
-```mermaid
-flowchart LR
-    PVS[SunPower PVS6] -->|Read-only LAN requests| Collector[Python collector]
-    Collector --- Queue[Local SQLite queue]
-    Collector -->|HTTPS and upload token| Ingest[Ingest Worker]
-    Weather[Open-Meteo] -->|Scheduled sync| Ingest
-    Ingest --> D1[(Cloudflare D1)]
-    D1 --> Dashboard[Dashboard Worker]
-    Dashboard -->|GitHub session| Browser[Private dashboard]
-```
+![System architecture: read-only collection at home, authenticated upload to Cloudflare, and a private browser dashboard](diagrams/architecture.svg)
+
+Arrows show data delivery and dependencies, rather than connections initiated
+by the PVS or database. The collector initiates LAN reads and outbound HTTPS;
+the Workers initiate their database and weather requests. GitHub OAuth identifies
+the browser user before the dashboard grants a session.
+
+[Editable diagram source](diagrams/architecture.json). Rendered with
+[Fireworks Tech Graph](diagrams/README.md); no diagram package runs in the service.
 
 | Component | Implemented role | Source |
 | --- | --- | --- |
@@ -27,7 +26,7 @@ flowchart LR
 | Ingest Worker | Validate uploads, store history/latest values, schedule weather and daily rollups | [workers/ingest/](../workers/ingest/) |
 | Dashboard Worker | GitHub OAuth, sessions, allowlist, telemetry APIs, settings and static asset gate | [workers/dashboard/](../workers/dashboard/) |
 | Shared cloud code | Upload contract, weather sync and daily aggregation | [workers/shared/](../workers/shared/) |
-| Database | Shared D1 schema and incremental migrations | [schema](../workers/schema.sql), [migrations](../workers/migrations/) |
+| Database | Shared D1 schema; v0.1.0 is the public installation baseline | [schema](../workers/schema.sql), [upgrade guidance](operations.md#database-upgrades) |
 | Browser dashboard | Live, History, Panels and Settings | [web/](../web/) |
 
 Only the collector talks to the PVS. It initiates outbound uploads; the cloud and browser need no inbound route to the home network. The home host keeps the pending queue and local panel mapping; D1 holds uploaded history. Each installation uses its own cloud resources and credentials.
@@ -67,7 +66,7 @@ The default installation uses GitHub login and `workers.dev`; the renderer adds 
 
 ## Browser dashboard
 
-The shipped browser uses native HTML/CSS/JavaScript and a bundled ECharts engine. [scripts/page-render-check.mjs](../scripts/page-render-check.mjs) exercises the production clients; [the local preview](preview.md) loads those same clients with simulated API responses.
+The shipped browser uses native HTML/CSS/JavaScript and a bundled ECharts engine. [scripts/checks/page-render-check.mjs](../scripts/checks/page-render-check.mjs) exercises the production clients; [the local preview](preview.md) loads those same clients with simulated API responses.
 
 Live freshness follows the measurement time: up to 30 seconds is live, up to 60 seconds delayed, and older data stale. An unavailable timestamp is unavailable. Weather is a separately sourced context layer and is not substituted for measured power.
 
@@ -86,6 +85,6 @@ The public introduction lives in the separate `site/` directory, with overview, 
 
 ## Installation and upgrade artifacts
 
-The release installer is generated from the root [install.sh](../install.sh) template by [prepare-release.py](../scripts/prepare-release.py). It fixes the official source commit and multi-platform image digest. Git tags identify releases; deployment labels identify running installations.
+The release installer is generated from the root [install.sh](../install.sh) template by [prepare-release.py](../scripts/release/prepare-release.py). It fixes the official source commit and multi-platform image digest. Git tags identify releases; deployment labels identify running installations.
 
 The same [Dockerfile](../deploy/pi/Dockerfile) and collector code serve personal and open-source installations. Queue data, rendered configuration and secrets stay on the host. Compose and direct Python/systemd remain manual alternatives. Follow [Operations](operations.md) before changing an existing deployment; a source-history rewrite alone does not require redeployment.

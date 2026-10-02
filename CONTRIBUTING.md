@@ -12,8 +12,8 @@ Use Python 3.11+ and Node.js 22+:
 npm ci
 python3 -m unittest discover -s tests
 bash -n install.sh
-python3 scripts/install-check.py
-INSTALL_CHECK_USE_LOCAL_IMAGE=0 python3 scripts/install-check.py
+python3 scripts/checks/install-check.py
+INSTALL_CHECK_USE_LOCAL_IMAGE=0 python3 scripts/checks/install-check.py
 npm run check
 ```
 
@@ -42,7 +42,7 @@ The hook never stages, commits, or amends files automatically. Existing staged/u
 
 SQL extraction additionally requires Graphify's `sql` extra; without it, Graphify warns and skips SQL files. This affects graph coverage, not the project's SQL runtime checks.
 
-Run `python3 scripts/check-graph-hook.py` to check real local pushes and worktree isolation in temporary repositories without contacting external services.
+Run `python3 scripts/checks/check-graph-hook.py` to check real local pushes and worktree isolation in temporary repositories without contacting external services.
 
 `npm run check` builds the browser chart bundle, compiles and tests the Workers, checks page behavior, and tests deployment configuration rendering. It does not deploy or contact a production D1 database. For a repeatable browser view with simulated readings, run `npm run preview` and open `http://127.0.0.1:4173/`.
 

@@ -8,10 +8,10 @@ on:
       - .github/workflows/security.yml
       - site/**
       - web/**
-      - scripts/build-site.mjs
-      - scripts/site-check.mjs
-      - scripts/preview-client.js
-      - scripts/introduction-check.mjs
+      - scripts/preview/build-site.mjs
+      - scripts/checks/site-check.mjs
+      - scripts/preview/preview-client.js
+      - scripts/checks/introduction-check.mjs
       - package.json
       - package-lock.json
   workflow_dispatch:

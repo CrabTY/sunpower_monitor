@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 940" width="1040" height="940" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="architecture" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #6b7280; }
+    .section { font-size: 13px; font-weight: 700; fill: #2563eb; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #64748b; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-weight: 500; fill: #6b7280; }
+    .node-type { font-size: 12px; font-weight: 700; fill: #64748b; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #64748b; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #64748b; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1040.0" height="940.0" fill="#ffffff"/>
+  <text x="520.0" y="56" text-anchor="middle" class="title">SunPower Monitor</text>
+  <text x="520.0" y="82" text-anchor="middle" class="subtitle">Collect at home. Keep history in your own cloud.</text>
+  <g id="home" data-graph-role="container" data-container-id="home" data-semantic-role="boundary" data-graph-bounds="40,130,310,650">
+  <rect data-graph-role="container" x="40.0" y="130.0" width="270.0" height="520.0" rx="16.0" fill="none" stroke="#dbe5f1" stroke-width="1.4" stroke-dasharray="6 5"/>
+  <text x="58.0" y="154.0" class="section">YOUR HOME NETWORK</text>
+    <rect id="home-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="136" width="158.7" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="cloud" data-graph-role="container" data-container-id="cloud" data-semantic-role="boundary" data-graph-bounds="390,310,660,830">
+  <rect data-graph-role="container" x="390.0" y="310.0" width="270.0" height="520.0" rx="16.0" fill="none" stroke="#dbe5f1" stroke-width="1.4" stroke-dasharray="6 5"/>
+  <text x="408.0" y="334.0" class="section">YOUR CLOUDFLARE ACCOUNT</text>
+    <rect id="cloud-header" data-graph-role="reserved" data-reserved-kind="container-header" x="398" y="316" width="197.7" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="external" data-graph-role="container" data-container-id="external" data-semantic-role="boundary" data-graph-bounds="740,130,1010,300">
+  <rect data-graph-role="container" x="740.0" y="130.0" width="270.0" height="170.0" rx="16.0" fill="none" stroke="#dbe5f1" stroke-width="1.4" stroke-dasharray="6 5"/>
+  <text x="758.0" y="154.0" class="section">EXTERNAL SERVICE</text>
+    <rect id="external-header" data-graph-role="reserved" data-reserved-kind="container-header" x="748" y="136" width="144.4" height="30" fill="none" stroke="none"/>
+  </g>
+  <g id="viewer" data-graph-role="container" data-container-id="viewer" data-semantic-role="boundary" data-graph-bounds="740,690,1010,830">
+  <rect data-graph-role="container" x="740.0" y="690.0" width="270.0" height="140.0" rx="16.0" fill="none" stroke="#dbe5f1" stroke-width="1.4" stroke-dasharray="6 5"/>
+  <text x="758.0" y="714.0" class="section">AUTHORIZED USER</text>
+    <rect id="viewer-header" data-graph-role="reserved" data-reserved-kind="container-header" x="748" y="696" width="136.86" height="30" fill="none" stroke="none"/>
+  </g>
+  <path id="weather-sync" data-graph-role="edge" data-edge-id="weather-sync" data-source="weather" data-target="ingest" data-edge-kind="flow" data-topic-id="" data-flow="async" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="2" data-route-stretch="1.0" data-bridges="" d="M 760,208 L 700,208 L 700,388 L 640,388" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" stroke-dasharray="6,4"/>
+  <path id="lan" data-graph-role="edge" data-edge-id="lan" data-source="pvs" data-target="collector" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 175,246 L 175,350" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="local-history" data-graph-role="edge" data-edge-id="local-history" data-source="collector" data-target="queue" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 175,426 L 175,540" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <path id="upload" data-graph-role="edge" data-edge-id="upload" data-source="collector" data-target="ingest" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 290,388 L 410,388" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <path id="store" data-graph-role="edge" data-edge-id="store" data-source="ingest" data-target="database" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 525,426 L 525,540" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowB)"/>
+  <path id="query" data-graph-role="edge" data-edge-id="query" data-source="database" data-target="dashboard" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 525,616 L 525,730" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowC)"/>
+  <path id="private-ui" data-graph-role="edge" data-edge-id="private-ui" data-source="dashboard" data-target="browser" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 640,768 L 760,768" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)"/>
+  <g id="node-pvs" data-graph-role="node" data-node-id="pvs" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,170,290,246">
+  <rect x="60.0" y="170.0" width="230.0" height="76.0" rx="10.0" fill="#fff7ed" stroke="#fb923c" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="SunPower PVS6" data-text-max-width="206.0" x="175.0" y="208.0" text-anchor="middle" class="node-title" font-size="18">SunPower PVS6</text>
+  <text data-text-role="subtitle" data-full-text="Local device; no battery" data-text-max-width="206.0" x="175.0" y="230.0" text-anchor="middle" class="node-sub" font-size="12">Local device; no battery</text>
+  </g>
+  <g id="node-collector" data-graph-role="node" data-node-id="collector" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,350,290,426">
+  <rect x="60.0" y="350.0" width="230.0" height="76.0" rx="10.0" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="Python collector" data-text-max-width="206.0" x="175.0" y="388.0" text-anchor="middle" class="node-title" font-size="18">Python collector</text>
+  <text data-text-role="subtitle" data-full-text="Read, normalize and upload" data-text-max-width="206.0" x="175.0" y="410.0" text-anchor="middle" class="node-sub" font-size="12">Read, normalize and upload</text>
+  </g>
+  <g id="node-queue" data-graph-role="node" data-node-id="queue" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,540,290,616">
+  <rect x="60.0" y="540.0" width="230.0" height="76.0" rx="10.0" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="SQLite queue" data-text-max-width="206.0" x="175.0" y="578.0" text-anchor="middle" class="node-title" font-size="18">SQLite queue</text>
+  <text data-text-role="subtitle" data-full-text="History retry + local panel map" data-text-max-width="206.0" x="175.0" y="600.0" text-anchor="middle" class="node-sub" font-size="12">History retry + local panel map</text>
+  </g>
+  <g id="node-ingest" data-graph-role="node" data-node-id="ingest" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="410,350,640,426">
+  <rect x="410.0" y="350.0" width="230.0" height="76.0" rx="10.0" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="Ingest Worker" data-text-max-width="206.0" x="525.0" y="388.0" text-anchor="middle" class="node-title" font-size="18">Ingest Worker</text>
+  <text data-text-role="subtitle" data-full-text="Token check + record validation" data-text-max-width="206.0" x="525.0" y="410.0" text-anchor="middle" class="node-sub" font-size="11.68">Token check + record validation</text>
+  </g>
+  <g id="node-database" data-graph-role="node" data-node-id="database" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="410,540,640,616">
+  <rect x="410.0" y="540.0" width="230.0" height="76.0" rx="10.0" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="Cloudflare D1" data-text-max-width="206.0" x="525.0" y="578.0" text-anchor="middle" class="node-title" font-size="18">Cloudflare D1</text>
+  <text data-text-role="subtitle" data-full-text="History, settings and weather" data-text-max-width="206.0" x="525.0" y="600.0" text-anchor="middle" class="node-sub" font-size="12">History, settings and weather</text>
+  </g>
+  <g id="node-dashboard" data-graph-role="node" data-node-id="dashboard" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="410,730,640,806">
+  <rect x="410.0" y="730.0" width="230.0" height="76.0" rx="10.0" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="Dashboard Worker" data-text-max-width="206.0" x="525.0" y="768.0" text-anchor="middle" class="node-title" font-size="18">Dashboard Worker</text>
+  <text data-text-role="subtitle" data-full-text="OAuth, allowlist + session gate" data-text-max-width="206.0" x="525.0" y="790.0" text-anchor="middle" class="node-sub" font-size="12">OAuth, allowlist + session gate</text>
+  </g>
+  <g id="node-browser" data-graph-role="node" data-node-id="browser" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,730,990,806">
+  <rect x="760.0" y="730.0" width="230.0" height="76.0" rx="10.0" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="Private dashboard" data-text-max-width="206.0" x="875.0" y="768.0" text-anchor="middle" class="node-title" font-size="18">Private dashboard</text>
+  <text data-text-role="subtitle" data-full-text="GitHub-authenticated browser" data-text-max-width="206.0" x="875.0" y="790.0" text-anchor="middle" class="node-sub" font-size="12">GitHub-authenticated browser</text>
+  </g>
+  <g id="node-weather" data-graph-role="node" data-node-id="weather" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="760,170,990,246">
+  <rect x="760.0" y="170.0" width="230.0" height="76.0" rx="10.0" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.8"/>
+  <text data-text-role="title" data-full-text="Open-Meteo" data-text-max-width="206.0" x="875.0" y="208.0" text-anchor="middle" class="node-title" font-size="18">Open-Meteo</text>
+  <text data-text-role="subtitle" data-full-text="Optional weather context" data-text-max-width="206.0" x="875.0" y="230.0" text-anchor="middle" class="node-sub" font-size="12">Optional weather context</text>
+  </g>
+  <g id="lan-label" data-graph-role="label" data-owner="lan" data-graph-bounds="73.28,284,172,304">
+  <rect x="73.28" y="284.0" width="98.72" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="122.64" y="298.0" text-anchor="middle" class="arrow-label">Read-only LAN</text>
+  </g>
+  <g id="local-history-label" data-graph-role="label" data-owner="local-history" data-graph-bounds="62.48,469,172,489">
+  <rect x="62.48" y="469.0" width="109.52000000000001" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="117.24" y="483.0" text-anchor="middle" class="arrow-label">Durable history</text>
+  </g>
+  <g id="upload-label" data-graph-role="label" data-owner="upload" data-graph-bounds="300.4,357,399.6,377">
+  <rect x="300.4" y="357.0" width="99.2" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="350.0" y="371.0" text-anchor="middle" class="arrow-label">HTTPS + token</text>
+  </g>
+  <g id="store-label" data-graph-role="label" data-owner="store" data-graph-bounds="420.16,469,522,489">
+  <rect x="420.16" y="469.0" width="101.84" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="471.08" y="483.0" text-anchor="middle" class="arrow-label">Store records</text>
+  </g>
+  <g id="query-label" data-graph-role="label" data-owner="query" data-graph-bounds="423.28,659,522,679">
+  <rect x="423.28" y="659.0" width="98.72" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="472.64" y="673.0" text-anchor="middle" class="arrow-label">Query results</text>
+  </g>
+  <g id="private-ui-label" data-graph-role="label" data-owner="private-ui" data-graph-bounds="650.64,737,749.36,757">
+  <rect x="650.64" y="737.0" width="98.72" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="700.0" y="751.0" text-anchor="middle" class="arrow-label">HTTPS session</text>
+  </g>
+  <g id="weather-sync-label" data-graph-role="label" data-owner="weather-sync" data-graph-bounds="591.32,284,697,304">
+  <rect x="591.32" y="284.0" width="105.68" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="644.16" y="298.0" text-anchor="middle" class="arrow-label">Scheduled sync</text>
+  </g>
+  <g id="legend" data-graph-role="legend">
+    <rect id="legend-zone" data-graph-role="reserved" data-reserved-kind="legend" x="38" y="846" width="642.4" height="46" rx="10" fill="none" stroke="none"/>
+    <line data-graph-role="decoration" x1="48.0" y1="860.0" x2="78.0" y2="860.0" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="88.0" y="864.0" class="legend">Telemetry / UI</text>
+    <line data-graph-role="decoration" x1="201.92000000000002" y1="860.0" x2="231.92000000000002" y2="860.0" stroke="#10b981" stroke-width="2.4" marker-end="url(#arrowB)"/>
+    <text data-graph-role="decoration" x="241.92000000000002" y="864.0" class="legend">Stored data</text>
+    <line data-graph-role="decoration" x1="343.84000000000003" y1="860.0" x2="373.84000000000003" y2="860.0" stroke="#2563eb" stroke-width="2.4" marker-end="url(#arrowC)"/>
+    <text data-graph-role="decoration" x="383.84000000000003" y="864.0" class="legend">Read stored data</text>
+    <line data-graph-role="decoration" x1="517.9200000000001" y1="860.0" x2="547.9200000000001" y2="860.0" stroke="#7c3aed" stroke-width="2.4" marker-end="url(#arrowA)"/>
+    <text data-graph-role="decoration" x="557.9200000000001" y="864.0" class="legend">Optional context</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,904,503,920">
+  <text x="48.0" y="916.0" class="footnote">Outbound uploads only; no inbound route to your home is required.</text>
+  </g>
+</svg>

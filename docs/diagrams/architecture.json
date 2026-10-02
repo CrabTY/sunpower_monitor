@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "template_type": "architecture",
+  "style": 1,
+  "quality_profile": "showcase",
+  "text_policy": "strict",
+  "width": 1040,
+  "height": 940,
+  "title": "SunPower Monitor",
+  "subtitle": "Collect at home. Keep history in your own cloud.",
+  "containers": [
+    {
+      "id": "home",
+      "x": 40,
+      "y": 130,
+      "width": 270,
+      "height": 520,
+      "label": "Your home network"
+    },
+    {
+      "id": "cloud",
+      "x": 390,
+      "y": 310,
+      "width": 270,
+      "height": 520,
+      "label": "Your Cloudflare account"
+    },
+    {
+      "id": "external",
+      "x": 740,
+      "y": 130,
+      "width": 270,
+      "height": 170,
+      "label": "External service"
+    },
+    {
+      "id": "viewer",
+      "x": 740,
+      "y": 690,
+      "width": 270,
+      "height": 140,
+      "label": "Authorized user"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pvs",
+      "kind": "rect",
+      "x": 60,
+      "y": 170,
+      "width": 230,
+      "height": 76,
+      "label": "SunPower PVS6",
+      "sublabel": "Local device; no battery",
+      "fill": "#fff7ed",
+      "stroke": "#fb923c",
+      "flat": true
+    },
+    {
+      "id": "collector",
+      "kind": "rect",
+      "x": 60,
+      "y": 350,
+      "width": 230,
+      "height": 76,
+      "label": "Python collector",
+      "sublabel": "Read, normalize and upload",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "queue",
+      "kind": "rect",
+      "x": 60,
+      "y": 540,
+      "width": 230,
+      "height": 76,
+      "label": "SQLite queue",
+      "sublabel": "History retry + local panel map",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    },
+    {
+      "id": "ingest",
+      "kind": "rect",
+      "x": 410,
+      "y": 350,
+      "width": 230,
+      "height": 76,
+      "label": "Ingest Worker",
+      "sublabel": "Token check + record validation",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "database",
+      "kind": "rect",
+      "x": 410,
+      "y": 540,
+      "width": 230,
+      "height": 76,
+      "label": "Cloudflare D1",
+      "sublabel": "History, settings and weather",
+      "fill": "#f0fdf4",
+      "stroke": "#4ade80",
+      "flat": true
+    },
+    {
+      "id": "dashboard",
+      "kind": "rect",
+      "x": 410,
+      "y": 730,
+      "width": 230,
+      "height": 76,
+      "label": "Dashboard Worker",
+      "sublabel": "OAuth, allowlist + session gate",
+      "fill": "#eff6ff",
+      "stroke": "#60a5fa",
+      "flat": true
+    },
+    {
+      "id": "browser",
+      "kind": "rect",
+      "x": 760,
+      "y": 730,
+      "width": 230,
+      "height": 76,
+      "label": "Private dashboard",
+      "sublabel": "GitHub-authenticated browser",
+      "fill": "#f8fafc",
+      "stroke": "#94a3b8",
+      "flat": true
+    },
+    {
+      "id": "weather",
+      "kind": "rect",
+      "x": 760,
+      "y": 170,
+      "width": 230,
+      "height": 76,
+      "label": "Open-Meteo",
+      "sublabel": "Optional weather context",
+      "fill": "#faf5ff",
+      "stroke": "#a78bfa",
+      "flat": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": "lan",
+      "source": "pvs",
+      "target": "collector",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "control",
+      "label": "Read-only LAN"
+    },
+    {
+      "id": "local-history",
+      "source": "collector",
+      "target": "queue",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "write",
+      "label": "Durable history"
+    },
+    {
+      "id": "upload",
+      "source": "collector",
+      "target": "ingest",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "label": "HTTPS + token"
+    },
+    {
+      "id": "store",
+      "source": "ingest",
+      "target": "database",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "write",
+      "label": "Store records"
+    },
+    {
+      "id": "query",
+      "source": "database",
+      "target": "dashboard",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "read",
+      "label": "Query results"
+    },
+    {
+      "id": "private-ui",
+      "source": "dashboard",
+      "target": "browser",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "control",
+      "label": "HTTPS session"
+    },
+    {
+      "id": "weather-sync",
+      "source": "weather",
+      "target": "ingest",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "async",
+      "label": "Scheduled sync",
+      "dashed": true,
+      "route_points": [
+        [
+          700,
+          208
+        ],
+        [
+          700,
+          388
+        ]
+      ]
+    }
+  ],
+  "legend_orientation": "horizontal",
+  "legend_x": 48,
+  "legend_y": 860,
+  "legend_locked": true,
+  "legend": [
+    {
+      "flow": "control",
+      "label": "Telemetry / UI"
+    },
+    {
+      "flow": "write",
+      "label": "Stored data"
+    },
+    {
+      "flow": "read",
+      "label": "Read stored data"
+    },
+    {
+      "flow": "async",
+      "label": "Optional context",
+      "dashed": true
+    }
+  ],
+  "footer": "Outbound uploads only; no inbound route to your home is required.",
+  "footer_x": 48,
+  "footer_y": 916
+}

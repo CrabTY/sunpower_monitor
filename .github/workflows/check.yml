@@ -21,8 +21,8 @@ jobs:
       - name: Check installer syntax and both image paths
         run: |
           bash -n install.sh
-          python3 scripts/install-check.py
-          INSTALL_CHECK_USE_LOCAL_IMAGE=0 python3 scripts/install-check.py
+          python3 scripts/checks/install-check.py
+          INSTALL_CHECK_USE_LOCAL_IMAGE=0 python3 scripts/checks/install-check.py
 
   cloud:
     runs-on: ubuntu-latest

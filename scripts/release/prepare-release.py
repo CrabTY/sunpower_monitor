@@ -21,7 +21,7 @@ def main():
     ):
         if not re.fullmatch(pattern, value):
             parser.error("Expected a version tag, full Git SHA and official image digest")
-    source = (Path(__file__).resolve().parents[1] / "install.sh").read_text()
+    source = (Path(__file__).resolve().parents[2] / "install.sh").read_text()
     for name, value in (
         ("release_revision", args.revision),
         ("release_commit", args.commit),

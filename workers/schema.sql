@@ -111,9 +111,7 @@ CREATE TABLE IF NOT EXISTS collector_event (
 CREATE INDEX IF NOT EXISTS collector_event_by_collector ON collector_event (collector_id, event_ts);
 
 -- The dashboard asks for the newest stored slot and for every slot inside a day
--- range. Without this index both scan the collector's whole partition: about
--- 5,000 rows per panel page load, which is what exhausted the free D1 daily
--- row-read allowance on 2026-09-21.
+-- range. Without this index both can scan the collector's whole partition.
 CREATE INDEX IF NOT EXISTS panel_sample_by_slot ON panel_sample (collector_id, slot_ts, panel_id);
 
 CREATE TABLE IF NOT EXISTS site_location (

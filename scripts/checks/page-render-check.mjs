@@ -6,13 +6,13 @@ import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const source = (name) => readFileSync(join(here, "../web", name), "utf8")
+const source = (name) => readFileSync(join(here, "../../web", name), "utf8")
   .replace(/^import\b[\s\S]*?from\s+"[^"]+";/gm, "");
 const modules = {
-  ...await import("../web/chart.js"),
-  ...await import("../web/energy-plot.js"),
-  ...await import("../web/calibration.js"),
-  ...await import("../web/insights.js"),
+  ...await import("../../web/chart.js"),
+  ...await import("../../web/energy-plot.js"),
+  ...await import("../../web/calibration.js"),
+  ...await import("../../web/insights.js"),
   chartPalette: () => ({ solar: "#a96508", home: "#64766e", imported: "#315f99", exported: "#167866", text: "#182d27", muted: "#64766e", line: "#dce4dc" }),
   renderEChart(node, option, height) {
     node.chartOption = option;

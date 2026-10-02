@@ -1,4 +1,4 @@
-# Rendered to wrangler.toml by scripts/render-config.mjs (untracked).
+# Rendered to wrangler.toml by scripts/install/render-config.mjs (untracked).
 name = "{{DASHBOARD_WORKER_NAME}}"
 main = "src/index.ts"
 compatibility_date = "2025-10-01"

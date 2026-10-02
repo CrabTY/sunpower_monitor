@@ -42,7 +42,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - name: Render wrangler configs from repository variables
-        run: node scripts/render-config.mjs
+        run: node scripts/install/render-config.mjs
       - name: Apply D1 schema (forward compatible only)
         working-directory: workers/ingest
         run: npx wrangler d1 execute DB --remote --file=../schema.sql

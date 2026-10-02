@@ -27,7 +27,7 @@ npm run preview
 
 - 模拟数据从 2026-08-24 00:00 PDT 开始，按分钟生成站点功率与累计电量，按五分钟生成面板读数，并提供逐小时天气、日出日落和日照时长。History 的 1 分钟、5 分钟、每日视图都使用这批数据。
 - 2026-09-19 的云层让产量降低；2026-09-21 10:30–11:05 PDT 有一段源数据错误，供检查历史缺口。Night 包含会显示为 `0.0 kW` 的极小夜间读数。
-- 预览服务器在 [`scripts/preview.mjs`](../scripts/preview.mjs)；数据生成、固定时钟和 `/api/v1/*` 浏览器内替身在 [`scripts/preview-client.js`](../scripts/preview-client.js)。页面仍读取当前 `web/` 文件，修改前端后刷新即可看到效果。
+- 预览服务器在 [`scripts/preview/preview.mjs`](../scripts/preview/preview.mjs)；数据生成、固定时钟和 `/api/v1/*` 浏览器内替身在 [`scripts/preview/preview-client.js`](../scripts/preview/preview-client.js)。页面仍读取当前 `web/` 文件，修改前端后刷新即可看到效果。
 - 这份数据覆盖约 30 天；可检查 Today、Week、Month 和指定日期。Year 仍只有这段模拟记录，页面会标明未覆盖的时间。预览固定为 PDT，不用于检查夏令时切换。
 
 运行 `npm run check:preview` 可检查三个场景和面板数据一致性；`npm run check` 运行仓库的全部检查。

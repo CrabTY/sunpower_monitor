@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
@@ -34,8 +34,8 @@ fi
 [[ "$args" == *'container inspect'* ]] && exit 1
 [[ "$args" == *'ps --format'* || "$args" == *'image inspect'* ]] && exit 0
 [[ "$args" == *'randomBytes'* ]] && { printf 'test-only-random-value'; exit 0; }
-[[ "$args" == *'node scripts/cloudflare-account.mjs'* ]] && { printf 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'; exit 0; }
-if [[ "$args" == *'node scripts/github-user.mjs'* ]]; then
+[[ "$args" == *'node scripts/install/cloudflare-account.mjs'* ]] && { printf 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'; exit 0; }
+if [[ "$args" == *'node scripts/install/github-user.mjs'* ]]; then
   if [[ "${@: -1}" == missing-test-user || "${@: -1}" == private@example.com ]]; then
     echo 'GitHub could not identify one user by that public email.' >&2
     exit 1
@@ -49,8 +49,8 @@ fi
 [[ "$args" == *'wrangler d1 create'* ]] && { touch "$MOCK_STATE/d1-created"; exit 0; }
 [[ "$args" == *'wrangler whoami'* ]] && { echo 'Account ID: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'; exit 0; }
 [[ "$args" == *'wrangler deploy'* ]] && { echo 'Deployment complete'; exit 0; }
-if [[ "$args" == *'node scripts/worker-origin.mjs'* ]]; then
-  if [[ "$args" == *'node scripts/worker-origin.mjs /state/deploy.ndjson demo-solar-ingest ingest'* ]]; then
+if [[ "$args" == *'node scripts/install/worker-origin.mjs'* ]]; then
+  if [[ "$args" == *'node scripts/install/worker-origin.mjs /state/deploy.ndjson demo-solar-ingest ingest'* ]]; then
     printf 'https://demo-solar-ingest.example.workers.dev'
   else
     printf 'https://demo-solar-dashboard.example.workers.dev'
@@ -89,7 +89,7 @@ fi
         release_image = "ghcr.io/crabty/sunpower-monitor-collector@sha256:" + "2" * 64
         import sys
         subprocess.run([
-            sys.executable, str(ROOT / "scripts/prepare-release.py"),
+            sys.executable, str(ROOT / "scripts/release/prepare-release.py"),
             "--revision", revision, "--commit", commit,
             "--image", release_image, "--output", str(temp),
         ], check=True)
@@ -102,7 +102,7 @@ fi
         assert "wrangler deploy" not in publication and "CLOUDFLARE_API_TOKEN" not in publication
         assert "workflow_dispatch:" in deployment and "tags:" not in deployment
         for flag, value in (("--revision", "v1;bad"), ("--commit", "short"), ("--image", "ghcr.io/other/image:latest")):
-            command = [sys.executable, str(ROOT / "scripts/prepare-release.py"),
+            command = [sys.executable, str(ROOT / "scripts/release/prepare-release.py"),
                        "--revision", revision, "--commit", commit,
                        "--image", release_image, "--output", str(temp)]
             command[command.index(flag) + 1] = value

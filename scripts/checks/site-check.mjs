@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import vm from "node:vm";
 
-const root = fileURLToPath(new URL("../dist/site/", import.meta.url));
+const root = fileURLToPath(new URL("../../dist/site/", import.meta.url));
 async function files(directory) {
   const result = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {

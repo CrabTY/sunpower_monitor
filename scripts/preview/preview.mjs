@@ -5,8 +5,8 @@ import { dirname, extname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const web = resolve(here, "../web");
-const site = resolve(here, "../site");
+const web = resolve(here, "../../web");
+const site = resolve(here, "../../site");
 const port = Number(process.env.PORT || 4173);
 const mime = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg" };
 const banner = `<style>

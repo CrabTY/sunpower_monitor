@@ -6,18 +6,18 @@ import { dirname, join } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
-const source = join(dirname(fileURLToPath(import.meta.url)), "..");
+const source = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
 function render(dashboardHost, databaseId = "00000000-0000-0000-0000-000000000000", names = {}) {
   const root = mkdtempSync(join(tmpdir(), "sunpower-config-"));
   try {
-    mkdirSync(join(root, "scripts"));
-    copyFileSync(join(source, "scripts/render-config.mjs"), join(root, "scripts/render-config.mjs"));
+    mkdirSync(join(root, "scripts", "install"), { recursive: true });
+    copyFileSync(join(source, "scripts/install/render-config.mjs"), join(root, "scripts/install/render-config.mjs"));
     for (const worker of ["ingest", "dashboard"]) {
       mkdirSync(join(root, "workers", worker), { recursive: true });
       copyFileSync(join(source, "workers", worker, "wrangler.toml.example"), join(root, "workers", worker, "wrangler.toml.example"));
     }
-    const result = spawnSync(process.execPath, [join(root, "scripts/render-config.mjs")], {
+    const result = spawnSync(process.execPath, [join(root, "scripts/install/render-config.mjs")], {
       env: {
         ...process.env,
         D1_DATABASE_ID: databaseId,

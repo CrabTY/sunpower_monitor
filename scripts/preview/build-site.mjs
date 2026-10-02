@@ -4,7 +4,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
-const root = fileURLToPath(new URL("../", import.meta.url));
+const root = fileURLToPath(new URL("../../", import.meta.url));
 const output = join(root, "dist/site");
 const demo = join(output, "demo");
 await rm(output, { recursive: true, force: true });
@@ -41,7 +41,7 @@ for (const name of await readdir(join(root, "web"))) {
   await writeFile(join(demo, name), body);
 }
 assert.ok((await readdir(demo)).includes("chart-engine.bundle.js"), "Run npm run build:web before building the site");
-const fixture = await readFile(join(root, "scripts/preview-client.js"), "utf8");
+const fixture = await readFile(join(root, "scripts/preview/preview-client.js"), "utf8");
 await writeFile(join(demo, "demo.js"), `/* Generated demo: synthetic readings and San Francisco city-center coordinates. */
 // The fixture's fallback fetch is this blocked function, never native network access.
 window.fetch = () => Promise.reject(new Error("Demo network access is disabled"));

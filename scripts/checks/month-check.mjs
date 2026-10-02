@@ -7,9 +7,9 @@
  * real dashboard Worker, and checks the month-spanning API responses.
  * Frontend rendering is covered by check:render and check:preview.
  *
- *   node scripts/month-check.mjs            # generate, seed, serve, check
- *   node scripts/month-check.mjs --serve    # seed and keep the dev server up
- *   MONTH_SQL_OUT=/tmp/month.sql node scripts/month-check.mjs --write-only
+ *   node scripts/checks/month-check.mjs            # generate, seed, serve, check
+ *   node scripts/checks/month-check.mjs --serve    # seed and keep the dev server up
+ *   MONTH_SQL_OUT=/tmp/month.sql node scripts/checks/month-check.mjs --write-only
  *
  * Writes only to a temp directory; never touches a remote account.
  */
@@ -20,10 +20,10 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { SCHEMA_VERSION, digestOf, validateBatch } from "../workers/dist/shared/contract.js";
-import { signSession } from "../workers/dist/dashboard/src/session.js";
+import { SCHEMA_VERSION, digestOf, validateBatch } from "../../workers/dist/shared/contract.js";
+import { signSession } from "../../workers/dist/dashboard/src/session.js";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const collector = "home-pvs";
 const timezone = "America/Los_Angeles";
 const tzOffsetSec = -7 * 3600; // September in Los Angeles is always PDT.
