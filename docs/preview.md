@@ -1,5 +1,7 @@
 # Local preview with simulated data
 
+在线体验：[项目介绍](https://crabty.github.io/sunpower_monitor/) · [只读模拟 Demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day)。以下步骤用于本地开发与复现。
+
 这套预览直接加载当前工作树的 `web/` 页面，用固定的模拟 API 数据检查 Live、History、Panels 和 Settings。它**没有从线上 D1 数据库导出真实历史**，也不会请求或修改线上 API。适合反复比较页面状态；不能用来判断真实产量或验证数据库查询。
 
 ## 启动
@@ -49,8 +51,8 @@ Demo 复用 `web/` 和同一份模拟数据，所有 API 均在浏览器内响�
 
 介绍站与模拟 Demo 使用同一仓库的 `.github/workflows/pages.yml`，只发布生成的 `dist/site/`。无需另建源码仓库、提交生成文件或维护 `gh-pages` 分支。
 
-Pages 尚未启用，在线地址尚未生效。仓库维护者需先满足 GitHub Pages 的套餐/可见性要求，并在 **Settings → Pages → Source** 选择 **GitHub Actions**。工作流不会改变仓库可见性，也不自动启用 Pages。
+本仓库已使用免费的 GitHub Pages 上线，**Settings → Pages → Source** 为 **GitHub Actions**。若在自己的仓库复现，需先满足 GitHub Pages 的套餐/可见性要求并选择相同发布来源；工作流不会改变仓库可见性，也不自动启用 Pages。
 
 Actions 中手动运行 `pages`，不勾选 `publish` 可验证安全检查、构建与临时 Pages artifact；勾选后才执行托管。首次上线后，公开仓库中影响站点的 main 更新会自动发布，安全检查失败时不会发布。私有仓库的 push 只验证构建，不自动发布。
 
-部署完成后，以工作流返回的实际 `page_url` 验证首页和 `demo/`，再填写 README 与 GitHub About 的真实链接。GitHub Pages 不读取 Cloudflare 的 `_headers` 文件；Demo 的网络限制通过 HTML CSP 和浏览器内替身实现，设置与真实定位仍禁用。
+本仓库首页为 `https://crabty.github.io/sunpower_monitor/`，Demo 位于 `demo/`；README 与 GitHub About 使用已验证地址。若在其他仓库部署，以工作流返回的实际 `page_url` 验证链接。GitHub Pages 不读取 Cloudflare 的 `_headers` 文件；Demo 的网络限制通过 HTML CSP 和浏览器内替身实现，设置与真实定位仍禁用。

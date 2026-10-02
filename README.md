@@ -5,9 +5,7 @@
 [![Security checks](https://github.com/CrabTY/sunpower_monitor/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/CrabTY/sunpower_monitor/actions/workflows/security.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md) · [Local preview](docs/preview.md)
-
-> The introduction website and online demo are not hosted yet. The [local preview guide](docs/preview.md) shows how to open both on your computer.
+[Website](https://crabty.github.io/sunpower_monitor/) · [Live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day) · [Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md)
 
 SunPower Monitor helps you see what your solar system is doing now, how its energy use changes over time, and how each panel performs. It reads your PVS6 on the home network, records history, and serves a dashboard you can open on a computer or phone, including when you are away from home.
 
@@ -38,7 +36,7 @@ You can use Cloudflare's `workers.dev` address without a custom domain. Home Ass
 
 ### Set up your dashboard
 
-> The first public release is being prepared. Automated installation requires a published Release installer and public collector image. Until those are available, repository users can follow the [manual installation guide](docs/manual-installation.md).
+> Source code and the v0.1.0 Release installer are public. The collector image is still private, so automated installation is not available yet. Follow the [manual installation guide](docs/manual-installation.md) to build or run from source.
 
 For a published version, follow the [Quick Start](docs/quick-start.md):
 
@@ -105,7 +103,7 @@ Only the collector contacts the PVS. It uploads over outbound HTTPS, so remote v
 ## Frequently asked questions
 
 **Can I use it without installing anything first?**
-You can inspect the screenshots above or [run the read-only simulated demo locally](docs/preview.md#可直接托管的演示产物). The introduction website and online demo have not been hosted yet. It uses the same dashboard code without a PVS, Cloudflare deployment, account, or household data.
+Yes: [open the read-only live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day). It uses the same dashboard code with simulated readings, without a PVS, Cloudflare deployment, account, or household data. Developers can also [preview it locally](docs/preview.md).
 
 **Does it run entirely offline?**
 PVS collection happens locally, but the hosted dashboard requires Cloudflare and an Internet connection. Historical records queue on the collector during a connection outage. Latest live snapshots are not replayed as history.

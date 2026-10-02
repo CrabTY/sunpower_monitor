@@ -12,7 +12,7 @@ The installer shows six numbered stages, each marked as a browser or terminal ta
 
 Cloudflare's Wrangler login lives in a temporary private directory while the script runs. Executable Node dependencies use a temporary Docker volume so NAS directories mounted with `noexec` work too. The installer removes both on exit; they are not stored in Git or in the collector image.
 
-> **Release status:** Public installation requires a published release and a public collector package. The source-tree installer has no production image pin; use the installer attached to the release.
+> **Release status:** The v0.1.0 installer is public, but its collector image remains private, so automated installation is not available to anonymous users yet. Use [manual installation](manual-installation.md) to build or run from source. When the image is public, use the installer attached to the release; the source-tree installer has no production image pin.
 
 ## Before you start
 
