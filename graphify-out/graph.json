@@ -6165,7 +6165,7 @@
       "file_type": "code",
       "norm_label": "link()",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L46"
+      "source_location": "L47"
     },
     {
       "id": "scripts_site_check_addeventlistener",
@@ -6177,7 +6177,7 @@
       "file_type": "code",
       "norm_label": "addeventlistener()",
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L40"
+      "source_location": "L41"
     },
     {
       "id": "scripts_site_check_fetch",
@@ -6189,7 +6189,7 @@
       "file_type": "code",
       "norm_label": "fetch()",
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L40"
+      "source_location": "L41"
     },
     {
       "id": "scripts_site_check_files",
@@ -6213,7 +6213,7 @@
       "file_type": "code",
       "norm_label": "getcurrentposition()",
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L41"
+      "source_location": "L42"
     },
     {
       "id": "scripts_site_check_getitem",
@@ -6225,7 +6225,7 @@
       "file_type": "code",
       "norm_label": "getitem()",
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L44"
+      "source_location": "L45"
     },
     {
       "id": "scripts_site_check_setitem",
@@ -6237,7 +6237,7 @@
       "file_type": "code",
       "norm_label": "setitem()",
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L44"
+      "source_location": "L45"
     },
     {
       "id": "tests_test_ingest_local_localingesttests_panel_sample",
@@ -6549,7 +6549,7 @@
       "file_type": "code",
       "norm_label": "preventdefault()",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L85"
+      "source_location": "L87"
     },
     {
       "id": "web_app_dayentry",
@@ -7593,7 +7593,7 @@
       "file_type": "code",
       "norm_label": "cell()",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L101"
+      "source_location": "L103"
     },
     {
       "id": "site_introduction_expandcomparisonrow",
@@ -12269,7 +12269,7 @@
       "node_kind": "heading",
       "norm_label": "contributing",
       "source_file": "README.md",
-      "source_location": "L142"
+      "source_location": "L146"
     },
     {
       "id": "readme_dashboard_tour",
@@ -12281,7 +12281,7 @@
       "node_kind": "heading",
       "norm_label": "dashboard tour",
       "source_file": "README.md",
-      "source_location": "L57"
+      "source_location": "L61"
     },
     {
       "id": "readme_documentation",
@@ -12293,7 +12293,7 @@
       "node_kind": "heading",
       "norm_label": "documentation",
       "source_file": "README.md",
-      "source_location": "L123"
+      "source_location": "L127"
     },
     {
       "id": "readme_frequently_asked_questions",
@@ -12305,7 +12305,7 @@
       "node_kind": "heading",
       "norm_label": "frequently asked questions",
       "source_file": "README.md",
-      "source_location": "L103"
+      "source_location": "L107"
     },
     {
       "id": "readme_gateway_compatibility",
@@ -12317,7 +12317,7 @@
       "node_kind": "heading",
       "norm_label": "gateway compatibility",
       "source_file": "README.md",
-      "source_location": "L18"
+      "source_location": "L22"
     },
     {
       "id": "readme_history_energy_over_time",
@@ -12329,7 +12329,7 @@
       "node_kind": "heading",
       "norm_label": "history: energy over time",
       "source_file": "README.md",
-      "source_location": "L65"
+      "source_location": "L69"
     },
     {
       "id": "readme_how_it_works",
@@ -12341,7 +12341,7 @@
       "node_kind": "heading",
       "norm_label": "how it works",
       "source_file": "README.md",
-      "source_location": "L93"
+      "source_location": "L97"
     },
     {
       "id": "readme_installation",
@@ -12353,7 +12353,7 @@
       "node_kind": "heading",
       "norm_label": "installation",
       "source_file": "README.md",
-      "source_location": "L24"
+      "source_location": "L28"
     },
     {
       "id": "readme_live_power_right_now",
@@ -12365,7 +12365,7 @@
       "node_kind": "heading",
       "norm_label": "live: power right now",
       "source_file": "README.md",
-      "source_location": "L59"
+      "source_location": "L63"
     },
     {
       "id": "readme_panels_individual_output_and_recorded_history",
@@ -12377,7 +12377,7 @@
       "node_kind": "heading",
       "norm_label": "panels: individual output and recorded history",
       "source_file": "README.md",
-      "source_location": "L73"
+      "source_location": "L77"
     },
     {
       "id": "readme_security",
@@ -12389,7 +12389,7 @@
       "node_kind": "heading",
       "norm_label": "security",
       "source_file": "README.md",
-      "source_location": "L136"
+      "source_location": "L140"
     },
     {
       "id": "readme_set_up_your_dashboard",
@@ -12401,7 +12401,7 @@
       "node_kind": "heading",
       "norm_label": "set up your dashboard",
       "source_file": "README.md",
-      "source_location": "L37"
+      "source_location": "L41"
     },
     {
       "id": "readme_settings_location_and_calibration",
@@ -12413,7 +12413,7 @@
       "node_kind": "heading",
       "norm_label": "settings: location and calibration",
       "source_file": "README.md",
-      "source_location": "L89"
+      "source_location": "L93"
     },
     {
       "id": "readme_sunpower_monitor",
@@ -12437,7 +12437,7 @@
       "node_kind": "heading",
       "norm_label": "support and license",
       "source_file": "README.md",
-      "source_location": "L148"
+      "source_location": "L152"
     },
     {
       "id": "readme_what_you_need",
@@ -12449,7 +12449,7 @@
       "node_kind": "heading",
       "norm_label": "what you need",
       "source_file": "README.md",
-      "source_location": "L26"
+      "source_location": "L30"
     },
     {
       "id": "scripts_preview_client",
@@ -12928,7 +12928,7 @@
       "file_type": "code",
       "norm_label": "bodyclasses",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L53"
+      "source_location": "L54"
     },
     {
       "id": "scripts_introduction_check_buttons",
@@ -12939,7 +12939,7 @@
       "file_type": "code",
       "norm_label": "buttons",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L39"
+      "source_location": "L40"
     },
     {
       "id": "scripts_introduction_check_caption",
@@ -12950,7 +12950,7 @@
       "file_type": "code",
       "norm_label": "caption",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L44"
+      "source_location": "L45"
     },
     {
       "id": "scripts_introduction_check_context",
@@ -12961,7 +12961,7 @@
       "file_type": "code",
       "norm_label": "context",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L72"
+      "source_location": "L73"
     },
     {
       "id": "scripts_introduction_check_document",
@@ -12972,7 +12972,7 @@
       "file_type": "code",
       "norm_label": "document",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L55"
+      "source_location": "L56"
     },
     {
       "id": "scripts_introduction_check_external",
@@ -12983,7 +12983,7 @@
       "file_type": "code",
       "norm_label": "external",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L51"
+      "source_location": "L52"
     },
     {
       "id": "scripts_introduction_check_guide",
@@ -13005,7 +13005,7 @@
       "file_type": "code",
       "norm_label": "header",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L42"
+      "source_location": "L43"
     },
     {
       "id": "scripts_introduction_check_image",
@@ -13016,7 +13016,7 @@
       "file_type": "code",
       "norm_label": "image",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L44"
+      "source_location": "L45"
     },
     {
       "id": "scripts_introduction_check_internal",
@@ -13027,7 +13027,7 @@
       "file_type": "code",
       "norm_label": "internal",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L50"
+      "source_location": "L51"
     },
     {
       "id": "scripts_introduction_check_media",
@@ -13038,7 +13038,7 @@
       "file_type": "code",
       "norm_label": "media",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L43"
+      "source_location": "L44"
     },
     {
       "id": "scripts_introduction_check_names",
@@ -13060,7 +13060,7 @@
       "file_type": "code",
       "norm_label": "nav",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L41"
+      "source_location": "L42"
     },
     {
       "id": "scripts_introduction_check_option",
@@ -13071,7 +13071,7 @@
       "file_type": "code",
       "norm_label": "option",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L52"
+      "source_location": "L53"
     },
     {
       "id": "scripts_introduction_check_original",
@@ -13082,7 +13082,7 @@
       "file_type": "code",
       "norm_label": "original",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L44"
+      "source_location": "L45"
     },
     {
       "id": "scripts_introduction_check_pages",
@@ -13104,7 +13104,7 @@
       "file_type": "code",
       "norm_label": "rows",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L36"
+      "source_location": "L37"
     },
     {
       "id": "scripts_introduction_check_screenshot",
@@ -13115,7 +13115,7 @@
       "file_type": "code",
       "norm_label": "screenshot",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L49"
+      "source_location": "L50"
     },
     {
       "id": "scripts_introduction_check_sections",
@@ -13126,7 +13126,7 @@
       "file_type": "code",
       "norm_label": "sections",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L40"
+      "source_location": "L41"
     },
     {
       "id": "scripts_introduction_check_server",
@@ -13137,7 +13137,7 @@
       "file_type": "code",
       "norm_label": "server",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L124"
+      "source_location": "L126"
     },
     {
       "id": "scripts_introduction_check_setupsections",
@@ -13148,7 +13148,7 @@
       "file_type": "code",
       "norm_label": "setupsections",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L23"
+      "source_location": "L24"
     },
     {
       "id": "scripts_introduction_check_viewer",
@@ -13159,7 +13159,7 @@
       "file_type": "code",
       "norm_label": "viewer",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "scripts_introduction_check_window",
@@ -13170,7 +13170,7 @@
       "file_type": "code",
       "norm_label": "window",
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L65"
+      "source_location": "L66"
     },
     {
       "id": "web_app",
@@ -33701,7 +33701,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L59",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -33712,7 +33712,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L65",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -33723,7 +33723,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L73",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -33734,7 +33734,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L89",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -33745,7 +33745,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L26",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -33756,7 +33756,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L37",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -33767,7 +33767,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L103",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -33778,7 +33778,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L123",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -33789,7 +33789,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L136",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -33800,7 +33800,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L142",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -33811,7 +33811,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L148",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -33822,7 +33822,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L18",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -33833,7 +33833,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L24",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -33844,7 +33844,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L57",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -33855,7 +33855,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L93",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -33937,13 +33937,24 @@
     },
     {
       "source": "scripts_introduction_check",
+      "target": "scripts_introduction_check_preventdefault",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/introduction-check.mjs",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_introduction_check",
       "target": "scripts_introduction_check_cell",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L101",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -33954,7 +33965,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L124",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -33965,7 +33976,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -33976,7 +33987,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -33987,7 +33998,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -33998,7 +34009,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L40",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -34009,7 +34020,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -34020,7 +34031,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -34031,7 +34042,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -34042,7 +34053,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -34053,7 +34064,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -34064,7 +34075,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -34075,7 +34086,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -34086,7 +34097,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -34097,7 +34108,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L49",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -34108,7 +34119,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L50",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -34119,7 +34130,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -34130,7 +34141,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -34141,7 +34152,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -34152,7 +34163,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L55",
+      "source_location": "L56",
       "weight": 1.0
     },
     {
@@ -34163,7 +34174,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L65",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -34185,7 +34196,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L72",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -34208,17 +34219,6 @@
       "confidence_score": 1.0,
       "source_file": "scripts/introduction-check.mjs",
       "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_introduction_check",
-      "target": "scripts_introduction_check_preventdefault",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/introduction-check.mjs",
-      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -35131,7 +35131,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L40",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -35142,7 +35142,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L40",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -35153,7 +35153,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -35164,7 +35164,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -35175,7 +35175,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L44",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -43197,7 +43197,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L101",
+      "source_location": "L105",
       "weight": 1.0
     },
     {
@@ -43208,84 +43208,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L106",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_references",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L121",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_security_review",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L138",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "contributing",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L144",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_ct_calibration",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L22",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_manual_installation",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L39",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_quick_start",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L41",
-      "weight": 1.0
-    },
-    {
-      "source": "readme",
-      "target": "docs_operations",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L55",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -43296,7 +43219,84 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L8",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_references",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_security_review",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L142",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "contributing",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_ct_calibration",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_manual_installation",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_quick_start",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "readme",
+      "target": "docs_operations",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -43404,7 +43404,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "scripts/site-check.mjs",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {

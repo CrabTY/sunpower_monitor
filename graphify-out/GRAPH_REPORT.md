@@ -1,7 +1,7 @@
 # Graph Report - sunpower_monitor  (2026-10-01)
 
 ## Corpus Check
-- 81 files · ~226,832 words
+- 81 files · ~226,882 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 12 file(s) not represented in the graph (top: (none) 5, .example 4, .css 2)
 
