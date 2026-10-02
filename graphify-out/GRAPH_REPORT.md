@@ -1,12 +1,12 @@
 # Graph Report - sunpower_monitor  (2026-10-01)
 
 ## Corpus Check
-- 79 files · ~228,382 words
+- 80 files · ~230,070 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 12 file(s) not represented in the graph (top: (none) 5, .example 4, .css 2)
 
 ## Summary
-- 1221 nodes · 2576 edges · 85 communities (58 shown, 27 thin omitted)
+- 1230 nodes · 2591 edges · 80 communities (55 shown, 25 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 74 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
@@ -15,7 +15,7 @@
 - panels.js
 - package.json
 - check.js
-- dashboard/src/index.ts
+- dashboard.test.ts
 - site-check.mjs
 - app.js
 - history.js
@@ -28,7 +28,7 @@
 - CT 安装限制与家庭用电校准
 - CollectorTestCase
 - month-check.mjs
-- PVSClient
+- PVSError
 - page-render-check.mjs
 - PendingQueue
 - test_pvs.py
@@ -40,23 +40,23 @@
 - settings.js
 - install.sh
 - energy-plot.js
-- fetch
-- ref_node_assert
+- dashboard/src/index.ts
+- dashboard/test/weather.test.ts
 - Security review
 - ref_node_fs
-- ParsingTests
+- prepare-release.py
 - FakePVS
 - compilerOptions
 - Operations
 - Quick Start: one terminal on the collector host
-- main.py
+- AuthError
 - Architecture
-- SiteMinute
+- FakeDb
 - SunPower Monitor
 - contract.ts
-- Env
-- PVSError
-- test_ingest_local.py
+- .test_minute_history_reaches_the_endpoint_and_is_acknowledged
+- Project layout
+- main.py
 - exportStats
 - Manual installation: private dashboard without a custom domain
 - Local preview with simulated data
@@ -65,17 +65,12 @@
 - ref_node_child_process
 - live.ts
 - FakeIngest
-- Clock
-- ScriptedDb
 - PVS
 - introduction-check.mjs
-- site-day.ts
 - api
 - Response
 - calibration.js
-- .test_minute_history_reaches_the_endpoint_and_is_acknowledged
 - Contributing
-- SiteSample
 - FakeDb
 - diagrams/README.md
 - AGENTS.md
@@ -123,11 +118,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (85 total, 27 thin omitted)
+## Communities (80 total, 25 thin omitted)
 
 ### Community 0 - "contract.test.ts"
-Cohesion: 0.14
-Nodes (15): conflictStatement(), epochSeconds(), insertStatement(), knownPanelStatement(), PlannedWrite, planWrite(), upsertLatestSite(), WriteOutcome (+7 more)
+Cohesion: 0.19
+Nodes (13): conflictStatement(), epochSeconds(), insertStatement(), knownPanelStatement(), PlannedWrite, planWrite(), upsertLatestSite(), WriteOutcome (+5 more)
 
 ### Community 1 - "panels.js"
 Cohesion: 0.13
@@ -141,9 +136,9 @@ Nodes (41): dependencies, echarts, description, devDependencies, @cloudflare/wor
 Cohesion: 0.05
 Nodes (44): COLORS, aligned, alignedRows, buckets, bucketWindows, calibratedEnergy, combined, correctedHistory (+36 more)
 
-### Community 4 - "dashboard/src/index.ts"
-Cohesion: 0.10
-Nodes (34): RFC-7636, OAUTH_COOKIE, SCHEMA_VERSION, SESSION_COOKIE, SESSION_SECONDS, AssetFetcher, callback(), Env (+26 more)
+### Community 4 - "dashboard.test.ts"
+Cohesion: 0.13
+Nodes (24): RFC-7636, callback(), login(), authorizeUrl(), exchangeCode(), Fetcher, fetchUserId(), GithubConfig (+16 more)
 
 ### Community 5 - "site-check.mjs"
 Cohesion: 0.20
@@ -162,20 +157,20 @@ Cohesion: 0.12
 Nodes (30): AIR_QUALITY_HOURLY, AIR_QUALITY_KIND, AIR_QUALITY_SOURCE, airQualityRows(), airQualityUrl(), alignHourly(), chunkStatements(), DaylightRow (+22 more)
 
 ### Community 9 - "location.ts"
-Cohesion: 0.11
-Nodes (30): allowResolve(), censusPlaces(), getJson(), isFiniteNumber(), isValidCoordinate(), isValidTimezone(), LOCATION_SOURCES, LocationSource (+22 more)
+Cohesion: 0.12
+Nodes (29): allowResolve(), censusPlaces(), getJson(), isFiniteNumber(), isValidCoordinate(), isValidTimezone(), LOCATION_SOURCES, LocationSource (+21 more)
 
 ### Community 10 - "model.py"
 Cohesion: 0.12
-Nodes (27): device_fields(), finite_number(), floor_slot(), _from_epoch(), _index_key(), _livedata_fields(), MeterSample, parse_measured_time() (+19 more)
+Nodes (26): device_fields(), finite_number(), _from_epoch(), _index_key(), _livedata_fields(), MeterSample, parse_measured_time(), parse_meters() (+18 more)
 
 ### Community 11 - "query.ts"
-Cohesion: 0.15
-Nodes (30): energyRange(), panels(), clampSpan(), daySql(), DEFAULT_SPAN_SECONDS, fiveMinuteSql(), HistoryView, instantSeconds() (+22 more)
+Cohesion: 0.12
+Nodes (30): ref_node_test, clampSpan(), daySql(), DEFAULT_SPAN_SECONDS, fiveMinuteSql(), HistoryView, iso(), MAX_ENERGY_SPAN_SECONDS (+22 more)
 
 ### Community 12 - "AuthenticationTests"
-Cohesion: 0.15
-Nodes (10): AuthenticationTests, client(), FakeOpener, http_error(), make_client(), A cache-only read can serve a partial variable set, so it is never used., A stale cookie gets 401 on every request, so re-login must drop it., Clearing a jar the opener does not use leaves the stale cookie in place. (+2 more)
+Cohesion: 0.07
+Nodes (20): Additional UI references, Decision, Reference projects and collector comparison, Reviewed versions, AuthenticationTests, client(), Clock, FakeOpener (+12 more)
 
 ### Community 13 - "Collector"
 Cohesion: 0.21
@@ -186,40 +181,40 @@ Cohesion: 0.25
 Nodes (8): 200A 入户电表箱的安装限制, 400A 系统的计量配置, CT 安装限制与家庭用电校准, SunPower 的发电与用电计量, 比例校准的依据与作用, 电表之后的供电结构, 电表对照与校准设置, 资料与图片
 
 ### Community 15 - "CollectorTestCase"
-Cohesion: 0.19
-Nodes (4): CollectorTestCase, A frozen measurement time is not a reading: one bootstrap row, then a gap., A PVS restart renumbers every index; identity has to come from the serial., One attempt a minute: the pause never grows past the first minute.
+Cohesion: 0.14
+Nodes (7): Network trouble, timeout, 429, or 5xx: keep the records and retry later., RetryableError, CollectorTestCase, published(), A frozen measurement time is not a reading: one bootstrap row, then a gap., A PVS restart renumbers every index; identity has to come from the serial., One attempt a minute: the pause never grows past the first minute.
 
 ### Community 16 - "month-check.mjs"
 Cohesion: 0.15
 Nodes (23): ref_workers_dist_shared_contract_js, buildSql(), check(), clamp(), contractRecords(), daylightHours(), dayOfYear(), declination() (+15 more)
 
-### Community 17 - "PVSClient"
-Cohesion: 0.23
-Nodes (5): PVSClient, Read one allowlisted group, re-authenticating once on session expiry., Small uncached query used to spot PVS restarts and rising load., One serialized read-only connection to a PVS6 on the LAN., Derive the in-memory session credential from a focused serial read.
+### Community 17 - "PVSError"
+Cohesion: 0.10
+Nodes (18): ArgumentParser, build_parser(), check_reads(), connect_pvs(), main(), One read-only pass over every group; prints values, stores nothing., Wait for the PVS instead of crash-looping when it is rebooting or down., PVSClient (+10 more)
 
 ### Community 18 - "page-render-check.mjs"
 Cohesion: 0.08
 Nodes (23): anchoredHistory, at, customHistory, here, history, historyPayload, live, location (+15 more)
 
 ### Community 19 - "PendingQueue"
-Cohesion: 0.08
+Cohesion: 0.07
 Nodes (10): PendingQueue, Oldest pending records first, with their stored payload unchanged., Isolate records the cloud rejected so the queue can move on., Stable, serial-free panel ID for one inverter. The serial decides identity, and…, Keep one row per index, so the index fallback never reads a stale one., Last known inverter index per panel, so a renumbering is visible., One writer (the collector process) over one SQLite file., Move a pre-serial panel_map to the serial-keyed shape, keeping ids. (+2 more)
 
 ### Community 20 - "test_pvs.py"
-Cohesion: 0.19
-Nodes (16): base64, _build_opener(), PVSAuthError, Read-only PVS6 varserver client: focused, serialized queries. Boundaries taken…, The PVS rejected the session with HTTP 401/403., http_cookiejar, json, now_utc() (+8 more)
+Cohesion: 0.16
+Nodes (19): base64, _build_opener(), PVSAuthError, Read-only PVS6 varserver client: focused, serialized queries. Boundaries taken…, The PVS rejected the session with HTTP 401/403., Ingest client: discardable latest-value PUTs and idempotent history batches.…, datetime, http_cookiejar (+11 more)
 
 ### Community 21 - "test_collector.py"
-Cohesion: 0.07
-Nodes (26): argparse, Read-only SunPower PVS6 collector: LAN polling, local queue, cloud upload., SQLite pending-upload queue and Pi-side anonymous panel mapping. Commit locally…, datetime, hashlib, http_server, io, pathlib (+18 more)
+Cohesion: 0.09
+Nodes (22): Read-only SunPower PVS6 collector: LAN polling, local queue, cloud upload., SQLite pending-upload queue and Pi-side anonymous panel mapping. Commit locally…, http_server, io, pathlib, pty, main(), Exercise local pushes and worktrees with fake Graphify; no external services. (+14 more)
 
 ### Community 22 - "weather.ts"
-Cohesion: 0.13
-Nodes (17): ref_node_test, Validation, DEFAULT_WEATHER_SPAN_SECONDS, FORECAST_FIELDS, localDate(), MAX_WEATHER_ROWS, MAX_WEATHER_SPAN_SECONDS, numberOrNull() (+9 more)
+Cohesion: 0.15
+Nodes (19): Validation, DEFAULT_WEATHER_SPAN_SECONDS, FORECAST_FIELDS, localDate(), MAX_WEATHER_ROWS, numberOrNull(), qualityOf(), readWeather() (+11 more)
 
 ### Community 23 - "IngestClient"
-Cohesion: 0.12
-Nodes (17): AuthError, _ids_from(), IngestClient, _parse_json(), Exception, Ingest client: discardable latest-value PUTs and idempotent history batches.…, Base class for ingest failures., The upload token was rejected; stop sending until an operator acts. (+9 more)
+Cohesion: 0.15
+Nodes (10): _ids_from(), IngestClient, _parse_json(), The batch was rejected; isolate these record IDs and keep the rest., HTTPS client for one ingest origin. Certificates are validated normally., Return the accepted record IDs; the caller deletes exactly those., RejectedError, Data contract and history (+2 more)
 
 ### Community 24 - "local-cloud-check.mjs"
 Cohesion: 0.14
@@ -241,21 +236,25 @@ Nodes (17): cleanup(), COLLECTOR_ID, configure_github_login(), D1_DATABASE_ID, D
 Cohesion: 0.22
 Nodes (15): alignedEnergy(), counterDelta(), rangeEnergy(), solarDisplay(), WEATHER_LAYERS, weatherBounds(), dailySiteOption(), dailySiteRows() (+7 more)
 
-### Community 29 - "fetch"
-Cohesion: 0.34
-Nodes (18): collectorId(), fetch(), getCalibration(), getLocation(), health(), history(), isoOrNull(), json() (+10 more)
+### Community 29 - "dashboard/src/index.ts"
+Cohesion: 0.22
+Nodes (28): AssetFetcher, collectorId(), energyRange(), fetch(), getCalibration(), getLocation(), health(), history() (+20 more)
+
+### Community 30 - "dashboard/test/weather.test.ts"
+Cohesion: 0.13
+Nodes (11): ref_node_assert, resolveUser(), OAUTH_COOKIE, SCHEMA_VERSION, SESSION_COOKIE, SESSION_SECONDS, Env, MAX_WEATHER_SPAN_SECONDS (+3 more)
 
 ### Community 31 - "Security review"
-Cohesion: 0.50
+Cohesion: 0.40
 Nodes (4): Continuing checks, Limits and deployment responsibilities, Scope and results, Security review
 
 ### Community 32 - "ref_node_fs"
 Cohesion: 0.08
 Nodes (20): ref_node_fs, ref_node_http, ref_node_os, ref_node_path, ref_node_url, source, configs, dashboardHost (+12 more)
 
-### Community 33 - "ParsingTests"
-Cohesion: 0.15
-Nodes (8): Additional UI references, Decision, Reference projects and collector comparison, Reviewed versions, inverter(), livedata(), ParsingTests, published()
+### Community 33 - "prepare-release.py"
+Cohesion: 0.33
+Nodes (4): argparse, hashlib, re, Create the release installer with immutable source and image references.
 
 ### Community 34 - "FakePVS"
 Cohesion: 0.24
@@ -266,24 +265,20 @@ Cohesion: 0.15
 Nodes (12): compilerOptions, lib, module, moduleResolution, noUncheckedIndexedAccess, outDir, rootDir, skipLibCheck (+4 more)
 
 ### Community 36 - "Operations"
-Cohesion: 0.18
-Nodes (11): AMD64 and ARM64 images, Backups and recovery, Capacity and optional weather, Collector service, Database upgrades, Deployment order, Direct Python service, Manual Docker Compose (+3 more)
+Cohesion: 0.12
+Nodes (16): AMD64 and ARM64 images, Backups and recovery, Capacity and optional weather, Choose what to redeploy, Collector service, Database upgrades, Deployment order, Direct Python service (+8 more)
 
 ### Community 37 - "Quick Start: one terminal on the collector host"
 Cohesion: 0.22
 Nodes (9): 1. Start the installer on the collector host, 2. Approve Cloudflare access in your browser, 3. Configure and deploy in the collector-host terminal, 4. Register GitHub login in your browser, 5. Check GitHub login in your browser, 6. Pull and start the collector on the same host, After installation: verify readings in your browser, Before you start (+1 more)
 
-### Community 39 - "main.py"
-Cohesion: 0.19
-Nodes (11): ArgumentParser, build_parser(), check_reads(), connect_pvs(), main(), datetime, Serialized PVS6 collector: tiered reads, minute rollup, local queue, upload.…, One read-only pass over every group; prints values, stores nothing. (+3 more)
+### Community 39 - "AuthError"
+Cohesion: 0.40
+Nodes (5): AuthError, Exception, Base class for ingest failures., The upload token was rejected; stop sending until an operator acts., UploadError
 
 ### Community 40 - "Architecture"
-Cohesion: 0.22
-Nodes (9): Architecture, Authentication and private settings, Browser dashboard, Collection and delivery, Compatibility, Components and boundaries, Data contract and history, Decisions (+1 more)
-
-### Community 41 - "SiteMinute"
-Cohesion: 0.22
-Nodes (3): Accumulates the site samples that belong to one UTC minute., SiteMinute, published()
+Cohesion: 0.25
+Nodes (8): Architecture, Authentication and private settings, Browser dashboard, Collection and delivery, Compatibility, Components and boundaries, Decisions, Installation and upgrade artifacts
 
 ### Community 42 - "SunPower Monitor"
 Cohesion: 0.12
@@ -291,19 +286,19 @@ Nodes (16): Contributing, Dashboard tour, Documentation, Frequently asked questi
 
 ### Community 43 - "contract.ts"
 Cohesion: 0.12
-Nodes (16): checkKind(), EARLIEST_MS, FUTURE_TOLERANCE_MS, LIVE_FIELDS, LivePayload, MAX_BATCH, MAX_BODY_BYTES, NUMBER_FIELDS (+8 more)
+Nodes (19): checkCommon(), checkKind(), EARLIEST_MS, FUTURE_TOLERANCE_MS, LIVE_FIELDS, LivePayload, MAX_BATCH, MAX_BODY_BYTES (+11 more)
 
-### Community 44 - "Env"
-Cohesion: 0.22
-Nodes (3): Env, Virtual wall clock plus monotonic clock advanced by the collector's sleeps., The Pi's monotonic clock starts at boot, so due times need the offset.
+### Community 44 - ".test_minute_history_reaches_the_endpoint_and_is_acknowledged"
+Cohesion: 0.18
+Nodes (6): Env, do_POST(), do_PUT(), _payload(), Virtual wall clock plus monotonic clock advanced by the collector's sleeps., The Pi's monotonic clock starts at boot, so due times need the offset.
 
-### Community 45 - "PVSError"
-Cohesion: 0.28
-Nodes (6): PVSError, A PVS read failed: transport, malformed response, or repeated auth failure., RuntimeError, StartupTests, __init__(), __init__()
+### Community 45 - "Project layout"
+Cohesion: 0.67
+Nodes (3): Local configuration and persistent data, Project layout, Source and generated output
 
-### Community 46 - "test_ingest_local.py"
-Cohesion: 0.28
-Nodes (10): PanelSample, Deterministic record ID; replay keeps the same ID and content., record_id(), to_iso(), panel_entry(), panel_sample_record(), datetime, Minute and five-minute rollups with explicit coverage and quality. Rules from… (+2 more)
+### Community 46 - "main.py"
+Cohesion: 0.13
+Nodes (22): datetime, Serialized PVS6 collector: tiered reads, minute rollup, local queue, upload.…, floor_minute(), floor_slot(), live_payload(), PanelSample, One ``site_latest`` snapshot for the discardable live path., Deterministic record ID; replay keeps the same ID and content. (+14 more)
 
 ### Community 48 - "Manual installation: private dashboard without a custom domain"
 Cohesion: 0.29
@@ -318,8 +313,8 @@ Cohesion: 0.67
 Nodes (3): Documentation, Images, Separate introduction site
 
 ### Community 51 - "ingest/src/index.ts"
-Cohesion: 0.29
-Nodes (14): authorized(), collectorId(), Env, fetch(), json(), postRecords(), putLive(), readJson() (+6 more)
+Cohesion: 0.32
+Nodes (12): authorized(), collectorId(), Env, fetch(), json(), postRecords(), putLive(), readJson() (+4 more)
 
 ### Community 53 - "live.ts"
 Cohesion: 0.33
@@ -329,10 +324,6 @@ Nodes (6): DELAYED_THRESHOLD_SECONDS, freshness, LIVE_THRESHOLD_SECONDS, LiveRow
 Cohesion: 0.07
 Nodes (25): ref_node_events, assets, bodyClasses, buttons, caption, context, document, external (+17 more)
 
-### Community 59 - "site-day.ts"
-Cohesion: 0.36
-Nodes (8): dayBounds(), midnight(), formatters, localDay(), nextDay(), previousDay(), refreshSiteDays(), rollupDay()
-
 ### Community 60 - "api"
 Cohesion: 0.39
 Nodes (6): fixture(), allPanelHistory(), api(), history(), panelHistory(), PreviewDate
@@ -341,36 +332,26 @@ Nodes (6): fixture(), allPanelHistory(), api(), history(), panelHistory(), Previ
 Cohesion: 0.80
 Nodes (4): calibrated(), calibrateHistory(), calibrateLive(), gridRatio()
 
-### Community 63 - ".test_minute_history_reaches_the_endpoint_and_is_acknowledged"
-Cohesion: 0.38
-Nodes (5): IngestSmokeTests, do_POST(), do_PUT(), _payload(), End to end over a real socket: collector -> HTTP -> queue drain.
-
 ### Community 64 - "Contributing"
 Cohesion: 0.40
 Nodes (5): Contributing, Local setup, Main push graph updates, Project layout, Pull requests
-
-### Community 65 - "SiteSample"
-Cohesion: 0.29
-Nodes (5): floor_minute(), live_payload(), One ``site_latest`` snapshot for the discardable live path., SiteSample, Only samples measured inside this UTC minute enter the mean.
 
 ### Community 72 - "introduction.js"
 Cohesion: 0.12
 Nodes (18): cell(), buttons, comparison, header, imageLinks, navigation, originalImage, phone (+10 more)
 
 ## Knowledge Gaps
-- **304 isolated node(s):** `PATH`, `DASHBOARD_WORKER_NAME`, `INGEST_WORKER_NAME`, `D1_DATABASE_NAME`, `COLLECTOR_ID` (+299 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 499 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **27 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **310 isolated node(s):** `PATH`, `DASHBOARD_WORKER_NAME`, `INGEST_WORKER_NAME`, `D1_DATABASE_NAME`, `COLLECTOR_ID` (+305 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 504 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **25 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Contributing` connect `Contributing` to `docs/README.md`?**
-  _High betweenness centrality (0.388) - this node is a cross-community bridge._
+  _High betweenness centrality (0.400) - this node is a cross-community bridge._
 - **Why does `sql()` connect `local-cloud-check.mjs` to `Contributing`?**
-  _High betweenness centrality (0.388) - this node is a cross-community bridge._
-- **Why does `Main push graph updates` connect `Contributing` to `local-cloud-check.mjs`?**
-  _High betweenness centrality (0.388) - this node is a cross-community bridge._
+  _High betweenness centrality (0.399) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `CollectorTestCase` (e.g. with `Collector` and `PendingQueue`) actually correct?**
   _`CollectorTestCase` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 8 inferred relationships involving `Collector` (e.g. with `PVSError` and `PendingQueue`) actually correct?**
@@ -379,3 +360,5 @@ _Questions this graph is uniquely positioned to answer:_
   _`PendingQueue` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 4 inferred relationships involving `SiteMinute` (e.g. with `Collector` and `SiteSample`) actually correct?**
   _`SiteMinute` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `PATH`, `DASHBOARD_WORKER_NAME`, `INGEST_WORKER_NAME` to the rest of the system?**
+  _310 weakly-connected nodes found - possible documentation gaps or missing edges._
