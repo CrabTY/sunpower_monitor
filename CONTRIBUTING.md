@@ -48,15 +48,9 @@ Run `python3 scripts/checks/check-graph-hook.py` to check real local pushes and 
 
 ## Project layout
 
-- `collector/`: read-only Python PVS client, rollups, local SQLite queue, and upload client.
-- `workers/ingest/`: authenticated upload API and scheduled weather/day rollups.
-- `workers/dashboard/`: GitHub login, private APIs, and static asset gate.
-- `workers/shared/`: record contract and shared cloud jobs.
-- `web/`: deployed private browser dashboard.
-- `site/`: public introduction pages and simulated screenshots.
-- `docs/`: installation, operations, architecture, references and security review.
-- `deploy/pi/`: Docker and optional direct Python service files.
-- `install.sh`: interactive setup on the collector host.
+See [Project layout](docs/project-layout.md) for the directory tree, script topics,
+build outputs and private configuration boundaries. [Operations](docs/operations.md#upgrade-an-existing-deployment)
+maps source changes to the services that need redeployment.
 
 ## Pull requests
 

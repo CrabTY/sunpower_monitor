@@ -4,9 +4,11 @@ These documents describe the current installation and code. Start with the guide
 
 | Task | Guide |
 | --- | --- |
+| Find source, script topics, generated output and local data | [Project layout](project-layout.md) |
 | Install from a published Release | [Quick Start](quick-start.md) |
 | Configure and deploy manually | [Manual installation](manual-installation.md) |
-| Upgrade, back up and recover | [Operations](operations.md) |
+| Update and redeploy an existing installation | [Upgrade steps](operations.md#upgrade-an-existing-deployment) |
+| Back up and recover | [Operations](operations.md) |
 | Understand components and data boundaries | [Architecture](architecture.md) |
 | Understand CT coverage and display calibration | [CT guide, Chinese](ct-calibration.md) |
 | Review security checks, remediation and limits | [Security review](security-review.md) |

@@ -128,9 +128,11 @@ No. This collector and dashboard work independently. Home Assistant integrations
 
 | Looking for | Read |
 | --- | --- |
+| Directory structure and script topics | [Project layout](docs/project-layout.md) |
 | Setup and first readings | [Quick Start](docs/quick-start.md) |
 | Workstation deployment or a direct Python service | [Manual installation](docs/manual-installation.md), [Operations](docs/operations.md) |
-| Upgrades, backups, and recovery | [Operations](docs/operations.md) |
+| Updates and redeployment | [Upgrade steps](docs/operations.md#upgrade-an-existing-deployment) |
+| Backups and recovery | [Operations](docs/operations.md) |
 | Collector, cloud, and authentication design | [Architecture](docs/architecture.md) |
 | CT coverage and display calibration | [CT guide, Chinese](docs/ct-calibration.md) |
 | Simulated dashboard for local development | [Preview](docs/preview.md) |
