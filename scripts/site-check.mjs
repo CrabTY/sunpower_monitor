@@ -16,6 +16,7 @@ async function files(directory) {
 }
 for (const path of (await files(root)).filter(path => path.endsWith(".html"))) {
   const html = await readFile(path, "utf8");
+  assert.match(html, /<html lang="en"/, "Website and demo default to English: " + path);
   for (const prefix of ["/", "/sunpower_monitor/"]) {
     const page = new URL(prefix + path.slice(root.length), "https://example.test");
     for (const [, link] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {

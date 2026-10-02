@@ -12,6 +12,7 @@ for (const [name, page] of Object.entries(pages)) {
   assert.doesNotMatch(page, /chatgpt\.com\/c\//);
   assert.equal((page.match(/<h1\b/g) || []).length, 1, name + ' has one primary heading');
   assert.match(page, /aria-current="page"/);
+  assert.match(page, /<html lang="en"/, name + ' defaults to English before scripts run');
   assert.doesNotMatch(page, /<details\b/, 'Content belongs on its page rather than hidden in folds');
   for (const [, target] of page.matchAll(/href="#([^"]+)"/g)) assert.ok(page.includes(`id="${target}"`), name + ': ' + target);
   for (const [, ids] of page.matchAll(/aria-labelledby="([^"]+)"/g)) for (const id of ids.split(' ')) assert.ok(page.includes(`id="${id}"`), name + ': ' + id);
@@ -63,7 +64,7 @@ const document = {
   getElementById: id => id === 'image-viewer' ? viewer : original,
 };
 const window = {
-  location: { href: 'http://localhost/introduction/getting-started.html?lang=en#calibration' },
+  location: { href: 'http://localhost/introduction/getting-started.html#calibration' },
   history: { replaceState(_, __, url) { window.location.href = String(url); } },
   events: {}, addEventListener(name, fn) { this.events[name] = fn; },
   requestAnimationFrame: fn => fn(), matchMedia: () => media,
@@ -71,7 +72,8 @@ const window = {
 };
 const context = { document, window, URL };
 vm.runInNewContext(readFileSync(new URL('../site/introduction.js', import.meta.url), 'utf8'), context);
-assert.equal(language, 'en');
+assert.equal(language, 'en', 'A URL without a language defaults to English');
+assert.equal(new URL(window.location.href).searchParams.get('lang'), 'en');
 assert.equal(new URL(internal.attrs.href).searchParams.get('lang'), 'en');
 assert.equal(new URL(internal.attrs.href).hash, '#first-use');
 assert.equal(external.attrs.href, 'https://github.com/CrabTY/sunpower_monitor');

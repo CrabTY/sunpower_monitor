@@ -30,7 +30,7 @@ function setLanguage(language, preservePosition = false) {
   const anchor = preservePosition && (readingSections.filter(section => section.getBoundingClientRect().top <= readingTop() + 24).at(-1) || readingSections[0]);
   const offset = anchor ? anchor.getBoundingClientRect().top - readingTop() : 0;
   if (anchor) document.documentElement.classList.add('changing-language');
-  const selected = language === 'en' ? 'en' : 'zh-CN';
+  const selected = language === 'zh' || language === 'zh-CN' ? 'zh-CN' : 'en';
   document.documentElement.lang = selected;
   document.title = 'SunPower Monitor · ' + document.documentElement.dataset[selected === 'en' ? 'titleEn' : 'titleZh'];
   buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === selected)));
