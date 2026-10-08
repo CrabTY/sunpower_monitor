@@ -26,7 +26,7 @@
     "check:site": "node scripts/preview/build-site.mjs && node scripts/checks/site-check.mjs"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260924.1",
+    "@cloudflare/workers-types": "^5.20260930.2",
     "@types/node": "^22.10.2",
     "esbuild": "^0.28.2",
     "typescript": "^5.7.2",
