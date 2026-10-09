@@ -62,7 +62,7 @@ export async function decryptDeviceKey(cipher: string, secret: string, collector
 
 async function push(key: string, title: string, body: string, fetcher: typeof fetch): Promise<void> {
   try {
-    const response = await fetcher("https://api.day.app/push", { method: "POST", redirect: "error",
+    const response = await fetcher("https://api.day.app/push", { method: "POST", redirect: "manual",
       signal: AbortSignal.timeout(10_000), headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ device_key: key, title, body, group: "sunpower-monitor" }) });
     if (!response.ok) throw new NotificationError("bark_rejected", response.status === 429 || response.status >= 500);

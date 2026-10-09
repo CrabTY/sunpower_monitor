@@ -85,12 +85,27 @@ test("failed testing preserves the old device and hides provider response detail
   assert.equal(row().enabled, 1);
 });
 
+test("Bark redirects are rejected without forwarding the key using Workers-supported fetch options", async (t) => {
+  const { db, row } = database(t);
+  let calls = 0;
+  const redirect: typeof fetch = async (_url, init) => {
+    calls++;
+    assert.equal(init?.redirect, "manual");
+    return new Response(null, { status: 302, headers: { Location: "https://untrusted.example" } });
+  };
+  const result = await mutateNotifications(db, SECRET, ID, "save", { enabled: true, device_key: KEY }, NOW, redirect);
+  assert.deepEqual(result, { status: 502, body: { error: "bark_rejected" } });
+  assert.equal(calls, 1);
+  assert.equal(row().device_key_cipher, null);
+  assert.equal(row().enabled, 0);
+});
+
 test("missing data alerts once after grace, recovers after three checks, and re-arms", async (t) => {
   const { db, enable, reading, row } = database(t);
   const titles: string[] = [];
   const send: typeof fetch = async (url, init) => {
     assert.equal(url, "https://api.day.app/push");
-    assert.equal(init?.redirect, "error");
+    assert.equal(init?.redirect, "manual");
     assert.ok(init?.signal);
     const payload = JSON.parse(String(init?.body));
     assert.equal(payload.device_key, KEY);
