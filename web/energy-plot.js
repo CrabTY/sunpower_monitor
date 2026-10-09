@@ -155,7 +155,8 @@ export function dailySiteRows(windows, from, to, resolutionMs, timezone) {
 }
 
 export function dailySiteOption(rows, weatherHours, options) {
-  const { timezone, measure, selected } = options;
+  const { timezone, selected } = options;
+  const layer = WEATHER_LAYERS[options.weatherLayer] || WEATHER_LAYERS.cloud;
   const palette = { ...DEFAULT, ...options.palette };
   const mobile = (options.width || 640) < 520;
   const first = mobile && rows.length > 7 ? Math.max(0, Math.min(rows.length - 7, selected - 3)) : 0;
@@ -164,13 +165,28 @@ export function dailySiteOption(rows, weatherHours, options) {
   const gridPeak = Math.max(1, ...rows.map((day) => Math.max(day.import || 0, day.export || 0))) * 1.18;
   const weather = new Map();
   (weatherHours || []).forEach((hour) => {
-    const ts = Date.parse(hour.ts), cloud = num(hour.cloud_cover_pct);
-    if (!Number.isFinite(ts) || cloud === null) return;
+    const ts = Date.parse(hour.ts), value = num(hour[layer.key]);
+    if (!Number.isFinite(ts) || value === null) return;
     const localHour = Number(new Intl.DateTimeFormat("en-US", { timeZone: timezone || undefined, hour: "numeric", hourCycle: "h23" }).format(ts));
-    if (localHour < 7 || localHour >= 19) return;
-    const key = dateKey(ts, timezone), bucket = weather.get(key) || { sum: 0, count: 0 };
-    bucket.sum += cloud; bucket.count++; weather.set(key, bucket);
+    if (layer.key !== "precipitation_mm" && (localHour < 7 || localHour >= 19)) return;
+    const key = dateKey(ts, timezone), bucket = weather.get(key) || { sum: 0, count: 0, peak: 0 };
+    bucket.sum += value; bucket.count++; bucket.peak = Math.max(bucket.peak, value); weather.set(key, bucket);
   });
+  const weatherData = shown.map((day) => {
+    const bucket = weather.get(day.date);
+    return !bucket ? null : layer.key === "precipitation_mm" ? bucket.sum
+      : layer.key === "uv_index" ? bucket.peak : bucket.sum / bucket.count;
+  });
+  const weatherScale = weatherBounds(shown.map((day, index) => ({ ts: `${day.date}T12:00:00Z`, [layer.key]: weatherData[index] })), layer, -Infinity, Infinity)
+    || { min: 0, max: 100 };
+  if (layer.key === "precipitation_mm" || layer.key === "uv_index") {
+    weatherScale.min = 0; weatherScale.max = Math.max(1, weatherScale.max);
+  }
+  const weatherName = mobile ? layer.label.toUpperCase()
+    : layer.key === "precipitation_mm" ? "DAILY PRECIPITATION"
+      : layer.key === "uv_index" ? "DAYTIME UV PEAK" : `DAYTIME ${layer.label.toUpperCase()}`;
+  const weatherAxis = valueAxis(`${weatherName} · ${layer.unit}`, weatherScale.min, weatherScale.max, palette, "right", 0, false);
+  weatherAxis.axisLabel.formatter = (value) => Number(value).toFixed(layer.digits);
   const today = dateKey(options.now ?? Date.now(), timezone);
   const firstFuture = shown.findIndex((day) => day.date > today);
   const future = firstFuture < 0 ? undefined : {
@@ -190,16 +206,17 @@ export function dailySiteOption(rows, weatherHours, options) {
       grid: [{ left: mobile ? 41 : 56, right: mobile ? 43 : 57, top: 38, height: mobile ? 139 : 185 },
         { left: mobile ? 41 : 56, right: mobile ? 43 : 57, top: mobile ? 216 : 265, height: mobile ? 78 : 105 }],
       xAxis,
-      yAxis: [valueAxis(`${measure === "home" ? "HOME USED" : "SOLAR PRODUCED"} · kWh`, 0, peak, palette),
-        valueAxis("DAYTIME CLOUD · %", 0, 100, palette, "right", 0, false),
+      yAxis: [valueAxis("SOLAR / HOME · kWh", 0, peak, palette),
+        weatherAxis,
         valueAxis("GRID · kWh   in + / out −", -gridPeak, gridPeak, palette, "left", 1)],
       series: [
-        { name: measure === "home" ? "Home" : "Solar", type: "bar", xAxisIndex: 0, yAxisIndex: 0,
+        ...["solar", "home"].map((measure) => ({
+          name: measure === "home" ? "Home (estimated)" : "Solar", type: "bar", xAxisIndex: 0, yAxisIndex: 0,
           data: shown.map((day) => day.valid ? day[measure] : null), barMaxWidth: 28,
-          itemStyle: { color: measure === "home" ? palette.home : palette.solar, borderRadius: [3, 3, 0, 0] }, markArea: future },
-        { name: "Cloud cover", type: "line", xAxisIndex: 0, yAxisIndex: 1,
-          data: shown.map((day) => { const bucket = weather.get(day.date); return bucket ? bucket.sum / bucket.count : null; }),
-          connectNulls: false, showSymbol: false, lineStyle: { color: palette.muted, type: "dashed", width: 1.8 }, itemStyle: { color: palette.muted } },
+          itemStyle: { color: palette[measure], borderRadius: [3, 3, 0, 0] }, ...(measure === "solar" ? { markArea: future } : {}),
+        })),
+        { name: layer.label, type: "line", xAxisIndex: 0, yAxisIndex: 1, data: weatherData,
+          connectNulls: false, showSymbol: false, lineStyle: { color: layer.key === "cloud_cover_pct" ? palette.muted : layer.color, type: "dashed", width: 1.8 }, itemStyle: { color: layer.color } },
         { name: "Grid in", type: "bar", xAxisIndex: 1, yAxisIndex: 2,
           data: shown.map((day) => day.valid ? day.import : null), stack: "grid", barMaxWidth: 28, itemStyle: { color: palette.imported, borderRadius: [2, 2, 0, 0] } },
         { name: "Grid out", type: "bar", xAxisIndex: 1, yAxisIndex: 2,

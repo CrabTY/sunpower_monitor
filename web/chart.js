@@ -12,8 +12,8 @@ export var SERIES = [
 export var WEATHER_LAYERS = {
   cloud: { key: "cloud_cover_pct", label: "Cloud cover", unit: "%", digits: 0, color: "#64766e", min: 0, max: 100 },
   temperature: { key: "temperature_c", label: "Temperature", unit: "\u00b0C", digits: 1, color: "#c76b3f" },
-  precipitation: { key: "precipitation_mm", label: "Precipitation", unit: "mm", digits: 2, color: "#2f8fbf" },
-  uv: { key: "uv_index", label: "UV index", unit: "UV", digits: 1, color: "#8e6fc9" },
+  precipitation: { key: "precipitation_mm", label: "Precipitation", unit: "mm", digits: 2, color: "#2f8fbf", min: 0 },
+  uv: { key: "uv_index", label: "UV index", unit: "UV", digits: 1, color: "#8e6fc9", min: 0 },
 };
 
 export function num(value) {
@@ -199,7 +199,8 @@ export function weatherBounds(hours, layer, fromMs, toMs) {
   });
   if (min === null || max === null) return null;
   if (layer.min !== undefined && layer.max !== undefined) return { min: layer.min, max: layer.max };
-  if (max === min) return { min: min - 1, max: max + 1 };
+  if (layer.min !== undefined) min = layer.min;
+  if (max === min) return { min: layer.min ?? min - 1, max: max + 1 };
   return { min: min, max: max };
 }
 

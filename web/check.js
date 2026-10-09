@@ -226,6 +226,10 @@ const sparse = powerGridOption(alignedRows, [], { from, to, now: Date.parse(alig
 if (sparse.xAxis[0].min !== from || sparse.xAxis[0].max !== to) failures.push("sparse power must retain the full day axis");
 const combined = powerGridOption(alignedRows, [], { from, to, resolution: "1m", layout: "combined", timezone: "America/Los_Angeles",
   daylightDays: [{ sunrise_utc: "2026-09-23T13:50:00Z", sunset_utc: "2026-09-24T02:10:00Z" }] });
+for (const weatherLayer of ["precipitation", "uv"]) {
+  const zeroWeather = powerGridOption(alignedRows, [{ ts: alignedRows[0].ts, precipitation_mm: 0, uv_index: 0 }], { from, to, resolution: "1m", weatherLayer });
+  if (zeroWeather.yAxis[1].min !== 0 || zeroWeather.yAxis[1].max <= 0) failures.push(`${weatherLayer} must keep a zero baseline even when every forecast is zero`);
+}
 if (sparse.grid.length !== 2 || combined.grid.length !== 1 || combined.yAxis[0].min >= 0 || combined.series[3].yAxisIndex !== 0) failures.push("combined power must share one signed kW axis");
 if (combined.series[0].markLine?.data.length !== 2 || combined.tooltip.axisPointer.type !== "line") failures.push("daylight markers and hover guide must remain visible");
 if (!sparse.series[0].markArea || !sparse.series[0].markArea.data.some((area) => area[1].xAxis === to)) failures.push("future time must be marked separately");
@@ -234,9 +238,24 @@ if (sparse.series[3].data.length !== 1 || sparse.series[3].data[0].value[1] !== 
 const aligned = alignedEnergy(alignedRows, 60000, Date.parse(alignedRows[0].ts), Date.parse(alignedRows[1].ts) + 60000, "America/Los_Angeles");
 if (aligned.valid !== 1 || aligned.expected !== 2 || Math.abs(aligned.self - 1 / 60) > 1e-8) failures.push("energy composition must use complete, aligned readings only");
 const week = dailySiteRows(alignedRows, from, from + 7 * 86400000, 60000, "America/Los_Angeles");
-const weekOption = dailySiteOption(week, [], { width: 640, timezone: "America/Los_Angeles", measure: "solar", selected: 0, now: from + 2 * 3600000 });
+const weekOption = dailySiteOption(week, [], { width: 640, timezone: "America/Los_Angeles", selected: 0, now: from + 2 * 3600000 });
 if (week.length !== 7 || weekOption.option.xAxis[0].data.length !== 7) failures.push("sparse week must retain seven calendar slots");
 if (!weekOption.option.series[0].markArea) failures.push("upcoming days must be marked separately from missing days");
+if (weekOption.option.series[1].name !== "Home (estimated)" || weekOption.option.series[1].stack ||
+    weekOption.option.series[1].data[0] !== week[0].home || weekOption.option.series[1].data[1] !== null) {
+  failures.push("daily solar and home must appear side by side, keeping missing days empty");
+}
+const forecast = [
+  { ts: "2026-09-23T08:00:00Z", cloud_cover_pct: 100, temperature_c: -20, precipitation_mm: 2, uv_index: 0 },
+  { ts: "2026-09-23T14:00:00Z", cloud_cover_pct: 20, temperature_c: -4, precipitation_mm: 1, uv_index: 1 },
+  { ts: "2026-09-23T15:00:00Z", cloud_cover_pct: 40, temperature_c: -2, precipitation_mm: 3, uv_index: 5 },
+];
+for (const [weatherLayer, expected, unit] of [["cloud", 30, "%"], ["temperature", -3, "°C"], ["precipitation", 6, "mm"], ["uv", 5, "UV"]]) {
+  const option = dailySiteOption(week, forecast, { timezone: "America/Los_Angeles", weatherLayer, selected: 0 }).option;
+  if (option.series[2].data[0] !== expected || option.series[2].data[1] !== null || !option.yAxis[1].name.endsWith(unit)) {
+    failures.push(`daily ${weatherLayer} must use its own aggregation and unit, keeping absent forecasts empty`);
+  }
+}
 if (num(0) !== 0 || num("1") !== null || num(Number.NaN) !== null) failures.push("num() must reject non-numbers");
 if (COLORS.solar !== "var(--solar)") failures.push("series colors moved out of the shared chart module");
 const quietSolar = chartBounds([{ pv_kw_avg: 0 }, { pv_kw_avg: 0.003 }], [{ key: "pv_kw_avg" }]);

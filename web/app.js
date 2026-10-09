@@ -2,6 +2,7 @@
 
 import { daylightVerdict, formatDaylightDuration, weatherText } from "./insights.js";
 import { calibrateHistory, calibrateLive, gridRatio } from "./calibration.js";
+import { initWeatherControls } from "./weather-controls.js";
 import { powerGridOption } from "./energy-plot.js";
 import { chartPalette, chartXValueAt, clearEChart, renderEChart } from "./chart-engine.bundle.js";
 import {
@@ -50,7 +51,7 @@ function readUrl() {
       el("to").value = localInput(to);
     }
   }
-  state.weatherLayer = params.get("weather") === "temperature" ? "temperature" : "cloud";
+  state.weatherLayer = Object.prototype.hasOwnProperty.call(WEATHER_LAYERS, params.get("weather")) ? params.get("weather") : "cloud";
   el("ranges").querySelectorAll("button").forEach(function (button) {
     button.setAttribute("aria-pressed", String(button.dataset.range === state.range));
   });
@@ -70,7 +71,7 @@ function writeUrl() {
       url.searchParams.set("to", chosen.to.toISOString());
     }
   }
-  if (state.weatherLayer === "temperature") url.searchParams.set("weather", "temperature");
+  if (state.weatherLayer !== "cloud") url.searchParams.set("weather", state.weatherLayer);
   window.history.replaceState(null, "", url);
 }
 
@@ -177,6 +178,7 @@ function weatherNear(ts) {
 
 function renderWeatherLegend() {
   var layer = WEATHER_LAYERS[state.weatherLayer];
+  el("weather-toggle").textContent = "Weather · " + layer.label;
   el("weather-key").textContent = layer.label + " " + layer.unit;
   // The swatch, the line, and the right axis share one colour.
   el("weather-key").style.setProperty("--weather", layer.color);
@@ -703,6 +705,7 @@ el("weathers").addEventListener("click", function (event) {
   renderChart();
 });
 
+initWeatherControls(el("weather-controls"), window.matchMedia("(max-width: 1000px)"));
 readUrl();
 refreshLive();
 refreshHistory();

@@ -39,23 +39,31 @@
             <button type="button" data-range="12m" aria-pressed="false">Year</button>
           </div>
         </div>
-        <div class="period-footer"><div class="control-group" id="period-options" aria-label="Choose period"></div><div class="period-meta" id="period-span"></div></div>
+        <div class="period-footer chart-controls">
+          <div class="control-group" id="period-options" aria-label="Choose period"></div>
+          <details class="weather-controls" id="weather-controls" open>
+            <summary id="weather-toggle">Weather · Cloud cover</summary>
+            <div class="control-group" id="weathers" aria-label="Weather layer">
+              <button type="button" data-weather="cloud" aria-pressed="true">Cloud cover</button>
+              <button type="button" data-weather="temperature" aria-pressed="false">Temperature</button>
+              <button type="button" data-weather="precipitation" aria-pressed="false">Precipitation</button>
+              <button type="button" data-weather="uv" aria-pressed="false">UV index</button>
+            </div>
+          </details>
+          <details class="advanced">
+            <summary>Choose exact times</summary>
+            <form class="control-group custom" id="custom">
+              <label>From <input type="datetime-local" id="from" name="from" autocomplete="off" /></label>
+              <label>To <input type="datetime-local" id="to" name="to" autocomplete="off" /></label>
+              <button type="submit">Apply</button>
+            </form>
+          </details>
+          <div class="period-meta" id="period-span"></div>
+        </div>
         <div class="control-group" id="metrics">
           <button type="button" data-metric="power" aria-pressed="true">Power kW</button>
           <button type="button" data-metric="energy" aria-pressed="false">Energy kWh</button>
         </div>
-        <div class="control-group" id="weathers" aria-label="Weather layer">
-          <button type="button" data-weather="cloud" aria-pressed="true">Cloud cover</button>
-          <button type="button" data-weather="temperature" aria-pressed="false">Temperature</button>
-        </div>
-        <details class="advanced">
-          <summary>Choose exact times</summary>
-          <form class="control-group custom" id="custom">
-            <label>From <input type="datetime-local" id="from" name="from" autocomplete="off" /></label>
-            <label>To <input type="datetime-local" id="to" name="to" autocomplete="off" /></label>
-            <button type="submit">Apply</button>
-          </form>
-        </details>
       </section>
 
       <section class="facts summary-cards" id="summary" aria-label="Energy totals"></section>
@@ -64,10 +72,6 @@
         <div class="chart-heading">
           <div><h2 class="chart-title" id="chart-title">Power</h2>
           <p class="chart-subtitle" id="chart-subtitle">Solar and signed grid power share the kW axis; weather uses the right axis.</p></div>
-          <div class="control-group" id="daily-measure" aria-label="Daily energy measure" hidden>
-            <button type="button" data-measure="solar" aria-pressed="true">Solar</button>
-            <button type="button" data-measure="home" aria-pressed="false">Home</button>
-          </div>
         </div>
         <div class="chart-stage"><div class="chart" id="chart"></div><div class="interval-overlay" id="interval-overlay" aria-hidden="true" hidden></div></div>
         <div class="daily-navigation" id="daily-navigation" hidden><button type="button" id="daily-prev" aria-label="Earlier days">‹ Earlier</button><span id="daily-window"></span><button type="button" id="daily-next" aria-label="Later days">Later ›</button></div>

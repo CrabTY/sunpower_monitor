@@ -735,7 +735,7 @@ h2 {
   font-size: 14px;
 }
 
-.advanced > summary {
+.advanced > summary, .weather-controls > summary {
   cursor: pointer;
   width: fit-content;
   min-height: 44px;
@@ -746,8 +746,8 @@ h2 {
   color: var(--accent);
 }
 
-.advanced > summary::-webkit-details-marker { display: none; }
-.advanced > summary::after {
+.advanced > summary::-webkit-details-marker, .weather-controls > summary::-webkit-details-marker { display: none; }
+.advanced > summary::after, .weather-controls > summary::after {
   content: "";
   width: 7px;
   height: 7px;
@@ -757,9 +757,10 @@ h2 {
   transform: translateY(-2px) rotate(45deg);
   transition: transform 150ms ease-out;
 }
-.advanced[open] > summary::after { transform: translateY(2px) rotate(225deg); }
+.advanced[open] > summary::after, .weather-controls[open] > summary::after { transform: translateY(2px) rotate(225deg); }
 
 .advanced > summary:focus-visible,
+.weather-controls > summary:focus-visible,
 .nav a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -853,7 +854,7 @@ body {
 .nav a { display: grid; place-items: center; min-height: 61px; padding: 0 16px; color: var(--nav-muted); }
 .nav a:hover { color: var(--nav-text); }
 button:hover:not(:disabled) { border-color: var(--accent); }
-.advanced > summary:hover { color: var(--text); }
+.advanced > summary:hover, .weather-controls > summary:hover { color: var(--text); }
 .nav a[aria-current="page"] { color: var(--nav-text); text-decoration: none; border-bottom: 2px solid var(--solar); margin-bottom: -2px; }
 .head { align-items: end; margin-bottom: 24px; }
 .eyebrow { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
@@ -902,9 +903,6 @@ button:hover:not(:disabled) { border-color: var(--accent); }
 .scope-control { grid-column: 2; }
 .period-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; grid-column: 1 / -1; padding-top: 2px; border-top: 1px solid var(--line); }
 .period-footer .period-meta { flex: 1 1 300px; text-align: right; }
-.period-controls > .advanced { grid-column: 3; grid-row: 1; align-self: center; }
-.period-controls > .advanced[open] { grid-column: 1 / -1; grid-row: auto; }
-.period-controls > .advanced > summary { min-height: 40px; font-size: 12px; }
 .period-heading { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
 .period-heading h2 { margin: 0; color: var(--text); font-size: 22px; font-weight: 650; letter-spacing: -.03em; }
 .period-meta { color: var(--muted); font-size: 13px; text-align: right; }
@@ -920,16 +918,14 @@ button:hover:not(:disabled) { border-color: var(--accent); }
 .period-controls #ranges button:nth-child(4) { left: 100%; }
 .period-controls #ranges button[aria-pressed="true"] { color: var(--accent); font-weight: 800; }
 #period-options { gap: 6px; margin-top: 0; }
-.period-controls > .advanced { margin-top: 0; padding-top: 0; border-top: 0; }
-.period-controls #metrics, .period-controls #weathers { margin-top: 3px; }
-.period-controls #metrics button, .period-controls #weathers button { min-height: 40px; padding: 5px 11px; }
+.period-controls #metrics { margin-top: 3px; }
+.period-controls #metrics button { min-height: 40px; padding: 5px 11px; }
 .summary-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0 0 16px; }
 .summary-cards.year-summary { grid-template-columns: minmax(0, 1fr); }
 .summary-cards article { min-height: 88px; padding: 14px 19px; color: var(--text); }
 .summary-cards article span { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
 .summary-cards article strong { display: block; margin-top: 7px; font-size: 29px; line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
 .summary-cards article small { color: var(--muted); font-size: 12px; font-weight: 500; letter-spacing: 0; }
-#daily-measure { justify-content: end; }
 .chart-stage { position: relative; }
 .interval-overlay { position: absolute; z-index: 1; top: 38px; bottom: 44px; left: var(--plot-left, 56px); right: var(--plot-right, 57px); pointer-events: none; }
 .interval-overlay::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--interval-start, 0%); right: calc(100% - var(--interval-end, 100%)); border-inline: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
@@ -976,10 +972,8 @@ button:hover:not(:disabled) { border-color: var(--accent); }
 .page-live .live-meta .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 20px; margin: 4px 0 0; font-size: 12px; }
 .page-live .live-meta .facts p { display: flex; flex-wrap: wrap; gap: 2px 8px; }
 .page-live .live-meta .fact-label { min-width: 106px; }
-.page-live .chart-card > .controls { justify-content: space-between; gap: 6px 14px; margin: 0 0 6px; padding: 0; border: 0; box-shadow: none; }
-.page-live .chart-card > .controls .advanced > summary { min-height: 40px; }
+.page-live .chart-card > .controls { margin: 0 0 6px; padding: 0; border: 0; box-shadow: none; }
 .page-live .chart-card > .controls .advanced[open] { flex-basis: 100%; }
-.page-live .chart-card > .controls .custom { justify-content: flex-end; }
 .page-live .chart-card > .legend { margin-top: 2px; gap: 4px 10px; }
 .page-live .chart-card > .advanced > summary { min-height: 32px; }
 .page-live .chart-card > #chart-state,
@@ -991,7 +985,7 @@ button:hover:not(:disabled) { border-color: var(--accent); }
 .page-live .chart-heading, .page-history .chart-heading { align-items: center; margin-bottom: 4px; }
 .page-history #summary { margin-top: 14px; }
 .page-live #ranges { display: flex; flex-wrap: wrap; gap: 6px; }
-.page-live #ranges button { min-height: 40px; padding: 7px 13px; border: 1px solid var(--line); background: var(--card); text-align: center; }
+.page-live #ranges button { min-height: 40px; padding: 5px 11px; border: 1px solid var(--line); background: var(--card); text-align: center; }
 .page-live #ranges button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--card); }
 .page-live .flow { gap: 5px; }
 .page-live .flow-node { min-width: 0; border-radius: 6px; }
@@ -1052,8 +1046,8 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .nav { flex-wrap: wrap; gap: 0; margin: 0 -15px 30px; padding: 8px 15px 0; }
   .nav .brand { width: 100%; min-height: 32px; margin: 0; font-size: 11px; }
   .nav a { min-height: 44px; padding: 0 12px; }
-  .control-group button, .period-controls #ranges button, .period-controls > .advanced > summary, .daily-navigation button, .candidate button { min-height: 44px; }
-  .page-live #ranges button, .period-controls #metrics button, .period-controls #weathers button { min-height: 44px; }
+  .control-group button, .period-controls #ranges button, .daily-navigation button, .candidate button { min-height: 44px; }
+  .period-controls #metrics button { min-height: 44px; }
   .period-controls #ranges { height: 44px; }
   .scope-slider { height: 44px; }
   .head { margin-bottom: 19px; }
@@ -1065,8 +1059,7 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .summary-cards article strong { font-size: 25px; }
   .period-controls { padding: 19px 17px; }
   .period-controls { grid-template-columns: 1fr; }
-  .period-heading, .scope-control, .period-footer, .period-controls > .advanced, .period-controls > .advanced[open] { grid-column: 1; grid-row: auto; }
-  .period-controls > .advanced { padding-top: 0; border-top: 0; }
+  .period-heading, .scope-control, .period-footer { grid-column: 1; grid-row: auto; }
   .period-heading { display: block; }
   .period-footer .period-meta { flex-basis: 100%; text-align: left; }
   .interval-range, .interval-range input, .interval-range input::-webkit-slider-runnable-track, .interval-range input::-moz-range-track { height: 44px; }
@@ -1089,14 +1082,11 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .live-weather { display: grid; grid-template-columns: 1fr 1fr; padding: 12px 15px; }
   .live-weather strong { font-size: 14px; }
   .page-live .live-meta .facts { grid-template-columns: 1fr; }
-  .page-live .chart-card > .controls { display: block; }
-  .page-live #ranges { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .page-live #weathers { margin-top: 9px; }
   .page-panels .panels { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .panel-detail-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .advanced > summary::after { transition: none; }
+  .advanced > summary::after, .weather-controls > summary::after { transition: none; }
 }
 @media (max-width: 390px) {
   .nav .brand { letter-spacing: .09em; }
@@ -1177,14 +1167,11 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .page-live .live-weather strong { font-size: 13px; }
   .page-live > .chart-card { position: relative; display: flex; flex-direction: column; padding: 13px 14px; }
   .page-live .chart-title { font-size: 19px; }
-  .page-live .chart-card > .controls { display: contents; }
+  .page-live .chart-card > .controls { display: flex; order: 2; }
   .page-live .chart-card > .chart-heading { order: 1; }
-  .page-live #ranges { order: 2; display: flex; flex-wrap: nowrap; gap: 3px; overflow-x: auto; margin: 5px 0 2px; }
+  .page-live #ranges { flex-basis: 100%; display: flex; flex-wrap: nowrap; gap: 3px; overflow-x: auto; margin: 5px 0 2px; }
   .page-live #ranges button { flex: 1 0 auto; min-height: 44px; padding: 5px 7px; font-size: 11px; }
-  .page-live .chart-card > .controls .advanced:not([open]) { position: absolute; top: 8px; right: 14px; }
   .page-live .chart-card > .controls .advanced[open] { order: 3; align-self: stretch; }
-  .page-live .chart-card > .controls .advanced > summary { position: relative; min-height: 36px; font-size: 12px; }
-  .page-live .chart-card > .controls .advanced > summary::before { content: ""; position: absolute; inset: -4px 0; }
   .page-live #chart { order: 4; }
   .page-live .chart-card > .legend { order: 5; gap: 3px 9px; font-size: 11px; }
   .page-live .chart-card > #chart-state { order: 6; }
@@ -1210,15 +1197,12 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .page-history .period-heading { grid-column: 1; grid-row: 1; align-self: center; }
   .page-history .period-heading .eyebrow { display: none; }
   .page-history .period-heading h2 { font-size: 21px; }
-  .page-history .period-controls > .advanced { grid-column: 2; grid-row: 1; justify-self: end; }
-  .page-history .period-controls > .advanced[open] { grid-column: 1 / -1; grid-row: 4; justify-self: stretch; }
-  .page-history .period-controls > .advanced > summary { min-height: 44px; }
   .page-history .scope-control { grid-column: 1 / -1; grid-row: 2; width: 100%; padding: 0 16px; }
   .page-history .scope-slider { height: 40px; }
   .page-history .period-controls #ranges { height: 44px; margin-top: -15px; }
   .page-history .period-controls #ranges button { min-height: 44px; font-size: 11px; }
-  .page-history .period-footer { grid-column: 1 / -1; grid-row: 3; display: block; padding-top: 0; }
-  .page-history #period-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .page-history .period-footer { grid-column: 1 / -1; grid-row: 3; padding-top: 0; }
+  .page-history #period-options { flex-basis: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .page-history #period-options button { min-width: 0; padding: 5px 4px; font-size: 11px; line-height: 1.15; }
   .page-history #period-options button:only-child { grid-column: 1 / -1; }
   .page-history .period-meta { margin-top: 2px; font-size: 11px; line-height: 1.3; }
@@ -1255,4 +1239,30 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .page-panels .panel-detail-summary > * { padding: 9px 10px; }
   .page-panels .panel-detail-summary strong { font-size: 19px; }
   .page-panels .panel-tile { min-height: 74px; }
+}
+
+/* Live and History share the same time / weather / exact-time control row. */
+.chart-controls { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 6px 12px; }
+.chart-controls .control-group:not(.custom) { flex-wrap: nowrap; }
+.chart-controls .control-group button { min-height: 40px; padding: 5px 11px; }
+.weather-controls > summary { display: none; }
+.chart-controls > .advanced { margin: 0 0 0 auto; padding: 0; border: 0; }
+.chart-controls > details > summary { min-height: 40px; font-size: 12px; }
+.chart-controls > .advanced[open] { flex-basis: 100%; }
+@media (max-width: 1000px) {
+  .weather-controls > summary { display: flex; }
+  .weather-controls[open] { flex-basis: 100%; }
+}
+@media (min-width: 521px) and (max-width: 750px) {
+  .chart-controls > #ranges, .chart-controls > #period-options { flex-basis: 100%; }
+}
+@media (max-width: 520px) {
+  .chart-controls .weather-controls { min-width: 0; flex: 1 1 auto; }
+  .weather-controls #weathers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0 0 6px; }
+  .chart-controls .control-group button { min-height: 44px; }
+  .chart-controls > details > summary { min-height: 44px; }
+  .chart-controls .custom { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 6px; }
+  .chart-controls .custom label { display: grid; grid-template-columns: 36px minmax(0, 1fr); }
+  .chart-controls .custom input { min-width: 0; width: 100%; }
+  .chart-controls .custom button { justify-self: end; }
 }
