@@ -28,7 +28,7 @@ const pages = [
   },
   { html: "history.html", script: "history.js", apis: ["/api/v1/history", "/api/v1/weather"] },
   { html: "panels.html", script: "panels.js", apis: ["/api/v1/panels", "/api/v1/live"] },
-  { html: "settings.html", script: "settings.js", apis: ["/api/v1/location", "/api/v1/location/resolve", "/api/v1/health", "/api/v1/calibration", "/api/v1/live"] },
+  { html: "settings.html", script: "settings.js", apis: ["/api/v1/location", "/api/v1/location/resolve", "/api/v1/health", "/api/v1/calibration", "/api/v1/live", "/api/v1/notifications"] },
 ];
 
 // A production page must not carry a demo credential or stand in for a real API.

@@ -1,5 +1,7 @@
 # Quick Start: one terminal on the collector host
 
+After installation, you can optionally enable [phone notifications](notifications.md) from the dashboard's Settings page. This adds no installer steps.
+
 SunPower Monitor has three places to think about. Your **browser** is for creating accounts and approving login. An always-on **Pi, NAS, or Linux host** reads the PVS and runs the installer. **Cloudflare** stores readings and serves the private dashboard. Your personal computer does not need the project source, Node.js, Python, or a terminal.
 
 | Place | What you do there | Stays on? |

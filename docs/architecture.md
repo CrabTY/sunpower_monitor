@@ -77,7 +77,9 @@ Stored times are UTC. Queries and daily views use the saved site time zone. Site
 
 ## Authentication and private settings
 
-The ingest upload token is separate from dashboard credentials. The dashboard verifies GitHub OAuth, a signed session and the configured numeric GitHub user-ID allowlist. Its Worker runs before static assets so pages, scripts and images share the login gate. Location and calibration mutations also require same-origin requests.
+The ingest upload token is separate from dashboard credentials. The dashboard verifies GitHub OAuth, a signed session and the configured numeric GitHub user-ID allowlist. Its Worker runs before static assets so pages, scripts and images share the login gate. Location, calibration and notification mutations also require same-origin requests.
+
+[Optional Bark notifications](notifications.md) are configured from Settings, independently of installation. The dashboard encrypts each deployment's device Key in D1 using a domain-separated key derived from its session secret. A minute cron reads current site data and persists incident, retry and lease state; no page needs to remain open. Collector and ingest do not receive notification credentials. The default is off.
 
 Login/callback routes and the limited `/api/v1/version` service metadata endpoint are exceptions to the session gate; telemetry and settings APIs require a session. Version metadata records the deployment label and source revision, not secret values.
 

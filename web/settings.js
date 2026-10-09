@@ -3,6 +3,7 @@
 var DASH = "\u2014";
 var WEATHER_WINDOW_MS = 36 * 3600000;
 var state = { health: null, weather: null, location: null, candidates: [] };
+var notifications = null, notificationBusy = false;
 
 function el(id) {
   return document.getElementById(id);
@@ -295,6 +296,7 @@ function refreshWeather() {
 }
 
 function load() {
+  loadNotifications();
   getJson("/api/v1/calibration")
     .then(function (data) { if (data) showCalibration(data); })
     .catch(function () { el("calibration-status").textContent = "Could not read calibration."; });
@@ -325,6 +327,102 @@ function load() {
   refreshWeather();
   el("state").textContent = "Cloud reachable";
 }
+
+function notificationControls() {
+  var configured = Boolean(notifications && notifications.configured);
+  var enabled = Boolean(notifications && notifications.enabled);
+  el("notification-save").textContent = enabled ? "Test and save device" : "Test and enable";
+  var readOnly = Boolean(notifications && notifications.read_only);
+  el("notification-save").disabled = notificationBusy || readOnly || !notifications || enabled && !el("bark-key").value.trim();
+  el("notification-test").hidden = !configured;
+  el("notification-pause").hidden = !enabled;
+  el("notification-delete").hidden = !configured;
+  ["notification-test", "notification-pause", "notification-delete"].forEach(function (id) {
+    el(id).disabled = notificationBusy || readOnly;
+  });
+  el("bark-key").disabled = notificationBusy || readOnly;
+}
+
+function showNotifications(data) {
+  notifications = data;
+  var states = { normal: "Normal", data_missing: "Missing current readings", measurement_invalid: "Stale or invalid readings", recovering: "Confirming recovery" };
+  var monitoring = { paused: "Paused", starting: "Starting", running: "Running", not_running: "Background checks may have stopped" };
+  el("notification-facts").innerHTML =
+    fact("Notifications", data.enabled ? "Enabled" : data.configured ? "Paused" : "Not configured") +
+    (data.configured ? fact("Device", "Configured") : "") +
+    (data.enabled ? fact("Background checks", monitoring[data.monitoring] || "Unknown") + fact("Readings", states[data.state] || "Unknown") : "") +
+    fact("Last check", formatTime(data.last_checked_at_utc)) + fact("Last submission", formatTime(data.last_sent_at_utc)) +
+    (data.last_error ? fact("Delivery", notificationError(data.last_error)) : "");
+  notificationControls();
+}
+
+function notificationError(code) {
+  var messages = {
+    device_key_required: "Enter a Bark device Key first.",
+    invalid_notification_settings: "Enter a Key with 8–128 letters, digits, dashes or underscores.",
+    notification_busy: "A check or test is in progress. Wait 30 seconds and try again.",
+    bark_rejected: "Bark rejected the request. Check your device Key; test and enable again.",
+    bark_unreachable: "Could not reach Bark. Try again shortly.",
+    key_unavailable: "The saved Key cannot be read. Paste it again and test to enable notifications.",
+    notification_storage_failed: "Could not save notification settings. Try again shortly.",
+    preview_read_only: "This preview is read only. Notifications cannot be sent.",
+  };
+  return messages[code] || "Could not update notifications. Try again shortly.";
+}
+
+function loadNotifications() {
+  if (notificationBusy) return;
+  getJson("/api/v1/notifications")
+    .then(function (data) {
+      if (data) { var initial = notifications === null; showNotifications(data); if (initial) el("notification-status").textContent = ""; }
+    })
+    .catch(function () { el("notification-status").textContent = "Could not read notification settings. Refresh to try again."; });
+}
+
+function updateNotifications(method, body, testing) {
+  if (notifications && notifications.read_only) return;
+  notificationBusy = true;
+  notificationControls();
+  el("notification-status").textContent = testing || body && body.enabled ? "Submitting test notification…" : "Saving…";
+  return fetch("/api/v1/notifications" + (testing ? "/test" : ""), {
+    method: method, headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: body === null ? undefined : JSON.stringify(body),
+  }).then(function (response) {
+    if (response.status === 401) { window.location.href = "/auth/login"; return null; }
+    return response.json().then(function (data) {
+      if (!response.ok) throw new Error(notificationError(data.error));
+      showNotifications(data);
+      el("notification-status").textContent = data.test_sent ? "Test submitted. Check your phone." :
+        data.configured ? "Notifications paused. A previously submitted notification may still arrive." : "Notification configuration deleted.";
+    });
+  }).catch(function (error) {
+    el("notification-status").textContent = error.message;
+  }).finally(function () { notificationBusy = false; notificationControls(); });
+}
+
+el("bark-key").addEventListener("input", function () {
+  setFieldError("bark-key", "");
+  notificationControls();
+});
+el("notification-form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  if (notificationBusy || !notifications) return;
+  var key = el("bark-key").value.trim();
+  if (key && !/^[A-Za-z0-9_-]{8,128}$/.test(key) || !key && !notifications.configured) {
+    setFieldError("bark-key", "Paste your Bark device Key (8–128 letters, digits, dashes or underscores).");
+    el("bark-key").focus(); return;
+  }
+  var body = { enabled: true };
+  if (key) body.device_key = key;
+  el("bark-key").value = "";
+  setFieldError("bark-key", "");
+  updateNotifications("PUT", body, false);
+});
+el("notification-test").addEventListener("click", function () { if (!notificationBusy) updateNotifications("POST", {}, true); });
+el("notification-pause").addEventListener("click", function () { if (!notificationBusy) updateNotifications("PUT", { enabled: false }, false); });
+el("notification-delete").addEventListener("click", function () {
+  if (!notificationBusy) { el("bark-key").value = ""; updateNotifications("DELETE", null, false); }
+});
 
 el("calibration-form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -409,3 +507,4 @@ el("city-form").addEventListener("submit", function (event) {
 
 setCityOpen(false);
 load();
+window.setInterval(loadNotifications, 30000);

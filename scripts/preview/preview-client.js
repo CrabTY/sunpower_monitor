@@ -193,6 +193,7 @@
         configured: true, latitude: 37.7749, longitude: -122.4194,
         timezone: "America/Los_Angeles", source: "manual", updated_at_utc: iso(START),
       };
+      if (path === "/api/v1/notifications") return { configured: false, enabled: false, read_only: true, state: "normal", monitoring: "paused", last_error: null, last_checked_at_utc: null, last_sent_at_utc: null };
       if (path === "/api/v1/calibration") return { grid_ratio: 1, updated_at_utc: null };
       if (path === "/api/v1/health") return {
         state: "connected", authenticated_upload: true, valid_measurement: true,
@@ -247,6 +248,9 @@
   window.fetch = (input, options = {}) => {
     const url = new URL(typeof input === "string" ? input : input.url, location.href);
     if (!url.pathname.startsWith("/api/v1/")) return realFetch(input, options);
+    if (url.pathname.startsWith("/api/v1/notifications") && options.method && options.method !== "GET") {
+      return Promise.resolve(new Response(JSON.stringify({ error: "preview_read_only" }), { status: 403, headers: { "Content-Type": "application/json" } }));
+    }
     const method = options.method || (typeof input === "string" ? "GET" : input.method);
     const body = method === "GET" ? data.api(url.pathname, url.searchParams) : null;
     return Promise.resolve(new Response(JSON.stringify(body || { error: "Preview is read only" }), {
