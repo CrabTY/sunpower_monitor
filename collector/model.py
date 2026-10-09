@@ -1,4 +1,4 @@
-"""Normalized PVS6 readings: allowlisted parsing, units, and quality.
+"""Normalized PVS varserver readings: allowlisted parsing, units, and quality.
 
 A parser takes the flat ``{path: value}`` dictionary returned by a focused
 varserver query and emits normalized fields. Raw path dictionaries stay in
@@ -8,6 +8,7 @@ never ``0``.
 
 from __future__ import annotations
 
+import json
 import math
 import re
 from dataclasses import dataclass
@@ -146,6 +147,23 @@ def _livedata_fields(data: dict, fields: dict[str, str]) -> dict[str, object]:
 def device_fields(data: dict, group: str, fields: dict[str, str]) -> dict[str, dict]:
     """Allowlisted ``{device_index: {field: raw}}`` from a flat path dictionary."""
     found: dict[str, dict] = {}
+    # Official LocalAPI examples also pack fields into /sys/devices/{id}/{group}/data.
+    for path, value in data.items():
+        if not isinstance(path, str):
+            continue
+        parts = path.split("/")
+        if len(parts) != 6 or parts[1:3] != ["sys", "devices"] or parts[4:] != [group, "data"]:
+            continue
+        if isinstance(value, str):
+            try:
+                value = json.loads(value)
+            except ValueError:
+                continue
+        if isinstance(value, dict):
+            selected = {name: value[field] for name, field in fields.items() if field in value}
+            if selected:
+                found[parts[3]] = selected
+    # Explicit flat fields take precedence when both layouts appear, independent of order.
     for path, value in data.items():
         if not isinstance(path, str):
             continue
@@ -157,6 +175,16 @@ def device_fields(data: dict, group: str, fields: dict[str, str]) -> dict[str, d
                 found.setdefault(parts[4], {})[name] = value
                 break
     return found
+
+
+def gateway_info(data: dict) -> dict:
+    """Only recognized model names and numeric revisions may enter diagnostics."""
+    model = data.get("/sys/info/model")
+    model = model.strip() if isinstance(model, str) else None
+    version = data.get("/sys/info/sw_rev")
+    version = version.strip() if isinstance(version, str) else None
+    return {"model": model if model in ("PVS5", "PVS6") else None,
+            "software_version": version if version and re.fullmatch(r"[0-9][0-9.]{0,63}", version) else None}
 
 
 def _index_key(index: str) -> tuple[int, int | str]:

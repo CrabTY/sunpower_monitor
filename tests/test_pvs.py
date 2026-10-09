@@ -3,15 +3,19 @@
 import base64
 import errno
 import http.cookiejar
+import http.server
 import io
 import json
 import unittest
+import threading
 import urllib.error
 import urllib.request
+from unittest.mock import patch
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlsplit
 
 from collector import model
+from collector.main import check_reads
 from collector.pvs import PVSAuthError, PVSClient, PVSError, _build_opener
 
 SERIAL = "ZS99000042"  # synthetic, not a real device
@@ -288,6 +292,212 @@ class AuthenticationTests(unittest.TestCase):
             make_client(routes(**{"/auth?login": http_error(403)}))
         self.assertEqual(caught.exception.diagnostics["stage"], "auth")
         self.assertEqual(caught.exception.diagnostics["http_status"], 403)
+
+
+class CompatibilityTests(unittest.TestCase):
+    def test_real_http_cookie_session_recovers_after_expiry(self):
+        seen = []
+        session = [0]
+
+        class Gateway(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                cookie = self.headers.get("Cookie")
+                seen.append((self.path, cookie))
+                if self.path == "/auth?login":
+                    expected = "Basic " + base64.b64encode(f"ssm_owner:{SERIAL[-5:]}".encode()).decode()
+                    if self.headers.get("Authorization") != expected:
+                        self.send_error(403)
+                        return
+                    session[0] += 1
+                    self.send_response(200)
+                    self.send_header("Set-Cookie", f"session=synthetic-{session[0]}; Path=/")
+                    self.end_headers()
+                    self.wfile.write(b"{}")
+                    return
+                if self.path == "/vars?name=/sys/info/serialnum&fmt=obj":
+                    payload = {"/sys/info/serialnum": SERIAL}
+                    if cookie:
+                        self.send_error(401)
+                        return
+                else:
+                    if cookie != f"session=synthetic-{session[0]}":
+                        self.send_error(401)
+                        return
+                    payload = livedata()
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(json.dumps(payload).encode())
+
+            def log_message(self, *args):
+                pass
+
+        server = http.server.HTTPServer(("127.0.0.1", 0), Gateway)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        self.addCleanup(server.server_close)
+        self.addCleanup(thread.join)
+        self.addCleanup(server.shutdown)
+
+        def local_opener(cookies):
+            real = _build_opener(cookies)
+
+            class Loopback:
+                def open(self, request, **kwargs):
+                    # Exercise urllib cookies/HTTP on loopback; this test does not validate TLS.
+                    request.full_url = request.full_url.replace("https://", "http://", 1)
+                    return real.open(request, **kwargs)
+
+            return Loopback()
+
+        with patch("collector.pvs._build_opener", side_effect=local_opener):
+            pvs = PVSClient(f"127.0.0.1:{server.server_port}", min_gap=0)
+            self.assertEqual(pvs.read_site()[0]["/sys/livedata/pv_p"], 3)
+            session[0] += 1
+            self.assertEqual(pvs.read_site()[0]["/sys/livedata/pv_p"], 3)
+        serial_queries = [cookie for path, cookie in seen if path.startswith("/vars?name=")]
+        self.assertEqual(serial_queries, [None, None])
+        self.assertEqual(session[0], 3)
+
+    def test_name_value_envelope_works_for_login_bootstrap_and_group_reads(self):
+        table = routes()
+        for path, value in list(table.items()):
+            if path.startswith("/vars"):
+                table[path] = {"values": [{"name": k, "value": v} for k, v in value.items()], "count": len(value)}
+        pvs, _, _ = make_client(table)
+        sample = model.parse_site(pvs.read_site()[0])
+        self.assertEqual(sample.values["pv_kw"], 3)
+        self.assertEqual(sample.quality, "ok")
+
+    def test_malformed_envelopes_are_safe_failures(self):
+        for value in (None, {}, [None], [{"name": "/x"}], [{"name": 42, "value": 1}],
+                      [{"name": "/x", "value": 1}, {"name": "/x", "value": 2}]):
+            with self.subTest(value=value):
+                pvs, _ = client(**{"/vars?match=livedata&fmt=obj&cache=ldata": {"values": value}})
+                with self.assertRaises(PVSError) as caught:
+                    pvs.read_site()
+                self.assertEqual(caught.exception.diagnostics["reason"], "invalid_json")
+
+    def test_health_and_gateway_share_bounded_session_recovery(self):
+        from collector.pvs import GATEWAY_PATH, HEALTH_PATH
+        for path, reader in ((HEALTH_PATH, "read_health"), (GATEWAY_PATH, "read_gateway")):
+            for failure in (http_error(403), {"errorcode": 1}):
+                with self.subTest(reader=reader, failure=type(failure).__name__):
+                    pvs, opener, clock = make_client(routes(**{path: [failure, {"/sys/info/model": "PVS5"}]}))
+                    self.assertEqual(getattr(pvs, reader)()[0]["/sys/info/model"], "PVS5")
+                    self.assertEqual(sum(p == "/auth?login" for p, _ in opener.requests), 2)
+                    self.assertTrue(all(gap == 3 for gap in clock.sleeps))
+                    opener.routes[path] = {"errorcode": 1}
+                    before = len(opener.requests)
+                    with self.assertRaises(PVSError):
+                        getattr(pvs, reader)()
+                    self.assertEqual(sum(p == path for p, _ in opener.requests[before:]), 2)
+
+    def test_group_recovery_does_not_stack_http_and_device_error_retries(self):
+        path = "/vars?match=livedata&fmt=obj&cache=ldata"
+        pvs, opener, _ = make_client(routes(**{path: [http_error(401), {"errorcode": 1}]}))
+        with self.assertRaises(PVSError):
+            pvs.read_site()
+        self.assertEqual(sum(p == path for p, _ in opener.requests), 2)
+
+    def test_documented_nested_devices_preserve_units_unknowns_and_identity(self):
+        fields = {"sn": "SYNTHETIC", "msmtEps": published(BASE), "pMppt1Kw": "0.45",
+                  "p3phsumKw": "nan", "wpa_key": "must-not-appear"}
+        for raw in (fields, json.dumps(fields)):
+            with self.subTest(shape=type(raw).__name__):
+                panels = model.parse_panels({"/sys/devices/21/inverter/data": raw})
+                self.assertEqual(len(panels), 1)
+                self.assertEqual(panels[0].index, "21")
+                self.assertEqual(panels[0].serial, "SYNTHETIC")
+                self.assertEqual(panels[0].values["dc_kw"], 0.45)
+                self.assertIsNone(panels[0].values["ac_kw"])
+                self.assertEqual(panels[0].measured_at, BASE)
+                self.assertNotIn("wpa_key", panels[0].values)
+        meters = model.parse_meters({"/sys/devices/12/meter/data": {"p3phsumKw": 0, "msmtEps": published(BASE)}})
+        self.assertEqual(meters[0].values["kw"], 0)
+
+    def test_flat_fields_take_precedence_over_nested_fields(self):
+        pairs = [("/sys/devices/1/inverter/data", {"p3phsumKw": 9}),
+                 ("/sys/devices/inverter/1/p3phsumKw", 0)]
+        for items in (pairs, pairs[::-1]):
+            self.assertEqual(model.parse_panels(dict(items))[0].values["ac_kw"], 0)
+        for raw in ("bad-json", "[]", [], None):
+            self.assertEqual(model.parse_panels({"/sys/devices/1/inverter/data": raw}), [])
+
+    def test_gateway_diagnostics_are_allowlisted_and_safe(self):
+        self.assertEqual(model.gateway_info({"/sys/info/model": " PVS5 ", "/sys/info/sw_rev": "2025.11.01.5412"}),
+                         {"model": "PVS5", "software_version": "2025.11.01.5412"})
+        self.assertEqual(model.gateway_info({"/sys/info/model": "secret", "/sys/info/sw_rev": "cookie-secret", "/sys/info/wpa_key": "secret"}),
+                         {"model": None, "software_version": None})
+
+
+class ReadCheckTests(unittest.TestCase):
+    def run_check(self, **overrides):
+        from collector.pvs import GATEWAY_PATH
+        table = routes(**{GATEWAY_PATH: {"/sys/info/model": "PVS5", "/sys/info/sw_rev": "2025.11.01.5412"}, **overrides})
+        pvs, _, _ = make_client(table)
+        logs = []
+        with patch("collector.main.PVSClient", return_value=pvs):
+            failures = check_reads(HOST, log=logs.append, now=lambda: BASE)
+        return failures, "\n".join(logs)
+
+    def test_synthetic_pvs5_shared_fields_use_the_existing_pipeline(self):
+        failures, output = self.run_check()
+        self.assertEqual(failures, 0)
+        self.assertIn('"model": "PVS5"', output)
+        self.assertIn('"software_version": "2025.11.01.5412"', output)
+        self.assertIn("site capability=available", output)
+        self.assertIn("inverters capability=available", output)
+        self.assertIn('"battery_kw": null', output)
+
+    def test_unknown_version_and_empty_groups_do_not_claim_absence_or_block_site(self):
+        from collector.pvs import GATEWAY_PATH
+        failures, output = self.run_check(**{GATEWAY_PATH: {}, "/vars?match=inverter&fmt=obj&cache=idata": {}})
+        self.assertEqual(failures, 0)
+        self.assertIn('"model": null', output)
+        self.assertIn("inverters capability=unverified", output)
+        self.assertIn("hardware_verified=no", output)
+
+    def test_metadata_failure_is_optional_but_missing_core_site_fields_fail(self):
+        from collector.pvs import GATEWAY_PATH
+        failures, output = self.run_check(**{GATEWAY_PATH: http_error(404)})
+        self.assertEqual(failures, 0)
+        self.assertIn("gateway unverified", output)
+        failures, output = self.run_check(**{"/vars?match=livedata&fmt=obj&cache=ldata": {}})
+        self.assertEqual(failures, 1)
+        self.assertIn("site capability=unusable", output)
+
+    def test_stale_and_future_site_time_fail_but_measured_zero_passes(self):
+        path = "/vars?match=livedata&fmt=obj&cache=ldata"
+        for seconds in (-3600, 3600):
+            failures, output = self.run_check(**{path: livedata(seconds=seconds)})
+            self.assertEqual(failures, 1)
+            self.assertIn("site capability=unusable", output)
+        failures, output = self.run_check(**{path: livedata(pv=0, load=0, net=0)})
+        self.assertEqual(failures, 0)
+        self.assertIn("site capability=available", output)
+
+    def test_authentication_failure_is_reported_without_traceback_or_secrets(self):
+        logs = []
+        with patch("collector.main.PVSClient", side_effect=PVSError("safe", reason="http", stage="auth", http_status=403)):
+            self.assertEqual(check_reads(HOST, log=logs.append), 1)
+        self.assertIn("connection FAILED", "\n".join(logs))
+
+    def test_documented_envelope_and_nested_data_work_through_the_whole_check(self):
+        from collector.pvs import GATEWAY_PATH
+        table = routes(**{GATEWAY_PATH: {"/sys/info/model": "PVS6"},
+                          "/vars?match=inverter&fmt=obj&cache=idata": {
+                              "/sys/devices/21/inverter/data": {"pMppt1Kw": "0.45", "msmtEps": published(BASE)}}})
+        for path, value in list(table.items()):
+            if path.startswith("/vars"):
+                table[path] = {"values": [{"name": k, "value": v} for k, v in value.items()]}
+        pvs, _, _ = make_client(table)
+        logs = []
+        with patch("collector.main.PVSClient", return_value=pvs):
+            self.assertEqual(check_reads(HOST, log=logs.append, now=lambda: BASE), 0)
+        output = "\n".join(logs)
+        self.assertIn("inverters capability=partial", output)
+        self.assertIn('"ac_kw": null', output)
+        self.assertIn('"dc_kw": 0.45', output)
 
 
 class ParsingTests(unittest.TestCase):

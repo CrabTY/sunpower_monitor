@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve SunPower Monitor. The collector only reads a PVS6, and the dashboard must keep private telemetry behind authentication. Please keep those two boundaries intact.
+Thanks for helping improve SunPower Monitor. The collector only reads PVS varserver data, and the dashboard must keep private telemetry behind authentication. Please keep those two boundaries intact. Separate [documented compatibility candidates](docs/pvs-compatibility.md) from hardware-verified configurations.
 
 ## Local setup
 

@@ -21,7 +21,7 @@ A small collector runs on your Raspberry Pi, NAS, or Linux host. Your own Cloudf
 
 ## Gateway compatibility
 
-The verified configuration is **SunPower PVS6 firmware `2025.10.20.61846`, without a battery**. The installer performs a read-only device check before starting collection. Other PVS6 firmware needs compatibility verification; PVS5, PVS2, other vendors, and battery systems are outside the supported installation path.
+The hardware-verified configuration is **SunPower PVS6 firmware `2025.10.20.61846`, without a battery**. The installer performs a read-only device check before starting collection. Other PVS6 builds and newer PVS5 gateways using the official varserver API are compatibility candidates: the collector accepts the documented response formats and checks available fields, without restricting collection to one firmware number. PVS5 has not been hardware-verified here. PVS2, other vendors, and battery systems remain outside the supported installation path. See [compatibility evidence and the read-only check](docs/pvs-compatibility.md).
 
 The collector must reach the PVS over your LAN. It handles the verified firmware's local authentication; it does not commission the system, provision devices, or change PVS settings. Home and grid readings depend on your installed consumption current transformers (CTs); see the [CT coverage and calibration guide](docs/ct-calibration.md).
 

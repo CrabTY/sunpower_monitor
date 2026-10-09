@@ -1,6 +1,6 @@
 # ADR-0001: Evaluate PyPVS for the collector
 
-**Status:** Proposed recommendation; investigation completed, migration not implemented.
+**Status:** Accepted: retain the current client and absorb documented compatibility information. SDK migration not implemented; compatibility follow-up implemented on `feature/pvs-compatibility`.
 **Date:** 2026-10-09.
 **Project baseline:** `47970446abe6ecdc23711d07ca668e88cc28531a`.
 
@@ -20,9 +20,9 @@ Its higher-level models and update cycle also differ from our missing-data and
 failure-reporting contract. A production adapter has not been built, so no
 measured net code reduction is claimed.
 
-## Compatibility objective and proposed flow
+## Compatibility objective and implemented follow-up
 
-The existing flow is:
+The investigation baseline flow was:
 
 ```text
 Configured LAN host
@@ -36,24 +36,29 @@ The client uses the common varserver interface, rather than checking for build
 61846 in code. The supported-installation statement is narrower because only
 PVS6 `2025.10.20.61846` without a battery has been verified on hardware.
 
-The proposed compatibility work keeps that pipeline and adds evidence at its
+The compatibility follow-up keeps that pipeline and adds evidence at its
 front, reusing `check_reads` rather than adding a separate installer wizard:
 
 ```text
 Configured LAN host -> Existing login
-  -> Focused gateway model / software revision read
+  -> Focused gateway model / software revision diagnostics
   -> Existing group reads + check required fields and source timestamps
   -> Report available, missing, or unverified capabilities
   -> Same parsers, collection schedule, queue, cloud and dashboard
 ```
 
-This flow is a proposal, not an implemented change. Version information should
-explain diagnostics; it should not reject every unlisted build when its required
-interface works. Conversely, HTTP 200 alone should not establish compatibility:
-the current `check_reads` can report success with partial site data or zero
-parsed devices. Optional/absent capabilities and failed reads must remain
-distinct, and a nighttime empty inverter group must not become permanent proof
-that the installation has no panels.
+This follow-up is implemented without an SDK dependency. Version information
+explains diagnostics rather than rejecting unlisted builds. HTTP 200 alone does
+not establish compatibility: `check_reads` now fails on unusable core site
+powers/timestamps and explicitly reports partial/empty device groups without
+claiming hardware verification or permanent absence. A gateway metadata failure
+does not block collection. Normal polling continues to retry empty groups.
+
+The client normalizes validated name/value envelopes and shares one bounded
+session refresh across group, health and gateway reads. Our parsers also accept
+the official nested device-data examples while preserving unknown values and
+AC/DC separation. The existing scheduler, queue and cloud contract are retained.
+See [implemented behavior and evidence limits](../pvs-compatibility.md).
 
 The alternative SDK replacement would reach only the transport/login part:
 
@@ -84,9 +89,9 @@ same revision using Python's `csv.DictReader`:
 | Panel fields plus measurement time and serial | 10/10 present | 10/10 present |
 | Meter fields plus measurement time | 4/4 present | 4/4 present |
 | Serial bootstrap and three health fields | 4/4 present | 4/4 present |
-| Proposed model, system type, software/hardware revision | 4/4 present | 4/4 present |
+| Metadata reference: model, system type, software/hardware revision | 4/4 present | 4/4 present |
 
-All 26 currently used path patterns have matching declared types and read roles
+All 26 baseline measurement/authentication/health path patterns have matching declared types and read roles
 in both tables. PVS5's `ess_p` is explicitly marked NOT USED; its presence must
 not be treated as evidence of working storage telemetry. The timestamp
 descriptions also differ, so timestamp freshness needs behavioral validation.
@@ -101,22 +106,23 @@ rather than an assumed SDK firmware translation layer.
 
 The shared field contract makes newer PVS5 and other documented PVS6 builds
 credible compatibility candidates without a parser rewrite or SDK dependency.
-Next work should check the proposed normalization and capability reporting with
-synthetic cases, then obtain read-only hardware evidence for authentication,
+Normalization and capability reporting are now tested with synthetic cases.
+Next work should obtain read-only hardware evidence for authentication,
 actual response shape, source freshness and complete device membership. Official
 LocalAPI examples include nested `/sys/devices/{id}/inverter/data` objects,
-whereas our parser and current SDK updaters use flat
-`/sys/devices/inverter/{index}/{field}` paths; a documented example does not
-establish that both layouts are returned on every build. Add a layout adapter
-only against a clearly identified supported response contract and tests.
+whereas the baseline parser and current SDK updaters use flat
+`/sys/devices/inverter/{index}/{field}` paths. Our follow-up accepts both, backed
+by format-specific synthetic tests; that does not establish that both layouts
+are returned on every build or that their identities can be mixed safely.
 
-No production flow, compatibility check or supported-installation declaration
-was changed during this investigation. Officially documented candidates,
-synthetic parser checks and hardware-verified support must be reported separately.
+The initial SDK investigation did not change the production flow. The subsequent
+compatibility implementation updates the collector and distinguishes documented
+candidates from the same hardware-verified configuration. No new hardware support
+claim or deployment is implied by synthetic checks.
 
 ## Context and requirements
 
-The collector uses a synchronous scheduler and a 169-line
+The investigation baseline uses a synchronous scheduler and a 169-line
 [PVS client](../../collector/pvs.py). It reads three allowlisted groups and
 three health fields, preserves source timestamps and unknown values, and
 returns `(dictionary, latency_ms)` or `PVSError` with safe diagnostics.
@@ -245,8 +251,16 @@ ingest integration tests skipped because `INGEST_LOCAL_URL`/`INGEST_TOKEN`
 were not supplied. SDK transport behavior is covered by our additional
 loopback checks, rather than inferred from the upstream model tests.
 
-The SDK/venv checkout and local outputs are ignored. No runtime dependency,
-production client, installer, collector process, cloud database or Worker was
-changed. No request reached a real PVS. Firmware-specific POST behavior,
+The SDK/venv checkout and local outputs are ignored. The initial investigation
+changed no runtime dependency, production client, installer, collector process,
+cloud database or Worker. The compatibility follow-up changes the collector but
+adds no SDK dependency and is not deployed. No request reached a real PVS. Firmware-specific POST behavior,
 certificate/session-cookie edge cases, long-running reliability and actual
 adapter code savings remain unverified.
+
+Compatibility follow-up validation: 87 project Python tests passed, two ingest
+integration tests skipped without their local service/token, and 15 released-SDK
+characterization checks still passed. Installer mock flow, introduction page/
+interaction checks, static site build/check, local documentation links and
+`git diff --check` passed. The new HTTP test uses a synthetic loopback gateway
+and real urllib cookie handling; it does not validate LAN TLS or real firmware.

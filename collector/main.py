@@ -1,4 +1,4 @@
-"""Serialized PVS6 collector: tiered reads, minute rollup, local queue, upload.
+"""Serialized PVS varserver collector: tiered reads, minute rollup, local queue, upload.
 
 Two independent state dimensions are tracked: PVS reading and cloud upload.
 A failed read produces no value; a failed upload keeps the record queued.
@@ -19,7 +19,7 @@ from . import model
 from .model import SCHEMA_VERSION, floor_slot, to_iso, utc_now
 from .pvs import PVSClient, PVSError
 from .queue import PendingQueue
-from .rollup import SiteMinute, panel_entry, panel_sample_record
+from .rollup import SITE_POWER_FIELDS, SiteMinute, panel_entry, panel_sample_record
 from .upload import AuthError, IngestClient, RejectedError, RetryableError
 
 INTERVALS = {"site": 10.0, "meters": 30.0, "inverters": 300.0, "health": 300.0}
@@ -161,6 +161,11 @@ class Collector:
         )
         self._event("collector_started", "boot")
         deadline = None if duration is None else self._monotonic() + duration
+        try:
+            data, latency = self.pvs.read_gateway()
+            self._log_line(event="gateway_info", latency_ms=latency, **model.gateway_info(data))
+        except PVSError as exc:
+            self._log_line(event="gateway_info_unavailable", **exc.diagnostics)
         while deadline is None or self._monotonic() < deadline:
             group = min(self._due, key=lambda name: (self._due[name], name != "rollup"))
             wait = self._due[group] - self._monotonic()
@@ -400,16 +405,30 @@ class Collector:
         self._log_line(event="queue_capacity", **stats, free_bytes=free, bytes_on_disk=self.queue.bytes_on_disk())
 
 
-def check_reads(host: str, log=print) -> int:
+def check_reads(host: str, log=print, *, now=utc_now) -> int:
     """One read-only pass over every group; prints values, stores nothing."""
-    pvs = PVSClient(host)
+    try:
+        pvs = PVSClient(host)
+    except PVSError as exc:
+        log("connection FAILED " + json.dumps(exc.diagnostics, sort_keys=True))
+        return 1
     failures = 0
     try:
+        data, latency = pvs.read_gateway()
+        log(f"gateway latency_ms={latency} " + json.dumps(model.gateway_info(data), sort_keys=True))
+    except PVSError as exc:
+        log("gateway unverified " + json.dumps(exc.diagnostics, sort_keys=True))
+    try:
         data, latency = pvs.read_site()
-        sample = model.parse_site(data)
+        sample = model.parse_site(data, collected_at=now())
         log(f"site ok latency_ms={latency} quality={sample.quality} field_count={sample.field_count}")
         log(f"site measured_at_utc={to_iso(sample.measured_at)}")
         log("site values " + json.dumps(sample.values, sort_keys=True))
+        missing = [name for name in SITE_POWER_FIELDS if sample.values[name] is None]
+        age = (sample.collected_at - sample.measured_at).total_seconds() if sample.measured_at else None
+        usable = not missing and age is not None and -5 <= age <= 60
+        failures += int(not usable)
+        log(f"site capability={'available' if usable else 'unusable'} missing={','.join(missing) or 'none'} source_age_s={age}")
         balance = sample.values["load_kw_reported"]
         derived = sum(
             value
@@ -433,6 +452,10 @@ def check_reads(host: str, log=print) -> int:
             continue
         devices = parse(data)
         log(f"{name} ok latency_ms={latency} devices={len(devices)} path_fields={len(data)}")
+        power = "ac_kw" if name == "inverters" else "kw"
+        complete = sum(device.measured_at is not None and device.values[power] is not None for device in devices)
+        capability = "available" if devices and complete == len(devices) else "partial" if devices else "unverified"
+        log(f"{name} capability={capability} usable_devices={complete} membership_verified=no")
         for device in devices:
             log(
                 f"{name} device index={device.index} measured_at_utc={to_iso(device.measured_at)} "
@@ -440,11 +463,13 @@ def check_reads(host: str, log=print) -> int:
             )
     try:
         data, latency = pvs.read_health()
-        log(f"health ok latency_ms={latency} " + json.dumps(data, sort_keys=True))
+        health = {name: model.finite_number(data.get(f"/sys/info/{name}"))
+                  for name in ("uptime", "cpu_usage", "flash_usage")}
+        log(f"health ok latency_ms={latency} " + json.dumps(health, sort_keys=True))
     except PVSError as exc:
         failures += 1
         log(f"health FAILED {type(exc).__name__} " + json.dumps(exc.diagnostics, sort_keys=True))
-    log(f"check finished failures={failures} stored=no")
+    log(f"check finished failures={failures} hardware_verified=no stored=no")
     return failures
 
 
