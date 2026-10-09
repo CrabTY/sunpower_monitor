@@ -19,6 +19,10 @@ binding = "ASSETS"
 # Every request goes through the worker, so assets and APIs share one login gate.
 run_worker_first = true
 
+# Settings controls whether this check sends notifications; no installation prompt.
+[triggers]
+crons = ["* * * * *"]
+
 [vars]
 ALLOWED_USER_IDS = "{{ALLOWED_USER_IDS}}"
 COLLECTOR_ID = "{{COLLECTOR_ID}}"

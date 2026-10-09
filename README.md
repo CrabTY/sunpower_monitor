@@ -9,7 +9,7 @@
 [![Live demo](https://img.shields.io/badge/demo-live-green)](https://crabty.github.io/sunpower_monitor/demo/?scenario=day)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Website](https://crabty.github.io/sunpower_monitor/) · [Live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day) · [Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md)
+[Website](https://crabty.github.io/sunpower_monitor/) · [Live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day) · [Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md) · [Acknowledgements](#acknowledgements)
 
 SunPower Monitor helps you see what your solar system is doing now, how its energy use changes over time, and how each panel performs. It reads your PVS6 on the home network, records history, and serves a dashboard you can open on a computer or phone, including when you are away from home.
 
@@ -21,7 +21,7 @@ A small collector runs on your Raspberry Pi, NAS, or Linux host. Your own Cloudf
 
 ## Gateway compatibility
 
-The verified configuration is **SunPower PVS6 firmware `2025.10.20.61846`, without a battery**. The installer performs a read-only device check before starting collection. Other PVS6 firmware needs compatibility verification; PVS5, PVS2, other vendors, and battery systems are outside the supported installation path.
+The hardware-verified configuration is **SunPower PVS6 firmware `2025.10.20.61846`, without a battery**. The installer performs a read-only device check before starting collection. Other PVS6 builds and newer PVS5 gateways using the official varserver API are compatibility candidates: the collector accepts the documented response formats and checks available fields, without restricting collection to one firmware number. PVS5 has not been hardware-verified here. PVS2, other vendors, and battery systems remain outside the supported installation path. See [compatibility evidence and the read-only check](docs/pvs-compatibility.md).
 
 The collector must reach the PVS over your LAN. It handles the verified firmware's local authentication; it does not commission the system, provision devices, or change PVS settings. Home and grid readings depend on your installed consumption current transformers (CTs); see the [CT coverage and calibration guide](docs/ct-calibration.md).
 
@@ -90,7 +90,17 @@ Select a panel or compare the array, inspect recorded five-minute samples, and v
 
 Diagnostics appear when the PVS supplies a valid value. A panel that stops reporting may have a device problem or a failed read; the dashboard cannot determine the cause from missing data alone.
 
-### Settings: location and calibration
+### Settings: notifications, location and calibration
+
+**Optional iPhone alerts with [Bark](https://github.com/Finb/Bark).** SunPower Monitor detects missing or invalid site readings; Bark delivers the phone notifications. After ten minutes of missing or invalid readings, you receive one alert for the ongoing fault. Three consecutive normal background checks trigger a recovery notification.
+
+Notifications are off by default. Enable them after installing your dashboard:
+
+1. Install [Bark](https://bark.day.app/) on your iPhone, allow notifications, and copy your own device Key from the app.
+2. Sign in to your dashboard and open **Settings → Phone notifications**. Paste the Key (not the full push URL) and select **Test and enable**.
+3. Confirm that **SunPower notification test** arrives on your phone. Settings shows **Enabled** and, once the first scheduled check completes, **Background checks: Running**. Monitoring continues when you close the webpage.
+
+The dashboard stores your Key encrypted and checks readings every minute. This optional setup adds no `install.sh` steps. See the [Bark notification guide](docs/notifications.md) for Key examples, delivery limits, and the database/Worker upgrade required for existing installations.
 
 Set the site's location and time zone for daylight and local-date views. Display calibration can correct a verified, stable grid-reading ratio after comparison with utility-meter data. It adjusts the displayed grid reading and corresponding home-load estimate, preserves raw records, and leaves solar production unchanged. See the [calibration procedure](docs/ct-calibration.md) before changing the ratio.
 
@@ -133,6 +143,7 @@ No. This collector and dashboard work independently. Home Assistant integrations
 | Workstation deployment or a direct Python service | [Manual installation](docs/manual-installation.md), [Operations](docs/operations.md) |
 | Updates and redeployment | [Upgrade steps](docs/operations.md#upgrade-an-existing-deployment) |
 | Backups and recovery | [Operations](docs/operations.md) |
+| Optional iPhone alerts configured from Settings | [Bark phone notifications](docs/notifications.md) |
 | Collector, cloud, and authentication design | [Architecture](docs/architecture.md) |
 | CT coverage and display calibration | [CT guide, Chinese](docs/ct-calibration.md) |
 | Simulated dashboard for local development | [Preview](docs/preview.md) |
@@ -149,7 +160,25 @@ Keep deployment credentials and household telemetry private. Use GitHub private 
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, checks, and pull requests. You can work on the dashboard using simulated readings without a PVS or production Cloudflare account.
 
-Community projects informed protocol handling and dashboard presentation, including [SunPower Web Monitor](https://github.com/thomastech/SunPower-Web-Monitor), [sunpower-monitor](https://github.com/karak2112/sunpower-monitor), and [PVS Watch](https://github.com/timkatz/pvswatch). See [References](docs/references.md) for reviewed sources and licenses.
+## Acknowledgements
+
+This project benefited from the work shared by the following project owners and their contributors. Thank you for documenting local PVS access, sharing collector implementations and dashboard designs, and providing phone notification delivery.
+
+| Project | Project owner | Contribution to this project |
+| --- | --- | --- |
+| [PyPVS and local API documentation](https://github.com/SunStrong-Management/pypvs) | [SunStrong Management](https://github.com/SunStrong-Management) | Official protocol reference for authentication, session cookies, queries and request pacing; PVS5/PVS6 field contracts and documented response formats informed the collector's compatibility handling. |
+| [sunpower-monitor](https://github.com/karak2112/sunpower-monitor) | [karak2112](https://github.com/karak2112) | Primary reference for 61846 authentication, focused varserver queries, parser behavior and tests; also reviewed for dashboard presentation. |
+| [SunPower-PVS-Supervisor](https://github.com/steveturbek/SunPower-PVS-Supervisor) | [steveturbek](https://github.com/steveturbek) | PVS field examples, inverter AC-power interpretation and cumulative-energy readings. |
+| [PVS Watch](https://github.com/timkatz/pvswatch) | [timkatz](https://github.com/timkatz) | Missing-energy semantics, nighttime behavior, session renewal and panel-chart references. |
+| [ha-esunpower](https://github.com/smcneece/ha-esunpower) | [smcneece](https://github.com/smcneece) | Newer-firmware handling, temporary missing-inverter behavior and AC/DC field separation. |
+| [SunPower Web Monitor](https://github.com/thomastech/SunPower-Web-Monitor) | [thomastech](https://github.com/thomastech) | Newer-firmware authentication proxy and current-reading dashboard reference. |
+| [pvs6-liberation](https://github.com/jschwerdtfeger/pvs6-liberation) | [jschwerdtfeger](https://github.com/jschwerdtfeger) | Local API documentation and examples used for protocol checks. |
+| [dash-sunpower](https://github.com/strawtype/dash-sunpower) | [strawtype](https://github.com/strawtype) | Historical replay and panel-layout ideas. |
+| [Solar Sentinel](https://github.com/smcneece/solar-sentinel) | [smcneece](https://github.com/smcneece) | Panel matrix, daylight arc, time slider and individual-panel history design references. |
+| [SOLECTRUS](https://github.com/solectrus/solectrus) | [SOLECTRUS community](https://github.com/solectrus) | Additional solar-dashboard presentation reference. |
+| [Bark](https://github.com/Finb/Bark) | [Finb](https://github.com/Finb) | Open-source iOS app and push API used to deliver optional alert and recovery notifications. |
+
+See [References](docs/references.md) for the detailed comparisons, reviewed source revisions and recorded licenses, and [Bark's documentation](https://bark.day.app/) for its app and push API.
 
 ## Support and license
 

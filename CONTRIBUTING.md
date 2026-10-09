@@ -1,12 +1,12 @@
 # Contributing
 
-Thanks for helping improve SunPower Monitor. The collector only reads a PVS6, and the dashboard must keep private telemetry behind authentication. Please keep those two boundaries intact.
+Thanks for helping improve SunPower Monitor. The collector only reads PVS varserver data, and the dashboard must keep private telemetry behind authentication. Please keep those two boundaries intact. Separate [documented compatibility candidates](docs/pvs-compatibility.md) from hardware-verified configurations.
 
 ## Local setup
 
 Fork the repository to your GitHub account if you want to submit changes, then clone your fork. Installation uses the published Release installer on the collector host; see the [Quick Start](docs/quick-start.md).
 
-Use Python 3.11+ and Node.js 22+:
+Use Python 3.11+ and Node.js 22.5+ (the notification tests use built-in SQLite):
 
 ```sh
 npm ci

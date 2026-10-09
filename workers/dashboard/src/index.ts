@@ -30,6 +30,7 @@ import {
 } from "./query.js";
 import { parseWeatherRange, readWeather } from "./weather.js";
 import { syncWeather } from "../../shared/weather-sync.js";
+import { checkNotifications, getNotifications, mutateNotifications } from "./notifications.js";
 import {
   clearCookie,
   pkceChallenge,
@@ -94,6 +95,22 @@ export default {
     const session = verified && isAllowedUser(verified.userId, env.ALLOWED_USER_IDS) ? verified : null;
     if (url.pathname.startsWith("/api/")) {
       if (!session) return json({ error: "unauthorized" }, 401);
+      if (url.pathname === "/api/v1/notifications" || url.pathname === "/api/v1/notifications/test") {
+        if (request.method !== "GET" && !sameOrigin(request, url)) return json({ error: "cross_origin" }, 403);
+        try {
+          if (url.pathname === "/api/v1/notifications" && request.method === "GET") {
+            return json(await getNotifications(env.DB, collectorId(env), nowSeconds()));
+          }
+          const action = url.pathname.endsWith("/test") && request.method === "POST" ? "test" :
+            url.pathname === "/api/v1/notifications" && request.method === "PUT" ? "save" :
+              url.pathname === "/api/v1/notifications" && request.method === "DELETE" ? "delete" : null;
+          if (!action) return json({ error: "method_not_allowed" }, 405);
+          const parsed = action === "delete" ? { ok: true, body: null } : await readSmallJson(request);
+          if (!parsed.ok) return json({ error: "body" }, parsed.status ?? 400);
+          const result = await mutateNotifications(env.DB, env.SESSION_SECRET, collectorId(env), action, parsed.body, nowSeconds());
+          return json(result.body, result.status);
+        } catch { return json({ error: "notification_storage_failed" }, 503); }
+      }
       if (url.pathname === "/api/v1/live" && request.method === "GET") return live(env);
       if (url.pathname === "/api/v1/history" && request.method === "GET") return history(env, url);
       if (url.pathname === "/api/v1/panels" && request.method === "GET") return panels(env, url);
@@ -122,6 +139,11 @@ export default {
       return new Response("unauthorized", { status: 401 });
     }
     return serveAsset(request, env);
+  },
+
+  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+    try { await checkNotifications(env.DB, env.SESSION_SECRET, collectorId(env), nowSeconds()); }
+    catch { throw new Error("notification_check_failed"); }
   },
 };
 

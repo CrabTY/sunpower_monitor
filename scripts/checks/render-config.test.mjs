@@ -43,6 +43,8 @@ test("dashboard route is absent without a custom domain and present with one", (
   assert.match(domainFree.config, /workers_dev = true/);
   assert.doesNotMatch(domainFree.config, /^routes = /m);
   assert.doesNotMatch(domainFree.config, /REPLACE_WITH_DASHBOARD_HOST/);
+  assert.match(domainFree.config, /\[triggers\]\s+crons = \["\* \* \* \* \*"\]/);
+  assert.doesNotMatch(domainFree.config, /BARK_DEVICE_KEY|ALERTS_ENABLED/);
 
   const customDomain = render("solar.example.com");
   assert.equal(customDomain.status, 0, customDomain.error);

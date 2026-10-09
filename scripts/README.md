@@ -30,3 +30,8 @@ python3 scripts/checks/check-graph-hook.py
 local D1 state; `check:month` uses temporary local state and synthetic data.
 Neither check deploys Workers or writes to a remote database. Keep rendered
 configuration, build output and household data ignored.
+
+`checks/pypvs-evaluation.py` is an optional SDK investigation using synthetic
+data and a loopback HTTP server. Its setup and characterized behaviors are
+documented in the [PyPVS evaluation](../docs/adr/0001-pypvs-client-evaluation.md).
+It is not part of the collector runtime or the default checks.

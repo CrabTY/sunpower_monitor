@@ -1,5 +1,7 @@
 # Quick Start: one terminal on the collector host
 
+After installation, you can optionally enable [phone notifications](notifications.md) from the dashboard's Settings page. This adds no installer steps.
+
 SunPower Monitor has three places to think about. Your **browser** is for creating accounts and approving login. An always-on **Pi, NAS, or Linux host** reads the PVS and runs the installer. **Cloudflare** stores readings and serves the private dashboard. Your personal computer does not need the project source, Node.js, Python, or a terminal.
 
 | Place | What you do there | Stays on? |
@@ -16,7 +18,7 @@ Cloudflare's Wrangler login lives in a temporary private directory while the scr
 
 ## Before you start
 
-- A SunPower PVS6 reachable by LAN address from the collector host.
+- A SunPower PVS6 reachable by LAN address from the collector host. Other official-varserver gateways are compatibility candidates; see [the evidence and read-only check](pvs-compatibility.md) before treating a PVS5 or another firmware as verified.
 - Docker running on an AMD64 or ARM64 Pi, NAS, or Linux host, plus `curl` and `tar`. The installer checks Docker; it does not install Docker or change NAS system settings.
 - A [Cloudflare account](https://developers.cloudflare.com/fundamentals/account/create-account/) with Workers enabled and a GitHub account. Cloudflare's `workers.dev` address lets you start without owning a domain. The [Workers](https://developers.cloudflare.com/workers/platform/pricing/) and [D1](https://developers.cloudflare.com/d1/platform/pricing/) Free allowances are available; check their current limits for your expected use. Cloudflare Access is not part of this GitHub-login path.
 - A way to open browser links shown in the collector-host terminal. If you connect to the Pi by SSH, keep that terminal open while using the browser on your computer or phone.

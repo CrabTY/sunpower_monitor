@@ -2,6 +2,8 @@
 
 Start with the [Quick Start](quick-start.md) for a new installation. Keep real hosts, account IDs, tokens, exports, and household measurements in private local notes. Run only one collector process for a PVS6 at a time.
 
+[Optional phone notifications](notifications.md) are configured entirely in Settings after installation. Existing deployments need the additive notification table and updated dashboard Worker described there; no installer, collector or ingest changes are required.
+
 ## Deployment order
 
 1. On the collector host, run `install.sh` and approve Cloudflare device login in your personal browser. Choose the installation name and optional dashboard domain.
@@ -15,7 +17,7 @@ The [Quick Start](quick-start.md) is the installer path; [manual installation](m
 
 Update the Workers with the manual cloud deployment workflow described above, or the [manual deployment commands](manual-installation.md#3-deploy-the-workers-and-add-secrets) using your existing configuration. `install.sh` is for new installations: it chooses a collector ID and saves login/session/upload credentials, and its collector-existence check only sees Docker on the installer host. Running it on another host can create a second collector or replace credentials used by the existing one. An upgrade does not require regenerating those secrets.
 
-Keep the existing D1 ID, Worker names, `COLLECTOR_ID`, allowlist, custom domain, OAuth callback, and Worker secrets. Location, calibration, and history are keyed by the collector ID; changing it does not migrate those records. Compare the rendered configuration before deploying. Use Node.js 22+ for Wrangler, even when the unit checks pass on an older Node version.
+Keep the existing D1 ID, Worker names, `COLLECTOR_ID`, allowlist, custom domain, OAuth callback, and Worker secrets. Location, calibration, and history are keyed by the collector ID; changing it does not migrate those records. Compare the rendered configuration before deploying. Use Node.js 22.5+ for Wrangler and the checks.
 
 Evaluate deployment only when the running source or required configuration changes. A Git history rewrite, documentation edit or release tag alone does not require restarting the collector or redeploying Workers.
 
@@ -59,7 +61,7 @@ npm run check
 
 Review the changes between the running commit and this target. Passing checks
 does not deploy it. Keep the ignored `.env`, Worker configuration and secrets;
-do not copy examples over an existing installation. Use Node.js 22+.
+do not copy examples over an existing installation. Use Node.js 22.5+.
 
 ### Redeploy the affected Workers
 

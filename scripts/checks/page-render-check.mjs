@@ -28,7 +28,7 @@ const modules = {
   chartXValueAt: () => at - 5 * 60000,
 };
 const pause = () => new Promise((resolve) => setTimeout(resolve, 20));
-const result = (value) => Promise.resolve({ status: 200, ok: true, json: async () => value });
+const result = (value) => Promise.resolve(value instanceof Response ? value : { status: 200, ok: true, json: async () => value });
 
 function page(name, reply, href = "http://localhost/") {
   const elements = new Map();
@@ -66,7 +66,7 @@ function page(name, reply, href = "http://localhost/") {
     document: { getElementById: get },
     window: { addEventListener() {}, setTimeout: () => 0, clearTimeout() {}, setInterval: () => 0, innerWidth: 1024, location, history },
     Date, Math, Intl, JSON, URL, URLSearchParams, isNaN, isFinite, ...modules,
-    fetch(url) { requests.push(url); return Promise.resolve(reply(url)).then(result); },
+    fetch(url, options) { requests.push(url); return Promise.resolve(reply(url, options)).then(result); },
   };
   context.self = context;
   vm.runInNewContext(source(name), context, { filename: name });
@@ -301,4 +301,67 @@ const savedSettings = page("settings.js", (url) => {
 await pause();
 assert.match(savedSettings.get("current").innerHTML, /37\.290° N, 122\.018° W/);
 assert.match(savedSettings.get("current").innerHTML, /openstreetmap\.org\/\?mlat=37\.29&mlon=-122\.018/);
+let notificationFixture = { configured: false, enabled: false, state: "normal", monitoring: "paused" };
+const notificationWrites = [];
+let rejectNotification = false;
+const notificationPage = page("settings.js", (url, options = {}) => {
+  if (url.startsWith("/api/v1/notifications")) {
+    if (options.method) {
+      notificationWrites.push({ method: options.method, body: options.body && JSON.parse(options.body) });
+      if (rejectNotification) return new Response(JSON.stringify({ error: "bark_rejected" }), { status: 502 });
+      if (options.method === "PUT") {
+        notificationFixture = { ...notificationFixture, configured: true, enabled: JSON.parse(options.body).enabled, test_sent: JSON.parse(options.body).enabled };
+      } else if (options.method === "DELETE") notificationFixture = { configured: false, enabled: false, state: "normal", monitoring: "paused" };
+      return { ...notificationFixture, test_sent: options.method === "POST" || options.method === "PUT" && notificationFixture.enabled };
+    }
+    return notificationFixture;
+  }
+  if (url.startsWith("/api/v1/location")) return { configured: false };
+  if (url.startsWith("/api/v1/calibration")) return { grid_ratio: 1 };
+  if (url.startsWith("/api/v1/weather")) return weather;
+  if (url.startsWith("/api/v1/health")) return { state: "collecting", events: [] };
+  return {};
+});
+await pause();
+assert.match(notificationPage.get("notification-facts").innerHTML, /Not configured/);
+assert.equal(notificationPage.get("notification-test").hidden, true);
+notificationPage.get("notification-form").handlers.submit({ preventDefault() {} });
+assert.match(notificationPage.get("bark-key-error").textContent, /Paste your Bark/);
+assert.equal(notificationWrites.length, 0);
+notificationPage.get("bark-key").value = "synthetic-bark-device";
+notificationPage.get("bark-key").handlers.input();
+notificationPage.get("notification-form").handlers.submit({ preventDefault() {} });
+assert.equal(notificationPage.get("bark-key").value, "");
+assert.equal(notificationPage.get("notification-save").disabled, true);
+await pause();
+assert.deepEqual(notificationWrites[0], { method: "PUT", body: { enabled: true, device_key: "synthetic-bark-device" } });
+assert.match(notificationPage.get("notification-status").textContent, /Test submitted/);
+assert.equal(notificationPage.get("notification-pause").hidden, false);
+notificationPage.get("notification-test").handlers.click();
+await pause();
+assert.deepEqual(notificationWrites[1], { method: "POST", body: {} });
+notificationPage.get("notification-pause").handlers.click();
+await pause();
+assert.equal(notificationPage.get("notification-pause").hidden, true);
+assert.match(notificationPage.get("notification-status").textContent, /paused/);
+notificationPage.get("notification-form").handlers.submit({ preventDefault() {} });
+await pause();
+assert.deepEqual(notificationWrites[3].body, { enabled: true });
+rejectNotification = true;
+notificationPage.get("notification-test").handlers.click();
+await pause();
+assert.match(notificationPage.get("notification-status").textContent, /Bark rejected/);
+assert.equal(notificationPage.get("notification-test").disabled, false);
+rejectNotification = false;
+notificationPage.get("notification-delete").handlers.click();
+await pause();
+assert.match(notificationPage.get("notification-facts").innerHTML, /Not configured/);
+assert.equal(notificationPage.get("notification-delete").hidden, true);
+
+const readOnlyNotifications = page("settings.js", (url) => url.startsWith("/api/v1/notifications") ? {
+  configured: false, enabled: false, read_only: true,
+} : {});
+await pause();
+assert.equal(readOnlyNotifications.get("bark-key").disabled, true);
+assert.equal(readOnlyNotifications.get("notification-save").disabled, true);
 console.log("page render checks passed");

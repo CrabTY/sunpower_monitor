@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.5"
   },
   "scripts": {
     "build:web": "esbuild web/chart-engine.js --bundle --format=esm --minify --target=es2022 --outfile=web/chart-engine.bundle.js",

@@ -1,9 +1,9 @@
-"""Read-only PVS6 varserver client: focused, serialized queries.
+"""Read-only PVS varserver client: focused, serialized queries.
 
 Boundaries taken from ``pilot.py`` and the architecture document:
 only ``match=livedata``, ``match=meter``, ``match=inverter``, and three
-``/sys/info/*`` health fields are ever requested; the full ``match=/`` tree,
-device list, and ``/vars?set=`` are never called. Credentials live in memory
+``/sys/info/*`` health fields plus serial/model/revision diagnostics are requested;
+the full ``match=/`` tree, device list, and ``/vars?set=`` are never called. Credentials live in memory
 only. The self-signed LAN certificate exception applies to this LAN device;
 cloud uploads must validate certificates.
 """
@@ -22,6 +22,7 @@ REQUEST_TIMEOUT = 8.0
 MIN_REQUEST_GAP = 3.0
 HEALTH_PATH = "/vars?name=/sys/info/uptime,/sys/info/cpu_usage,/sys/info/flash_usage&fmt=obj"
 SERIAL_PATH = "/vars?name=/sys/info/serialnum&fmt=obj"
+GATEWAY_PATH = "/vars?name=/sys/info/model,/sys/info/sw_rev&fmt=obj"
 CACHES = {"livedata": "ldata", "meter": "mdata", "inverter": "idata"}
 
 
@@ -45,7 +46,7 @@ class PVSAuthError(PVSError):
 
 
 class PVSClient:
-    """One serialized read-only connection to a PVS6 on the LAN."""
+    """One serialized read-only connection to a PVS varserver on the LAN."""
 
     def __init__(
         self,
@@ -100,6 +101,17 @@ class PVSClient:
             raise PVSError("pvs response was not valid JSON", reason="invalid_json", stage=stage, latency_ms=latency) from None
         if not isinstance(data, dict):
             raise PVSError("pvs response was not a JSON object", reason="invalid_json", stage=stage, latency_ms=latency)
+        if "values" in data and "errorcode" not in data:
+            values = data["values"]
+            normalized = {}
+            if not isinstance(values, list):
+                raise PVSError("pvs values were not an array", reason="invalid_json", stage=stage, latency_ms=latency)
+            for item in values:
+                if (not isinstance(item, dict) or not isinstance(item.get("name"), str)
+                        or not item["name"].startswith("/") or "value" not in item or item["name"] in normalized):
+                    raise PVSError("pvs values contained an invalid entry", reason="invalid_json", stage=stage, latency_ms=latency)
+                normalized[item["name"]] = item["value"]
+            data = normalized
         return data, latency
 
     def authenticate(self) -> None:
@@ -119,7 +131,22 @@ class PVSClient:
         finally:
             del credential
 
-    def _read_once(self, group: str) -> tuple[dict, int]:
+    def _read(self, path: str, *, stage="read") -> tuple[dict, int]:
+        """Every read gets at most one session refresh, regardless of rejection format."""
+        for attempt in range(2):
+            try:
+                data, latency = self._request(path, stage=stage)
+            except PVSAuthError:
+                if attempt:
+                    raise
+            else:
+                if "errorcode" not in data:
+                    return data, latency
+                if attempt:
+                    raise PVSError("pvs read returned an error response", reason="device_error", stage=stage, latency_ms=latency)
+            self.authenticate()
+
+    def read_group(self, group: str) -> tuple[dict, int]:
         # Every read names its group. A cache-only query (``cache=idata`` without
         # ``match=``) is answered from the variable set the PVS built when that
         # cache was filled, and one such set served 8 of 21 inverters for two
@@ -127,22 +154,7 @@ class PVSClient:
         # partial answer is indistinguishable from a smaller array, so it must
         # not be reused.
         path = f"/vars?match={group}&fmt=obj&cache={CACHES[group]}"
-        try:
-            data, latency = self._request(path)
-        except PVSAuthError:
-            self.authenticate()
-            return self._request(path)
-        return data, latency
-
-    def read_group(self, group: str) -> tuple[dict, int]:
-        """Read one allowlisted group, re-authenticating once on session expiry."""
-        data, latency = self._read_once(group)
-        if "errorcode" in data:
-            self.authenticate()
-            data, latency = self._read_once(group)
-        if "errorcode" in data:
-            raise PVSError(f"pvs {group} read returned an error response", reason="device_error", latency_ms=latency)
-        return data, latency
+        return self._read(path)
 
     def read_site(self) -> tuple[dict, int]:
         return self.read_group("livedata")
@@ -155,7 +167,11 @@ class PVSClient:
 
     def read_health(self) -> tuple[dict, int]:
         """Small uncached query used to spot PVS restarts and rising load."""
-        return self._request(HEALTH_PATH, stage="health")
+        return self._read(HEALTH_PATH, stage="health")
+
+    def read_gateway(self) -> tuple[dict, int]:
+        """Focused identity diagnostics; exclude SSID, MAC and other settings."""
+        return self._read(GATEWAY_PATH, stage="gateway")
 
 
 def _build_opener(cookies=None):

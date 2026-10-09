@@ -4,7 +4,9 @@ This describes the implemented collector, Workers and browser dashboard. For dep
 
 ## Compatibility
 
-The verified device is a SunPower PVS6 running firmware `2025.10.20.61846`, without a battery. Other PVS6 firmware requires a read-only compatibility check before collection. PVS5, PVS2, other vendors and battery-equipped systems are outside the supported installation path.
+The hardware-verified device is a SunPower PVS6 running firmware `2025.10.20.61846`, without a battery. Other PVS6 builds and newer PVS5 gateways exposing the official varserver API are compatibility candidates, supported by shared official field definitions and synthetic format tests. This is not hardware verification of those gateways. PVS2, other vendors and battery-equipped systems are outside the supported installation path. See [compatibility evidence and checks](pvs-compatibility.md).
+
+The collector preserves its synchronous read/parse/queue/upload pipeline. At startup it makes one focused model/software-revision read for safe local diagnostics; failure does not block normal collection. Read responses can be flat path/value objects or validated `values` name/value envelopes. Device parsing accepts both flat paths and the nested device `data` objects shown in the official API examples. Missing values remain unknown, and DC power never substitutes for AC power. All read queries share at most one session refresh for HTTP 401/403 or a device `errorcode`, including health and gateway reads.
 
 PVS-reported home load depends on the installed CT coverage. It is not an independent utility-meter measurement. See [CT coverage and display calibration](ct-calibration.md).
 
@@ -77,7 +79,9 @@ Stored times are UTC. Queries and daily views use the saved site time zone. Site
 
 ## Authentication and private settings
 
-The ingest upload token is separate from dashboard credentials. The dashboard verifies GitHub OAuth, a signed session and the configured numeric GitHub user-ID allowlist. Its Worker runs before static assets so pages, scripts and images share the login gate. Location and calibration mutations also require same-origin requests.
+The ingest upload token is separate from dashboard credentials. The dashboard verifies GitHub OAuth, a signed session and the configured numeric GitHub user-ID allowlist. Its Worker runs before static assets so pages, scripts and images share the login gate. Location, calibration and notification mutations also require same-origin requests.
+
+[Optional Bark notifications](notifications.md) are configured from Settings, independently of installation. The dashboard encrypts each deployment's device Key in D1 using a domain-separated key derived from its session secret. A minute cron reads current site data and persists incident, retry and lease state; no page needs to remain open. Collector and ingest do not receive notification credentials. The default is off.
 
 Login/callback routes and the limited `/api/v1/version` service metadata endpoint are exceptions to the session gate; telemetry and settings APIs require a session. Version metadata records the deployment label and source revision, not secret values.
 

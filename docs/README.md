@@ -9,10 +9,13 @@ These documents describe the current installation and code. Start with the guide
 | Configure and deploy manually | [Manual installation](manual-installation.md) |
 | Update and redeploy an existing installation | [Upgrade steps](operations.md#upgrade-an-existing-deployment) |
 | Back up and recover | [Operations](operations.md) |
+| Enable optional Bark notifications from Settings | [Phone notifications](notifications.md) |
 | Understand components and data boundaries | [Architecture](architecture.md) |
+| Check PVS models, firmware and available fields | [PVS compatibility](pvs-compatibility.md) |
 | Understand CT coverage and display calibration | [CT guide, Chinese](ct-calibration.md) |
 | Review security checks, remediation and limits | [Security review](security-review.md) |
 | Find protocol/UI sources and reviewed versions | [Reference projects](references.md) |
+| Review whether to adopt the official PyPVS SDK | [PyPVS client evaluation](adr/0001-pypvs-client-evaluation.md) |
 | Develop with simulated dashboard readings | [Local preview](preview.md), [Contributing](../CONTRIBUTING.md) |
 
 ## Separate introduction site

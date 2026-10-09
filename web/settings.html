@@ -21,11 +21,34 @@
       </nav>
 
       <header class="head" id="content" tabindex="-1">
-        <div><span class="eyebrow">Energy journal / Settings</span><h1>System settings.</h1><p class="head-subtitle">Location, calibration, and connection details.</p></div>
+        <div><span class="eyebrow">Energy journal / Settings</span><h1>System settings.</h1><p class="head-subtitle">Notifications, location, calibration, and connection details.</p></div>
         <p class="state" id="state" role="status">Loading…</p>
       </header>
 
       <p class="banner" id="banner" role="alert" hidden></p>
+
+      <section class="chart-card" aria-labelledby="notification-heading">
+        <h2 class="chart-title" id="notification-heading">Phone notifications <span class="note">· Optional</span></h2>
+        <p class="note">Use Bark on your iPhone to receive an alert after 10 minutes of missing or invalid site readings, and one notification when readings recover. Each ongoing fault sends one alert.</p>
+        <section class="facts" id="notification-facts"></section>
+        <form id="notification-form" novalidate>
+          <div class="control-group custom">
+            <label>Bark device Key
+              <input type="password" id="bark-key" name="bark-key" maxlength="128" autocomplete="off" spellcheck="false" aria-describedby="bark-key-help bark-key-error" />
+              <span class="field-error" id="bark-key-error" role="alert" hidden></span>
+            </label>
+            <button type="submit" id="notification-save" disabled>Test and enable</button>
+          </div>
+          <p class="note" id="bark-key-help">Install <a href="https://bark.day.app/" target="_blank" rel="noopener noreferrer">Bark</a>, allow notifications, and copy your device Key. To change phones, paste the new Key here. Leave blank to reuse a saved device.</p>
+          <div class="control-group">
+            <button type="button" id="notification-test" hidden>Send test</button>
+            <button type="button" id="notification-pause" hidden>Pause notifications</button>
+            <button type="button" id="notification-delete" hidden>Delete configuration</button>
+          </div>
+        </form>
+        <p class="note" id="notification-status" role="status">Loading notification settings…</p>
+        <p class="note">This installation shares one receiving device. Anyone allowed to use Settings can change it. The Key is encrypted on your server; notification text is sent through Bark and Apple. A test sends a real phone notification.</p>
+      </section>
 
       <section class="chart-card">
         <h2 class="chart-title">Grid calibration</h2>

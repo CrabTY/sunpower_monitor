@@ -1,6 +1,18 @@
-# Reference projects and collector comparison
+# Reference projects, acknowledgements and collector comparison
 
-Links identify the upstream versions reviewed for protocol and UI decisions. These projects are references, not bundled dependencies. Any directly copied code must retain the notices required by its MIT or Apache-2.0 license.
+We thank the authors and contributors of the projects below for sharing their protocol research, implementations and interface designs. The [README acknowledgements](../README.md#acknowledgements) name and link every project owner and summarize how each project informed this work.
+
+Links identify the upstream versions reviewed for protocol and UI decisions. The collector and UI projects below are references, not bundled dependencies. Any directly copied code must retain the notices required by its MIT or Apache-2.0 license.
+
+## Official local API documentation
+
+Thank you to [SunStrong Management](https://github.com/SunStrong-Management) and the contributors to [PyPVS](https://github.com/SunStrong-Management/pypvs) for publishing the [local API documentation](https://github.com/SunStrong-Management/pypvs/blob/main/doc/LocalAPI.md), [PVS5 variable reference](https://github.com/SunStrong-Management/pypvs/blob/main/doc/varserver-variables-public-pvs5.csv) and [PVS6 variable reference](https://github.com/SunStrong-Management/pypvs/blob/main/doc/varserver-variables-public-pvs6.csv). The introduction site's compatibility and sampling explanations already cite these official materials. They document authentication, session cookies, `/vars` queries, cache parameters and request-pacing recommendations. The collector also uses their documented name/value and nested-device response shapes and shared field contracts; see [compatibility evidence](pvs-compatibility.md). This adopts protocol information, not the SDK's model/update cycle or a bundled copy of its code.
+
+Our collector implements the local HTTP interface with Python's standard library. It does not install or import the `pypvs` package, call SunStrong's cloud service, or import historical records from that service. Each grouped read includes `match=` even when using a cache ID, following our hardware checks of stale cache membership; see [the collector implementation](../collector/pvs.py).
+
+The SDK itself is assessed separately in the [PyPVS client evaluation](adr/0001-pypvs-client-evaluation.md), including executable checks of the published package and a pinned upstream revision.
+
+## Community collector references
 
 | Project | Collector entry point | Strengths | Limits for this project |
 | --- | --- | --- | --- |
@@ -24,6 +36,10 @@ Links identify the upstream versions reviewed for protocol and UI decisions. The
 ## Additional UI references
 
 Collector analysis is separate from UI design. We also compared [Solar Sentinel](https://github.com/smcneece/solar-sentinel) for its panel matrix, daylight arc, time slider, and individual-panel history; [sunpower-monitor](https://github.com/karak2112/sunpower-monitor/tree/4806123242424696f570243b3dc01b40079d7a7c/apps/web) for current power, flow, freshness, and panel replay; and the presentation patterns in [PVS Watch](https://github.com/timkatz/pvswatch), [dash-sunpower](https://github.com/strawtype/dash-sunpower), [SunPower-Web-Monitor](https://github.com/thomastech/SunPower-Web-Monitor), and [SOLECTRUS](https://github.com/solectrus/solectrus). See the [current browser implementation](architecture.md#browser-dashboard) for the shipped interface. Solar Sentinel is a Home Assistant UI reference, not a collector for this project.
+
+## Notification delivery
+
+Optional iPhone alerts use [Bark](https://github.com/Finb/Bark), created by [Finb](https://github.com/Finb) and maintained with its contributors. Bark provides the receiving iOS app and push API; SunPower Monitor calls that API from its dashboard Worker after detecting a sustained fault or recovery. The current integration sends to `https://api.day.app/push`. See [Bark's official documentation](https://bark.day.app/) and our [notification setup guide](notifications.md).
 
 ## Reviewed versions
 

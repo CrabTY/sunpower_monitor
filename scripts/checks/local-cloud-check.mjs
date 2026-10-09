@@ -301,6 +301,15 @@ async function main() {
     return { status: response.status, body: await response.json().catch(() => null) };
   };
 
+  const notifications = await get("/api/v1/notifications");
+  check("notifications start off with no device", notifications.status === 200 && notifications.body?.configured === false && notifications.body?.enabled === false);
+  check("notification configuration is private", (await get("/api/v1/notifications", false)).status === 401);
+  const paused = await send("PUT", "/api/v1/notifications", { enabled: false });
+  check("notification settings persist in local D1 without sending", paused.status === 200 && paused.body?.enabled === false && paused.body?.test_sent === false);
+  check("notification responses contain no encrypted device material", !JSON.stringify(paused.body).includes("device_key_cipher"));
+  check("invalid device keys are refused before any outbound request", (await send("PUT", "/api/v1/notifications", { enabled: true, device_key: "invalid key" })).status === 400);
+  check("notification configuration can be deleted", (await send("DELETE", "/api/v1/notifications")).status === 200);
+
   const weather = await get(`/api/v1/weather?${span}`);
   const hours = weather.body?.hours ?? [];
   check(
