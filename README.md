@@ -145,7 +145,7 @@ No. This collector and dashboard work independently. Home Assistant integrations
 | Backups and recovery | [Operations](docs/operations.md) |
 | Optional iPhone alerts configured from Settings | [Bark phone notifications](docs/notifications.md) |
 | Collector, cloud, and authentication design | [Architecture](docs/architecture.md) |
-| CT coverage and display calibration | [CT guide, Chinese](docs/ct-calibration.md) |
+| CT coverage and display calibration | [CT guide](docs/ct-calibration.md) |
 | Simulated dashboard for local development | [Preview](docs/preview.md) |
 
 The [documentation index](docs/README.md) also links the bilingual introduction, comparison, and technical references.

@@ -12,7 +12,7 @@ These documents describe the current installation and code. Start with the guide
 | Enable optional Bark notifications from Settings | [Phone notifications](notifications.md) |
 | Understand components and data boundaries | [Architecture](architecture.md) |
 | Check PVS models, firmware and available fields | [PVS compatibility](pvs-compatibility.md) |
-| Understand CT coverage and display calibration | [CT guide, Chinese](ct-calibration.md) |
+| Understand CT coverage and display calibration | [CT guide](ct-calibration.md) |
 | Review security checks, remediation and limits | [Security review](security-review.md) |
 | Find protocol/UI sources and reviewed versions | [Reference projects](references.md) |
 | Review whether to adopt the official PyPVS SDK | [PyPVS client evaluation](adr/0001-pypvs-client-evaluation.md) |

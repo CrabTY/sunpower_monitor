@@ -1,97 +1,97 @@
-# CT 安装限制与家庭用电校准
+# CT coverage limits and home-use calibration
 
-**安装方式可能让监控只测到一部分供电路径，因此页面上的 Load（家庭用电）未必代表全屋实际用电。** 本项目提供校准模块，是为了在对照电力公司电表数据后，修正其中稳定的比例偏差。
+**The installation may measure only part of the supply path, so the displayed Load may not represent actual whole-home consumption.** This project provides display calibration to correct a stable proportional bias after comparison with utility-meter data.
 
-## SunPower 的发电与用电计量
+## SunPower production and consumption metering
 
-SunPower 通过配套的计量模块采集供电与太阳能路径的数据，再由 PVS 提供监控读数。模块使用 CT（电流互感器）测量电流，也就是安装时夹在导线上的传感器。
+SunPower's metering module measures the supply and solar paths, and the PVS exposes those readings. The module uses current transformers (CTs): sensors clamped around conductors during installation.
 
-以本文的 **200A 住宅入户供电系统** 为例，SunPower 此前提供的计量方案配有四个 CT：两个用于电表侧供电路径，两个用于太阳能路径。
+In the **200A residential service** used as this guide's example, the SunPower metering configuration has four CTs: two for the utility supply path and two for the solar path.
 
-| CT | 测量对象 |
+| CTs | What they measure |
 | --- | --- |
-| 两个供电 CT | 电表侧供电路径的 L1、L2 |
-| 两个太阳能 CT | 太阳能路径的 L1、L2 |
+| Two supply CTs | L1 and L2 on the utility supply path |
+| Two solar CTs | L1 and L2 on the solar path |
 
-这套配置中，太阳能路径占用一对 CT，入户供电路径使用另一对。[Sense Solar 的官方安装说明](https://help.sense.com/hc/en-us/articles/25275207683603-Installation-Guide-Sense-Solar)也采用这样的分工：一对测主供电，一对测太阳能。
+One pair therefore measures solar and the other pair measures the incoming supply. The [official Sense Solar installation guide](https://help.sense.com/hc/en-us/articles/25275207683603-Installation-Guide-Sense-Solar) uses the same division: one pair for the main supply and one for solar.
 
-## 200A 入户电表箱的安装限制
+## Installation limits in a 200A meter enclosure
 
-下图示意同一柜体内两个相邻断路器与其供电导体的空间排列：每组都有红、黑两根导体，合起来按 **红、黑、红、黑** 分开。本案例中，SunPower 提供的 CT 硬件配置固定，允许安装的位置、夹子开口和柜内空间限制了测量覆盖范围。图中不表示下游负载是否相连。
+The figure below shows the physical arrangement of two adjacent breakers and their supply conductors in one enclosure. Each group has a red and a black conductor, arranged **red, black, red, black**. In this example, the supplied SunPower CT hardware, permitted mounting locations, clamp opening and enclosure space limit measurement coverage. The figure does not indicate whether the downstream loads are connected.
 
-<img src="../site/assets/ct-partial-coverage.png" width="620" alt="同柜相邻断路器的四根供电导体按红黑红黑排列，两只 CT 仅覆盖其中一组">
+<img src="../site/assets/ct-partial-coverage.png" width="620" alt="Four supply conductors for adjacent breakers arranged red, black, red, black; two CTs cover only one pair">
 
-*图 1：同柜相邻断路器的红黑红黑导体排列，两只 CT 仅覆盖一组。本例中，现有 CT 开口与安装空间无法同时覆盖所有同相导体；夹持位置只作概念示意，不是接线或安装说明。产品结构可参考 [Eaton MB2040B200BTSBL 产品资料](https://www.eaton.com/us/en-us/skuPage.MB2040B200BTSBL.html)，示意图不复刻该产品。*
+*Figure 1: Adjacent breakers with red, black, red, black conductors; two CTs cover only one pair. The existing clamp opening and available space cannot cover all conductors of each phase. Clamp positions are conceptual, not wiring or installation instructions. See the [Eaton MB2040B200BTSBL product information](https://www.eaton.com/us/en-us/skuPage.MB2040B200BTSBL.html) for a structural reference; this illustration does not reproduce that product.*
 
-以本案例的导线布局来看，用户侧供电导线按 **红、黑、红、黑** 两组分开排列。要完整覆盖两组电流，测红线的 CT 必须同时套住两根红线，测黑线的 CT 必须同时套住两根黑线。但同色导线在柜内分开布置，现有夹子的尺寸和位置无法做到这一点，只能分别夹住其中一根红线和一根黑线。
+In this layout, the customer-side conductors form two separated red/black groups. To cover both groups, the CT measuring red conductors would need to enclose both red conductors, and the CT measuring black conductors would need to enclose both black conductors. The same-phase conductors are separated in the enclosure, and the existing clamp dimensions and positions allow only one red and one black conductor to be measured.
 
-本案例中，能够完整测量供电的共同位置在电表区域，而该区域属于供电服务商管理、限制改动的部分，不能把现有 CT 移过去安装。因此，在这套硬件和箱体布局下，**用户侧无法夹全，电表侧又不能安装，供电 CT 最终只能测到其中一组路径。**
+The common location that could measure the complete supply is in the meter area. That area is controlled by the utility and restricts modifications, so the existing CTs cannot be moved there. With this hardware and enclosure layout, **the customer side cannot be fully covered, the meter side is unavailable for installation, and the supply CTs measure only one group of paths.**
 
-太阳能 CT 仍然可以测量发电，但供电测量没有覆盖整体，基于这些读数计算或报告的 Load 就可能偏离全屋实际用电。更换一个读取同一组 PVS 数据的 App，也不会增加 CT 的测量范围。
+The solar CTs can still measure production, but supply measurement is incomplete. Load calculated or reported from those readings may therefore differ from actual whole-home consumption. Another app reading the same PVS data cannot increase CT coverage.
 
-## 电表之后的供电结构
+## Supply structures downstream of the meter
 
-对于采用简单进线结构的 100A 住宅，若电表后的 L1、L2 各有一根可接近、供给全屋的导线，一对供电 CT 就能分别夹住它们，直接覆盖整体电流。
+In a simple 100A residential service, accessible L1 and L2 conductors downstream of the meter may each supply the entire home. One pair of supply CTs can then cover the complete current.
 
-已经安装或准备安装太阳能的住宅，也可能采用了 200A、400A 的入户供电系统。这时需要关注的是：**电流经过电表之后，如何转接和分配到家中的配电系统？** 多组导体可能汇总成一对出线，也可能通过母排、内部连接件或分开的馈线供电。固定的一对供电 CT，不一定能在允许安装的位置测到全部电流。
+Homes with existing or planned solar may instead have 200A or 400A services. The relevant question is: **how is current routed and distributed to the home's panels after passing through the meter?** Multiple conductors may join into one outgoing pair, or the supply may use busbars, internal connections or separate feeders. A fixed pair of supply CTs cannot necessarily cover all current at a permitted installation point.
 
-下面按电表后的连接方式对照，说明前面 200A 案例的问题如何出现在其他布局中。
+The table below compares these downstream connection structures and shows how the 200A example's coverage problem can occur elsewhere.
 
-| 电表后的连接方式 | 对一对供电 CT 的影响 | 产品或结构参考 |
+| Connection downstream of the meter | Effect on one pair of supply CTs | Product or structural reference |
 | --- | --- | --- |
-| 汇总为一对 L1/L2 导线，再连接全屋配电箱 | 若这一对导线可接近，CT 可以直接测整体电流 | 200A 独立配电箱，例如 [Eaton CHM42PN200](https://www.eaton.com/us/en-us/skuPage.CHM42PN200.html)，由一对馈线供电的接线方式 |
-| 通过母排或内部连接件直接接到配电部分 | 没有普通夹式 CT 可套住的电缆段；完整测量点可能位于受限制的电表侧 | 图 2 的主断路器与母排结构 |
-| 多组导线分别转接到用户侧 | 同相导线分开布置，现有 CT 可能只能夹到其中一组 | 图 1 的 200A 一体式电表配电箱案例 |
-| 分成独立供电分支，进入不同隔间或配电箱 | 只夹一个分支就会漏掉另一个；需要覆盖两路或在共同上游测量 | 图 3 的 Class 320 / 400A 双 200A 主断路器；电表后连接两个独立 200A 配电箱也有同样的覆盖要求 |
+| Conductors join into one L1/L2 pair feeding the home's panel | If this pair is accessible, the CTs can measure the whole supply | A separate 200A panel such as [Eaton CHM42PN200](https://www.eaton.com/us/en-us/skuPage.CHM42PN200.html), supplied by one feeder pair |
+| Busbars or internal connections feed the distribution section directly | No ordinary cable segment is available for clamp CTs; the complete measurement point may be on the restricted meter side | Main-breaker/busbar structure in Figure 2 |
+| Multiple conductor groups feed the customer side separately | Same-phase conductors are separated; existing CTs may cover only one group | The integrated 200A meter/panel enclosure in Figure 1 |
+| Independent supply branches feed different compartments or panels | Measuring one branch misses the other; both branches or a common upstream point must be covered | Class 320 / 400A service with dual 200A main breakers in Figure 3; two separate 200A panels downstream of one meter have the same coverage requirement |
 
-单个 400A 主断路器的结构，还需要考虑粗导线、多根同相导体与 CT 开口尺寸。[Eaton 的 Class 320 meter-main 系列](https://www.eaton.com/us/en-us/catalog/low-voltage-power-distribution-controls-systems/b-line-series-meter-breakers.html)同时提供单个 400A 主断路器和双 200A 主断路器配置，说明相近供电容量可以采用不同的转接结构。
+A single 400A main-breaker arrangement also requires consideration of large conductors, multiple same-phase conductors and CT opening dimensions. The [Eaton Class 320 meter-main family](https://www.eaton.com/us/en-us/catalog/low-voltage-power-distribution-controls-systems/b-line-series-meter-breakers.html) includes both single 400A and dual 200A main-breaker configurations, showing that similar service capacities can use different connection structures.
 
-<img src="../site/assets/ct-busbar-connection.png" width="620" alt="主断路器直接连接母排，两者之间没有可供普通夹式 CT 套住的电缆段">
+<img src="../site/assets/ct-busbar-connection.png" width="620" alt="Main breaker connected directly to busbars, without a cable segment between them for an ordinary clamp CT">
 
-*图 2：主断路器直接连接母排，中间没有可供普通夹式 CT 套住的电缆。若上游有可接近、供给全屋的 L1/L2 进线，则可在进线上测量。仅说明结构限制，不代表实际接线。*
+*Figure 2: The main breaker connects directly to busbars, without an ordinary cable segment between them for a clamp CT. Accessible upstream L1/L2 conductors supplying the whole home could provide a measurement point. This illustrates a structural limitation, not actual wiring.*
 
-<img src="../site/assets/ct-dual-branch.png" width="620" alt="两个独立的 200A 供电分支分别供给各自负载，只测分支 A 会漏掉分支 B">
+<img src="../site/assets/ct-dual-branch.png" width="620" alt="Two independent 200A supply branches feed separate loads; measuring branch A misses branch B">
 
-*图 3：两个独立供电分支，CT 如果只测其中一个，就没有覆盖另一个独立变化的负载。图 1 强调同柜排列与夹持空间，图 3 强调分支覆盖。产品结构可参考 [Siemens 官方接线与尺寸资料](https://cache.industry.siemens.com/dl/files/224/109800224/att_1074558/v1/SIE_FL_230-71_MeterMain.pdf)所列双 200A 主断路器系列（320A 连续、400A 最大额定值）；示意图不复刻该产品。*
+*Figure 3: Two independent supply branches. Measuring only one misses the other independently varying load. Figure 1 emphasizes conductor arrangement and clamp space; Figure 3 emphasizes branch coverage. The [official Siemens wiring and dimension reference](https://cache.industry.siemens.com/dl/files/224/109800224/att_1074558/v1/SIE_FL_230-71_MeterMain.pdf) lists dual 200A main-breaker models rated for 320A continuous / 400A maximum service. This illustration does not reproduce a product.*
 
-这些布局会使固定 CT 的安装反复遇到同一个限制：**完整电流所在的位置不能安装，能够安装的位置又只有部分电流，或根本没有可夹的导线。** 所以，装了用电监控模块，也不能默认它已经准确测到全屋 Load；需要对照电表验证，才能判断读数是否有偏差。
+These layouts can leave a fixed CT configuration with the same limitation: **the location carrying all current is unavailable for installation, while an available location carries only part of the current or has no conductor the clamp can enclose.** Installing a consumption-monitoring module does not by itself establish accurate whole-home Load measurement. Compare against the utility meter to identify any bias.
 
-## 400A 系统的计量配置
+## Metering configuration for 400A services
 
-**SunPower 在 400A 住宅供电系统中提供多少 CT、如何汇总多个供电路径，目前待确认。** 本文的四个 CT 配置来自上述 200A 住宅案例。
+**The number of CTs SunPower provides for a 400A residential service, and how it combines multiple supply paths, remain unconfirmed.** The four-CT configuration described here comes from the 200A example.
 
-Sense 可作为对照：[其 400A split-service 安装指南](https://help.sense.com/hc/en-us/articles/25272076608659-Installation-Guide-Sense-With-400A-Split-Service)使用主 CT 测一个 200A 配电箱，再用第二对 Flex CT 测另一个。第二对接入的中间接口，也是 Sense Solar 使用的接口。因此，该方案的“支持 400A”不能直接推断为同时支持两路供电和独立太阳能测量。
+For comparison, the [Sense 400A split-service installation guide](https://help.sense.com/hc/en-us/articles/25272076608659-Installation-Guide-Sense-With-400A-Split-Service) uses the main CTs on one 200A panel and a second Flex CT pair on the other. The second pair uses the same intermediate connection as Sense Solar. Support for 400A service in that configuration therefore does not establish simultaneous support for both supply branches and separate solar measurement.
 
-## 比例校准的依据与作用
+## What proportional calibration can correct
 
-安装位置受限时，监控需要从已测到的部分电流估算整体。校准模块提供一个可调整的比例，用电表数据验证和修正稳定偏差，使电网与家庭用电显示更接近实际。
+When installation limits coverage, monitoring must estimate the total from the measured current. The calibration setting provides an adjustable ratio to correct a stable bias verified against utility-meter data, bringing displayed grid flow and estimated home consumption closer to actual values.
 
-[Continental Control Systems 的原始说明](https://ctlsys.com/support/measuring-parallel-conductors/)给出了部分并联导体测量的换算方法：按总导体数 / 测量导体数放大读数。它也指出，长度和连接差异可能导致分流不均，所以仅测一根导体再按根数放大，仍可能长期偏高或偏低。
+[Continental Control Systems](https://ctlsys.com/support/measuring-parallel-conductors/) describes scaling a measurement of some parallel conductors by total conductor count divided by measured conductor count. It also explains that conductor length and connection differences can produce unequal current sharing. Measuring one conductor and scaling by count can therefore remain consistently high or low.
 
-例如两根并联导线分别通过 37A、43A，总电流为 80A。只测 37A 再乘二，得到 74A，仍低了 7.5%。这个假设示例说明：实际修正比例需要与电表对照，不能仅凭两组导线就固定为两倍。
+For example, parallel conductors carrying 37A and 43A have a total current of 80A. Measuring only 37A and doubling gives 74A, still 7.5% low. This hypothetical example shows why the actual correction ratio needs comparison with the meter; two conductor groups alone do not justify a fixed multiplier of two.
 
-如果漏测的是双配电箱中的独立负载分支，其用电会随另一侧设备开关而变化，固定比例无法补出这部分数据。比例校准适用于经过验证的稳定偏差。
+If the missing measurement is an independent load branch feeding another panel, its use changes as equipment on that branch turns on and off. A fixed ratio cannot reconstruct that data. Proportional calibration applies to a verified, stable bias.
 
-## 电表对照与校准设置
+## Compare against the utility meter and set calibration
 
-当安装受限、数据与电表不一致时，先对照同一时间范围的电网电量，验证是否存在稳定的比例偏差，再设置校准。电力公司的购电 / 售电或净电量，应与项目的电网数据比较；有太阳能时，电网净电量不等于家庭总用电。
+When installation coverage is limited and readings differ from the utility meter, compare grid energy over matching time ranges to establish whether the proportional bias is stable before applying calibration. Compare utility import/export or net energy with this project's grid data. With solar, net grid energy is not total home consumption.
 
-1. 对齐电力公司数据与 PVS 记录的时区、时间边界和进出电方向，将记录的功率按时间积分为相同区间的电量（kWh）。
-2. 使用多个完整、净电量足够的区间，排除数据缺口、接近零及大量购售电互相抵消的区间，估计 **PVS 电网电量 ÷ 电表电网电量** 的稳定比例。
-3. 在 **Settings → Grid calibration → PVS / utility grid flow (%)** 填入比例，点击 **Save calibration**，刷新 Live / History。
-4. 用其他日期、不同负载及有代表性的购电 / 售电时段复核；比例若明显变化，应继续核查测量覆盖范围。
+1. Align utility data and PVS records by time zone, interval boundaries and import/export direction. Integrate recorded power over time into energy for the same interval, in kWh.
+2. Use multiple complete intervals with sufficient net energy. Exclude gaps, near-zero intervals and intervals where substantial imports and exports cancel each other. Estimate a stable **PVS grid energy / utility-meter grid energy** ratio.
+3. Enter the ratio in **Settings → Grid calibration → PVS / utility grid flow (%)**, click **Save calibration**, and refresh Live / History.
+4. Cross-check other dates, load conditions and representative import/export periods. If the ratio changes substantially, investigate measurement coverage further.
 
-例如，对照后得到的比例是 50%，就填 **50%**。项目会将电网读数除以 0.5，并把同一修正量加到家庭用电估算中；不会把包含太阳能贡献的整个 Load 一律乘二。100% 表示不修正，目前输入范围为 10%–200%。
+For example, enter **50%** when the measured ratio is 50%. The project divides grid readings by 0.5 and adds the same correction to estimated home consumption; it does not double the entire Load, which also includes solar contribution. A value of 100% applies no correction. The accepted range is currently 10%–200%.
 
-校准影响 Live / History 的电网和家庭用电显示估算，适用于历史及后续数据。太阳能发电、单块面板读数及原始存储记录保持不变。页面不自动导入电力公司数据。
+Calibration affects the displayed grid flow and home-use estimates in Live / History, including historical and subsequent data. Solar production, individual panel readings and stored raw records remain unchanged. The page does not import utility data automatically.
 
-**校准能改善稳定的比例偏差，但无法补出独立变化的漏测负载。** 如果两路负载无法被完整覆盖，或存在 CT 方向、相位配对等安装问题，需要先核查计量配置。
+**Calibration can improve a stable proportional bias, but cannot reconstruct an independently varying unmeasured load.** If both branches cannot be covered, or CT orientation or phase pairing is wrong, investigate the metering configuration first.
 
-## 资料与图片
+## Sources and illustrations
 
-本文以一套 200A 住宅入户供电系统及其 SunPower 配套计量模块为案例。三张图是为本项目生成的原创概念示意图，未使用产品照片作为输入，不表示真实设备尺寸、接线或安装步骤。产品链接仅用于查阅结构资料。
+This guide uses one 200A residential service and its SunPower metering module as an example. The three illustrations are original conceptual diagrams generated for this project without product photographs as inputs. They do not show actual equipment dimensions, wiring or installation steps. Product links provide structural references only.
 
-- [并联导体测量原理：Continental Control Systems](https://ctlsys.com/support/measuring-parallel-conductors/)
-- [Sense Solar 安装指南](https://help.sense.com/hc/en-us/articles/25275207683603-Installation-Guide-Sense-Solar)
-- [Sense 400A split-service 安装指南](https://help.sense.com/hc/en-us/articles/25272076608659-Installation-Guide-Sense-With-400A-Split-Service)
-- 产品资料见各图说明与布局表。公开资料核对于 2026-09-30。
+- [Parallel-conductor measurement: Continental Control Systems](https://ctlsys.com/support/measuring-parallel-conductors/)
+- [Sense Solar installation guide](https://help.sense.com/hc/en-us/articles/25275207683603-Installation-Guide-Sense-Solar)
+- [Sense 400A split-service installation guide](https://help.sense.com/hc/en-us/articles/25272076608659-Installation-Guide-Sense-With-400A-Split-Service)
+- Product references appear in the figure captions and layout table. Public sources were reviewed on 2026-09-30.

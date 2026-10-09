@@ -1,58 +1,58 @@
 # Local preview with simulated data
 
-在线体验：[项目介绍](https://crabty.github.io/sunpower_monitor/) · [只读模拟 Demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day)。以下步骤用于本地开发与复现。
+Try the [project introduction](https://crabty.github.io/sunpower_monitor/) or [read-only simulated demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day) online. The steps below describe local development and reproduction.
 
-这套预览直接加载当前工作树的 `web/` 页面，用固定的模拟 API 数据检查 Live、History、Panels 和 Settings。它**没有从线上 D1 数据库导出真实历史**，也不会请求或修改线上 API。适合反复比较页面状态；不能用来判断真实产量或验证数据库查询。
+The preview loads the current worktree's `web/` pages with fixed simulated API data for Live, History, Panels and Settings. It **does not export real history from the production D1 database** or request or modify production APIs. Use it to compare page states repeatedly; it cannot establish actual production or validate database queries.
 
-## 启动
+## Start the preview
 
-使用 Node.js 22.5+，在仓库根目录安装依赖后启动：
+Use Node.js 22.5 or newer. Install dependencies and start from the repository root:
 
 ```sh
 npm ci
 npm run preview
 ```
 
-打开 <http://127.0.0.1:4173/>。顶部提示栏标明 `Simulated data · local review`，可切换场景；选中的场景会保存在当前浏览器，切换页面时继续生效。若 4173 端口被占用，可运行 `PORT=4174 npm run preview` 并打开对应端口。退出用 `Ctrl-C`。
+Open <http://127.0.0.1:4173/>. The top banner says `Simulated data · local review` and lets you select a scenario. The browser keeps that selection across page navigation. If port 4173 is occupied, run `PORT=4174 npm run preview` and open the corresponding port. Stop with `Ctrl-C`.
 
-| 场景 | 固定时间（站点时区 America/Los_Angeles） | Review 重点 |
+| Scenario | Fixed time in America/Los_Angeles | What to review |
 | --- | --- | --- |
-| Night | 2026-09-23 00:45 PDT | 夜间微小读数、Live/History 的 0.5 kW 最低刻度、Panels 等待日光 |
-| Day | 2026-09-22 14:00 PDT | 正常日间曲线、21 块面板中的 19 块产出与 2 块未上报 |
-| Day without output | 2026-09-22 14:00 PDT | 白天已有采样但零产出，与 Night 的“尚未到采样时间”对照 |
+| Night | 2026-09-23 00:45 PDT | Tiny nighttime readings, the 0.5 kW minimum Live/History scale, and Panels waiting for daylight |
+| Day | 2026-09-22 14:00 PDT | Normal daytime curves, with 19 of 21 panels producing and two not reporting |
+| Day without output | 2026-09-22 14:00 PDT | Daytime samples with zero output, compared with Night before the day's sampling begins |
 
-也可直接访问 `/?scenario=night`、`/?scenario=day`、`/?scenario=idle` 切换。然后用页面导航进入 History 或 Panels。
+You can also select a scenario directly with `/?scenario=night`, `/?scenario=day` or `/?scenario=idle`, then navigate to History or Panels.
 
-## 数据范围与实现
+## Data coverage and implementation
 
-- 模拟数据从 2026-08-24 00:00 PDT 开始，按分钟生成站点功率与累计电量，按五分钟生成面板读数，并提供逐小时天气、日出日落和日照时长。History 的 1 分钟、5 分钟、每日视图都使用这批数据。
-- 2026-09-19 的云层让产量降低；2026-09-21 10:30–11:05 PDT 有一段源数据错误，供检查历史缺口。Night 包含会显示为 `0.0 kW` 的极小夜间读数。
-- 预览服务器在 [`scripts/preview/preview.mjs`](../scripts/preview/preview.mjs)；数据生成、固定时钟和 `/api/v1/*` 浏览器内替身在 [`scripts/preview/preview-client.js`](../scripts/preview/preview-client.js)。页面仍读取当前 `web/` 文件，修改前端后刷新即可看到效果。
-- 这份数据覆盖约 30 天；可检查 Today、Week、Month 和指定日期。Year 仍只有这段模拟记录，页面会标明未覆盖的时间。预览固定为 PDT，不用于检查夏令时切换。
+- Simulated data starts on 2026-08-24 at 00:00 PDT. It generates site power and cumulative energy every minute, panel readings every five minutes, and hourly weather, sunrise/sunset and sunshine duration. History's minute, five-minute and daily views use the same data.
+- Clouds reduce output on 2026-09-19. A source-error interval on 2026-09-21 from 10:30 to 11:05 PDT exercises history gaps. Night includes tiny readings displayed as `0.0 kW`.
+- The server is [`scripts/preview/preview.mjs`](../scripts/preview/preview.mjs). Data generation, the fixed clock and in-browser `/api/v1/*` replacements are in [`scripts/preview/preview-client.js`](../scripts/preview/preview-client.js). Pages load the current `web/` files, so refresh after editing the frontend.
+- The dataset covers about 30 days for Today, Week, Month and custom-date checks. Year still has only that simulated coverage, and the page identifies missing periods. The fixed PDT preview does not test daylight-saving transitions.
 
-运行 `npm run check:preview` 可检查三个场景和面板数据一致性；`npm run check` 运行仓库的全部检查。
+Run `npm run check:preview` to check the three scenarios and panel-data consistency. `npm run check` runs the repository's full set of checks.
 
-## 项目介绍站点
+## Project introduction
 
-同一服务器的 `/introduction/` 提供公开介绍、开始使用、方案对比和项目说明四页；`?lang=en` 切换英文。源码位于独立的 `site/` 目录，站点使用 `site/assets/` 的模拟界面截图，不访问家庭数据。
+The same server exposes four public pages under `/introduction/`: overview, getting started, comparison and project details. They remain bilingual; `?lang=en` selects English and `?lang=zh` selects Chinese. Source lives separately in `site/`, using simulated interface screenshots from `site/assets/` without accessing household data.
 
-## 可直接托管的演示产物
+## Static demo artifact
 
 ```sh
 npm run build:site
 python3 -m http.server 4174 --bind 127.0.0.1 --directory dist/site
 ```
 
-打开 <http://127.0.0.1:4174/>，从介绍页进入 Demo。`dist/site/` 是可删除、可重新生成的静态产物，不是第二套源代码；既可托管在域名根路径，也可托管在 GitHub Pages 的项目子路径。部署平台只需发布该目录，域名和 GitHub About 的 Website 地址在真正发布后设置。
+Open <http://127.0.0.1:4174/> and enter the demo from the introduction. `dist/site/` is a disposable, reproducible build artifact, not another source tree. It can be hosted at a domain root or a GitHub Pages project subpath. Publish that directory; configure the domain and GitHub About website address after verifying publication.
 
-Demo 复用 `web/` 和同一份模拟数据，所有 API 均在浏览器内响应，不连接 PVS 或 Cloudflare。未模拟的网络请求被拒绝，Settings 控件与定位禁用；显示的坐标是旧金山市中心示例。生产仪表盘仍需登录，并使用用户自己的部署和数据。
+The demo reuses `web/` and the same simulated data. All APIs respond inside the browser without connecting to a PVS or Cloudflare. Unmocked network requests are rejected, and Settings controls and geolocation are disabled. Displayed coordinates are an example at the center of San Francisco. The production dashboard requires login and uses each owner's deployment and data.
 
 ### GitHub Pages
 
-介绍站与模拟 Demo 使用同一仓库的 `.github/workflows/pages.yml`，只发布生成的 `dist/site/`。无需另建源码仓库、提交生成文件或维护 `gh-pages` 分支。
+The introduction and simulated demo use this repository's `.github/workflows/pages.yml`, which publishes only generated `dist/site/`. No separate source repository, committed build output or `gh-pages` branch is needed.
 
-本仓库已使用免费的 GitHub Pages 上线，**Settings → Pages → Source** 为 **GitHub Actions**。若在自己的仓库复现，需先满足 GitHub Pages 的套餐/可见性要求并选择相同发布来源；工作流不会改变仓库可见性，也不自动启用 Pages。
+This repository is already published on GitHub Pages with **Settings → Pages → Source** set to **GitHub Actions**. For your own repository, first meet the applicable Pages plan/visibility requirements and select the same publishing source. The workflow does not change repository visibility or enable Pages automatically.
 
-Actions 中手动运行 `pages`，不勾选 `publish` 可验证安全检查、构建与临时 Pages artifact；勾选后才执行托管。首次上线后，公开仓库中影响站点的 main 更新会自动发布，安全检查失败时不会发布。私有仓库的 push 只验证构建，不自动发布。
+A manual `pages` run with `publish` unchecked verifies security checks, the build and a temporary Pages artifact. Checking `publish` also publishes the site. After initial publication, relevant `main` updates in a public repository publish automatically; failed security checks block publication. Pushes in private repositories validate the build without automatic publication.
 
-本仓库首页为 `https://crabty.github.io/sunpower_monitor/`，Demo 位于 `demo/`；README 与 GitHub About 使用已验证地址。若在其他仓库部署，以工作流返回的实际 `page_url` 验证链接。GitHub Pages 不读取 Cloudflare 的 `_headers` 文件；Demo 的网络限制通过 HTML CSP 和浏览器内替身实现，设置与真实定位仍禁用。
+The homepage is `https://crabty.github.io/sunpower_monitor/`, with the demo under `demo/`. README and GitHub About use those verified addresses. For another repository, verify links against the workflow's actual `page_url`. GitHub Pages does not read Cloudflare's `_headers`; the demo's network restrictions use HTML CSP and browser replacements, while settings and real geolocation remain disabled.

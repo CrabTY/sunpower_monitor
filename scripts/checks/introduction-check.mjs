@@ -26,7 +26,7 @@ assert.equal(setupSections.at(-1), 'calibration');
 for (const name of ['index.html', 'getting-started.html']) {
   const requirements = pages[name].match(/<dl class="requirements preparation-list">([\s\S]*?)<\/dl>/)[1];
   assert.equal((requirements.match(/<dt>/g) || []).length, 3, 'Only three actual prerequisites');
-  for (const term of ['24 小时', 'Cloudflare', 'GitHub']) assert.ok(requirements.includes(term));
+  for (const term of ['An always-on machine', 'Cloudflare', 'GitHub']) assert.ok(requirements.includes(term));
 }
 assert.doesNotMatch(guide, /chatgpt\.com\/c\//);
 for (const [, asset] of guide.matchAll(/src="([^"]+)"/g)) {
@@ -52,9 +52,12 @@ const internal = link('getting-started.html#first-use');
 const external = link('https://github.com/CrabTY/sunpower_monitor');
 const option = { dataset: { en: 'Home Assistant', zh: 'Home Assistant' } };
 const bodyClasses = new Set();
+const titleEn = pages['index.html'].match(/data-title-en="([^"]+)"/)[1];
+const titleZh = pages['index.html'].match(/data-title-zh="([^"]+)"/)[1];
+assert.notEqual(titleEn, titleZh, 'The website retains distinct English and Chinese titles');
 let language;
 const document = {
-  documentElement: { dataset: { titleEn: 'PVS6 energy history', titleZh: 'PVS6 的能源历史' }, style: { setProperty() {} }, classList: { add() {}, remove() {} }, get lang() { return language; }, set lang(value) {
+  documentElement: { dataset: { titleEn, titleZh }, style: { setProperty() {} }, classList: { add() {}, remove() {} }, get lang() { return language; }, set lang(value) {
     if (language && language !== value) { sections.forEach(s => { s.top += 300; }); header.height = value === 'en' ? 76 : 100; }
     language = value;
   } },
@@ -80,7 +83,7 @@ assert.equal(external.attrs.href, 'https://github.com/CrabTY/sunpower_monitor');
 const offset = sections[0].top - header.height - 24;
 buttons[0].click();
 assert.equal(language, 'zh-CN');
-assert.equal(document.title, 'SunPower Monitor · PVS6 的能源历史');
+assert.equal(document.title, 'SunPower Monitor · ' + titleZh);
 assert.equal(new URL(window.location.href).hash, '#calibration');
 assert.equal(new URL(internal.attrs.href).searchParams.get('lang'), 'zh');
 assert.equal(sections[0].top - header.height - 24, offset, 'Language switch keeps reading position');
