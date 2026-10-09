@@ -75,6 +75,7 @@ class Collector:
         self._panel_count = 0
         self._panels_fresh = 0
         self._health: dict = {}
+        self._uptime_observation: tuple[float, float] | None = None
         self._last_sample_at: datetime | None = None
         self._upload_open = False
         self._upload_backoff = 0.0
@@ -113,18 +114,30 @@ class Collector:
                 f"uptime={self._health_text('uptime')}",
                 f"cpu_pct={self._health_text('cpu_pct')}",
                 f"flash_pct={self._health_text('flash_pct')}",
+                f"health_age_s={self._read_age_seconds('health')}",
                 f"queue_pending={queue['pending']}",
                 f"queue_failed={queue['failed']}",
                 f"site_age_s={self._site_age_seconds()}",
-                f"panels_fresh={self._panels_fresh}",
+                f"panels_fresh={self._panels_fresh if self._group_fresh('inverters') else 0}",
+                f"panels_age_s={self._read_age_seconds('inverters')}",
                 f"groups_failed={','.join(failing) or 'none'}",
             ]
         )
         self._event("collector_heartbeat", details)
 
     def _health_text(self, name: str) -> str:
-        value = self._health.get(name)
+        value = self._health.get(name) if self._group_fresh("health") else None
         return "null" if value is None else str(int(value))
+
+    def _read_age_seconds(self, group: str) -> str:
+        observed = self._groups.get(group, {}).get("last_success")
+        return "null" if observed is None else str(max(0, int(self._monotonic() - observed)))
+
+    def _group_fresh(self, group: str) -> bool:
+        state = self._groups.get(group, {})
+        observed = state.get("last_success")
+        return (observed is not None and not state.get("error")
+                and self._monotonic() - observed <= 2 * self.intervals[group])
 
     def _site_age_seconds(self) -> str:
         if self._last_sample_at is None:
@@ -195,12 +208,15 @@ class Collector:
         except (PVSError, ValueError) as exc:
             state["failures"] += 1
             state["error"] = type(exc).__name__
+            diagnostics = exc.diagnostics if isinstance(exc, PVSError) else {"reason": "parse", "stage": "read"}
+            if group == "inverters":
+                self._panels_fresh = 0
             if not state["open_event"]:
                 state["open_event"] = True
-                self._event("pvs_request_failed", f"{group}:{type(exc).__name__}")
-            self._log_line(event="read_failed", group=group, error=type(exc).__name__, failures=state["failures"])
+                details = ",".join(f"{key}={value}" for key, value in diagnostics.items())
+                self._event("pvs_request_failed", f"{group}:{type(exc).__name__},{details}")
+            self._log_line(event="read_failed", group=group, error=type(exc).__name__, failures=state["failures"], **diagnostics)
             if state["failures"] >= COOLDOWN_FAILURES:
-                state["failures"] = 0
                 self._due[group] = self._monotonic() + COOLDOWN_SECONDS
                 self._log_line(event="cooldown", group=group, seconds=COOLDOWN_SECONDS)
         else:
@@ -209,6 +225,7 @@ class Collector:
                 self._event("pvs_recovered", group)
             state["failures"] = 0
             state.pop("error", None)
+            state["last_success"] = self._monotonic()
 
     def _read_site(self) -> None:
         data, latency = self.pvs.read_site()
@@ -257,16 +274,28 @@ class Collector:
 
     def _read_health(self) -> None:
         data, latency = self.pvs.read_health()
+        observed_mono, observed_at = self._monotonic(), self._now()
         health = {
             "uptime": model.finite_number(data.get("/sys/info/uptime")),
             "cpu_pct": model.finite_number(data.get("/sys/info/cpu_usage")),
             "flash_pct": model.finite_number(data.get("/sys/info/flash_usage")),
         }
-        if model.pvs_uptime_regressed(self._health, health):
+        uptime = health["uptime"]
+        if uptime is not None and not 0 <= uptime <= observed_at.timestamp():
+            health["uptime"] = uptime = None
+        previous = self._uptime_observation
+        restarted = model.pvs_uptime_regressed(
+            {"uptime": previous[0]} if previous else {}, health,
+            elapsed_seconds=observed_mono - previous[1] if previous else None,
+        )
+        if uptime is not None:
+            self._uptime_observation = (uptime, observed_mono)
+        self._health = health
+        boot_ts = to_iso(observed_at - timedelta(seconds=uptime)) if uptime is not None else None
+        self._log_line(event="health_read", ts=to_iso(observed_at), latency_ms=latency, boot_ts_utc=boot_ts, **health)
+        if restarted:
             self._event("pvs_restarted", "uptime_reset")
             self.pvs.authenticate()
-        self._health = health
-        self._log_line(event="health_read", latency_ms=latency, **health)
 
     # -- panels ------------------------------------------------------------
     def _record_panels(self, panels: list, collected_at: datetime) -> None:
@@ -391,7 +420,7 @@ def check_reads(host: str, log=print) -> int:
             log(f"site balance_check load_minus_known_sources={round(balance - derived, 4)}")
     except PVSError as exc:
         failures += 1
-        log(f"site FAILED {type(exc).__name__}")
+        log(f"site FAILED {type(exc).__name__} " + json.dumps(exc.diagnostics, sort_keys=True))
     for name, reader, parse in (
         ("meters", pvs.read_meters, model.parse_meters),
         ("inverters", pvs.read_inverters, model.parse_panels),
@@ -400,7 +429,7 @@ def check_reads(host: str, log=print) -> int:
             data, latency = reader()
         except PVSError as exc:
             failures += 1
-            log(f"{name} FAILED {type(exc).__name__}")
+            log(f"{name} FAILED {type(exc).__name__} " + json.dumps(exc.diagnostics, sort_keys=True))
             continue
         devices = parse(data)
         log(f"{name} ok latency_ms={latency} devices={len(devices)} path_fields={len(data)}")
@@ -414,7 +443,7 @@ def check_reads(host: str, log=print) -> int:
         log(f"health ok latency_ms={latency} " + json.dumps(data, sort_keys=True))
     except PVSError as exc:
         failures += 1
-        log(f"health FAILED {type(exc).__name__}")
+        log(f"health FAILED {type(exc).__name__} " + json.dumps(exc.diagnostics, sort_keys=True))
     log(f"check finished failures={failures} stored=no")
     return failures
 
@@ -429,7 +458,8 @@ def connect_pvs(host: str, *, log=print, sleep=time.sleep, client=PVSClient, dea
             wait = delay if deadline is None else min(delay, max(0.0, deadline - monotonic()))
             if wait <= 0:
                 break
-            log(json.dumps({"event": "pvs_unavailable", "error": type(exc).__name__, "retry_in_seconds": wait}, sort_keys=True))
+            log(json.dumps({"event": "pvs_unavailable", "error": type(exc).__name__, "retry_in_seconds": wait,
+                            **exc.diagnostics}, sort_keys=True))
             sleep(wait)
             delay = min(delay * 2, MAX_STARTUP_BACKOFF_SECONDS)
     return None

@@ -1,6 +1,7 @@
 """Adapter tests: authentication, focused queries, parsing, and quality."""
 
 import base64
+import errno
 import http.cookiejar
 import io
 import json
@@ -261,6 +262,33 @@ class AuthenticationTests(unittest.TestCase):
         with self.assertRaises(PVSError):
             pvs.read_meters()
 
+    def test_safe_failure_diagnostics_distinguish_http_transport_and_json(self):
+        cases = [
+            (http_error(400, b"private response"), "http", {"http_status": 400}),
+            (TimeoutError("private timeout"), "timeout", {}),
+            (urllib.error.URLError(OSError(errno.EHOSTUNREACH, "private route")), "transport", {"errno": errno.EHOSTUNREACH}),
+            (b"private non-JSON response", "invalid_json", {}),
+        ]
+        for response, reason, expected in cases:
+            with self.subTest(reason=reason):
+                pvs, opener, _ = make_client(routes())
+                opener.routes["/vars?match=meter&fmt=obj&cache=mdata"] = response
+                with self.assertRaises(PVSError) as caught:
+                    pvs.read_meters()
+                details = caught.exception.diagnostics
+                self.assertEqual(details["reason"], reason)
+                self.assertEqual(details["stage"], "read")
+                self.assertGreaterEqual(details["latency_ms"], 0)
+                for key, value in expected.items():
+                    self.assertEqual(details[key], value)
+                self.assertNotIn("private", json.dumps(details))
+
+    def test_login_failure_retains_safe_auth_diagnostics(self):
+        with self.assertRaises(PVSError) as caught:
+            make_client(routes(**{"/auth?login": http_error(403)}))
+        self.assertEqual(caught.exception.diagnostics["stage"], "auth")
+        self.assertEqual(caught.exception.diagnostics["http_status"], 403)
+
 
 class ParsingTests(unittest.TestCase):
     def test_site_units_signs_and_missing_values(self):
@@ -351,6 +379,13 @@ class ParsingTests(unittest.TestCase):
         self.assertTrue(model.pvs_uptime_regressed({"uptime": 500}, {"uptime": 12}))
         self.assertFalse(model.pvs_uptime_regressed({"uptime": 500}, {"uptime": 600}))
         self.assertFalse(model.pvs_uptime_regressed({}, {"uptime": 12}))
+
+    def test_restart_detection_across_a_long_observation_gap(self):
+        previous = {"uptime": 3600}
+        self.assertTrue(model.pvs_uptime_regressed(previous, {"uptime": 7199}, elapsed_seconds=7200))
+        self.assertFalse(model.pvs_uptime_regressed(previous, {"uptime": 10800}, elapsed_seconds=7200))
+        self.assertFalse(model.pvs_uptime_regressed(previous, {"uptime": 10792}, elapsed_seconds=7200))
+        self.assertFalse(model.pvs_uptime_regressed(previous, {"uptime": None}, elapsed_seconds=7200))
 
 
 if __name__ == "__main__":
