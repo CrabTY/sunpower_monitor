@@ -35,6 +35,25 @@ Only the collector talks to the PVS. It initiates outbound uploads; the cloud an
 
 The default read intervals in [collector/main.py](../collector/main.py) are 10 seconds for site power, 30 seconds for meters, and 300 seconds for inverters and health. These are polling intervals, not guarantees that every firmware produces a new measurement at that rate.
 
+After three consecutive failures, only the failing group waits 60 seconds after
+each failed attempt until a read succeeds. Success restores its normal interval.
+Failed-read logs and collector event details retain fixed reason/stage labels,
+HTTP status, numeric errno and request duration where available; they exclude
+arbitrary exception text, response bodies and credentials.
+
+Heartbeats include `health_age_s` and `panels_age_s`, measured from the last
+successful group read. Failed or older-than-two-interval health values are null;
+the corresponding fresh panel count is zero. A missing age is reported as null.
+Panel freshness counts newly queued rows from the latest successful inverter
+read; it is not the array's installed panel count.
+
+Restart detection compares uptime progression with monotonic elapsed observation
+time, allowing 15 seconds for query latency and rounding. This can detect a
+restart across a long outage even when the new uptime exceeds the previous one.
+Health observation time and estimated `boot_ts_utc` are logged before
+reauthentication; missing or invalid uptime never replaces the valid baseline.
+The boot timestamp is an estimate, not a complete history of offline restarts.
+
 Two upload paths have different recovery behavior:
 
 - Latest site snapshots are sent to `PUT /api/v1/live` and replace the cloud latest-value row. They are not durably queued or replayed after an outage.
