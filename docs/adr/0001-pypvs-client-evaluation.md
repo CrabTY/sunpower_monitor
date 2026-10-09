@@ -1,6 +1,6 @@
 # ADR-0001: Evaluate PyPVS for the collector
 
-**Status:** Accepted: retain the current client and absorb documented compatibility information. SDK migration not implemented; compatibility follow-up implemented on `feature/pvs-compatibility`.
+**Status:** Accepted: retain the current client and absorb documented compatibility information. SDK migration not implemented; compatibility follow-up implemented on `feature/pvs-compatibility` and deployed/tested on Raspberry Pi with PVS6 `61846`.
 **Date:** 2026-10-09.
 **Project baseline:** `47970446abe6ecdc23711d07ca668e88cc28531a`.
 
@@ -107,7 +107,7 @@ rather than an assumed SDK firmware translation layer.
 The shared field contract makes newer PVS5 and other documented PVS6 builds
 credible compatibility candidates without a parser rewrite or SDK dependency.
 Normalization and capability reporting are now tested with synthetic cases.
-Next work should obtain read-only hardware evidence for authentication,
+For additional gateways/firmware, next work should obtain read-only hardware evidence for authentication,
 actual response shape, source freshness and complete device membership. Official
 LocalAPI examples include nested `/sys/devices/{id}/inverter/data` objects,
 whereas the baseline parser and current SDK updaters use flat
@@ -251,12 +251,12 @@ ingest integration tests skipped because `INGEST_LOCAL_URL`/`INGEST_TOKEN`
 were not supplied. SDK transport behavior is covered by our additional
 loopback checks, rather than inferred from the upstream model tests.
 
-The SDK/venv checkout and local outputs are ignored. The initial investigation
-changed no runtime dependency, production client, installer, collector process,
-cloud database or Worker. The compatibility follow-up changes the collector but
-adds no SDK dependency and is not deployed. No request reached a real PVS. Firmware-specific POST behavior,
-certificate/session-cookie edge cases, long-running reliability and actual
-adapter code savings remain unverified.
+The SDK/venv checkout and local outputs are ignored. The initial SDK investigation
+used only a loopback server and changed no production client or deployment.
+The compatibility follow-up adds no SDK dependency and was subsequently deployed
+and tested on Raspberry Pi using our client, as described below. SDK-specific
+POST behavior on real firmware, certificate/session-cookie edge cases,
+long-running reliability and actual adapter code savings remain unverified.
 
 Compatibility follow-up validation: 87 project Python tests passed, two ingest
 integration tests skipped without their local service/token, and 15 released-SDK
@@ -264,3 +264,14 @@ characterization checks still passed. Installer mock flow, introduction page/
 interaction checks, static site build/check, local documentation links and
 `git diff --check` passed. The new HTTP test uses a synthetic loopback gateway
 and real urllib cookie handling; it does not validate LAN TLS or real firmware.
+
+On 2026-10-09, collector commit `4929446` passed a real PVS6
+`2025.10.20.61846` read-only check from the development host and from the ARM64
+image on Raspberry Pi. The image also passed the same 87 Python tests, with two
+local-ingest tests skipped. After deployment it completed two inverter/health
+read cycles, read two meters and 21 panels, and delivered five complete cloud
+minutes plus a new 21-panel sample with quality `ok`. The queue remained healthy
+and empty, panel identity mapping was preserved, and the container did not
+restart. This is a short acceptance window on the existing verified PVS6, not
+evidence of real PVS5 support or long-term reliability. See the
+[compatibility guide](../pvs-compatibility.md#hardware-acceptance).

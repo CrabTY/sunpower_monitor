@@ -6,7 +6,7 @@
 
 **Tech stack:** Python standard library; existing unittest suite. No runtime dependency added.
 
-**Status:** Complete. Python: 87 passed, two local-ingest integration tests skipped. Installer mock flow, static-site build/check, introduction interaction/route checks, SDK characterization and diff checks passed. No deployment or live PVS queries.
+**Status:** Implemented and deployed/tested on Raspberry Pi with PVS6 `2025.10.20.61846`. Python: 87 passed, two local-ingest integration tests skipped, both on the development host and in the ARM64 image. Installer mock flow, static-site build/check, introduction interaction/route checks, SDK characterization and diff checks passed. Real acceptance: two inverter/health cycles, two meters, 21 panels, five complete cloud minutes with quality `ok`, zero restarts/backlog, and preserved panel identity mapping. See [hardware acceptance](../pvs-compatibility.md#hardware-acceptance).
 
 ## Scope and accepted design
 
@@ -15,7 +15,7 @@
 - `collector/main.py`: report safe gateway diagnostics on startup; extend `--check` to reject unusable core site data, and report empty/partial device groups as unverified rather than claiming absence. Metadata failure does not block otherwise usable reads.
 - Tests: exercise both response shapes, malformed envelopes, nested device fields, bounded 403/errorcode recovery, safe metadata and read-check success/degradation/failure.
 - README, architecture, references and ADR: distinguish documented candidates from hardware-verified configurations; credit official API/variable tables.
-- Existing installer call, queue, cloud contracts and polling intervals remain in place. No live PVS queries or deployment during implementation.
+- Existing installer call, queue, cloud contracts and polling intervals remain in place. Initial implementation used synthetic checks; the subsequent authorized Raspberry Pi rollout added real-device acceptance.
 
 ## Steps
 

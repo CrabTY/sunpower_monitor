@@ -16,6 +16,19 @@ The [official README at the reviewed revision](https://github.com/SunStrong-Mana
 
 The [PVS5 variable table](https://github.com/SunStrong-Management/pypvs/blob/adb6a61f6f272f1171d487949ccdb43183db8479/doc/varserver-variables-public-pvs5.csv) and [PVS6 table](https://github.com/SunStrong-Management/pypvs/blob/adb6a61f6f272f1171d487949ccdb43183db8479/doc/varserver-variables-public-pvs6.csv) share our eight site/time paths, ten inverter/time/serial paths, four meter/time paths and four authentication/health paths. PVS5 marks battery power as NOT USED. A listed field or its CSV default does not prove that a device supplies a valid reading.
 
+## Hardware acceptance
+
+On 2026-10-09, collector commit `4929446` was deployed as an ARM64 image on Raspberry Pi against PVS6 `2025.10.20.61846`, without a battery. The image passed 87 Python tests; two tests needing a local ingest service were skipped. A read-only check passed before switching the running collector.
+
+During the subsequent acceptance window:
+
+- Inverter and health queries each completed two read cycles; both inverter reads returned 21 valid power/timestamp pairs. Two meters were readable.
+- The dashboard APIs confirmed five complete minute records and the next 21-panel sampling slot with quality `ok`.
+- The upload queue remained empty with integrity `ok`; all existing panel identities were preserved, and container restart count remained zero.
+- The previous image and a stopped-data/configuration backup were retained for rollback.
+
+This verifies the new collector on the existing PVS6 configuration for a short run. Other firmware and PVS5 remain candidates, and the documented alternative response shapes remain covered by synthetic tests. This rollout did not deliberately expire the real device's session or perform a long outage test.
+
 ## Implemented flow
 
 ```text

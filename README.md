@@ -166,7 +166,7 @@ This project benefited from the work shared by the following project owners and 
 
 | Project | Project owner | Contribution to this project |
 | --- | --- | --- |
-| [PyPVS and local API documentation](https://github.com/SunStrong-Management/pypvs) | [SunStrong Management](https://github.com/SunStrong-Management) | Official protocol reference for local authentication, session cookies, query/cache parameters and request-pacing guidance, cited in the compatibility and sampling explanations. |
+| [PyPVS and local API documentation](https://github.com/SunStrong-Management/pypvs) | [SunStrong Management](https://github.com/SunStrong-Management) | Official protocol reference for authentication, session cookies, queries and request pacing; PVS5/PVS6 field contracts and documented response formats informed the collector's compatibility handling. |
 | [sunpower-monitor](https://github.com/karak2112/sunpower-monitor) | [karak2112](https://github.com/karak2112) | Primary reference for 61846 authentication, focused varserver queries, parser behavior and tests; also reviewed for dashboard presentation. |
 | [SunPower-PVS-Supervisor](https://github.com/steveturbek/SunPower-PVS-Supervisor) | [steveturbek](https://github.com/steveturbek) | PVS field examples, inverter AC-power interpretation and cumulative-energy readings. |
 | [PVS Watch](https://github.com/timkatz/pvswatch) | [timkatz](https://github.com/timkatz) | Missing-energy semantics, nighttime behavior, session renewal and panel-chart references. |
