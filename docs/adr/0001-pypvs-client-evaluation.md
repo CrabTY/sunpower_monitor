@@ -9,6 +9,9 @@
 Keep the current collector client for now. Do not replace it directly with the
 unmodified PyPVS `0.2.9` release or the reviewed upstream main revision.
 Continue using and crediting SunStrong's official local API documentation.
+This is a recommendation about the SDK dependency, not a recommendation to
+limit investigation to the one tested PVS6 firmware. Broader gateway/firmware
+compatibility is a separate, valuable objective, with concrete evidence below.
 
 This recommendation follows executable compatibility checks, rather than a
 general preference against dependencies. The low-level SDK can return data to
@@ -16,6 +19,100 @@ our parser, but its request encoding and logging need changes or containment.
 Its higher-level models and update cycle also differ from our missing-data and
 failure-reporting contract. A production adapter has not been built, so no
 measured net code reduction is claimed.
+
+## Compatibility objective and proposed flow
+
+The existing flow is:
+
+```text
+Configured LAN host
+  -> PVSClient: clear cookies, read serial, derive password, GET /auth?login
+  -> Serialized GET /vars queries: livedata / meter / inverter / health
+  -> Our allowlisted parsers: units, timestamps, zero versus unknown
+  -> Live upload + minute/panel rollups -> SQLite queue -> cloud -> dashboard
+```
+
+The client uses the common varserver interface, rather than checking for build
+61846 in code. The supported-installation statement is narrower because only
+PVS6 `2025.10.20.61846` without a battery has been verified on hardware.
+
+The proposed compatibility work keeps that pipeline and adds evidence at its
+front, reusing `check_reads` rather than adding a separate installer wizard:
+
+```text
+Configured LAN host -> Existing login
+  -> Focused gateway model / software revision read
+  -> Existing group reads + check required fields and source timestamps
+  -> Report available, missing, or unverified capabilities
+  -> Same parsers, collection schedule, queue, cloud and dashboard
+```
+
+This flow is a proposal, not an implemented change. Version information should
+explain diagnostics; it should not reject every unlisted build when its required
+interface works. Conversely, HTTP 200 alone should not establish compatibility:
+the current `check_reads` can report success with partial site data or zero
+parsed devices. Optional/absent capabilities and failed reads must remain
+distinct, and a nighttime empty inverter group must not become permanent proof
+that the installation has no panels.
+
+The alternative SDK replacement would reach only the transport/login part:
+
+```text
+Existing scheduler -> PyPVS low-level client + compatibility adapter
+  -> Raw dictionary -> Our parsers -> Existing queue/cloud/dashboard
+```
+
+That adapter would preserve spacing, timeout, query parameters, safe errors and
+our recovery policy. Taking the complete SDK discovery/update/model cycle would
+replace more than transport and is unnecessary for the compatibility objective.
+
+### Concrete official compatibility evidence
+
+The [pinned official README](https://github.com/SunStrong-Management/pypvs/blob/adb6a61f6f272f1171d487949ccdb43183db8479/README.md)
+lists PVS5 minimum `2025.11`, build `5412`, and PVS6 minimum `2025.06`, build
+`61839`. The same revision's [LocalAPI document](https://github.com/SunStrong-Management/pypvs/blob/adb6a61f6f272f1171d487949ccdb43183db8479/doc/LocalAPI.md)
+instead says PVS6 `61840+`, PVS5 coming soon, and PVS2 unsupported. These sources
+are inconsistent; the README supplies a broader candidate scope, not verified
+lower firmware bounds for our project.
+
+We compared the current collector allowlists against both official CSVs at the
+same revision using Python's `csv.DictReader`:
+
+| Current requirement | [PVS5 variable table](https://github.com/SunStrong-Management/pypvs/blob/adb6a61f6f272f1171d487949ccdb43183db8479/doc/varserver-variables-public-pvs5.csv) | [PVS6 variable table](https://github.com/SunStrong-Management/pypvs/blob/adb6a61f6f272f1171d487949ccdb43183db8479/doc/varserver-variables-public-pvs6.csv) |
+| --- | --- | --- |
+| Site fields plus measurement time | 8/8 present | 8/8 present |
+| Panel fields plus measurement time and serial | 10/10 present | 10/10 present |
+| Meter fields plus measurement time | 4/4 present | 4/4 present |
+| Serial bootstrap and three health fields | 4/4 present | 4/4 present |
+| Proposed model, system type, software/hardware revision | 4/4 present | 4/4 present |
+
+All 26 currently used path patterns have matching declared types and read roles
+in both tables. PVS5's `ess_p` is explicitly marked NOT USED; its presence must
+not be treated as evidence of working storage telemetry. The timestamp
+descriptions also differ, so timestamp freshness needs behavioral validation.
+CSV defaults are declarations, not actual device readings or test fixtures.
+
+The SDK itself uses shared authentication, variable paths and device-group
+probes; it does not dispatch to per-build implementations. Despite its name,
+`PVSFirmware.setup()` reads serial/SSID/MAC, not software version. Gateway models
+read `/sys/info/model` and `/sys/info/sw_rev`. The useful ideas to absorb are
+model/revision diagnostics, capability discovery and explicit optional fields,
+rather than an assumed SDK firmware translation layer.
+
+The shared field contract makes newer PVS5 and other documented PVS6 builds
+credible compatibility candidates without a parser rewrite or SDK dependency.
+Next work should check the proposed normalization and capability reporting with
+synthetic cases, then obtain read-only hardware evidence for authentication,
+actual response shape, source freshness and complete device membership. Official
+LocalAPI examples include nested `/sys/devices/{id}/inverter/data` objects,
+whereas our parser and current SDK updaters use flat
+`/sys/devices/inverter/{index}/{field}` paths; a documented example does not
+establish that both layouts are returned on every build. Add a layout adapter
+only against a clearly identified supported response contract and tests.
+
+No production flow, compatibility check or supported-installation declaration
+was changed during this investigation. Officially documented candidates,
+synthetic parser checks and hardware-verified support must be reported separately.
 
 ## Context and requirements
 
