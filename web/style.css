@@ -73,13 +73,6 @@ h1, h2, h3 { text-wrap: balance; }
   padding: 28px 28px 64px;
 }
 
-.page-settings > .chart-card,
-.page-settings > .diagnostics,
-.page-settings > .foot,
-.page-settings > .head {
-  max-width: 840px;
-}
-
 .head {
   display: flex;
   align-items: baseline;
@@ -954,11 +947,11 @@ button:hover:not(:disabled) { border-color: var(--accent); }
 #energy-sources p, #energy-destinations p { display: flex; justify-content: space-between; gap: 15px; }
 
 /* Live: current flow, forecast, and chart fit in one reading path. */
-.page-live .nav, .page-history .nav, .page-panels .nav { margin-bottom: 8px; }
-.page-live .head, .page-history .head, .page-panels .head { margin-bottom: 8px; }
-.page-live .head .eyebrow, .page-history .head .eyebrow, .page-panels .head .eyebrow { display: none; }
-.page-live .head h1, .page-history .head h1, .page-panels .head h1 { margin: 0; font-size: 34px; }
-.page-live .head-subtitle, .page-history .head-subtitle, .page-panels .head-subtitle { display: none; }
+.page .nav { margin-bottom: 8px; }
+.page .head { margin-bottom: 8px; }
+.page .head .eyebrow { display: none; }
+.page .head h1 { margin: 0; font-size: 34px; }
+.page .head-subtitle { display: none; }
 .page-live .live-summary { grid-template-columns: minmax(0, 1fr) minmax(190px, .27fr); gap: 10px; margin-bottom: 8px; }
 .live-weather { display: grid; align-content: center; gap: 5px; margin: 0; padding: 10px 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
 .live-weather > div { display: grid; gap: 2px; }
@@ -1187,11 +1180,11 @@ button:hover:not(:disabled) { border-color: var(--accent); }
   .page-live .flow-node strong, .page-live .flow > .flow-node:first-child strong { font-size: 14px; }
 }
 
-/* Phone History and Panels follow the same summary-first rhythm as Live. */
+/* Phone History, Panels and Settings follow the same summary-first rhythm as Live. */
 @media (max-width: 520px) {
-  .page-history .head, .page-panels .head { margin-bottom: 9px; }
-  .page-history .head h1, .page-panels .head h1 { font-size: 27px; }
-  .page-history .state, .page-panels .state { margin-top: 3px; font-size: 11px; }
+  .page-history .head, .page-panels .head, .page-settings .head { margin-bottom: 9px; }
+  .page-history .head h1, .page-panels .head h1, .page-settings .head h1 { font-size: 27px; }
+  .page-history .state, .page-panels .state, .page-settings .state { margin-top: 3px; font-size: 11px; }
 
   .page-history .period-controls { grid-template-columns: minmax(0, 1fr) auto; gap: 0 8px; margin-bottom: 8px; padding: 8px 12px; }
   .page-history .period-heading { grid-column: 1; grid-row: 1; align-self: center; }
