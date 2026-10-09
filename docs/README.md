@@ -14,6 +14,7 @@ These documents describe the current installation and code. Start with the guide
 | Understand CT coverage and display calibration | [CT guide, Chinese](ct-calibration.md) |
 | Review security checks, remediation and limits | [Security review](security-review.md) |
 | Find protocol/UI sources and reviewed versions | [Reference projects](references.md) |
+| Review whether to adopt the official PyPVS SDK | [PyPVS client evaluation](adr/0001-pypvs-client-evaluation.md) |
 | Develop with simulated dashboard readings | [Local preview](preview.md), [Contributing](../CONTRIBUTING.md) |
 
 ## Separate introduction site
