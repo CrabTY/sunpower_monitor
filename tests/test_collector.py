@@ -68,6 +68,11 @@ class FakePVS:
     def authenticate(self):
         self.authenticated += 1
 
+    def read_gateway(self):
+        if "gateway" in self.fail:
+            raise PVSError("gateway unavailable", reason="http", stage="gateway", http_status=404)
+        return {"/sys/info/model": "PVS6", "/sys/info/sw_rev": "2025.10.20.61846"}, 30
+
     def _measured(self):
         if self.frozen_measured_at is not None:
             return self.frozen_measured_at
@@ -163,6 +168,20 @@ class CollectorTestCase(unittest.TestCase):
 
     def records(self, kind):
         return [row["payload"] for row in self.queue.batch(1000) if row["kind"] == kind]
+
+    def test_gateway_diagnostics_do_not_block_collection_or_enter_history(self):
+        logs = []
+        self.collector(log=logs.append).run(duration=1)
+        gateway = [json.loads(line) for line in logs if json.loads(line)["event"] == "gateway_info"]
+        self.assertEqual(gateway[0]["software_version"], "2025.10.20.61846")
+        self.assertGreater(self.pvs.calls["site"], 0)
+        self.assertFalse(any("software_version" in row["payload"] for row in self.queue.batch(1000)))
+        self.pvs.fail.add("gateway")
+        logs.clear()
+        before = self.pvs.calls["site"]
+        self.collector(log=logs.append).run(duration=1)
+        self.assertGreater(self.pvs.calls["site"], before)
+        self.assertTrue(any(json.loads(line)["event"] == "gateway_info_unavailable" for line in logs))
 
     def events(self):
         return [record["event_type"] for record in self.records("collector_event")]

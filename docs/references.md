@@ -6,9 +6,11 @@ Links identify the upstream versions reviewed for protocol and UI decisions. The
 
 ## Official local API documentation
 
-Thank you to [SunStrong Management](https://github.com/SunStrong-Management) and the contributors to [PyPVS](https://github.com/SunStrong-Management/pypvs) for publishing the [local API documentation](https://github.com/SunStrong-Management/pypvs/blob/main/doc/LocalAPI.md) and [PVS6 variable reference](https://github.com/SunStrong-Management/pypvs/blob/main/doc/varserver-variables-public-pvs6.csv). The introduction site's compatibility and sampling explanations already cite these official materials. They document authentication, session cookies, `/vars` queries, cache parameters and request-pacing recommendations.
+Thank you to [SunStrong Management](https://github.com/SunStrong-Management) and the contributors to [PyPVS](https://github.com/SunStrong-Management/pypvs) for publishing the [local API documentation](https://github.com/SunStrong-Management/pypvs/blob/main/doc/LocalAPI.md), [PVS5 variable reference](https://github.com/SunStrong-Management/pypvs/blob/main/doc/varserver-variables-public-pvs5.csv) and [PVS6 variable reference](https://github.com/SunStrong-Management/pypvs/blob/main/doc/varserver-variables-public-pvs6.csv). The introduction site's compatibility and sampling explanations already cite these official materials. They document authentication, session cookies, `/vars` queries, cache parameters and request-pacing recommendations. The collector also uses their documented name/value and nested-device response shapes and shared field contracts; see [compatibility evidence](pvs-compatibility.md). This adopts protocol information, not the SDK's model/update cycle or a bundled copy of its code.
 
 Our collector implements the local HTTP interface with Python's standard library. It does not install or import the `pypvs` package, call SunStrong's cloud service, or import historical records from that service. Each grouped read includes `match=` even when using a cache ID, following our hardware checks of stale cache membership; see [the collector implementation](../collector/pvs.py).
+
+The SDK itself is assessed separately in the [PyPVS client evaluation](adr/0001-pypvs-client-evaluation.md), including executable checks of the published package and a pinned upstream revision.
 
 ## Community collector references
 

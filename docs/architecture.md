@@ -4,7 +4,9 @@ This describes the implemented collector, Workers and browser dashboard. For dep
 
 ## Compatibility
 
-The verified device is a SunPower PVS6 running firmware `2025.10.20.61846`, without a battery. Other PVS6 firmware requires a read-only compatibility check before collection. PVS5, PVS2, other vendors and battery-equipped systems are outside the supported installation path.
+The hardware-verified device is a SunPower PVS6 running firmware `2025.10.20.61846`, without a battery. Other PVS6 builds and newer PVS5 gateways exposing the official varserver API are compatibility candidates, supported by shared official field definitions and synthetic format tests. This is not hardware verification of those gateways. PVS2, other vendors and battery-equipped systems are outside the supported installation path. See [compatibility evidence and checks](pvs-compatibility.md).
+
+The collector preserves its synchronous read/parse/queue/upload pipeline. At startup it makes one focused model/software-revision read for safe local diagnostics; failure does not block normal collection. Read responses can be flat path/value objects or validated `values` name/value envelopes. Device parsing accepts both flat paths and the nested device `data` objects shown in the official API examples. Missing values remain unknown, and DC power never substitutes for AC power. All read queries share at most one session refresh for HTTP 401/403 or a device `errorcode`, including health and gateway reads.
 
 PVS-reported home load depends on the installed CT coverage. It is not an independent utility-meter measurement. See [CT coverage and display calibration](ct-calibration.md).
 

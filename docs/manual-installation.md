@@ -4,7 +4,7 @@ For a new installation, start with the [Release installer](quick-start.md). This
 
 ## Before you start
 
-- A PVS6 reachable from the collector host by LAN IP.
+- A PVS6 reachable from the collector host by LAN IP. For other firmware or a newer PVS5 exposing the official varserver API, review [compatibility evidence and checks](pvs-compatibility.md); these remain candidates until hardware verification.
 - A Cloudflare account with Workers and D1 available, plus a GitHub account.
 - A workstation with Node.js 22.5+, npm, Python 3.11+, and Git. The collector host needs Docker with Compose, or Python 3.11+ if you use the direct service path in [operations](operations.md).
 - A separate, private place to keep the upload token. Do not put it in the repository, image, or GitHub Actions variables.
