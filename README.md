@@ -90,7 +90,9 @@ Select a panel or compare the array, inspect recorded five-minute samples, and v
 
 Diagnostics appear when the PVS supplies a valid value. A panel that stops reporting may have a device problem or a failed read; the dashboard cannot determine the cause from missing data alone.
 
-### Settings: location and calibration
+### Settings: notifications, location and calibration
+
+Optional Bark notifications alert your iPhone after ten minutes of missing or invalid site readings, then notify you when three consecutive background checks confirm recovery. Notifications are off by default. After installation, open **Settings → Phone notifications**, paste your own Bark device Key, and select **Test and enable**. The dashboard saves the Key encrypted and starts background monitoring automatically; this adds no `install.sh` steps. See [phone notifications](docs/notifications.md) for configuration, delivery limits, and the database/Worker upgrade required for existing installations.
 
 Set the site's location and time zone for daylight and local-date views. Display calibration can correct a verified, stable grid-reading ratio after comparison with utility-meter data. It adjusts the displayed grid reading and corresponding home-load estimate, preserves raw records, and leaves solar production unchanged. See the [calibration procedure](docs/ct-calibration.md) before changing the ratio.
 
@@ -133,6 +135,7 @@ No. This collector and dashboard work independently. Home Assistant integrations
 | Workstation deployment or a direct Python service | [Manual installation](docs/manual-installation.md), [Operations](docs/operations.md) |
 | Updates and redeployment | [Upgrade steps](docs/operations.md#upgrade-an-existing-deployment) |
 | Backups and recovery | [Operations](docs/operations.md) |
+| Optional iPhone alerts configured from Settings | [Bark phone notifications](docs/notifications.md) |
 | Collector, cloud, and authentication design | [Architecture](docs/architecture.md) |
 | CT coverage and display calibration | [CT guide, Chinese](docs/ct-calibration.md) |
 | Simulated dashboard for local development | [Preview](docs/preview.md) |
