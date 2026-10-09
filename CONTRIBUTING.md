@@ -22,7 +22,7 @@ npm run check
 Install Graphify (the tested version is `graphifyy==0.9.71`), make its `graphify` command available on your PATH, and enable the shared hook once per clone:
 
 ```sh
-uv tool install graphifyy==0.9.71
+uv tool install 'graphifyy[sql]==0.9.71'
 git config --local core.hooksPath .githooks
 ```
 
@@ -40,7 +40,7 @@ The hook never stages, commits, or amends files automatically. Existing staged/u
 
 `AGENTS.md` and the three graph results are shared project files. Graphify caches, timestamp manifests, hidden local metadata, and dated backups are ignored. This hook performs structural extraction without an API; use `/graphify --update` for semantic document/image changes. Hooks must be enabled by each contributor and can be bypassed by Git; repository-wide CI enforcement is a separate gate.
 
-SQL extraction additionally requires Graphify's `sql` extra; without it, Graphify warns and skips SQL files. This affects graph coverage, not the project's SQL runtime checks.
+The `sql` extra includes the parser needed to extract tables and relationships from SQL files. For an existing installation without it, run `uv tool install --reinstall 'graphifyy[sql]==0.9.71'`. Without the extra, Graphify warns and skips SQL files; this affects graph coverage, not the project's SQL runtime checks.
 
 Run `python3 scripts/checks/check-graph-hook.py` to check real local pushes and worktree isolation in temporary repositories without contacting external services.
 

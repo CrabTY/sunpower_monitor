@@ -30,6 +30,19 @@
       "source_location": "L14"
     },
     {
+      "id": "workers_ingest_test_contract_test_fakedb",
+      "label": "FakeDb",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "contract.test.ts",
+      "file_type": "code",
+      "norm_label": "fakedb",
+      "source_file": "workers/ingest/test/contract.test.ts",
+      "source_location": "L186"
+    },
+    {
       "id": "collector_model_metersample",
       "label": "MeterSample",
       "_callable": true,
@@ -108,6 +121,19 @@
       "source_location": "L25"
     },
     {
+      "id": "workers_dashboard_test_query_test_scripteddb",
+      "label": "ScriptedDb",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "query.ts",
+      "file_type": "code",
+      "norm_label": "scripteddb",
+      "source_file": "workers/dashboard/test/query.test.ts",
+      "source_location": "L21"
+    },
+    {
       "id": "tests_test_pvs_parsingtests",
       "label": "ParsingTests",
       "_callable": true,
@@ -173,17 +199,69 @@
       "source_location": "L10"
     },
     {
-      "id": "collector_upload_retryableerror",
-      "label": "RetryableError",
+      "id": "workers_dashboard_src_session_session",
+      "label": "Session",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 15,
-      "community_name": "CollectorTestCase",
+      "community": 13,
+      "community_name": "notifications.ts",
       "file_type": "code",
-      "norm_label": "retryableerror",
-      "source_file": "collector/upload.py",
+      "norm_label": "session",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "workers_dashboard_src_query_validation",
+      "label": "Validation",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "validation",
+      "source_file": "workers/dashboard/src/query.ts",
       "source_location": "L31"
+    },
+    {
+      "id": "workers_dashboard_src_weather_weatherrange",
+      "label": "WeatherRange",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "weatherrange",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "workers_dashboard_src_weather_weatherview",
+      "label": "WeatherView",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "weatherview",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L64"
+    },
+    {
+      "id": "workers_dashboard_test_weather_test_scripteddb",
+      "label": "ScriptedDb",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "scripteddb",
+      "source_file": "workers/dashboard/test/weather.test.ts",
+      "source_location": "L13"
     },
     {
       "id": "tests_test_collector_collectortestcase",
@@ -197,6 +275,19 @@
       "norm_label": "collectortestcase",
       "source_file": "tests/test_collector.py",
       "source_location": "L151"
+    },
+    {
+      "id": "collector_pvs_pvsautherror",
+      "label": "PVSAuthError",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "PVSClient",
+      "file_type": "code",
+      "norm_label": "pvsautherror",
+      "source_file": "collector/pvs.py",
+      "source_location": "L40"
     },
     {
       "id": "collector_pvs_pvsclient",
@@ -251,26 +342,13 @@
       "source_location": "L718"
     },
     {
-      "id": "collector_pvs_pvsautherror",
-      "label": "PVSAuthError",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "test_pvs.py",
-      "file_type": "code",
-      "norm_label": "pvsautherror",
-      "source_file": "collector/pvs.py",
-      "source_location": "L40"
-    },
-    {
       "id": "collector_upload_autherror",
       "label": "AuthError",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": "autherror",
       "source_file": "collector/upload.py",
@@ -283,7 +361,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": "rejectederror",
       "source_file": "collector/upload.py",
@@ -296,7 +374,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": "uploaderror",
       "source_file": "collector/upload.py",
@@ -342,17 +420,30 @@
       "source_location": "L615"
     },
     {
-      "id": "workers_dashboard_test_weather_test_scripteddb",
-      "label": "ScriptedDb",
+      "id": "workers_dashboard_src_index_assetfetcher",
+      "label": "AssetFetcher",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
-      "norm_label": "scripteddb",
-      "source_file": "workers/dashboard/test/weather.test.ts",
-      "source_location": "L13"
+      "norm_label": "assetfetcher",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L59"
+    },
+    {
+      "id": "workers_dashboard_src_index_oauthstate",
+      "label": "OauthState",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": "oauthstate",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L66"
     },
     {
       "id": "tests_test_pvs_authenticationtests",
@@ -387,7 +478,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "pvserror",
       "source_file": "collector/pvs.py",
@@ -400,24 +491,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "startuptests",
       "source_file": "tests/test_collector.py",
       "source_location": "L666"
-    },
-    {
-      "id": "workers_dashboard_src_index_assetfetcher",
-      "label": "AssetFetcher",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "assetfetcher",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L59"
     },
     {
       "id": "workers_dashboard_src_index_env",
@@ -426,24 +504,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "env",
       "source_file": "workers/dashboard/src/index.ts",
       "source_location": "L46"
-    },
-    {
-      "id": "workers_dashboard_src_index_oauthstate",
-      "label": "OauthState",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "oauthstate",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L66"
     },
     {
       "id": "workers_dashboard_src_oauth_fetcher",
@@ -452,7 +517,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "fetcher",
       "source_file": "workers/dashboard/src/oauth.ts",
@@ -465,37 +530,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "githubconfig",
       "source_file": "workers/dashboard/src/oauth.ts",
       "source_location": "L3"
-    },
-    {
-      "id": "workers_dashboard_src_session_session",
-      "label": "Session",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "session",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "workers_ingest_test_contract_test_fakedb",
-      "label": "FakeDb",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "FakeDb",
-      "file_type": "code",
-      "norm_label": "fakedb",
-      "source_file": "workers/ingest/test/contract.test.ts",
-      "source_location": "L186"
     },
     {
       "id": "workers_shared_contract_livepayload",
@@ -563,19 +602,6 @@
       "source_location": "L91"
     },
     {
-      "id": "tests_test_collector_env",
-      "label": "Env",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "Env",
-      "file_type": "code",
-      "norm_label": "env",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L33"
-    },
-    {
       "id": "collector_model_panelsample",
       "label": "PanelSample",
       "_callable": true,
@@ -587,6 +613,19 @@
       "norm_label": "panelsample",
       "source_file": "collector/model.py",
       "source_location": "L211"
+    },
+    {
+      "id": "collector_upload_ingestclient",
+      "label": "IngestClient",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "test_ingest_local.py",
+      "file_type": "code",
+      "norm_label": "ingestclient",
+      "source_file": "collector/upload.py",
+      "source_location": "L43"
     },
     {
       "id": "tests_test_ingest_local_localingesttests",
@@ -667,30 +706,17 @@
       "source_location": "L119"
     },
     {
-      "id": "tests_test_pvs_fakeopener",
-      "label": "FakeOpener",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "Clock",
-      "file_type": "code",
-      "norm_label": "fakeopener",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L73"
-    },
-    {
-      "id": "collector_rollup_siteminute",
-      "label": "SiteMinute",
+      "id": "collector_upload_retryableerror",
+      "label": "RetryableError",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "code",
-      "norm_label": "siteminute",
-      "source_file": "collector/rollup.py",
-      "source_location": "L34"
+      "norm_label": "retryableerror",
+      "source_file": "collector/upload.py",
+      "source_location": "L31"
     },
     {
       "id": "pilot_pvs",
@@ -758,19 +784,6 @@
       "source_location": "L297"
     },
     {
-      "id": "collector_upload_ingestclient",
-      "label": "IngestClient",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": "ingestclient",
-      "source_file": "collector/upload.py",
-      "source_location": "L43"
-    },
-    {
       "id": "workers_ingest_test_weather_test_fakedb",
       "label": "FakeDb",
       "_callable": true,
@@ -782,6 +795,19 @@
       "norm_label": "fakedb",
       "source_file": "workers/ingest/test/weather.test.ts",
       "source_location": "L124"
+    },
+    {
+      "id": "collector_rollup_siteminute",
+      "label": "SiteMinute",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "SiteMinute",
+      "file_type": "code",
+      "norm_label": "siteminute",
+      "source_file": "collector/rollup.py",
+      "source_location": "L34"
     },
     {
       "id": "tests_test_pvs_readchecktests",
@@ -914,45 +940,6 @@
       "source_location": "L43"
     },
     {
-      "id": "workers_dashboard_src_query_validation",
-      "label": "Validation",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "validation",
-      "source_file": "workers/dashboard/src/query.ts",
-      "source_location": "L31"
-    },
-    {
-      "id": "workers_dashboard_src_weather_weatherrange",
-      "label": "WeatherRange",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "weatherrange",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "workers_dashboard_src_weather_weatherview",
-      "label": "WeatherView",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "weatherview",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L64"
-    },
-    {
       "id": "workers_dashboard_test_location_test_scripteddb",
       "label": "ScriptedDb",
       "_callable": true,
@@ -966,17 +953,30 @@
       "source_location": "L24"
     },
     {
-      "id": "workers_dashboard_test_query_test_scripteddb",
-      "label": "ScriptedDb",
+      "id": "tests_test_collector_env",
+      "label": "Env",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "ScriptedDb",
+      "community_name": "Env",
       "file_type": "code",
-      "norm_label": "scripteddb",
-      "source_file": "workers/dashboard/test/query.test.ts",
-      "source_location": "L21"
+      "norm_label": "env",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "tests_test_pvs_fakeopener",
+      "label": "FakeOpener",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "FakeOpener",
+      "file_type": "code",
+      "norm_label": "fakeopener",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L73"
     },
     {
       "id": "workers_ingest_src_store_conflictstatement",
@@ -1075,6 +1075,42 @@
       "source_location": "L79"
     },
     {
+      "id": "workers_ingest_test_contract_test_fakedb_batch",
+      "label": ".batch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "contract.test.ts",
+      "file_type": "code",
+      "norm_label": ".batch()",
+      "source_file": "workers/ingest/test/contract.test.ts",
+      "source_location": "L206"
+    },
+    {
+      "id": "workers_ingest_test_contract_test_fakedb_constructor",
+      "label": ".constructor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "contract.test.ts",
+      "file_type": "code",
+      "norm_label": ".constructor()",
+      "source_file": "workers/ingest/test/contract.test.ts",
+      "source_location": "L190"
+    },
+    {
+      "id": "workers_ingest_test_contract_test_fakedb_prepare",
+      "label": ".prepare()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "contract.test.ts",
+      "file_type": "code",
+      "norm_label": ".prepare()",
+      "source_file": "workers/ingest/test/contract.test.ts",
+      "source_location": "L192"
+    },
+    {
       "id": "workers_ingest_test_contract_test_live",
       "label": "live()",
       "_callable": true,
@@ -1133,6 +1169,18 @@
       "norm_label": "digestof()",
       "source_file": "workers/shared/contract.ts",
       "source_location": "L236"
+    },
+    {
+      "id": "workers_shared_contract_parseinstant",
+      "label": "parseInstant()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "contract.test.ts",
+      "file_type": "code",
+      "norm_label": "parseinstant()",
+      "source_file": "workers/shared/contract.ts",
+      "source_location": "L141"
     },
     {
       "id": "web_chart_num",
@@ -1915,18 +1963,6 @@
       "source_location": "L202"
     },
     {
-      "id": "collector_model_utc_now",
-      "label": "utc_now()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "model.py",
-      "file_type": "code",
-      "norm_label": "utc_now()",
-      "source_file": "collector/model.py",
-      "source_location": "L59"
-    },
-    {
       "id": "collector_rollup_siteminute_add",
       "label": ".add()",
       "_callable": true,
@@ -2167,16 +2203,52 @@
       "source_location": "L202"
     },
     {
-      "id": "workers_dashboard_src_weather_parseweatherrange",
-      "label": "parseWeatherRange()",
+      "id": "workers_dashboard_test_query_test_db",
+      "label": "db()",
       "_callable": true,
       "_origin": "ast",
       "community": 11,
       "community_name": "query.ts",
       "file_type": "code",
-      "norm_label": "parseweatherrange()",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L27"
+      "norm_label": "db()",
+      "source_file": "workers/dashboard/test/query.test.ts",
+      "source_location": "L51"
+    },
+    {
+      "id": "workers_dashboard_test_query_test_scripteddb_batch",
+      "label": ".batch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "query.ts",
+      "file_type": "code",
+      "norm_label": ".batch()",
+      "source_file": "workers/dashboard/test/query.test.ts",
+      "source_location": "L46"
+    },
+    {
+      "id": "workers_dashboard_test_query_test_scripteddb_constructor",
+      "label": ".constructor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "query.ts",
+      "file_type": "code",
+      "norm_label": ".constructor()",
+      "source_file": "workers/dashboard/test/query.test.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "workers_dashboard_test_query_test_scripteddb_prepare",
+      "label": ".prepare()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "query.ts",
+      "file_type": "code",
+      "norm_label": ".prepare()",
+      "source_file": "workers/dashboard/test/query.test.ts",
+      "source_location": "L30"
     },
     {
       "id": "tests_test_pvs_inverter",
@@ -2359,6 +2431,18 @@
       "source_location": "L485"
     },
     {
+      "id": "workers_dashboard_src_index_login",
+      "label": "login()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "login()",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L267"
+    },
+    {
       "id": "workers_dashboard_src_notifications_checknotifications",
       "label": "checkNotifications()",
       "_callable": true,
@@ -2515,6 +2599,42 @@
       "source_location": "L11"
     },
     {
+      "id": "workers_dashboard_src_session_hmackey",
+      "label": "hmacKey()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "hmackey()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L23"
+    },
+    {
+      "id": "workers_dashboard_src_session_pkcechallenge",
+      "label": "pkceChallenge()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "pkcechallenge()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L72"
+    },
+    {
+      "id": "workers_dashboard_src_session_pkceverifier",
+      "label": "pkceVerifier()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "pkceverifier()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L68"
+    },
+    {
       "id": "workers_dashboard_src_session_randomtoken",
       "label": "randomToken()",
       "_callable": true,
@@ -2525,6 +2645,30 @@
       "norm_label": "randomtoken()",
       "source_file": "workers/dashboard/src/session.ts",
       "source_location": "L77"
+    },
+    {
+      "id": "workers_dashboard_src_session_setcookie",
+      "label": "setCookie()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "setcookie()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L91"
+    },
+    {
+      "id": "workers_dashboard_src_session_verifysession",
+      "label": "verifySession()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "verifysession()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L36"
     },
     {
       "id": "workers_dashboard_test_notifications_test_database",
@@ -2551,6 +2695,114 @@
       "source_location": "L11"
     },
     {
+      "id": "workers_dashboard_src_weather_localdate",
+      "label": "localDate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "localdate()",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L38"
+    },
+    {
+      "id": "workers_dashboard_src_weather_numberornull",
+      "label": "numberOrNull()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "numberornull()",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L42"
+    },
+    {
+      "id": "workers_dashboard_src_weather_parseweatherrange",
+      "label": "parseWeatherRange()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "parseweatherrange()",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "workers_dashboard_src_weather_qualityof",
+      "label": "qualityOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "qualityof()",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L59"
+    },
+    {
+      "id": "workers_dashboard_src_weather_readweather",
+      "label": "readWeather()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "readweather()",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L71"
+    },
+    {
+      "id": "workers_dashboard_src_weather_rowsof",
+      "label": "rowsOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "rowsof()",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L46"
+    },
+    {
+      "id": "workers_dashboard_test_weather_test_forecastrow",
+      "label": "forecastRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "forecastrow()",
+      "source_file": "workers/dashboard/test/weather.test.ts",
+      "source_location": "L40"
+    },
+    {
+      "id": "workers_dashboard_test_weather_test_scripteddb_constructor",
+      "label": ".constructor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": ".constructor()",
+      "source_file": "workers/dashboard/test/weather.test.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "workers_dashboard_test_weather_test_scripteddb_prepare",
+      "label": ".prepare()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": ".prepare()",
+      "source_file": "workers/dashboard/test/weather.test.ts",
+      "source_location": "L23"
+    },
+    {
       "id": "tests_test_collector_collectortestcase_collector",
       "label": ".collector()",
       "_callable": true,
@@ -2563,18 +2815,6 @@
       "source_location": "L162"
     },
     {
-      "id": "tests_test_collector_collectortestcase_events",
-      "label": ".events()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "CollectorTestCase",
-      "file_type": "code",
-      "norm_label": ".events()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L186"
-    },
-    {
       "id": "tests_test_collector_collectortestcase_records",
       "label": ".records()",
       "_callable": true,
@@ -2585,6 +2825,18 @@
       "norm_label": ".records()",
       "source_file": "tests/test_collector.py",
       "source_location": "L169"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_run_panels",
+      "label": ".run_panels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "code",
+      "norm_label": ".run_panels()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L382"
     },
     {
       "id": "tests_test_collector_collectortestcase_test_a_failing_group_retries_every_minute_without_escalating",
@@ -2611,6 +2863,18 @@
       "source_location": "L462"
     },
     {
+      "id": "tests_test_collector_collectortestcase_test_boot_relative_monotonic_clock_keeps_the_schedule",
+      "label": ".test_boot_relative_monotonic_clock_keeps_the_schedule()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "code",
+      "norm_label": ".test_boot_relative_monotonic_clock_keeps_the_schedule()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L602"
+    },
+    {
       "id": "tests_test_collector_collectortestcase_test_collector_logs_safe_structured_failure_without_exception_text",
       "label": ".test_collector_logs_safe_structured_failure_without_exception_text()",
       "_callable": true,
@@ -2621,6 +2885,18 @@
       "norm_label": ".test_collector_logs_safe_structured_failure_without_exception_text()",
       "source_file": "tests/test_collector.py",
       "source_location": "L570"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_equal_power_with_new_measurement_time_is_a_valid_sample",
+      "label": ".test_equal_power_with_new_measurement_time_is_a_valid_sample()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "code",
+      "norm_label": ".test_equal_power_with_new_measurement_time_is_a_valid_sample()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L263"
     },
     {
       "id": "tests_test_collector_collectortestcase_test_failed_groups_keep_cooldown_until_recovery",
@@ -2645,6 +2921,18 @@
       "norm_label": "record_attempt()",
       "source_file": "tests/test_collector.py",
       "source_location": "L488"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_frozen_measurement_times_write_no_placeholder_panel_rows",
+      "label": ".test_frozen_measurement_times_write_no_placeholder_panel_rows()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "code",
+      "norm_label": ".test_frozen_measurement_times_write_no_placeholder_panel_rows()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L307"
     },
     {
       "id": "tests_test_collector_collectortestcase_test_gateway_diagnostics_do_not_block_collection_or_enter_history",
@@ -2707,18 +2995,6 @@
       "source_location": "L552"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_live_snapshots_are_not_queued_for_replay",
-      "label": ".test_live_snapshots_are_not_queued_for_replay()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "CollectorTestCase",
-      "file_type": "code",
-      "norm_label": ".test_live_snapshots_are_not_queued_for_replay()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L450"
-    },
-    {
       "id": "tests_test_collector_collectortestcase_test_live_upload_is_not_waiting_on_a_closed_minute",
       "label": ".test_live_upload_is_not_waiting_on_a_closed_minute()",
       "_callable": true,
@@ -2741,6 +3017,30 @@
       "norm_label": ".test_minute_rollup_averages_fresh_samples()",
       "source_file": "tests/test_collector.py",
       "source_location": "L190"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_panel_ids_stay_stable_across_restart",
+      "label": ".test_panel_ids_stay_stable_across_restart()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "code",
+      "norm_label": ".test_panel_ids_stay_stable_across_restart()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L315"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_panel_sample_and_freshness_marker_commit_together",
+      "label": ".test_panel_sample_and_freshness_marker_commit_together()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "code",
+      "norm_label": ".test_panel_sample_and_freshness_marker_commit_together()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L295"
     },
     {
       "id": "tests_test_collector_collectortestcase_test_panel_sample_survives_restart_before_next_slot",
@@ -2767,18 +3067,6 @@
       "source_location": "L538"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_recovery_emits_one_event_per_group",
-      "label": ".test_recovery_emits_one_event_per_group()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "CollectorTestCase",
-      "file_type": "code",
-      "norm_label": ".test_recovery_emits_one_event_per_group()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L584"
-    },
-    {
       "id": "tests_test_collector_collectortestcase_test_source_error_minute_when_every_read_fails",
       "label": ".test_source_error_minute_when_every_read_fails()",
       "_callable": true,
@@ -2801,18 +3089,6 @@
       "norm_label": ".test_started_partial_minute_is_not_reported()",
       "source_file": "tests/test_collector.py",
       "source_location": "L209"
-    },
-    {
-      "id": "tests_test_collector_collectortestcase_test_wan_loss_queues_then_replays_identical_records",
-      "label": ".test_wan_loss_queues_then_replays_identical_records()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "CollectorTestCase",
-      "file_type": "code",
-      "norm_label": ".test_wan_loss_queues_then_replays_identical_records()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L407"
     },
     {
       "id": "scripts_checks_month_check_buildsql",
@@ -3871,6 +4147,18 @@
       "source_location": "L25"
     },
     {
+      "id": "collector_model_utc_now",
+      "label": "utc_now()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "file_type": "code",
+      "norm_label": "utc_now()",
+      "source_file": "collector/model.py",
+      "source_location": "L59"
+    },
+    {
       "id": "scripts_checks_check_graph_hook_main",
       "label": "main()",
       "_callable": true,
@@ -3919,16 +4207,52 @@
       "source_location": "L10"
     },
     {
+      "id": "collector_upload_ids_from",
+      "label": "_ids_from()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "code",
+      "norm_label": "_ids_from()",
+      "source_file": "collector/upload.py",
+      "source_location": "L109"
+    },
+    {
       "id": "collector_upload_ingestclient_init",
       "label": ".__init__()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "collector/upload.py",
       "source_location": "L46"
+    },
+    {
+      "id": "collector_upload_ingestclient_post_records",
+      "label": ".post_records()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "code",
+      "norm_label": ".post_records()",
+      "source_file": "collector/upload.py",
+      "source_location": "L80"
+    },
+    {
+      "id": "collector_upload_ingestclient_put_live",
+      "label": ".put_live()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "code",
+      "norm_label": ".put_live()",
+      "source_file": "collector/upload.py",
+      "source_location": "L75"
     },
     {
       "id": "collector_upload_ingestclient_raise",
@@ -3936,11 +4260,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": "._raise()",
       "source_file": "collector/upload.py",
       "source_location": "L92"
+    },
+    {
+      "id": "collector_upload_ingestclient_send",
+      "label": "._send()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "code",
+      "norm_label": "._send()",
+      "source_file": "collector/upload.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "collector_upload_parse_json",
+      "label": "_parse_json()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "code",
+      "norm_label": "_parse_json()",
+      "source_file": "collector/upload.py",
+      "source_location": "L101"
     },
     {
       "id": "collector_upload_rejectederror_init",
@@ -3948,7 +4296,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "collector/upload.py",
@@ -3960,7 +4308,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": ".test_authentication_failure_stops_uploading_and_keeps_collecting()",
       "source_file": "tests/test_collector.py",
@@ -3972,7 +4320,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": ".test_rejected_records_are_isolated_not_retried_forever()",
       "source_file": "tests/test_collector.py",
@@ -4747,12 +5095,24 @@
       "source_location": "L26"
     },
     {
+      "id": "workers_dashboard_src_index_assetfetcher_fetch",
+      "label": ".fetch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": ".fetch()",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L60"
+    },
+    {
       "id": "workers_dashboard_src_index_collectorid",
       "label": "collectorId()",
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "collectorid()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4764,7 +5124,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "fetch()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4776,7 +5136,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "getcalibration()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4788,7 +5148,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "getlocation()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4800,7 +5160,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "health()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4812,7 +5172,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "history()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4824,7 +5184,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "isoornull()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4836,7 +5196,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "json()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4848,7 +5208,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "live()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4860,7 +5220,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "nowseconds()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4872,7 +5232,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "presentlocation()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4884,7 +5244,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "putcalibration()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4896,7 +5256,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "putlocation()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4908,7 +5268,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "readcalibration()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4920,7 +5280,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "readsmalljson()",
       "source_file": "workers/dashboard/src/index.ts",
@@ -4932,11 +5292,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "resolvelocation()",
       "source_file": "workers/dashboard/src/index.ts",
       "source_location": "L213"
+    },
+    {
+      "id": "workers_dashboard_src_index_sameorigin",
+      "label": "sameOrigin()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": "sameorigin()",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L155"
     },
     {
       "id": "workers_dashboard_src_index_scheduled",
@@ -4944,11 +5316,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "scheduled()",
       "source_file": "workers/dashboard/src/index.ts",
       "source_location": "L144"
+    },
+    {
+      "id": "workers_dashboard_src_index_serveasset",
+      "label": "serveAsset()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": "serveasset()",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L258"
     },
     {
       "id": "workers_dashboard_src_index_weather",
@@ -4956,11 +5340,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 29,
-      "community_name": "fetch",
+      "community_name": "dashboard/src/index.ts",
       "file_type": "code",
       "norm_label": "weather()",
       "source_file": "workers/dashboard/src/index.ts",
       "source_location": "L224"
+    },
+    {
+      "id": "workers_dashboard_src_session_clearcookie",
+      "label": "clearCookie()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": "clearcookie()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L103"
+    },
+    {
+      "id": "workers_dashboard_src_session_readcookie",
+      "label": "readCookie()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": "readcookie()",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L81"
     },
     {
       "id": "web_check_minutewindow",
@@ -5023,40 +5431,100 @@
       "source_location": "L77"
     },
     {
-      "id": "workers_dashboard_test_weather_test_forecastrow",
-      "label": "forecastRow()",
+      "id": "workers_ingest_test_site_day_test_prepare",
+      "label": "prepare()",
       "_callable": true,
       "_origin": "ast",
       "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
+      "community_name": "site-day.ts",
       "file_type": "code",
-      "norm_label": "forecastrow()",
-      "source_file": "workers/dashboard/test/weather.test.ts",
-      "source_location": "L40"
+      "norm_label": "prepare()",
+      "source_file": "workers/ingest/test/site-day.test.ts",
+      "source_location": "L24"
     },
     {
-      "id": "workers_dashboard_test_weather_test_scripteddb_constructor",
-      "label": ".constructor()",
+      "id": "workers_shared_site_day_daybounds",
+      "label": "dayBounds()",
       "_callable": true,
       "_origin": "ast",
       "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
+      "community_name": "site-day.ts",
       "file_type": "code",
-      "norm_label": ".constructor()",
-      "source_file": "workers/dashboard/test/weather.test.ts",
-      "source_location": "L19"
+      "norm_label": "daybounds()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L26"
     },
     {
-      "id": "workers_dashboard_test_weather_test_scripteddb_prepare",
-      "label": ".prepare()",
+      "id": "workers_shared_site_day_daybounds_midnight",
+      "label": "midnight()",
       "_callable": true,
       "_origin": "ast",
       "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
+      "community_name": "site-day.ts",
       "file_type": "code",
-      "norm_label": ".prepare()",
-      "source_file": "workers/dashboard/test/weather.test.ts",
-      "source_location": "L23"
+      "norm_label": "midnight()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "workers_shared_site_day_localday",
+      "label": "localDay()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "site-day.ts",
+      "file_type": "code",
+      "norm_label": "localday()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "workers_shared_site_day_nextday",
+      "label": "nextDay()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "site-day.ts",
+      "file_type": "code",
+      "norm_label": "nextday()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "workers_shared_site_day_previousday",
+      "label": "previousDay()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "site-day.ts",
+      "file_type": "code",
+      "norm_label": "previousday()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "workers_shared_site_day_refreshsitedays",
+      "label": "refreshSiteDays()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "site-day.ts",
+      "file_type": "code",
+      "norm_label": "refreshsitedays()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L79"
+    },
+    {
+      "id": "workers_shared_site_day_rollupday",
+      "label": "rollupDay()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "site-day.ts",
+      "file_type": "code",
+      "norm_label": "rollupday()",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L55"
     },
     {
       "id": "scripts_checks_render_config_test_render",
@@ -5191,6 +5659,18 @@
       "source_location": "L264"
     },
     {
+      "id": "tests_test_pvs_authenticationtests_test_missing_serial_is_an_authentication_failure",
+      "label": ".test_missing_serial_is_an_authentication_failure()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "make_client",
+      "file_type": "code",
+      "norm_label": ".test_missing_serial_is_an_authentication_failure()",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L251"
+    },
+    {
       "id": "tests_test_pvs_authenticationtests_test_never_requests_the_full_tree_or_a_write_path",
       "label": ".test_never_requests_the_full_tree_or_a_write_path()",
       "_callable": true,
@@ -5309,18 +5789,6 @@
       "norm_label": ".test_malformed_envelopes_are_safe_failures()",
       "source_file": "tests/test_pvs.py",
       "source_location": "L371"
-    },
-    {
-      "id": "tests_test_pvs_compatibilitytests_test_name_value_envelope_works_for_login_bootstrap_and_group_reads",
-      "label": ".test_name_value_envelope_works_for_login_bootstrap_and_group_reads()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 33,
-      "community_name": "make_client",
-      "file_type": "code",
-      "norm_label": ".test_name_value_envelope_works_for_login_bootstrap_and_group_reads()",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L361"
     },
     {
       "id": "tests_test_pvs_http_error",
@@ -5484,7 +5952,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "build_parser()",
       "source_file": "collector/main.py",
@@ -5496,7 +5964,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "check_reads()",
       "source_file": "collector/main.py",
@@ -5508,7 +5976,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "connect_pvs()",
       "source_file": "collector/main.py",
@@ -5520,7 +5988,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "collector/main.py",
@@ -5532,7 +6000,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "stop_on_sigterm()",
       "source_file": "collector/main.py",
@@ -5544,7 +6012,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "gateway_info()",
       "source_file": "collector/model.py",
@@ -5556,7 +6024,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "fail()",
       "source_file": "tests/test_collector.py",
@@ -5568,7 +6036,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "authenticate()",
       "source_file": "tests/test_collector.py",
@@ -5580,7 +6048,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": ".test_duration_limits_startup_retries()",
       "source_file": "tests/test_collector.py",
@@ -5592,7 +6060,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "__init__()",
       "source_file": "tests/test_collector.py",
@@ -5604,7 +6072,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": ".test_sigterm_closes_queue_during_startup()",
       "source_file": "tests/test_collector.py",
@@ -5616,7 +6084,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": ".test_startup_waits_for_the_pvs_instead_of_crash_looping()",
       "source_file": "tests/test_collector.py",
@@ -5628,23 +6096,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "__init__()",
       "source_file": "tests/test_collector.py",
       "source_location": "L672"
     },
     {
-      "id": "workers_dashboard_src_index_assetfetcher_fetch",
-      "label": ".fetch()",
+      "id": "tests_test_pvs_readchecktests_test_authentication_failure_is_reported_without_traceback_or_secrets",
+      "label": ".test_authentication_failure_is_reported_without_traceback_or_secrets()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "PVSError",
+      "file_type": "code",
+      "norm_label": ".test_authentication_failure_is_reported_without_traceback_or_secrets()",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L479"
+    },
+    {
+      "id": "scripts_install_github_user_resolveuser",
+      "label": "resolveUser()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
-      "norm_label": ".fetch()",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L60"
+      "norm_label": "resolveuser()",
+      "source_file": "scripts/install/github-user.mjs",
+      "source_location": "L6"
+    },
+    {
+      "id": "scripts_install_github_user_resolveuser_get",
+      "label": "get()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "dashboard.test.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "scripts/install/github-user.mjs",
+      "source_location": "L8"
     },
     {
       "id": "workers_dashboard_src_index_callback",
@@ -5652,47 +6144,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "callback()",
       "source_file": "workers/dashboard/src/index.ts",
       "source_location": "L282"
-    },
-    {
-      "id": "workers_dashboard_src_index_login",
-      "label": "login()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "login()",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L267"
-    },
-    {
-      "id": "workers_dashboard_src_index_sameorigin",
-      "label": "sameOrigin()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "sameorigin()",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L155"
-    },
-    {
-      "id": "workers_dashboard_src_index_serveasset",
-      "label": "serveAsset()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "serveasset()",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L258"
     },
     {
       "id": "workers_dashboard_src_oauth_authorizeurl",
@@ -5700,7 +6156,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "authorizeurl()",
       "source_file": "workers/dashboard/src/oauth.ts",
@@ -5712,7 +6168,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "exchangecode()",
       "source_file": "workers/dashboard/src/oauth.ts",
@@ -5724,7 +6180,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "fetchuserid()",
       "source_file": "workers/dashboard/src/oauth.ts",
@@ -5736,7 +6192,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "isalloweduser()",
       "source_file": "workers/dashboard/src/oauth.ts",
@@ -5748,83 +6204,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "oauthfailurecode()",
       "source_file": "workers/dashboard/src/oauth.ts",
       "source_location": "L75"
-    },
-    {
-      "id": "workers_dashboard_src_session_clearcookie",
-      "label": "clearCookie()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "clearcookie()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L103"
-    },
-    {
-      "id": "workers_dashboard_src_session_hmackey",
-      "label": "hmacKey()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "hmackey()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L23"
-    },
-    {
-      "id": "workers_dashboard_src_session_pkcechallenge",
-      "label": "pkceChallenge()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "pkcechallenge()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L72"
-    },
-    {
-      "id": "workers_dashboard_src_session_pkceverifier",
-      "label": "pkceVerifier()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "pkceverifier()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L68"
-    },
-    {
-      "id": "workers_dashboard_src_session_readcookie",
-      "label": "readCookie()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "readcookie()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L81"
-    },
-    {
-      "id": "workers_dashboard_src_session_setcookie",
-      "label": "setCookie()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "setcookie()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L91"
     },
     {
       "id": "workers_dashboard_src_session_signsession",
@@ -5832,23 +6216,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "signsession()",
       "source_file": "workers/dashboard/src/session.ts",
       "source_location": "L30"
-    },
-    {
-      "id": "workers_dashboard_src_session_verifysession",
-      "label": "verifySession()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "verifysession()",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L36"
     },
     {
       "id": "workers_dashboard_test_dashboard_test_env",
@@ -5856,7 +6228,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "env()",
       "source_file": "workers/dashboard/test/dashboard.test.ts",
@@ -5868,59 +6240,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "stubresponse()",
       "source_file": "workers/dashboard/test/dashboard.test.ts",
       "source_location": "L13"
     },
     {
-      "id": "workers_ingest_test_contract_test_fakedb_batch",
-      "label": ".batch()",
+      "id": "workers_dashboard_test_location_test_cookie",
+      "label": "cookie()",
       "_callable": true,
       "_origin": "ast",
-      "community": 41,
-      "community_name": "FakeDb",
+      "community": 4,
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
-      "norm_label": ".batch()",
-      "source_file": "workers/ingest/test/contract.test.ts",
-      "source_location": "L206"
-    },
-    {
-      "id": "workers_ingest_test_contract_test_fakedb_constructor",
-      "label": ".constructor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "FakeDb",
-      "file_type": "code",
-      "norm_label": ".constructor()",
-      "source_file": "workers/ingest/test/contract.test.ts",
-      "source_location": "L190"
-    },
-    {
-      "id": "workers_ingest_test_contract_test_fakedb_prepare",
-      "label": ".prepare()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "FakeDb",
-      "file_type": "code",
-      "norm_label": ".prepare()",
-      "source_file": "workers/ingest/test/contract.test.ts",
-      "source_location": "L192"
-    },
-    {
-      "id": "workers_shared_contract_checkcommon",
-      "label": "checkCommon()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "contract.ts",
-      "file_type": "code",
-      "norm_label": "checkcommon()",
-      "source_file": "workers/shared/contract.ts",
-      "source_location": "L147"
+      "norm_label": "cookie()",
+      "source_file": "workers/dashboard/test/location.test.ts",
+      "source_location": "L212"
     },
     {
       "id": "workers_shared_contract_checkkind",
@@ -5933,90 +6269,6 @@
       "norm_label": "checkkind()",
       "source_file": "workers/shared/contract.ts",
       "source_location": "L202"
-    },
-    {
-      "id": "workers_shared_contract_parseinstant",
-      "label": "parseInstant()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "contract.ts",
-      "file_type": "code",
-      "norm_label": "parseinstant()",
-      "source_file": "workers/shared/contract.ts",
-      "source_location": "L141"
-    },
-    {
-      "id": "workers_shared_contract_validatelive",
-      "label": "validateLive()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "contract.ts",
-      "file_type": "code",
-      "norm_label": "validatelive()",
-      "source_file": "workers/shared/contract.ts",
-      "source_location": "L170"
-    },
-    {
-      "id": "tests_test_collector_collectortestcase_test_boot_relative_monotonic_clock_keeps_the_schedule",
-      "label": ".test_boot_relative_monotonic_clock_keeps_the_schedule()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "Env",
-      "file_type": "code",
-      "norm_label": ".test_boot_relative_monotonic_clock_keeps_the_schedule()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L602"
-    },
-    {
-      "id": "tests_test_collector_env_init",
-      "label": ".__init__()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "Env",
-      "file_type": "code",
-      "norm_label": ".__init__()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L36"
-    },
-    {
-      "id": "tests_test_collector_env_monotonic",
-      "label": ".monotonic()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "Env",
-      "file_type": "code",
-      "norm_label": ".monotonic()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L44"
-    },
-    {
-      "id": "tests_test_collector_env_now",
-      "label": ".now()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "Env",
-      "file_type": "code",
-      "norm_label": ".now()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L41"
-    },
-    {
-      "id": "tests_test_collector_env_sleep",
-      "label": ".sleep()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "Env",
-      "file_type": "code",
-      "norm_label": ".sleep()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L47"
     },
     {
       "id": "collector_main_collector_record_panels",
@@ -6403,6 +6655,18 @@
       "source_location": "L55"
     },
     {
+      "id": "workers_shared_contract_checkcommon",
+      "label": "checkCommon()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "ingest/src/index.ts",
+      "file_type": "code",
+      "norm_label": "checkcommon()",
+      "source_file": "workers/shared/contract.ts",
+      "source_location": "L147"
+    },
+    {
       "id": "workers_shared_contract_isplainobject",
       "label": "isPlainObject()",
       "_callable": true,
@@ -6427,12 +6691,24 @@
       "source_location": "L179"
     },
     {
+      "id": "workers_shared_contract_validatelive",
+      "label": "validateLive()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "ingest/src/index.ts",
+      "file_type": "code",
+      "norm_label": "validatelive()",
+      "source_file": "workers/shared/contract.ts",
+      "source_location": "L170"
+    },
+    {
       "id": "scripts_checks_page_render_check_result",
       "label": "result()",
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "result()",
       "source_file": "scripts/checks/page-render-check.mjs",
@@ -6444,35 +6720,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "accountsfrom()",
       "source_file": "scripts/install/cloudflare-account.mjs",
       "source_location": "L4"
-    },
-    {
-      "id": "scripts_install_github_user_resolveuser",
-      "label": "resolveUser()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "resolveuser()",
-      "source_file": "scripts/install/github-user.mjs",
-      "source_location": "L6"
-    },
-    {
-      "id": "scripts_install_github_user_resolveuser_get",
-      "label": "get()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "scripts/install/github-user.mjs",
-      "source_location": "L8"
     },
     {
       "id": "workers_dashboard_src_live_presentlatest",
@@ -6559,18 +6811,6 @@
       "source_location": "L135"
     },
     {
-      "id": "tests_test_pvs_authenticationtests_test_missing_serial_is_an_authentication_failure",
-      "label": ".test_missing_serial_is_an_authentication_failure()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "Clock",
-      "file_type": "code",
-      "norm_label": ".test_missing_serial_is_an_authentication_failure()",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L251"
-    },
-    {
       "id": "tests_test_pvs_clock_init",
       "label": ".__init__()",
       "_callable": true,
@@ -6607,160 +6847,64 @@
       "source_location": "L129"
     },
     {
-      "id": "tests_test_pvs_fakeopener_init",
-      "label": ".__init__()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "Clock",
-      "file_type": "code",
-      "norm_label": ".__init__()",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L76"
-    },
-    {
-      "id": "tests_test_pvs_fakeopener_open",
-      "label": ".open()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "Clock",
-      "file_type": "code",
-      "norm_label": ".open()",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L81"
-    },
-    {
-      "id": "collector_rollup_siteminute_init",
-      "label": ".__init__()",
+      "id": "tests_test_collector_collectortestcase_events",
+      "label": ".events()",
       "_callable": true,
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "code",
-      "norm_label": ".__init__()",
-      "source_file": "collector/rollup.py",
-      "source_location": "L37"
-    },
-    {
-      "id": "tests_test_collector_collectortestcase_test_enqueue_is_idempotent_and_survives_restart",
-      "label": ".test_enqueue_is_idempotent_and_survives_restart()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "SiteMinute",
-      "file_type": "code",
-      "norm_label": ".test_enqueue_is_idempotent_and_survives_restart()",
+      "norm_label": ".events()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L386"
+      "source_location": "L186"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_health_observation_survives_failed_reauthentication",
-      "label": ".test_health_observation_survives_failed_reauthentication()",
+      "id": "tests_test_collector_collectortestcase_test_live_snapshots_are_not_queued_for_replay",
+      "label": ".test_live_snapshots_are_not_queued_for_replay()",
       "_callable": true,
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "code",
-      "norm_label": ".test_health_observation_survives_failed_reauthentication()",
+      "norm_label": ".test_live_snapshots_are_not_queued_for_replay()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L516"
+      "source_location": "L450"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_panel_sample_and_freshness_marker_commit_together",
-      "label": ".test_panel_sample_and_freshness_marker_commit_together()",
+      "id": "tests_test_collector_collectortestcase_test_panel_ids_follow_the_serial_when_the_pvs_renumbers",
+      "label": ".test_panel_ids_follow_the_serial_when_the_pvs_renumbers()",
       "_callable": true,
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "code",
-      "norm_label": ".test_panel_sample_and_freshness_marker_commit_together()",
+      "norm_label": ".test_panel_ids_follow_the_serial_when_the_pvs_renumbers()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L295"
+      "source_location": "L324"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_partial_minute_below_the_sample_threshold",
-      "label": ".test_partial_minute_below_the_sample_threshold()",
+      "id": "tests_test_collector_collectortestcase_test_recovery_emits_one_event_per_group",
+      "label": ".test_recovery_emits_one_event_per_group()",
       "_callable": true,
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "code",
-      "norm_label": ".test_partial_minute_below_the_sample_threshold()",
+      "norm_label": ".test_recovery_emits_one_event_per_group()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L234"
+      "source_location": "L584"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_queue_holds_at_least_a_week_of_offline_minutes",
-      "label": ".test_queue_holds_at_least_a_week_of_offline_minutes()",
+      "id": "tests_test_collector_collectortestcase_test_wan_loss_queues_then_replays_identical_records",
+      "label": ".test_wan_loss_queues_then_replays_identical_records()",
       "_callable": true,
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "code",
-      "norm_label": ".test_queue_holds_at_least_a_week_of_offline_minutes()",
+      "norm_label": ".test_wan_loss_queues_then_replays_identical_records()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L401"
-    },
-    {
-      "id": "tests_test_collector_collectortestcase_test_record_ids_are_deterministic",
-      "label": ".test_record_ids_are_deterministic()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "SiteMinute",
-      "file_type": "code",
-      "norm_label": ".test_record_ids_are_deterministic()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L213"
-    },
-    {
-      "id": "tests_test_collector_collectortestcase_test_repeated_measurement_times_are_not_counted_twice",
-      "label": ".test_repeated_measurement_times_are_not_counted_twice()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "SiteMinute",
-      "file_type": "code",
-      "norm_label": ".test_repeated_measurement_times_are_not_counted_twice()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L244"
-    },
-    {
-      "id": "tests_test_collector_collectortestcase_test_unparsable_measurement_time_is_clock_invalid",
-      "label": ".test_unparsable_measurement_time_is_clock_invalid()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "SiteMinute",
-      "file_type": "code",
-      "norm_label": ".test_unparsable_measurement_time_is_clock_invalid()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L254"
-    },
-    {
-      "id": "tests_test_collector_fakepvs_authenticate",
-      "label": ".authenticate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "SiteMinute",
-      "file_type": "code",
-      "norm_label": ".authenticate()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L68"
-    },
-    {
-      "id": "tests_test_collector_published",
-      "label": "published()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 56,
-      "community_name": "SiteMinute",
-      "file_type": "code",
-      "norm_label": "published()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L29"
+      "source_location": "L407"
     },
     {
       "id": "pilot_pvs_get",
@@ -7072,7 +7216,7 @@
       "file_type": "code",
       "norm_label": "preventdefault()",
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L87"
+      "source_location": "L90"
     },
     {
       "id": "web_app_dayentry",
@@ -7759,6 +7903,18 @@
       "source_location": "L426"
     },
     {
+      "id": "tests_test_pvs_compatibilitytests_test_name_value_envelope_works_for_login_bootstrap_and_group_reads",
+      "label": ".test_name_value_envelope_works_for_login_bootstrap_and_group_reads()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 63,
+      "community_name": "CompatibilityTests",
+      "file_type": "code",
+      "norm_label": ".test_name_value_envelope_works_for_login_bootstrap_and_group_reads()",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L361"
+    },
+    {
       "id": "tests_test_pvs_compatibilitytests_test_real_http_cookie_session_recovers_after_expiry",
       "label": ".test_real_http_cookie_session_recovers_after_expiry()",
       "_callable": true,
@@ -7817,66 +7973,6 @@
       "norm_label": "log_message()",
       "source_file": "tests/test_pvs.py",
       "source_location": "L331"
-    },
-    {
-      "id": "collector_upload_ids_from",
-      "label": "_ids_from()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": "_ids_from()",
-      "source_file": "collector/upload.py",
-      "source_location": "L109"
-    },
-    {
-      "id": "collector_upload_ingestclient_post_records",
-      "label": ".post_records()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": ".post_records()",
-      "source_file": "collector/upload.py",
-      "source_location": "L80"
-    },
-    {
-      "id": "collector_upload_ingestclient_put_live",
-      "label": ".put_live()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": ".put_live()",
-      "source_file": "collector/upload.py",
-      "source_location": "L75"
-    },
-    {
-      "id": "collector_upload_ingestclient_send",
-      "label": "._send()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": "._send()",
-      "source_file": "collector/upload.py",
-      "source_location": "L52"
-    },
-    {
-      "id": "collector_upload_parse_json",
-      "label": "_parse_json()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": "_parse_json()",
-      "source_file": "collector/upload.py",
-      "source_location": "L101"
     },
     {
       "id": "workers_ingest_test_weather_test_fakedb_batch",
@@ -8308,7 +8404,7 @@
       "file_type": "code",
       "norm_label": "cell()",
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L103"
+      "source_location": "L106"
     },
     {
       "id": "site_introduction_expandcomparisonrow",
@@ -8407,64 +8503,124 @@
       "source_location": "L16"
     },
     {
-      "id": "tests_test_collector_collectortestcase_run_panels",
-      "label": ".run_panels()",
+      "id": "collector_rollup_siteminute_init",
+      "label": ".__init__()",
       "_callable": true,
       "_origin": "ast",
       "community": 73,
-      "community_name": ".run_panels",
+      "community_name": "SiteMinute",
       "file_type": "code",
-      "norm_label": ".run_panels()",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L382"
+      "norm_label": ".__init__()",
+      "source_file": "collector/rollup.py",
+      "source_location": "L37"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_equal_power_with_new_measurement_time_is_a_valid_sample",
-      "label": ".test_equal_power_with_new_measurement_time_is_a_valid_sample()",
+      "id": "tests_test_collector_collectortestcase_test_enqueue_is_idempotent_and_survives_restart",
+      "label": ".test_enqueue_is_idempotent_and_survives_restart()",
       "_callable": true,
       "_origin": "ast",
       "community": 73,
-      "community_name": ".run_panels",
+      "community_name": "SiteMinute",
       "file_type": "code",
-      "norm_label": ".test_equal_power_with_new_measurement_time_is_a_valid_sample()",
+      "norm_label": ".test_enqueue_is_idempotent_and_survives_restart()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L263"
+      "source_location": "L386"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_frozen_measurement_times_write_no_placeholder_panel_rows",
-      "label": ".test_frozen_measurement_times_write_no_placeholder_panel_rows()",
+      "id": "tests_test_collector_collectortestcase_test_health_observation_survives_failed_reauthentication",
+      "label": ".test_health_observation_survives_failed_reauthentication()",
       "_callable": true,
       "_origin": "ast",
       "community": 73,
-      "community_name": ".run_panels",
+      "community_name": "SiteMinute",
       "file_type": "code",
-      "norm_label": ".test_frozen_measurement_times_write_no_placeholder_panel_rows()",
+      "norm_label": ".test_health_observation_survives_failed_reauthentication()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L307"
+      "source_location": "L516"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_panel_ids_follow_the_serial_when_the_pvs_renumbers",
-      "label": ".test_panel_ids_follow_the_serial_when_the_pvs_renumbers()",
+      "id": "tests_test_collector_collectortestcase_test_partial_minute_below_the_sample_threshold",
+      "label": ".test_partial_minute_below_the_sample_threshold()",
       "_callable": true,
       "_origin": "ast",
       "community": 73,
-      "community_name": ".run_panels",
+      "community_name": "SiteMinute",
       "file_type": "code",
-      "norm_label": ".test_panel_ids_follow_the_serial_when_the_pvs_renumbers()",
+      "norm_label": ".test_partial_minute_below_the_sample_threshold()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L324"
+      "source_location": "L234"
     },
     {
-      "id": "tests_test_collector_collectortestcase_test_panel_ids_stay_stable_across_restart",
-      "label": ".test_panel_ids_stay_stable_across_restart()",
+      "id": "tests_test_collector_collectortestcase_test_queue_holds_at_least_a_week_of_offline_minutes",
+      "label": ".test_queue_holds_at_least_a_week_of_offline_minutes()",
       "_callable": true,
       "_origin": "ast",
       "community": 73,
-      "community_name": ".run_panels",
+      "community_name": "SiteMinute",
       "file_type": "code",
-      "norm_label": ".test_panel_ids_stay_stable_across_restart()",
+      "norm_label": ".test_queue_holds_at_least_a_week_of_offline_minutes()",
       "source_file": "tests/test_collector.py",
-      "source_location": "L315"
+      "source_location": "L401"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_record_ids_are_deterministic",
+      "label": ".test_record_ids_are_deterministic()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "SiteMinute",
+      "file_type": "code",
+      "norm_label": ".test_record_ids_are_deterministic()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L213"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_repeated_measurement_times_are_not_counted_twice",
+      "label": ".test_repeated_measurement_times_are_not_counted_twice()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "SiteMinute",
+      "file_type": "code",
+      "norm_label": ".test_repeated_measurement_times_are_not_counted_twice()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L244"
+    },
+    {
+      "id": "tests_test_collector_collectortestcase_test_unparsable_measurement_time_is_clock_invalid",
+      "label": ".test_unparsable_measurement_time_is_clock_invalid()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "SiteMinute",
+      "file_type": "code",
+      "norm_label": ".test_unparsable_measurement_time_is_clock_invalid()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L254"
+    },
+    {
+      "id": "tests_test_collector_fakepvs_authenticate",
+      "label": ".authenticate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "SiteMinute",
+      "file_type": "code",
+      "norm_label": ".authenticate()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L68"
+    },
+    {
+      "id": "tests_test_collector_published",
+      "label": "published()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "SiteMinute",
+      "file_type": "code",
+      "norm_label": "published()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L29"
     },
     {
       "id": "tests_test_pvs_readchecktests_run_check",
@@ -8477,18 +8633,6 @@
       "norm_label": ".run_check()",
       "source_file": "tests/test_pvs.py",
       "source_location": "L434"
-    },
-    {
-      "id": "tests_test_pvs_readchecktests_test_authentication_failure_is_reported_without_traceback_or_secrets",
-      "label": ".test_authentication_failure_is_reported_without_traceback_or_secrets()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "ReadCheckTests",
-      "file_type": "code",
-      "norm_label": ".test_authentication_failure_is_reported_without_traceback_or_secrets()",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L479"
     },
     {
       "id": "tests_test_pvs_readchecktests_test_metadata_failure_is_optional_but_missing_core_site_fields_fail",
@@ -8947,78 +9091,6 @@
       "source_location": "L134"
     },
     {
-      "id": "workers_dashboard_src_weather_localdate",
-      "label": "localDate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "localdate()",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L38"
-    },
-    {
-      "id": "workers_dashboard_src_weather_numberornull",
-      "label": "numberOrNull()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "numberornull()",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L42"
-    },
-    {
-      "id": "workers_dashboard_src_weather_qualityof",
-      "label": "qualityOf()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "qualityof()",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L59"
-    },
-    {
-      "id": "workers_dashboard_src_weather_readweather",
-      "label": "readWeather()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "readweather()",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L71"
-    },
-    {
-      "id": "workers_dashboard_src_weather_rowsof",
-      "label": "rowsOf()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "rowsof()",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L46"
-    },
-    {
-      "id": "workers_dashboard_test_location_test_cookie",
-      "label": "cookie()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "cookie()",
-      "source_file": "workers/dashboard/test/location.test.ts",
-      "source_location": "L212"
-    },
-    {
       "id": "workers_dashboard_test_location_test_env",
       "label": "env()",
       "_callable": true,
@@ -9079,148 +9151,52 @@
       "source_location": "L29"
     },
     {
-      "id": "workers_ingest_test_site_day_test_prepare",
-      "label": "prepare()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "prepare()",
-      "source_file": "workers/ingest/test/site-day.test.ts",
-      "source_location": "L24"
-    },
-    {
-      "id": "workers_shared_site_day_daybounds",
-      "label": "dayBounds()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "daybounds()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L26"
-    },
-    {
-      "id": "workers_shared_site_day_daybounds_midnight",
-      "label": "midnight()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "midnight()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L27"
-    },
-    {
-      "id": "workers_shared_site_day_localday",
-      "label": "localDay()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "localday()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "workers_shared_site_day_nextday",
-      "label": "nextDay()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "nextday()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "workers_shared_site_day_previousday",
-      "label": "previousDay()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "previousday()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "workers_shared_site_day_refreshsitedays",
-      "label": "refreshSiteDays()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "refreshsitedays()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L79"
-    },
-    {
-      "id": "workers_shared_site_day_rollupday",
-      "label": "rollupDay()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "rollupday()",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L55"
-    },
-    {
-      "id": "workers_dashboard_test_query_test_db",
-      "label": "db()",
+      "id": "tests_test_collector_env_init",
+      "label": ".__init__()",
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "ScriptedDb",
+      "community_name": "Env",
       "file_type": "code",
-      "norm_label": "db()",
-      "source_file": "workers/dashboard/test/query.test.ts",
-      "source_location": "L51"
+      "norm_label": ".__init__()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L36"
     },
     {
-      "id": "workers_dashboard_test_query_test_scripteddb_batch",
-      "label": ".batch()",
+      "id": "tests_test_collector_env_monotonic",
+      "label": ".monotonic()",
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "ScriptedDb",
+      "community_name": "Env",
       "file_type": "code",
-      "norm_label": ".batch()",
-      "source_file": "workers/dashboard/test/query.test.ts",
-      "source_location": "L46"
+      "norm_label": ".monotonic()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L44"
     },
     {
-      "id": "workers_dashboard_test_query_test_scripteddb_constructor",
-      "label": ".constructor()",
+      "id": "tests_test_collector_env_now",
+      "label": ".now()",
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "ScriptedDb",
+      "community_name": "Env",
       "file_type": "code",
-      "norm_label": ".constructor()",
-      "source_file": "workers/dashboard/test/query.test.ts",
-      "source_location": "L25"
+      "norm_label": ".now()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L41"
     },
     {
-      "id": "workers_dashboard_test_query_test_scripteddb_prepare",
-      "label": ".prepare()",
+      "id": "tests_test_collector_env_sleep",
+      "label": ".sleep()",
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "ScriptedDb",
+      "community_name": "Env",
       "file_type": "code",
-      "norm_label": ".prepare()",
-      "source_file": "workers/dashboard/test/query.test.ts",
-      "source_location": "L30"
+      "norm_label": ".sleep()",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L47"
     },
     {
       "id": "web_weather_controls_initweathercontrols",
@@ -9245,6 +9221,30 @@
       "norm_label": "sync()",
       "source_file": "web/weather-controls.js",
       "source_location": "L3"
+    },
+    {
+      "id": "tests_test_pvs_fakeopener_init",
+      "label": ".__init__()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "FakeOpener",
+      "file_type": "code",
+      "norm_label": ".__init__()",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L76"
+    },
+    {
+      "id": "tests_test_pvs_fakeopener_open",
+      "label": ".open()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "FakeOpener",
+      "file_type": "code",
+      "norm_label": ".open()",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L81"
     },
     {
       "id": "workers_ingest_src_store",
@@ -9567,6 +9567,39 @@
       "source_location": "L8"
     },
     {
+      "id": "workers_dashboard_src_session",
+      "label": "session.ts",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "session.ts",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "workers_dashboard_src_session_decoder",
+      "label": "decoder",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "decoder",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "workers_dashboard_src_session_encoder",
+      "label": "encoder",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "code",
+      "norm_label": "encoder",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L8"
+    },
+    {
       "id": "workers_dashboard_test_notifications_test",
       "label": "notifications.test.ts",
       "_origin": "ast",
@@ -9578,111 +9611,114 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_ct_calibration_200a_\u5165\u6237\u7535\u8868\u7bb1\u7684\u5b89\u88c5\u9650\u5236",
-      "label": "200A \u5165\u6237\u7535\u8868\u7bb1\u7684\u5b89\u88c5\u9650\u5236",
+      "id": "docref_rfc_7636",
+      "label": "RFC-7636",
       "_origin": "ast",
-      "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "200a \u5165\u6237\u7535\u8868\u7bb1\u7684\u5b89\u88c5\u9650\u5236",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L18"
+      "community": 13,
+      "community_name": "notifications.ts",
+      "file_type": "concept",
+      "norm_label": "rfc-7636",
+      "source_file": "workers/dashboard/src/session.ts",
+      "source_location": "L67"
     },
     {
-      "id": "docs_ct_calibration_400a_\u7cfb\u7edf\u7684\u8ba1\u91cf\u914d\u7f6e",
-      "label": "400A \u7cfb\u7edf\u7684\u8ba1\u91cf\u914d\u7f6e",
+      "id": "workers_dashboard_src_weather",
+      "label": "weather.ts",
       "_origin": "ast",
       "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "400a \u7cfb\u7edf\u7684\u8ba1\u91cf\u914d\u7f6e",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L59"
-    },
-    {
-      "id": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "label": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "_origin": "ast",
-      "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "ct \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "source_file": "docs/ct-calibration.md",
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "weather.ts",
+      "source_file": "workers/dashboard/src/weather.ts",
       "source_location": "L1"
     },
     {
-      "id": "docs_ct_calibration_sunpower_\u7684\u53d1\u7535\u4e0e\u7528\u7535\u8ba1\u91cf",
-      "label": "SunPower \u7684\u53d1\u7535\u4e0e\u7528\u7535\u8ba1\u91cf",
+      "id": "workers_dashboard_src_weather_default_weather_span_seconds",
+      "label": "DEFAULT_WEATHER_SPAN_SECONDS",
       "_origin": "ast",
       "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "sunpower \u7684\u53d1\u7535\u4e0e\u7528\u7535\u8ba1\u91cf",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L5"
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "default_weather_span_seconds",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L16"
     },
     {
-      "id": "docs_ct_calibration_\u6bd4\u4f8b\u6821\u51c6\u7684\u4f9d\u636e\u4e0e\u4f5c\u7528",
-      "label": "\u6bd4\u4f8b\u6821\u51c6\u7684\u4f9d\u636e\u4e0e\u4f5c\u7528",
+      "id": "workers_dashboard_src_weather_forecast_fields",
+      "label": "FORECAST_FIELDS",
       "_origin": "ast",
       "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\u6bd4\u4f8b\u6821\u51c6\u7684\u4f9d\u636e\u4e0e\u4f5c\u7528",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L65"
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "forecast_fields",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L51"
     },
     {
-      "id": "docs_ct_calibration_\u7535\u8868\u4e4b\u540e\u7684\u4f9b\u7535\u7ed3\u6784",
-      "label": "\u7535\u8868\u4e4b\u540e\u7684\u4f9b\u7535\u7ed3\u6784",
+      "id": "workers_dashboard_src_weather_max_weather_rows",
+      "label": "MAX_WEATHER_ROWS",
       "_origin": "ast",
       "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\u7535\u8868\u4e4b\u540e\u7684\u4f9b\u7535\u7ed3\u6784",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L32"
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "max_weather_rows",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L15"
     },
     {
-      "id": "docs_ct_calibration_\u7535\u8868\u5bf9\u7167\u4e0e\u6821\u51c6\u8bbe\u7f6e",
-      "label": "\u7535\u8868\u5bf9\u7167\u4e0e\u6821\u51c6\u8bbe\u7f6e",
+      "id": "workers_dashboard_src_weather_max_weather_span_seconds",
+      "label": "MAX_WEATHER_SPAN_SECONDS",
       "_origin": "ast",
       "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\u7535\u8868\u5bf9\u7167\u4e0e\u6821\u51c6\u8bbe\u7f6e",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L75"
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "max_weather_span_seconds",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L14"
     },
     {
-      "id": "docs_ct_calibration_\u8d44\u6599\u4e0e\u56fe\u7247",
-      "label": "\u8d44\u6599\u4e0e\u56fe\u7247",
+      "id": "workers_dashboard_src_weather_weather_stale_seconds",
+      "label": "WEATHER_STALE_SECONDS",
       "_origin": "ast",
       "community": 14,
-      "community_name": "CT \u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\u8d44\u6599\u4e0e\u56fe\u7247",
-      "source_file": "docs/ct-calibration.md",
-      "source_location": "L90"
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "weather_stale_seconds",
+      "source_file": "workers/dashboard/src/weather.ts",
+      "source_location": "L13"
     },
     {
-      "id": "collector_upload_rationale_32",
-      "label": "Network trouble, timeout, 429, or 5xx: keep the records and retry later.",
+      "id": "workers_dashboard_test_weather_test",
+      "label": "dashboard/test/weather.test.ts",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "dashboard/test/weather.test.ts",
+      "source_file": "workers/dashboard/test/weather.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "workers_dashboard_test_weather_test_now",
+      "label": "NOW",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "weather.ts",
+      "file_type": "code",
+      "norm_label": "now",
+      "source_file": "workers/dashboard/test/weather.test.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "tests_test_collector_rationale_308",
+      "label": "A frozen measurement time is not a reading: one bootstrap row, then a gap.",
       "_origin": "ast",
       "community": 15,
       "community_name": "CollectorTestCase",
       "file_type": "rationale",
-      "norm_label": "network trouble, timeout, 429, or 5xx: keep the records and retry later.",
-      "source_file": "collector/upload.py",
-      "source_location": "L32"
+      "norm_label": "a frozen measurement time is not a reading: one bootstrap row, then a gap.",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L308"
     },
     {
       "id": "tests_test_collector_rationale_469",
@@ -9694,6 +9730,17 @@
       "norm_label": "one attempt a minute: the pause never grows past the first minute.",
       "source_file": "tests/test_collector.py",
       "source_location": "L469"
+    },
+    {
+      "id": "tests_test_collector_rationale_603",
+      "label": "The Pi's monotonic clock starts at boot, so due times need the offset.",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "CollectorTestCase",
+      "file_type": "rationale",
+      "norm_label": "the pi's monotonic clock starts at boot, so due times need the offset.",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L603"
     },
     {
       "id": "scripts_checks_month_check",
@@ -9804,6 +9851,17 @@
       "norm_label": "focused identity diagnostics; exclude ssid, mac and other settings.",
       "source_file": "collector/pvs.py",
       "source_location": "L173"
+    },
+    {
+      "id": "collector_pvs_rationale_41",
+      "label": "The PVS rejected the session with HTTP 401/403.",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "PVSClient",
+      "file_type": "rationale",
+      "norm_label": "the pvs rejected the session with http 401/403.",
+      "source_file": "collector/pvs.py",
+      "source_location": "L41"
     },
     {
       "id": "collector_pvs_rationale_49",
@@ -10796,17 +10854,6 @@
       "source_location": "L1"
     },
     {
-      "id": "collector_pvs_rationale_41",
-      "label": "The PVS rejected the session with HTTP 401/403.",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "test_pvs.py",
-      "file_type": "rationale",
-      "norm_label": "the pvs rejected the session with http 401/403.",
-      "source_file": "collector/pvs.py",
-      "source_location": "L41"
-    },
-    {
       "id": "pilot_rationale_2",
       "label": "Read-only PVS6 cadence and health pilot. Logs metadata, never power values.",
       "_origin": "ast",
@@ -10826,6 +10873,28 @@
       "file_type": "rationale",
       "norm_label": "adapter tests: authentication, focused queries, parsing, and quality.",
       "source_file": "tests/test_pvs.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "collector_init",
+      "label": "__init__.py",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "file_type": "code",
+      "norm_label": "__init__.py",
+      "source_file": "collector/__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "collector_main",
+      "label": "main.py",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "file_type": "code",
+      "norm_label": "main.py",
+      "source_file": "collector/main.py",
       "source_location": "L1"
     },
     {
@@ -10884,6 +10953,28 @@
       "source_location": "L1"
     },
     {
+      "id": "collector_init_rationale_1",
+      "label": "Read-only SunPower PVS varserver collector: LAN polling, local queue, cloud\u2026",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "file_type": "rationale",
+      "norm_label": "read-only sunpower pvs varserver collector: lan polling, local queue, cloud...",
+      "source_file": "collector/__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "collector_main_rationale_1",
+      "label": "Serialized PVS varserver collector: tiered reads, minute rollup, local queue,\u2026",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "file_type": "rationale",
+      "norm_label": "serialized pvs varserver collector: tiered reads, minute rollup, local queue,...",
+      "source_file": "collector/main.py",
+      "source_location": "L1"
+    },
+    {
       "id": "collector_queue_rationale_1",
       "label": "SQLite pending-upload queue and Pi-side anonymous panel mapping. Commit locally\u2026",
       "_origin": "ast",
@@ -10939,17 +11030,6 @@
       "source_location": "L1"
     },
     {
-      "id": "collector_init",
-      "label": "__init__.py",
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "file_type": "code",
-      "norm_label": "__init__.py",
-      "source_file": "collector/__init__.py",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_checks_pypvs_evaluation",
       "label": "pypvs-evaluation.py",
       "_origin": "ast",
@@ -10958,17 +11038,6 @@
       "file_type": "code",
       "norm_label": "pypvs-evaluation.py",
       "source_file": "scripts/checks/pypvs-evaluation.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "collector_init_rationale_1",
-      "label": "Read-only SunPower PVS varserver collector: LAN polling, local queue, cloud\u2026",
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "file_type": "rationale",
-      "norm_label": "read-only sunpower pvs varserver collector: lan polling, local queue, cloud...",
-      "source_file": "collector/__init__.py",
       "source_location": "L1"
     },
     {
@@ -10983,22 +11052,44 @@
       "source_location": "L1"
     },
     {
+      "id": "collector_upload",
+      "label": "upload.py",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "code",
+      "norm_label": "upload.py",
+      "source_file": "collector/upload.py",
+      "source_location": "L1"
+    },
+    {
       "id": "collector_upload_py_exception",
       "label": "Exception",
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "code",
       "norm_label": "exception",
       "source_file": "",
       "source_location": ""
     },
     {
+      "id": "collector_upload_rationale_1",
+      "label": "Ingest client: discardable latest-value PUTs and idempotent history batches.\u2026",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "rationale",
+      "norm_label": "ingest client: discardable latest-value puts and idempotent history batches....",
+      "source_file": "collector/upload.py",
+      "source_location": "L1"
+    },
+    {
       "id": "collector_upload_rationale_24",
       "label": "Base class for ingest failures.",
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "rationale",
       "norm_label": "base class for ingest failures.",
       "source_file": "collector/upload.py",
@@ -11009,7 +11100,7 @@
       "label": "The upload token was rejected; stop sending until an operator acts.",
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "rationale",
       "norm_label": "the upload token was rejected; stop sending until an operator acts.",
       "source_file": "collector/upload.py",
@@ -11020,11 +11111,22 @@
       "label": "The batch was rejected; isolate these record IDs and keep the rest.",
       "_origin": "ast",
       "community": 23,
-      "community_name": "RejectedError",
+      "community_name": "upload.py",
       "file_type": "rationale",
       "norm_label": "the batch was rejected; isolate these record ids and keep the rest.",
       "source_file": "collector/upload.py",
       "source_location": "L36"
+    },
+    {
+      "id": "collector_upload_rationale_81",
+      "label": "Return the accepted record IDs; the caller deletes exactly those.",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "upload.py",
+      "file_type": "rationale",
+      "norm_label": "return the accepted record ids; the caller deletes exactly those.",
+      "source_file": "collector/upload.py",
+      "source_location": "L81"
     },
     {
       "id": "scripts_checks_local_cloud_check",
@@ -11460,6 +11562,17 @@
       "norm_label": "default",
       "source_file": "web/energy-plot.js",
       "source_location": "L5"
+    },
+    {
+      "id": "workers_dashboard_src_index",
+      "label": "dashboard/src/index.ts",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "dashboard/src/index.ts",
+      "file_type": "code",
+      "norm_label": "dashboard/src/index.ts",
+      "source_file": "workers/dashboard/src/index.ts",
+      "source_location": "L1"
     },
     {
       "id": "web_chart_colors",
@@ -11935,48 +12048,37 @@
       "source_location": "L1"
     },
     {
-      "id": "workers_dashboard_src_weather_max_weather_span_seconds",
-      "label": "MAX_WEATHER_SPAN_SECONDS",
+      "id": "workers_ingest_test_site_day_test",
+      "label": "site-day.test.ts",
       "_origin": "ast",
       "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
+      "community_name": "site-day.ts",
       "file_type": "code",
-      "norm_label": "max_weather_span_seconds",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L14"
-    },
-    {
-      "id": "workers_dashboard_src_weather_weather_stale_seconds",
-      "label": "WEATHER_STALE_SECONDS",
-      "_origin": "ast",
-      "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
-      "file_type": "code",
-      "norm_label": "weather_stale_seconds",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L13"
-    },
-    {
-      "id": "workers_dashboard_test_weather_test",
-      "label": "dashboard/test/weather.test.ts",
-      "_origin": "ast",
-      "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
-      "file_type": "code",
-      "norm_label": "dashboard/test/weather.test.ts",
-      "source_file": "workers/dashboard/test/weather.test.ts",
+      "norm_label": "site-day.test.ts",
+      "source_file": "workers/ingest/test/site-day.test.ts",
       "source_location": "L1"
     },
     {
-      "id": "workers_dashboard_test_weather_test_now",
-      "label": "NOW",
+      "id": "workers_shared_site_day",
+      "label": "site-day.ts",
       "_origin": "ast",
       "community": 30,
-      "community_name": "dashboard/test/weather.test.ts",
+      "community_name": "site-day.ts",
       "file_type": "code",
-      "norm_label": "now",
-      "source_file": "workers/dashboard/test/weather.test.ts",
-      "source_location": "L9"
+      "norm_label": "site-day.ts",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "workers_shared_site_day_formatters",
+      "label": "formatters",
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "site-day.ts",
+      "file_type": "code",
+      "norm_label": "formatters",
+      "source_file": "workers/shared/site-day.ts",
+      "source_location": "L3"
     },
     {
       "id": "docs_security_review",
@@ -12942,31 +13044,9 @@
       "label": "ArgumentParser",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "argumentparser",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "collector_main",
-      "label": "main.py",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "main.py",
-      "file_type": "code",
-      "norm_label": "main.py",
-      "source_file": "collector/main.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "collector_main_py_datetime",
-      "label": "datetime",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "main.py",
-      "file_type": "code",
-      "norm_label": "datetime",
       "source_file": "",
       "source_location": ""
     },
@@ -12975,7 +13055,7 @@
       "label": "RuntimeError",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "code",
       "norm_label": "runtimeerror",
       "source_file": "",
@@ -12986,7 +13066,7 @@
       "label": "Context and requirements",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "context and requirements",
@@ -12994,22 +13074,11 @@
       "source_location": "L123"
     },
     {
-      "id": "collector_main_rationale_1",
-      "label": "Serialized PVS varserver collector: tiered reads, minute rollup, local queue,\u2026",
-      "_origin": "ast",
-      "community": 39,
-      "community_name": "main.py",
-      "file_type": "rationale",
-      "norm_label": "serialized pvs varserver collector: tiered reads, minute rollup, local queue,...",
-      "source_file": "collector/main.py",
-      "source_location": "L1"
-    },
-    {
       "id": "collector_main_rationale_409",
       "label": "One read-only pass over every group; prints values, stores nothing.",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "rationale",
       "norm_label": "one read-only pass over every group; prints values, stores nothing.",
       "source_file": "collector/main.py",
@@ -13020,7 +13089,7 @@
       "label": "Wait for the PVS instead of crash-looping when it is rebooting or down.",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "rationale",
       "norm_label": "wait for the pvs instead of crash-looping when it is rebooting or down.",
       "source_file": "collector/main.py",
@@ -13031,7 +13100,7 @@
       "label": "Only recognized model names and numeric revisions may enter diagnostics.",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "rationale",
       "norm_label": "only recognized model names and numeric revisions may enter diagnostics.",
       "source_file": "collector/model.py",
@@ -13042,18 +13111,29 @@
       "label": "A PVS read failed: transport, malformed response, or repeated auth failure.",
       "_origin": "ast",
       "community": 39,
-      "community_name": "main.py",
+      "community_name": "PVSError",
       "file_type": "rationale",
       "norm_label": "a pvs read failed: transport, malformed response, or repeated auth failure.",
       "source_file": "collector/pvs.py",
       "source_location": "L30"
     },
     {
+      "id": "scripts_install_github_user",
+      "label": "github-user.mjs",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "dashboard.test.ts",
+      "file_type": "code",
+      "norm_label": "github-user.mjs",
+      "source_file": "scripts/install/github-user.mjs",
+      "source_location": "L1"
+    },
+    {
       "id": "workers_dashboard_src_constants",
       "label": "constants.ts",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "constants.ts",
       "source_file": "workers/dashboard/src/constants.ts",
@@ -13064,7 +13144,7 @@
       "label": "OAUTH_COOKIE",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "oauth_cookie",
       "source_file": "workers/dashboard/src/constants.ts",
@@ -13075,7 +13155,7 @@
       "label": "SCHEMA_VERSION",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "schema_version",
       "source_file": "workers/dashboard/src/constants.ts",
@@ -13086,7 +13166,7 @@
       "label": "SESSION_COOKIE",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "session_cookie",
       "source_file": "workers/dashboard/src/constants.ts",
@@ -13097,73 +13177,29 @@
       "label": "SESSION_SECONDS",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "session_seconds",
       "source_file": "workers/dashboard/src/constants.ts",
       "source_location": "L11"
     },
     {
-      "id": "workers_dashboard_src_index",
-      "label": "dashboard/src/index.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "dashboard/src/index.ts",
-      "source_file": "workers/dashboard/src/index.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "workers_dashboard_src_oauth",
       "label": "oauth.ts",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "oauth.ts",
       "source_file": "workers/dashboard/src/oauth.ts",
       "source_location": "L1"
     },
     {
-      "id": "workers_dashboard_src_session",
-      "label": "session.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "session.ts",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "workers_dashboard_src_session_decoder",
-      "label": "decoder",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "decoder",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "workers_dashboard_src_session_encoder",
-      "label": "encoder",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "code",
-      "norm_label": "encoder",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L8"
-    },
-    {
       "id": "workers_dashboard_test_calibration_test",
       "label": "calibration.test.ts",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "calibration.test.ts",
       "source_file": "workers/dashboard/test/calibration.test.ts",
@@ -13174,7 +13210,7 @@
       "label": "dashboard.test.ts",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "dashboard.test.ts",
       "source_file": "workers/dashboard/test/dashboard.test.ts",
@@ -13185,22 +13221,11 @@
       "label": "NOW",
       "_origin": "ast",
       "community": 4,
-      "community_name": "dashboard/src/index.ts",
+      "community_name": "dashboard.test.ts",
       "file_type": "code",
       "norm_label": "now",
       "source_file": "workers/dashboard/test/dashboard.test.ts",
       "source_location": "L11"
-    },
-    {
-      "id": "docref_rfc_7636",
-      "label": "RFC-7636",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "dashboard/src/index.ts",
-      "file_type": "concept",
-      "norm_label": "rfc-7636",
-      "source_file": "workers/dashboard/src/session.ts",
-      "source_location": "L67"
     },
     {
       "id": "docs_architecture_architecture",
@@ -13275,18 +13300,6 @@
       "source_location": "L13"
     },
     {
-      "id": "docs_architecture_data_contract_and_history",
-      "label": "Data contract and history",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "Architecture",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "data contract and history",
-      "source_file": "docs/architecture.md",
-      "source_location": "L66"
-    },
-    {
       "id": "docs_architecture_decisions",
       "label": "Decisions",
       "_origin": "ast",
@@ -13309,6 +13322,102 @@
       "norm_label": "installation and upgrade artifacts",
       "source_file": "docs/architecture.md",
       "source_location": "L109"
+    },
+    {
+      "id": "docs_ct_calibration_compare_against_the_utility_meter_and_set_calibration",
+      "label": "Compare against the utility meter and set calibration",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "compare against the utility meter and set calibration",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L75"
+    },
+    {
+      "id": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "label": "CT coverage limits and home-use calibration",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "ct coverage limits and home-use calibration",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "docs_ct_calibration_installation_limits_in_a_200a_meter_enclosure",
+      "label": "Installation limits in a 200A meter enclosure",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "installation limits in a 200a meter enclosure",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L18"
+    },
+    {
+      "id": "docs_ct_calibration_metering_configuration_for_400a_services",
+      "label": "Metering configuration for 400A services",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "metering configuration for 400a services",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L59"
+    },
+    {
+      "id": "docs_ct_calibration_sources_and_illustrations",
+      "label": "Sources and illustrations",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "sources and illustrations",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L90"
+    },
+    {
+      "id": "docs_ct_calibration_sunpower_production_and_consumption_metering",
+      "label": "SunPower production and consumption metering",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "sunpower production and consumption metering",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "docs_ct_calibration_supply_structures_downstream_of_the_meter",
+      "label": "Supply structures downstream of the meter",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "supply structures downstream of the meter",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L32"
+    },
+    {
+      "id": "docs_ct_calibration_what_proportional_calibration_can_correct",
+      "label": "What proportional calibration can correct",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "CT coverage limits and home-use calibration",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "what proportional calibration can correct",
+      "source_file": "docs/ct-calibration.md",
+      "source_location": "L65"
     },
     {
       "id": "readme_acknowledgements",
@@ -13636,26 +13745,158 @@
       "source_location": "L125"
     },
     {
-      "id": "tests_test_collector_rationale_34",
-      "label": "Virtual wall clock plus monotonic clock advanced by the collector's sleeps.",
+      "id": "workers_schema",
+      "label": "schema.sql",
       "_origin": "ast",
       "community": 44,
-      "community_name": "Env",
-      "file_type": "rationale",
-      "norm_label": "virtual wall clock plus monotonic clock advanced by the collector's sleeps.",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L34"
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "schema.sql",
+      "source_file": "workers/schema.sql",
+      "source_location": null
     },
     {
-      "id": "tests_test_collector_rationale_603",
-      "label": "The Pi's monotonic clock starts at boot, so due times need the offset.",
+      "id": "workers_schema_collector_event",
+      "label": "collector_event",
       "_origin": "ast",
       "community": 44,
-      "community_name": "Env",
-      "file_type": "rationale",
-      "norm_label": "the pi's monotonic clock starts at boot, so due times need the offset.",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L603"
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "collector_event",
+      "source_file": "workers/schema.sql",
+      "source_location": "L101"
+    },
+    {
+      "id": "workers_schema_collector_event_by_collector",
+      "label": "collector_event_by_collector",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "collector_event_by_collector",
+      "source_file": "workers/schema.sql",
+      "source_location": "L111"
+    },
+    {
+      "id": "workers_schema_latest_site",
+      "label": "latest_site",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "latest_site",
+      "source_file": "workers/schema.sql",
+      "source_location": "L5"
+    },
+    {
+      "id": "workers_schema_panel_known",
+      "label": "panel_known",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "panel_known",
+      "source_file": "workers/schema.sql",
+      "source_location": "L89"
+    },
+    {
+      "id": "workers_schema_panel_sample",
+      "label": "panel_sample",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "panel_sample",
+      "source_file": "workers/schema.sql",
+      "source_location": "L65"
+    },
+    {
+      "id": "workers_schema_panel_sample_by_slot",
+      "label": "panel_sample_by_slot",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "panel_sample_by_slot",
+      "source_file": "workers/schema.sql",
+      "source_location": "L115"
+    },
+    {
+      "id": "workers_schema_site_calibration",
+      "label": "site_calibration",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "site_calibration",
+      "source_file": "workers/schema.sql",
+      "source_location": "L127"
+    },
+    {
+      "id": "workers_schema_site_day",
+      "label": "site_day",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "site_day",
+      "source_file": "workers/schema.sql",
+      "source_location": "L44"
+    },
+    {
+      "id": "workers_schema_site_location",
+      "label": "site_location",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "site_location",
+      "source_file": "workers/schema.sql",
+      "source_location": "L117"
+    },
+    {
+      "id": "workers_schema_site_minute",
+      "label": "site_minute",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "site_minute",
+      "source_file": "workers/schema.sql",
+      "source_location": "L20"
+    },
+    {
+      "id": "workers_schema_site_notifications",
+      "label": "site_notifications",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "site_notifications",
+      "source_file": "workers/schema.sql",
+      "source_location": "L134"
+    },
+    {
+      "id": "workers_schema_weather_hour",
+      "label": "weather_hour",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "weather_hour",
+      "source_file": "workers/schema.sql",
+      "source_location": "L153"
+    },
+    {
+      "id": "workers_schema_weather_sunshine_hour",
+      "label": "weather_sunshine_hour",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "schema.sql",
+      "file_type": "code",
+      "norm_label": "weather_sunshine_hour",
+      "source_file": "workers/schema.sql",
+      "source_location": "L171"
     },
     {
       "id": "docs_project_layout_local_configuration_and_persistent_data",
@@ -13692,6 +13933,17 @@
       "norm_label": "source and generated output",
       "source_file": "docs/project-layout.md",
       "source_location": "L38"
+    },
+    {
+      "id": "collector_main_py_datetime",
+      "label": "datetime",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "test_ingest_local.py",
+      "file_type": "code",
+      "norm_label": "datetime",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "collector_rollup",
@@ -13736,6 +13988,18 @@
       "norm_label": "test_ingest_local.py",
       "source_file": "tests/test_ingest_local.py",
       "source_location": "L1"
+    },
+    {
+      "id": "docs_architecture_data_contract_and_history",
+      "label": "Data contract and history",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "test_ingest_local.py",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "data contract and history",
+      "source_file": "docs/architecture.md",
+      "source_location": "L66"
     },
     {
       "id": "collector_model_rationale_280",
@@ -13791,6 +14055,17 @@
       "norm_label": "one panel's state for a five-minute slot.",
       "source_file": "collector/rollup.py",
       "source_location": "L116"
+    },
+    {
+      "id": "collector_upload_rationale_44",
+      "label": "HTTPS client for one ingest origin. Certificates are validated normally.",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "test_ingest_local.py",
+      "file_type": "rationale",
+      "norm_label": "https client for one ingest origin. certificates are validated normally.",
+      "source_file": "collector/upload.py",
+      "source_location": "L44"
     },
     {
       "id": "tests_test_ingest_local_rationale_1",
@@ -13888,6 +14163,18 @@
       "source_location": "L129"
     },
     {
+      "id": "docs_preview_data_coverage_and_implementation",
+      "label": "Data coverage and implementation",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "Local preview with simulated data",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "data coverage and implementation",
+      "source_file": "docs/preview.md",
+      "source_location": "L26"
+    },
+    {
       "id": "docs_preview_github_pages",
       "label": "GitHub Pages",
       "_origin": "ast",
@@ -13912,52 +14199,40 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_preview_\u53ef\u76f4\u63a5\u6258\u7ba1\u7684\u6f14\u793a\u4ea7\u7269",
-      "label": "\u53ef\u76f4\u63a5\u6258\u7ba1\u7684\u6f14\u793a\u4ea7\u7269",
+      "id": "docs_preview_project_introduction",
+      "label": "Project introduction",
       "_origin": "ast",
       "community": 49,
       "community_name": "Local preview with simulated data",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\u53ef\u76f4\u63a5\u6258\u7ba1\u7684\u6f14\u793a\u4ea7\u7269",
+      "norm_label": "project introduction",
       "source_file": "docs/preview.md",
-      "source_location": "L39"
+      "source_location": "L35"
     },
     {
-      "id": "docs_preview_\u542f\u52a8",
-      "label": "\u542f\u52a8",
+      "id": "docs_preview_start_the_preview",
+      "label": "Start the preview",
       "_origin": "ast",
       "community": 49,
       "community_name": "Local preview with simulated data",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\u542f\u52a8",
+      "norm_label": "start the preview",
       "source_file": "docs/preview.md",
       "source_location": "L7"
     },
     {
-      "id": "docs_preview_\u6570\u636e\u8303\u56f4\u4e0e\u5b9e\u73b0",
-      "label": "\u6570\u636e\u8303\u56f4\u4e0e\u5b9e\u73b0",
+      "id": "docs_preview_static_demo_artifact",
+      "label": "Static demo artifact",
       "_origin": "ast",
       "community": 49,
       "community_name": "Local preview with simulated data",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\u6570\u636e\u8303\u56f4\u4e0e\u5b9e\u73b0",
+      "norm_label": "static demo artifact",
       "source_file": "docs/preview.md",
-      "source_location": "L26"
-    },
-    {
-      "id": "docs_preview_\u9879\u76ee\u4ecb\u7ecd\u7ad9\u70b9",
-      "label": "\u9879\u76ee\u4ecb\u7ecd\u7ad9\u70b9",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "Local preview with simulated data",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "\u9879\u76ee\u4ecb\u7ecd\u7ad9\u70b9",
-      "source_file": "docs/preview.md",
-      "source_location": "L35"
+      "source_location": "L39"
     },
     {
       "id": "scripts_checks_site_check",
@@ -14033,21 +14308,10 @@
       "label": "cloudflare-account.mjs",
       "_origin": "ast",
       "community": 52,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_child_process",
       "file_type": "code",
       "norm_label": "cloudflare-account.mjs",
       "source_file": "scripts/install/cloudflare-account.mjs",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_install_github_user",
-      "label": "github-user.mjs",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "ref_node_assert",
-      "file_type": "code",
-      "norm_label": "github-user.mjs",
-      "source_file": "scripts/install/github-user.mjs",
       "source_location": "L1"
     },
     {
@@ -14106,26 +14370,26 @@
       "source_location": "L120"
     },
     {
-      "id": "tests_test_pvs_rationale_74",
-      "label": "Minimal stand-in for urllib's opener; records every requested path.",
-      "_origin": "ast",
-      "community": 55,
-      "community_name": "Clock",
-      "file_type": "rationale",
-      "norm_label": "minimal stand-in for urllib's opener; records every requested path.",
-      "source_file": "tests/test_pvs.py",
-      "source_location": "L74"
-    },
-    {
-      "id": "collector_rollup_rationale_35",
-      "label": "Accumulates the site samples that belong to one UTC minute.",
+      "id": "collector_upload_rationale_32",
+      "label": "Network trouble, timeout, 429, or 5xx: keep the records and retry later.",
       "_origin": "ast",
       "community": 56,
-      "community_name": "SiteMinute",
+      "community_name": "RetryableError",
       "file_type": "rationale",
-      "norm_label": "accumulates the site samples that belong to one utc minute.",
-      "source_file": "collector/rollup.py",
-      "source_location": "L35"
+      "norm_label": "network trouble, timeout, 429, or 5xx: keep the records and retry later.",
+      "source_file": "collector/upload.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "tests_test_collector_rationale_325",
+      "label": "A PVS restart renumbers every index; identity has to come from the serial.",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "RetryableError",
+      "file_type": "rationale",
+      "norm_label": "a pvs restart renumbers every index; identity has to come from the serial.",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L325"
     },
     {
       "id": "docs_adr_0001_pypvs_client_evaluation_adr_0001_evaluate_pypvs_for_the_collector",
@@ -14287,7 +14551,7 @@
       "file_type": "code",
       "norm_label": "context",
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L73"
+      "source_location": "L76"
     },
     {
       "id": "scripts_checks_introduction_check_document",
@@ -14298,7 +14562,7 @@
       "file_type": "code",
       "norm_label": "document",
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L56"
+      "source_location": "L59"
     },
     {
       "id": "scripts_checks_introduction_check_external",
@@ -14463,7 +14727,7 @@
       "file_type": "code",
       "norm_label": "server",
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L126"
+      "source_location": "L129"
     },
     {
       "id": "scripts_checks_introduction_check_setupsections",
@@ -14496,7 +14760,7 @@
       "file_type": "code",
       "norm_label": "window",
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L66"
+      "source_location": "L69"
     },
     {
       "id": "docs_plans_2026_10_09_collector_recovery",
@@ -14675,48 +14939,28 @@
       "source_location": "L55"
     },
     {
-      "id": "collector_upload",
-      "label": "upload.py",
+      "id": "docs_plans_2026_10_09_english_documentation",
+      "label": "2026-10-09-english-documentation.md",
       "_origin": "ast",
       "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "code",
-      "norm_label": "upload.py",
-      "source_file": "collector/upload.py",
+      "community_name": "2026-10-09-english-documentation.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "2026-10-09-english-documentation.md",
+      "source_file": "docs/plans/2026-10-09-english-documentation.md",
       "source_location": "L1"
     },
     {
-      "id": "collector_upload_rationale_1",
-      "label": "Ingest client: discardable latest-value PUTs and idempotent history batches.\u2026",
+      "id": "docs_plans_2026_10_09_english_documentation_english_documentation_and_code_cleanup",
+      "label": "English documentation and code cleanup",
       "_origin": "ast",
       "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "rationale",
-      "norm_label": "ingest client: discardable latest-value puts and idempotent history batches....",
-      "source_file": "collector/upload.py",
+      "community_name": "2026-10-09-english-documentation.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "english documentation and code cleanup",
+      "source_file": "docs/plans/2026-10-09-english-documentation.md",
       "source_location": "L1"
-    },
-    {
-      "id": "collector_upload_rationale_44",
-      "label": "HTTPS client for one ingest origin. Certificates are validated normally.",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "rationale",
-      "norm_label": "https client for one ingest origin. certificates are validated normally.",
-      "source_file": "collector/upload.py",
-      "source_location": "L44"
-    },
-    {
-      "id": "collector_upload_rationale_81",
-      "label": "Return the accepted record IDs; the caller deletes exactly those.",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "IngestClient",
-      "file_type": "rationale",
-      "norm_label": "return the accepted record ids; the caller deletes exactly those.",
-      "source_file": "collector/upload.py",
-      "source_location": "L81"
     },
     {
       "id": "docs_diagrams_readme",
@@ -15046,26 +15290,15 @@
       "source_location": "L63"
     },
     {
-      "id": "tests_test_collector_rationale_308",
-      "label": "A frozen measurement time is not a reading: one bootstrap row, then a gap.",
+      "id": "collector_rollup_rationale_35",
+      "label": "Accumulates the site samples that belong to one UTC minute.",
       "_origin": "ast",
       "community": 73,
-      "community_name": ".run_panels",
+      "community_name": "SiteMinute",
       "file_type": "rationale",
-      "norm_label": "a frozen measurement time is not a reading: one bootstrap row, then a gap.",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L308"
-    },
-    {
-      "id": "tests_test_collector_rationale_325",
-      "label": "A PVS restart renumbers every index; identity has to come from the serial.",
-      "_origin": "ast",
-      "community": 73,
-      "community_name": ".run_panels",
-      "file_type": "rationale",
-      "norm_label": "a pvs restart renumbers every index; identity has to come from the serial.",
-      "source_file": "tests/test_collector.py",
-      "source_location": "L325"
+      "norm_label": "accumulates the site samples that belong to one utc minute.",
+      "source_file": "collector/rollup.py",
+      "source_location": "L35"
     },
     {
       "id": "docs_references_additional_ui_references",
@@ -15458,50 +15691,6 @@
       "source_location": "L218"
     },
     {
-      "id": "workers_dashboard_src_weather",
-      "label": "weather.ts",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "weather.ts",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "workers_dashboard_src_weather_default_weather_span_seconds",
-      "label": "DEFAULT_WEATHER_SPAN_SECONDS",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "default_weather_span_seconds",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L16"
-    },
-    {
-      "id": "workers_dashboard_src_weather_forecast_fields",
-      "label": "FORECAST_FIELDS",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "forecast_fields",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L51"
-    },
-    {
-      "id": "workers_dashboard_src_weather_max_weather_rows",
-      "label": "MAX_WEATHER_ROWS",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "max_weather_rows",
-      "source_file": "workers/dashboard/src/weather.ts",
-      "source_location": "L15"
-    },
-    {
       "id": "workers_dashboard_test_location_test",
       "label": "location.test.ts",
       "_origin": "ast",
@@ -15522,39 +15711,6 @@
       "norm_label": "now",
       "source_file": "workers/dashboard/test/location.test.ts",
       "source_location": "L21"
-    },
-    {
-      "id": "workers_ingest_test_site_day_test",
-      "label": "site-day.test.ts",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "site-day.test.ts",
-      "source_file": "workers/ingest/test/site-day.test.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "workers_shared_site_day",
-      "label": "site-day.ts",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "site-day.ts",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "workers_shared_site_day_formatters",
-      "label": "formatters",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "location.ts",
-      "file_type": "code",
-      "norm_label": "formatters",
-      "source_file": "workers/shared/site-day.ts",
-      "source_location": "L3"
     },
     {
       "id": "docs_pvs_compatibility_evidence_and_scope",
@@ -15617,6 +15773,17 @@
       "source_location": "L53"
     },
     {
+      "id": "tests_test_collector_rationale_34",
+      "label": "Virtual wall clock plus monotonic clock advanced by the collector's sleeps.",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "Env",
+      "file_type": "rationale",
+      "norm_label": "virtual wall clock plus monotonic clock advanced by the collector's sleeps.",
+      "source_file": "tests/test_collector.py",
+      "source_location": "L34"
+    },
+    {
       "id": "web_weather_controls",
       "label": "weather-controls.js",
       "_origin": "ast",
@@ -15628,6 +15795,39 @@
       "source_location": "L1"
     },
     {
+      "id": "tests_test_pvs_rationale_74",
+      "label": "Minimal stand-in for urllib's opener; records every requested path.",
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "FakeOpener",
+      "file_type": "rationale",
+      "norm_label": "minimal stand-in for urllib's opener; records every requested path.",
+      "source_file": "tests/test_pvs.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "workers_migrations_2026_10_09_notifications",
+      "label": "2026-10-09-notifications.sql",
+      "_origin": "ast",
+      "community": 94,
+      "community_name": "2026-10-09-notifications.sql",
+      "file_type": "code",
+      "norm_label": "2026-10-09-notifications.sql",
+      "source_file": "workers/migrations/2026-10-09-notifications.sql",
+      "source_location": null
+    },
+    {
+      "id": "workers_migrations_2026_10_09_notifications_site_notifications",
+      "label": "site_notifications",
+      "_origin": "ast",
+      "community": 94,
+      "community_name": "2026-10-09-notifications.sql",
+      "file_type": "code",
+      "norm_label": "site_notifications",
+      "source_file": "workers/migrations/2026-10-09-notifications.sql",
+      "source_location": "L2"
+    },
+    {
       "id": "dataclasses",
       "label": "dataclasses",
       "_origin": "semantic",
@@ -15636,6 +15836,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "dataclasses",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_sqlite",
+      "label": "ref_node_sqlite",
+      "_origin": "semantic",
+      "community": 13,
+      "community_name": "notifications.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_sqlite",
       "source_file": "",
       "type": "external"
     },
@@ -15712,18 +15924,6 @@
       "type": "external"
     },
     {
-      "id": "io",
-      "label": "io",
-      "_origin": "semantic",
-      "community": 20,
-      "community_name": "test_pvs.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "io",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "ssl",
       "label": "ssl",
       "_origin": "semantic",
@@ -15760,6 +15960,18 @@
       "type": "external"
     },
     {
+      "id": "unittest_mock",
+      "label": "unittest_mock",
+      "_origin": "semantic",
+      "community": 20,
+      "community_name": "test_pvs.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "unittest_mock",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "urllib_error",
       "label": "urllib_error",
       "_origin": "semantic",
@@ -15768,18 +15980,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "urllib_error",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "urllib_parse",
-      "label": "urllib_parse",
-      "_origin": "semantic",
-      "community": 20,
-      "community_name": "test_pvs.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "urllib_parse",
       "source_file": "",
       "type": "external"
     },
@@ -15820,6 +16020,18 @@
       "type": "external"
     },
     {
+      "id": "io",
+      "label": "io",
+      "_origin": "semantic",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "io",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "json",
       "label": "json",
       "_origin": "semantic",
@@ -15828,18 +16040,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "json",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "os",
-      "label": "os",
-      "_origin": "semantic",
-      "community": 21,
-      "community_name": "test_collector.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "os",
       "source_file": "",
       "type": "external"
     },
@@ -15904,6 +16104,18 @@
       "type": "external"
     },
     {
+      "id": "signal",
+      "label": "signal",
+      "_origin": "semantic",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "signal",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "sqlite3",
       "label": "sqlite3",
       "_origin": "semantic",
@@ -15964,6 +16176,42 @@
       "type": "external"
     },
     {
+      "id": "urllib_parse",
+      "label": "urllib_parse",
+      "_origin": "semantic",
+      "community": 21,
+      "community_name": "test_collector.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "urllib_parse",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "aiohttp",
+      "label": "aiohttp",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "aiohttp",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "logging",
+      "label": "logging",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "logging",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "math",
       "label": "math",
       "_origin": "semantic",
@@ -15976,14 +16224,98 @@
       "type": "external"
     },
     {
-      "id": "unittest",
-      "label": "unittest",
+      "id": "pypvs",
+      "label": "pypvs",
       "_origin": "semantic",
       "community": 22,
       "community_name": "pypvs-evaluation.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "unittest",
+      "norm_label": "pypvs",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_models_common",
+      "label": "pypvs_models_common",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_models_common",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_models_inverter",
+      "label": "pypvs_models_inverter",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_models_inverter",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_models_livedata",
+      "label": "pypvs_models_livedata",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_models_livedata",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_models_pvs",
+      "label": "pypvs_models_pvs",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_models_pvs",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_pvs",
+      "label": "pypvs_pvs",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_pvs",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_pvs_fcgi",
+      "label": "pypvs_pvs_fcgi",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_pvs_fcgi",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pypvs_updaters_production_inverters",
+      "label": "pypvs_updaters_production_inverters",
+      "_origin": "semantic",
+      "community": 22,
+      "community_name": "pypvs-evaluation.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pypvs_updaters_production_inverters",
       "source_file": "",
       "type": "external"
     },
@@ -16048,18 +16380,6 @@
       "type": "external"
     },
     {
-      "id": "ref_node_test",
-      "label": "ref_node_test",
-      "_origin": "semantic",
-      "community": 32,
-      "community_name": "ref_node_fs",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_test",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "ref_node_url",
       "label": "ref_node_url",
       "_origin": "semantic",
@@ -16072,14 +16392,50 @@
       "type": "external"
     },
     {
-      "id": "signal",
-      "label": "signal",
+      "id": "ref_node_assert",
+      "label": "ref_node_assert",
       "_origin": "semantic",
-      "community": 39,
-      "community_name": "main.py",
+      "community": 4,
+      "community_name": "dashboard.test.ts",
       "external": true,
       "file_type": "concept",
-      "norm_label": "signal",
+      "norm_label": "ref_node_assert",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ref_node_test",
+      "label": "ref_node_test",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "dashboard.test.ts",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ref_node_test",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "os",
+      "label": "os",
+      "_origin": "semantic",
+      "community": 46,
+      "community_name": "test_ingest_local.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "os",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "unittest",
+      "label": "unittest",
+      "_origin": "semantic",
+      "community": 46,
+      "community_name": "test_ingest_local.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "unittest",
       "source_file": "",
       "type": "external"
     },
@@ -16096,23 +16452,11 @@
       "type": "external"
     },
     {
-      "id": "ref_node_assert",
-      "label": "ref_node_assert",
-      "_origin": "semantic",
-      "community": 52,
-      "community_name": "ref_node_assert",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_assert",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "ref_node_child_process",
       "label": "ref_node_child_process",
       "_origin": "semantic",
       "community": 52,
-      "community_name": "ref_node_assert",
+      "community_name": "ref_node_child_process",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_node_child_process",
@@ -16284,138 +16628,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "workers_dist_shared_contract_validatebatch",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "ref_node_sqlite",
-      "label": "ref_node_sqlite",
-      "community": 13,
-      "community_name": "notifications.ts",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "ref_node_sqlite",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "unittest_mock",
-      "label": "unittest_mock",
-      "community": 20,
-      "community_name": "test_pvs.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "unittest_mock",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "aiohttp",
-      "label": "aiohttp",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "aiohttp",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "logging",
-      "label": "logging",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "logging",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs",
-      "label": "pypvs",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_models_common",
-      "label": "pypvs_models_common",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_models_common",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_models_inverter",
-      "label": "pypvs_models_inverter",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_models_inverter",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_models_livedata",
-      "label": "pypvs_models_livedata",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_models_livedata",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_models_pvs",
-      "label": "pypvs_models_pvs",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_models_pvs",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_pvs",
-      "label": "pypvs_pvs",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_pvs",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_pvs_fcgi",
-      "label": "pypvs_pvs_fcgi",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_pvs_fcgi",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pypvs_updaters_production_inverters",
-      "label": "pypvs_updaters_production_inverters",
-      "community": 22,
-      "community_name": "pypvs-evaluation.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pypvs_updaters_production_inverters",
       "source_file": "",
       "type": "external"
     }
@@ -36817,7 +37029,7 @@
     },
     {
       "source": "docs_ct_calibration",
-      "target": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
+      "target": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36827,8 +37039,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_200a_\u5165\u6237\u7535\u8868\u7bb1\u7684\u5b89\u88c5\u9650\u5236",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_installation_limits_in_a_200a_meter_enclosure",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36838,8 +37050,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_\u7535\u8868\u4e4b\u540e\u7684\u4f9b\u7535\u7ed3\u6784",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_supply_structures_downstream_of_the_meter",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36849,8 +37061,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_sunpower_\u7684\u53d1\u7535\u4e0e\u7528\u7535\u8ba1\u91cf",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_sunpower_production_and_consumption_metering",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36860,8 +37072,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_400a_\u7cfb\u7edf\u7684\u8ba1\u91cf\u914d\u7f6e",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_metering_configuration_for_400a_services",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36871,8 +37083,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_\u6bd4\u4f8b\u6821\u51c6\u7684\u4f9d\u636e\u4e0e\u4f5c\u7528",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_what_proportional_calibration_can_correct",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36882,8 +37094,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_\u7535\u8868\u5bf9\u7167\u4e0e\u6821\u51c6\u8bbe\u7f6e",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_compare_against_the_utility_meter_and_set_calibration",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36893,8 +37105,8 @@
       "weight": 1.0
     },
     {
-      "source": "docs_ct_calibration_ct_\u5b89\u88c5\u9650\u5236\u4e0e\u5bb6\u5ead\u7528\u7535\u6821\u51c6",
-      "target": "docs_ct_calibration_\u8d44\u6599\u4e0e\u56fe\u7247",
+      "source": "docs_ct_calibration_ct_coverage_limits_and_home_use_calibration",
+      "target": "docs_ct_calibration_sources_and_illustrations",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -37344,6 +37556,17 @@
       "weight": 1.0
     },
     {
+      "source": "docs_plans_2026_10_09_english_documentation",
+      "target": "docs_plans_2026_10_09_english_documentation_english_documentation_and_code_cleanup",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/plans/2026-10-09-english-documentation.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "docs_plans_2026_10_09_pvs_compatibility",
       "target": "docs_plans_2026_10_09_pvs_compatibility_pvs_compatibility_implementation_plan",
       "relation": "contains",
@@ -37400,7 +37623,7 @@
     },
     {
       "source": "docs_preview_local_preview_with_simulated_data",
-      "target": "docs_preview_\u6570\u636e\u8303\u56f4\u4e0e\u5b9e\u73b0",
+      "target": "docs_preview_data_coverage_and_implementation",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -37411,7 +37634,7 @@
     },
     {
       "source": "docs_preview_local_preview_with_simulated_data",
-      "target": "docs_preview_\u9879\u76ee\u4ecb\u7ecd\u7ad9\u70b9",
+      "target": "docs_preview_project_introduction",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -37422,7 +37645,7 @@
     },
     {
       "source": "docs_preview_local_preview_with_simulated_data",
-      "target": "docs_preview_\u53ef\u76f4\u63a5\u6258\u7ba1\u7684\u6f14\u793a\u4ea7\u7269",
+      "target": "docs_preview_static_demo_artifact",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -37433,7 +37656,7 @@
     },
     {
       "source": "docs_preview_local_preview_with_simulated_data",
-      "target": "docs_preview_\u542f\u52a8",
+      "target": "docs_preview_start_the_preview",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -37443,7 +37666,7 @@
       "weight": 1.0
     },
     {
-      "source": "docs_preview_\u53ef\u76f4\u63a5\u6258\u7ba1\u7684\u6f14\u793a\u4ea7\u7269",
+      "source": "docs_preview_static_demo_artifact",
       "target": "docs_preview_github_pages",
       "relation": "contains",
       "_origin": "ast",
@@ -38473,7 +38696,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L100",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -38484,7 +38707,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L103",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -38495,7 +38718,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L126",
+      "source_location": "L129",
       "weight": 1.0
     },
     {
@@ -38693,7 +38916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L56",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -38704,7 +38927,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L66",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -38726,7 +38949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/introduction-check.mjs",
-      "source_location": "L73",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -44131,6 +44354,160 @@
       "weight": 1.0
     },
     {
+      "source": "workers_migrations_2026_10_09_notifications",
+      "target": "workers_migrations_2026_10_09_notifications_site_notifications",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/migrations/2026-10-09-notifications.sql",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_collector_event",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_collector_event_by_collector",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_panel_sample_by_slot",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_site_location",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_site_calibration",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_site_notifications",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_weather_hour",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_weather_sunshine_hour",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_site_minute",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_site_day",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_latest_site",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_panel_sample",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema",
+      "target": "workers_schema_panel_known",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
       "source": "workers_shared_contract",
       "target": "workers_shared_contract_max_batch",
       "relation": "contains",
@@ -45142,6 +45519,28 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/checks/page-render-check.mjs"
+    },
+    {
+      "source": "workers_schema_collector_event_by_collector",
+      "target": "workers_schema_collector_event",
+      "relation": "indexes",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "workers_schema_panel_sample_by_slot",
+      "target": "workers_schema_panel_sample",
+      "relation": "indexes",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "workers/schema.sql",
+      "source_location": "L115",
+      "weight": 1.0
     },
     {
       "source": "collector_pvs_pvsautherror",
