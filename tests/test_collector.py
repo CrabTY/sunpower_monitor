@@ -210,7 +210,7 @@ class CollectorTestCase(unittest.TestCase):
         self.assertIn("pvs_request_failed", self.events())
         self.assertEqual(minutes[0]["valid_counts"]["error"], "site:PVSError")
         detail = [record for record in self.records("collector_event") if record["event_type"] == "pvs_request_failed"]
-        self.assertEqual(detail[0]["details_code"], "site:PVSError")
+        self.assertEqual(detail[0]["details_code"], "site:PVSError,reason=unknown,stage=read")
 
     def test_partial_minute_below_the_sample_threshold(self):
         minute = SiteMinute(MINUTE)
@@ -459,6 +459,108 @@ class CollectorTestCase(unittest.TestCase):
         self.assertGreaterEqual(self.pvs.calls["site"], 6, "and the group keeps probing")
         # The healthy groups were never paused.
         self.assertNotIn("meters", [entry.get("group") for entry in logs if entry.get("event") == "cooldown"])
+
+    def test_failed_groups_keep_cooldown_until_recovery(self):
+        collector = self.collector(upload=False)
+        self.pvs.fail = set(self.pvs.calls)
+        attempts = {group: [] for group in self.pvs.calls}
+        guard = self.pvs._guard
+
+        def record_attempt(group):
+            attempts[group].append(self.env.monotonic())
+            guard(group)
+
+        self.pvs._guard = record_attempt
+        collector.run(duration=1500)
+        for group, times in attempts.items():
+            with self.subTest(group=group):
+                self.assertGreater(len(times), 4)
+                self.assertEqual(set(b - a for a, b in zip(times[2:], times[3:])), {60.0})
+        self.pvs.fail.clear()
+        collector.run(duration=200)
+        self.assertEqual(attempts["site"][-1] - attempts["site"][-2], 10.0)
+        self.assertEqual(attempts["meters"][-1] - attempts["meters"][-2], 30.0)
+
+    def test_heartbeat_marks_old_health_and_panel_values_as_stale(self):
+        collector = self.collector(upload=False)
+        collector._read_group("health")
+        collector._read_group("inverters")
+        self.env.sleep(3600)
+        self.pvs.fail.update({"health", "inverters"})
+        collector._read_group("health")
+        collector._read_group("inverters")
+        collector._heartbeat()
+        beat = [r for r in self.records("collector_event") if r["event_type"] == "collector_heartbeat"][-1]
+        for field in ("uptime=null", "cpu_pct=null", "panels_fresh=0", "health_age_s=3600", "panels_age_s=3600"):
+            self.assertIn(field, beat["details_code"])
+
+    def test_health_observation_survives_failed_reauthentication(self):
+        collector = self.collector(upload=False)
+        collector._read_group("health")
+        self.env.sleep(7200)
+        self.pvs.read_health = lambda: ({"/sys/info/uptime": 7199, "/sys/info/cpu_usage": 5}, 30)
+
+        def authenticate():
+            self.env.sleep(7)
+            raise PVSError("private auth detail")
+
+        self.pvs.authenticate = authenticate
+        logs = []
+        collector._log = lambda line: logs.append(json.loads(line))
+        observed_at = self.env.now()
+        collector._read_group("health")
+        health = next(r for r in logs if r["event"] == "health_read")
+        self.assertEqual(health["ts"], published(observed_at))
+        self.assertNotIn("private", json.dumps(logs))
+        self.pvs.read_health = lambda: ({"/sys/info/uptime": 7206}, 30)
+        collector._read_group("health")
+        self.assertEqual(self.events().count("pvs_restarted"), 1)
+
+    def test_reboot_with_larger_uptime_uses_monotonic_time_after_missing_read(self):
+        collector = self.collector(upload=False)
+        self.pvs.read_health = lambda: ({"/sys/info/uptime": 3600}, 30)
+        collector._read_group("health")
+        self.env.sleep(3600)
+        self.pvs.read_health = lambda: ({}, 30)
+        collector._read_group("health")
+        self.env.sleep(3600)
+        self.env.clock += timedelta(hours=5)
+        self.pvs.read_health = lambda: ({"/sys/info/uptime": 7199}, 30)
+        collector._read_group("health")
+        self.assertIn("pvs_restarted", self.events())
+        self.assertEqual(self.pvs.authenticated, 1)
+
+    def test_invalid_health_uptime_cannot_overflow_boot_timestamp(self):
+        collector = self.collector(upload=False)
+        for uptime in (-1, 1e308):
+            self.pvs.read_health = lambda: ({"/sys/info/uptime": uptime}, 30)
+            collector._read_group("health")
+            self.assertIsNone(collector._health["uptime"])
+            self.assertIsNone(collector._uptime_observation)
+
+    def test_heartbeat_expires_values_even_before_a_failed_read(self):
+        collector = self.collector(upload=False)
+        collector._read_group("health")
+        collector._read_group("inverters")
+        self.env.sleep(601)
+        collector._heartbeat()
+        beat = [r for r in self.records("collector_event") if r["event_type"] == "collector_heartbeat"][-1]
+        self.assertIn("uptime=null", beat["details_code"])
+        self.assertIn("panels_fresh=0", beat["details_code"])
+
+    def test_collector_logs_safe_structured_failure_without_exception_text(self):
+        collector = self.collector(upload=False)
+        logs = []
+        collector._log = lambda line: logs.append(json.loads(line))
+
+        def fail():
+            raise PVSError("private cookie and response", reason="http", stage="auth", http_status=403, latency_ms=20)
+
+        self.pvs.read_site = fail
+        collector._read_group("site")
+        failed = next(r for r in logs if r["event"] == "read_failed")
+        self.assertEqual((failed["reason"], failed["stage"], failed["http_status"], failed["latency_ms"]), ("http", "auth", 403, 20))
+        self.assertNotIn("private", json.dumps(logs))
 
     def test_recovery_emits_one_event_per_group(self):
         self.pvs.fail.add("meters")
