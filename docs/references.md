@@ -4,6 +4,14 @@ We thank the authors and contributors of the projects below for sharing their pr
 
 Links identify the upstream versions reviewed for protocol and UI decisions. The collector and UI projects below are references, not bundled dependencies. Any directly copied code must retain the notices required by its MIT or Apache-2.0 license.
 
+## Official local API documentation
+
+Thank you to [SunStrong Management](https://github.com/SunStrong-Management) and the contributors to [PyPVS](https://github.com/SunStrong-Management/pypvs) for publishing the [local API documentation](https://github.com/SunStrong-Management/pypvs/blob/main/doc/LocalAPI.md) and [PVS6 variable reference](https://github.com/SunStrong-Management/pypvs/blob/main/doc/varserver-variables-public-pvs6.csv). The introduction site's compatibility and sampling explanations already cite these official materials. They document authentication, session cookies, `/vars` queries, cache parameters and request-pacing recommendations.
+
+Our collector implements the local HTTP interface with Python's standard library. It does not install or import the `pypvs` package, call SunStrong's cloud service, or import historical records from that service. Each grouped read includes `match=` even when using a cache ID, following our hardware checks of stale cache membership; see [the collector implementation](../collector/pvs.py).
+
+## Community collector references
+
 | Project | Collector entry point | Strengths | Limits for this project |
 | --- | --- | --- | --- |
 | [sunpower-monitor](https://github.com/karak2112/sunpower-monitor/blob/4806123242424696f570243b3dc01b40079d7a7c/services/collector/src/solar_collector/datasource/varserver.py) | Python `httpx`; authenticates, then makes grouped GET requests for `livedata`, `meter`, and `inverter`; parsing lives in [`parse.py`](https://github.com/karak2112/sunpower-monitor/blob/4806123242424696f570243b3dc01b40079d7a7c/services/collector/src/solar_collector/parse.py) | Targets the same 61846 firmware; focused read-only queries, timeouts, circuit breaker, redacted fixtures, and tests | [`poller.py`](https://github.com/karak2112/sunpower-monitor/blob/4806123242424696f570243b3dc01b40079d7a7c/services/collector/src/solar_collector/poller.py) writes directly to PostgreSQL/TimescaleDB. Its parser maps `pMppt1Kw` to inverter `power_kw`, but that is DC MPPT power and should not stand in for AC output. |
