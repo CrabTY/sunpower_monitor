@@ -28,12 +28,19 @@ CACHES = {"livedata": "ldata", "meter": "mdata", "inverter": "idata"}
 class PVSError(RuntimeError):
     """A PVS read failed: transport, malformed response, or repeated auth failure."""
 
+    def __init__(self, message, *, reason="unknown", stage="read", http_status=None, errno=None, latency_ms=None):
+        super().__init__(message)
+        self.diagnostics = {"reason": reason, "stage": stage}
+        self.diagnostics.update({key: value for key, value in
+                                 (("http_status", http_status), ("errno", errno), ("latency_ms", latency_ms))
+                                 if value is not None})
+
 
 class PVSAuthError(PVSError):
     """The PVS rejected the session with HTTP 401/403."""
 
-    def __init__(self, status: int):
-        super().__init__(f"pvs authentication rejected with status {status}")
+    def __init__(self, status: int, **diagnostics):
+        super().__init__(f"pvs authentication rejected with status {status}", reason="http", http_status=status, **diagnostics)
         self.status = status
 
 
@@ -60,7 +67,7 @@ class PVSClient:
         self._last_request = float("-inf")
         self.authenticate()
 
-    def _request(self, path: str, headers: dict | None = None) -> tuple[dict, int]:
+    def _request(self, path: str, headers: dict | None = None, *, stage="read") -> tuple[dict, int]:
         gap = self.min_gap - (self._monotonic() - self._last_request)
         if gap > 0:
             self._sleep(gap)
@@ -71,35 +78,44 @@ class PVSClient:
                 body = response.read()
         except urllib.error.HTTPError as exc:
             exc.close()
+            elapsed = round(max(0.0, self._monotonic() - started) * 1000)
             if exc.code in (401, 403):
-                raise PVSAuthError(exc.code) from None
-            raise PVSError(f"pvs request failed with status {exc.code}") from None
+                raise PVSAuthError(exc.code, stage=stage, latency_ms=elapsed) from None
+            raise PVSError(f"pvs request failed with status {exc.code}", reason="http", stage=stage,
+                           http_status=exc.code, latency_ms=elapsed) from None
         except (urllib.error.URLError, OSError, ValueError) as exc:
-            raise PVSError(f"pvs request failed: {type(exc).__name__}") from None
+            cause = exc.reason if isinstance(exc, urllib.error.URLError) else exc
+            reason = "timeout" if isinstance(cause, TimeoutError) else "transport"
+            # Only fixed labels and numeric errno survive; exception text can contain credentials.
+            error_number = cause.errno if isinstance(cause, OSError) else None
+            error_number = error_number if type(error_number) is int else None
+            raise PVSError(f"pvs request failed: {type(exc).__name__}", reason=reason, stage=stage,
+                           errno=error_number, latency_ms=round(max(0.0, self._monotonic() - started) * 1000)) from None
         finally:
             self._last_request = self._monotonic()
+        latency = round(max(0.0, self._last_request - started) * 1000)
         try:
             data = json.loads(body)
         except ValueError:
-            raise PVSError("pvs response was not valid JSON") from None
+            raise PVSError("pvs response was not valid JSON", reason="invalid_json", stage=stage, latency_ms=latency) from None
         if not isinstance(data, dict):
-            raise PVSError("pvs response was not a JSON object")
-        return data, round(max(0.0, self._monotonic() - started) * 1000)
+            raise PVSError("pvs response was not a JSON object", reason="invalid_json", stage=stage, latency_ms=latency)
+        return data, latency
 
     def authenticate(self) -> None:
         """Derive the in-memory session credential from a focused serial read."""
         # The PVS answers 401 to every request that carries a stale session cookie,
         # including the serial read that login needs, so start from a clean jar.
         self._cookies.clear()
-        data, _ = self._request(SERIAL_PATH)
+        data, _ = self._request(SERIAL_PATH, stage="serial")
         serial = data.get("/sys/info/serialnum")
         if not isinstance(serial, str) or len(serial) < 5:
-            raise PVSError("pvs serial read did not return a usable value")
+            raise PVSError("pvs serial read did not return a usable value", reason="invalid_serial", stage="serial")
         credential = base64.b64encode(f"ssm_owner:{serial[-5:]}".encode()).decode()
         try:
-            self._request("/auth?login", {"Authorization": f"Basic {credential}"})
-        except PVSAuthError:
-            raise PVSError("pvs authentication failed") from None
+            self._request("/auth?login", {"Authorization": f"Basic {credential}"}, stage="auth")
+        except PVSAuthError as exc:
+            raise PVSError("pvs authentication failed", **exc.diagnostics) from None
         finally:
             del credential
 
@@ -125,7 +141,7 @@ class PVSClient:
             self.authenticate()
             data, latency = self._read_once(group)
         if "errorcode" in data:
-            raise PVSError(f"pvs {group} read returned an error response")
+            raise PVSError(f"pvs {group} read returned an error response", reason="device_error", latency_ms=latency)
         return data, latency
 
     def read_site(self) -> tuple[dict, int]:
@@ -139,7 +155,7 @@ class PVSClient:
 
     def read_health(self) -> tuple[dict, int]:
         """Small uncached query used to spot PVS restarts and rising load."""
-        return self._request(HEALTH_PATH)
+        return self._request(HEALTH_PATH, stage="health")
 
 
 def _build_opener(cookies=None):

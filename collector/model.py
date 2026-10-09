@@ -261,10 +261,13 @@ def live_payload(collector_id: str, sample: SiteSample) -> dict:
     return payload
 
 
-def pvs_uptime_regressed(previous: dict, current: dict) -> bool:
-    """A decreasing uptime means the PVS restarted; missing values prove nothing."""
+def pvs_uptime_regressed(previous: dict, current: dict, *, elapsed_seconds: float | None = None) -> bool:
+    """Detect a reset even when an outage lets the new uptime overtake the old one."""
     before, after = previous.get("uptime"), current.get("uptime")
-    return before is not None and after is not None and after < before
+    if before is None or after is None:
+        return False
+    # Allow query latency and uptime rounding; wall-clock adjustments are excluded by the caller.
+    return after < before or (elapsed_seconds is not None and after - before < elapsed_seconds - 15.0)
 
 
 if __name__ == "__main__":
