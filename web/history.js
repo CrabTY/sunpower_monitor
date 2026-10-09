@@ -2,6 +2,7 @@
 
 import { weatherText } from "./insights.js";
 import { calibrateHistory, gridRatio } from "./calibration.js";
+import { initWeatherControls } from "./weather-controls.js";
 import { powerGridOption, dailySiteRows, dailySiteOption } from "./energy-plot.js";
 import { chartPalette, chartXValueAt, clearEChart, disposeEChart, renderEChart } from "./chart-engine.bundle.js";
 import {
@@ -19,7 +20,7 @@ import {
 } from "./chart.js";
 
 var DASH = "\u2014";
-var state = { range: "today", period: "today", metric: "power", measure: "solar", weatherLayer: "cloud", data: null, weather: null, interval: null, selectedIndex: -1, selectedDay: -1 };
+var state = { range: "today", period: "today", metric: "power", weatherLayer: "cloud", data: null, weather: null, interval: null, selectedIndex: -1, selectedDay: -1 };
 
 (function () {
   "use strict";
@@ -56,8 +57,7 @@ var state = { range: "today", period: "today", metric: "power", measure: "solar"
         state.metric = params.get("metric") === "energy" ? "energy" : "power";
       }
     }
-    state.measure = params.get("measure") === "home" ? "home" : "solar";
-    state.weatherLayer = params.get("weather") === "temperature" ? "temperature" : "cloud";
+    state.weatherLayer = Object.prototype.hasOwnProperty.call(WEATHER_LAYERS, params.get("weather")) ? params.get("weather") : "cloud";
   }
 
   function writeUrl() {
@@ -71,8 +71,7 @@ var state = { range: "today", period: "today", metric: "power", measure: "solar"
     } else if (state.range !== "custom" && state.period !== PERIODS[state.range][0][0]) {
       url.searchParams.set("period", state.period);
     }
-    if (state.measure === "home") url.searchParams.set("measure", "home");
-    if (state.weatherLayer === "temperature") url.searchParams.set("weather", "temperature");
+    if (state.weatherLayer !== "cloud") url.searchParams.set("weather", state.weatherLayer);
     window.history.replaceState(null, "", url);
   }
 
@@ -158,6 +157,7 @@ var state = { range: "today", period: "today", metric: "power", measure: "solar"
   function renderWeatherLegend() {
     var weather = state.weather;
     var layer = WEATHER_LAYERS[state.weatherLayer];
+    el("weather-toggle").textContent = "Weather · " + layer.label;
     el("weather-key").textContent = layer.label + " " + layer.unit;
     el("weather-key-energy").textContent = layer.label + " " + layer.unit;
     // The swatch and the line share one colour, so the right axis is findable.
@@ -236,13 +236,12 @@ var state = { range: "today", period: "today", metric: "power", measure: "solar"
     el("ranges").querySelectorAll("button").forEach(function (button) {
       button.setAttribute("aria-pressed", String(button.dataset.range === state.range));
     });
-    el("daily-measure").hidden = state.range !== "7d" && state.range !== "30d";
     el("daily-navigation").hidden = state.range !== "30d";
     el("metrics").hidden = state.range !== "custom";
-    el("weathers").hidden = state.range !== "custom";
-    ["metrics", "daily-measure", "weathers"].forEach(function (id) {
+    el("weather-controls").hidden = state.range === "12m";
+    ["metrics", "weathers"].forEach(function (id) {
       el(id).querySelectorAll("button").forEach(function (button) {
-        var key = id === "metrics" ? "metric" : id === "weathers" ? "weather" : "measure";
+        var key = id === "metrics" ? "metric" : "weather";
         var value = id === "weathers" ? state.weatherLayer : state[key];
         button.setAttribute("aria-pressed", String(button.dataset[key] === value));
       });
@@ -333,7 +332,7 @@ var state = { range: "today", period: "today", metric: "power", measure: "solar"
     state.dailyRows = rows;
     if (!rows.length) { clearEChart(container, "No days in this period."); return; }
     if (state.selectedDay < 0 || state.selectedDay >= rows.length) state.selectedDay = Math.max(0, rows.findLastIndex(function (day) { return day.valid; }));
-    var chart = dailySiteOption(rows, weatherHours(), { width: container.clientWidth || 640, timezone: timezone, measure: state.measure, selected: state.selectedDay, palette: chartPalette() });
+    var chart = dailySiteOption(rows, weatherHours(), { width: container.clientWidth || 640, timezone: timezone, weatherLayer: state.weatherLayer, selected: state.selectedDay, palette: chartPalette() });
     renderEChart(container, chart.option, container.clientWidth < 520 ? 338 : 410);
     container.tabIndex = 0;
     container.setAttribute("role", "group");
@@ -559,6 +558,7 @@ function render() {
       summary.ok + " complete of " + summary.windows + " stored windows";
     el("state").dataset.state = summary.source_error ? "delayed" : "live";
     // The bucket size follows the requested range, which the chart axis shows.
+    var isDailyEnergy = state.range === "7d" || state.range === "30d";
     var isCustomEnergy = state.range === "custom" && state.metric === "energy";
     var weatherName = WEATHER_LAYERS[state.weatherLayer].label.toLowerCase();
     el("chart-title").textContent =
@@ -568,11 +568,11 @@ function render() {
     el("chart-subtitle").textContent = data.resolution === "1d"
       ? "Only stored daily averages are available here. The blank part has no history."
       : state.range === "7d" || state.range === "30d"
-        ? "Daily energy and forecast cloud cover share one date axis; grid direction sits below."
+        ? "Daily solar and home energy share one date axis with forecast " + weatherName + "; grid direction sits below."
         : isCustomEnergy
           ? "Solar, home, and grid energy by window; forecast " + weatherName + " uses the right axis."
           : "Solar and signed grid power share the kW axis; forecast " + weatherName + " uses the right axis.";
-    el("power-legend").hidden = data.resolution === "1d" || state.metric === "energy" && state.range === "custom";
+    el("power-legend").hidden = data.resolution === "1d" || isDailyEnergy || isCustomEnergy;
     el("energy-legend").hidden = data.resolution === "1d" || !el("power-legend").hidden;
     el("composition").hidden = data.resolution === "1d";
     el("interval-controls").hidden = data.resolution === "1d" || isCustomEnergy;
@@ -628,7 +628,7 @@ function render() {
     el("chart-note").textContent = data.resolution === "1d"
       ? "The solar total covers the stored dates only; it is not a total for the entire selected year."
       : state.range === "7d" || state.range === "30d"
-        ? "Each date keeps its calendar position. Shaded dates are upcoming; earlier blank bars have no complete readings. The cloud line uses forecast daytime hours."
+        ? "Each date keeps its calendar position. Shaded dates are upcoming; earlier blank bars have no complete readings. The forecast line shows " + (state.weatherLayer === "precipitation" ? "daily precipitation totals" : state.weatherLayer === "uv" ? "daytime UV peaks" : "daytime " + weatherName + " averages") + "."
         : isCustomEnergy
           ? "Each bar covers one measured window; blank spans have no complete reading."
           : "";
@@ -828,17 +828,6 @@ function render() {
     load();
   });
 
-  el("daily-measure").addEventListener("click", function (event) {
-    var button = event.target.closest("button[data-measure]");
-    if (!button) return;
-    state.measure = button.dataset.measure;
-    writeUrl();
-    el("daily-measure").querySelectorAll("button").forEach(function (item) {
-      item.setAttribute("aria-pressed", String(item === button));
-    });
-    drawChart();
-  });
-
   ["daily-prev", "daily-next"].forEach(function (id) {
     el(id).addEventListener("click", function () {
       var rows = state.dailyRows || [];
@@ -885,8 +874,7 @@ function render() {
     [].forEach.call(el("weathers").querySelectorAll("button"), function (item) {
       item.setAttribute("aria-pressed", String(item === button));
     });
-    renderWeatherLegend();
-    drawChart();
+    render();
   });
 
   el("custom").addEventListener("submit", function (event) {
@@ -916,6 +904,7 @@ function render() {
     resizeTimer = window.setTimeout(drawChart, 200);
   });
 
+  initWeatherControls(el("weather-controls"), window.matchMedia("(max-width: 1000px)"));
   readUrl();
   fetch("/api/v1/location", { headers: { Accept: "application/json" }, cache: "no-store" })
     .then(function (response) { return response.ok ? response.json() : null; })

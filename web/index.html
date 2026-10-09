@@ -86,17 +86,22 @@
           <div><h2 class="chart-title" id="chart-title">Solar shape &amp; grid direction</h2>
           <p class="chart-subtitle" id="weather-current">Forecast weather loading…</p></div>
         </div>
-        <section class="controls" aria-label="Chart range">
+        <section class="controls chart-controls" aria-label="Chart range">
           <div class="control-group" id="ranges">
             <button type="button" data-range="hour" aria-pressed="false">Last hour</button>
             <button type="button" data-range="sofar" aria-pressed="true">Day so far</button>
             <button type="button" data-range="daylight" aria-pressed="false">Daylight</button>
             <button type="button" data-range="today" aria-pressed="false">Full day</button>
           </div>
-          <div class="control-group" id="weathers" aria-label="Weather layer" hidden>
-            <button type="button" data-weather="cloud" aria-pressed="true">Cloud cover</button>
-            <button type="button" data-weather="temperature" aria-pressed="false">Temperature</button>
-          </div>
+          <details class="weather-controls" id="weather-controls" open>
+            <summary id="weather-toggle">Weather · Cloud cover</summary>
+            <div class="control-group" id="weathers" aria-label="Weather layer">
+              <button type="button" data-weather="cloud" aria-pressed="true">Cloud cover</button>
+              <button type="button" data-weather="temperature" aria-pressed="false">Temperature</button>
+              <button type="button" data-weather="precipitation" aria-pressed="false">Precipitation</button>
+              <button type="button" data-weather="uv" aria-pressed="false">UV index</button>
+            </div>
+          </details>
           <details class="advanced">
             <summary>Choose exact times</summary>
             <form class="control-group custom" id="custom">

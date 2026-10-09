@@ -13,6 +13,7 @@ const modules = {
   ...await import("../../web/energy-plot.js"),
   ...await import("../../web/calibration.js"),
   ...await import("../../web/insights.js"),
+  ...await import("../../web/weather-controls.js"),
   chartPalette: () => ({ solar: "#a96508", home: "#64766e", imported: "#315f99", exported: "#167866", text: "#182d27", muted: "#64766e", line: "#dce4dc" }),
   renderEChart(node, option, height) {
     node.chartOption = option;
@@ -64,7 +65,7 @@ function page(name, reply, href = "http://localhost/") {
   };
   const context = {
     document: { getElementById: get },
-    window: { addEventListener() {}, setTimeout: () => 0, clearTimeout() {}, setInterval: () => 0, innerWidth: 1024, location, history },
+    window: { addEventListener() {}, matchMedia: () => ({ matches: false, addEventListener() {} }), setTimeout: () => 0, clearTimeout() {}, setInterval: () => 0, innerWidth: 1024, location, history },
     Date, Math, Intl, JSON, URL, URLSearchParams, isNaN, isFinite, ...modules,
     fetch(url, options) { requests.push(url); return Promise.resolve(reply(url, options)).then(result); },
   };
@@ -74,6 +75,16 @@ function page(name, reply, href = "http://localhost/") {
 }
 
 const at = Date.now();
+const disclosure = {}, phoneMedia = { matches: true, addEventListener(_event, handler) { this.change = handler; } };
+modules.initWeatherControls(disclosure, phoneMedia);
+assert.equal(disclosure.open, false);
+disclosure.open = true;
+phoneMedia.matches = false;
+phoneMedia.change();
+assert.equal(disclosure.open, true);
+phoneMedia.matches = true;
+phoneMedia.change();
+assert.equal(disclosure.open, false);
 const rows = [
   { ts: new Date(at - 240000).toISOString(), quality: "ok", complete: true, pv_kw_avg: 3.2, load_kw_reported_avg: 1.4, grid_kw_avg: -1.8, pv_kwh_total_end: 36500.0 },
   { ts: new Date(at - 180000).toISOString(), quality: "ok", complete: true, pv_kw_avg: 3.3, load_kw_reported_avg: 1.4, grid_kw_avg: -1.9, pv_kwh_total_end: 36500.05 },
@@ -137,6 +148,21 @@ await pause();
 assert.equal(customHistory.get("chart-title").textContent, "Energy by window");
 assert.equal(customHistory.get("interval-controls").hidden, true);
 assert.match(customHistory.get("chart-subtitle").textContent, /temperature/);
+const weekHistory = page("history.js", (url) =>
+  url.startsWith("/api/v1/location") ? location : url.startsWith("/api/v1/weather") ? weather : historyPayload,
+  "http://localhost/history.html?view=7d&measure=home&weather=temperature");
+await pause();
+assert.equal(weekHistory.get("weather-controls").hidden, false);
+assert.equal(weekHistory.get("weather-controls").open, true);
+assert.equal(weekHistory.get("energy-legend").hidden, false);
+assert.deepEqual(Array.from(weekHistory.get("chart").chartOption.series, (series) => series.name),
+  ["Solar", "Home (estimated)", "Temperature", "Grid in", "Grid out"]);
+weekHistory.get("weathers").handlers.click({ target: { closest: () => ({ dataset: { weather: "uv" } }) } });
+assert.match(weekHistory.location.search, /weather=uv/);
+assert.doesNotMatch(weekHistory.location.search, /measure=/);
+assert.match(weekHistory.get("chart-note").textContent, /UV peaks/);
+assert.equal(weekHistory.get("weather-toggle").textContent, "Weather · UV index");
+assert.match(weekHistory.get("chart").chartOption.yAxis[1].name, /UV PEAK/);
 page("history.js", (url) =>
   url.startsWith("/api/v1/location") ? location : url.startsWith("/api/v1/weather") ? weather : historyPayload,
   "http://localhost/history.html?view=__proto__");
@@ -162,6 +188,10 @@ assert.equal(live.get("flow-note").hidden, true);
 assert.match(live.get("reading-times").textContent, /Measured and received/);
 assert.equal(live.get("weather-legend").hidden, true);
 assert.equal(Number.isFinite(live.get("chart").chartOption.xAxis[0].max), true);
+live.get("weathers").handlers.click({ target: { closest: () => ({ dataset: { weather: "precipitation" } }) } });
+assert.match(live.location.search, /weather=precipitation/);
+assert.match(live.get("chart").chartOption.yAxis[1].name, /PRECIPITATION · mm/);
+assert.equal(live.get("weather-key").textContent, "Precipitation mm");
 live.get("ranges").handlers.click({ target: { closest: () => ({ dataset: { range: "today" } }) } });
 assert.match(live.location.search, /scenario=day/);
 assert.match(live.location.search, /view=today/);
