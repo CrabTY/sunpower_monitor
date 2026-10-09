@@ -1,12 +1,15 @@
-# Optional phone notifications
+# Optional iPhone notifications with Bark
+
+Phone notification delivery uses [Bark](https://github.com/Finb/Bark), the open-source iOS notification app by [Finb](https://github.com/Finb) and its contributors. Thank you to the Bark community for providing the app and push API. SunPower Monitor detects missing or invalid readings and decides when to send an alert or recovery message; Bark delivers those messages through Apple's push notification service.
 
 Phone notifications are configured after installation in the private dashboard's **Settings → Phone notifications**. They are off by default. There are no new `install.sh` prompts, environment variables, Cloudflare credentials or Worker secrets to configure.
 
 ## Enable from Settings
 
-1. Install [Bark](https://bark.day.app/) on your iPhone, allow notifications and copy your device Key.
-2. Sign in to your own SunPower Monitor dashboard. In Settings, paste that Key and select **Test and enable**.
-3. Check your phone for **SunPower notification test**. The page reports submission to Bark, not confirmed phone delivery. Background checks start automatically; the page can be closed.
+1. Install [Bark](https://bark.day.app/) on your iPhone and allow notifications.
+2. Open Bark and copy your device Key. If you copy the example push URL instead, such as `https://api.day.app/YOUR_DEVICE_KEY/example`, use only `YOUR_DEVICE_KEY`: the part after the hostname and before the next `/`. Each installation uses its own receiving device's Key. Keep it private.
+3. Sign in to your own SunPower Monitor dashboard and open **Settings → Phone notifications**. Paste the Key, not the URL, and select **Test and enable**. Configuration is saved only after Bark accepts the test.
+4. Check your phone for **SunPower notification test**. Settings should show **Enabled**, then **Background checks: Running** after the first scheduled check. The page reports submission to Bark, not confirmed phone delivery. Background checks run every minute; the page can be closed.
 
 **Send test** uses the saved device without changing monitoring. **Pause notifications** retains the encrypted Key but clears pending incidents. **Test and enable** resumes monitoring with a fresh ten-minute grace period. To replace the device, paste its new Key and select **Test and save device**; a failed test keeps the previous configuration. **Delete configuration** removes the Key and pending incident from the active database (existing backups are not rewritten). Already submitted notifications cannot be recalled.
 

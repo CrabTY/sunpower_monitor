@@ -1,6 +1,8 @@
-# Reference projects and collector comparison
+# Reference projects, acknowledgements and collector comparison
 
-Links identify the upstream versions reviewed for protocol and UI decisions. These projects are references, not bundled dependencies. Any directly copied code must retain the notices required by its MIT or Apache-2.0 license.
+We thank the authors and contributors of the projects below for sharing their protocol research, implementations and interface designs. The [README acknowledgements](../README.md#acknowledgements) name and link every project owner and summarize how each project informed this work.
+
+Links identify the upstream versions reviewed for protocol and UI decisions. The collector and UI projects below are references, not bundled dependencies. Any directly copied code must retain the notices required by its MIT or Apache-2.0 license.
 
 | Project | Collector entry point | Strengths | Limits for this project |
 | --- | --- | --- | --- |
@@ -24,6 +26,10 @@ Links identify the upstream versions reviewed for protocol and UI decisions. The
 ## Additional UI references
 
 Collector analysis is separate from UI design. We also compared [Solar Sentinel](https://github.com/smcneece/solar-sentinel) for its panel matrix, daylight arc, time slider, and individual-panel history; [sunpower-monitor](https://github.com/karak2112/sunpower-monitor/tree/4806123242424696f570243b3dc01b40079d7a7c/apps/web) for current power, flow, freshness, and panel replay; and the presentation patterns in [PVS Watch](https://github.com/timkatz/pvswatch), [dash-sunpower](https://github.com/strawtype/dash-sunpower), [SunPower-Web-Monitor](https://github.com/thomastech/SunPower-Web-Monitor), and [SOLECTRUS](https://github.com/solectrus/solectrus). See the [current browser implementation](architecture.md#browser-dashboard) for the shipped interface. Solar Sentinel is a Home Assistant UI reference, not a collector for this project.
+
+## Notification delivery
+
+Optional iPhone alerts use [Bark](https://github.com/Finb/Bark), created by [Finb](https://github.com/Finb) and maintained with its contributors. Bark provides the receiving iOS app and push API; SunPower Monitor calls that API from its dashboard Worker after detecting a sustained fault or recovery. The current integration sends to `https://api.day.app/push`. See [Bark's official documentation](https://bark.day.app/) and our [notification setup guide](notifications.md).
 
 ## Reviewed versions
 
