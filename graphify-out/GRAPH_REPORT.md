@@ -1,12 +1,12 @@
-# Graph Report - sunpower_monitor  (2026-10-09)
+# Graph Report - sunpower-monitor  (2026-10-09)
 
 ## Corpus Check
-- 92 files · ~247,102 words
+- 92 files · ~247,191 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 12 file(s) not represented in the graph (top: (none) 5, .example 4, .css 2)
 
 ## Summary
-- 1408 nodes · 2946 edges · 95 communities (66 shown, 29 thin omitted)
+- 1409 nodes · 2947 edges · 94 communities (68 shown, 26 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 100 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
@@ -30,11 +30,11 @@
 - month-check.mjs
 - PVSClient
 - page-render-check.mjs
-- Collector
+- PendingQueue
 - test_pvs.py
 - test_collector.py
 - pypvs-evaluation.py
-- upload.py
+- RejectedError
 - local-cloud-check.mjs
 - UploaderTests
 - settings.js
@@ -57,7 +57,7 @@
 - contract.ts
 - schema.sql
 - Project layout
-- test_ingest_local.py
+- main.py
 - exportStats
 - Manual installation: private dashboard without a custom domain
 - Local preview with simulated data
@@ -67,7 +67,7 @@
 - live.ts
 - FakeIngest
 - Clock
-- RetryableError
+- Collector
 - SDKChecks
 - introduction-check.mjs
 - Collector Recovery Implementation Plan
@@ -84,7 +84,7 @@
 - pre-push
 - Bark Alerts Implementation Plan
 - introduction.js
-- SiteMinute
+- check_reads
 - ReadCheckTests
 - Reference projects, acknowledgements and collector comparison
 - Optional iPhone notifications with Bark
@@ -102,9 +102,8 @@
 - workers_dist_shared_contract_validatebatch
 - PVS Compatibility Implementation Plan
 - PVS compatibility and read-only checks
-- Env
+- .test_minute_history_reaches_the_endpoint_and_is_acknowledged
 - weather-controls.js
-- FakeOpener
 - 2026-10-09-notifications.sql
 
 ## God Nodes (most connected - your core abstractions)
@@ -134,7 +133,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (95 total, 29 thin omitted)
+## Communities (94 total, 26 thin omitted)
 
 ### Community 0 - "contract.test.ts"
 Cohesion: 0.14
@@ -178,7 +177,7 @@ Nodes (29): allowResolve(), censusPlaces(), getJson(), isFiniteNumber(), isValid
 
 ### Community 10 - "model.py"
 Cohesion: 0.11
-Nodes (27): device_fields(), finite_number(), floor_minute(), floor_slot(), _from_epoch(), _index_key(), _livedata_fields(), MeterSample (+19 more)
+Nodes (28): device_fields(), finite_number(), floor_minute(), _from_epoch(), _index_key(), _livedata_fields(), MeterSample, parse_measured_time() (+20 more)
 
 ### Community 11 - "query.ts"
 Cohesion: 0.12
@@ -197,40 +196,40 @@ Cohesion: 0.14
 Nodes (16): Validation, DEFAULT_WEATHER_SPAN_SECONDS, FORECAST_FIELDS, localDate(), MAX_WEATHER_ROWS, MAX_WEATHER_SPAN_SECONDS, numberOrNull(), parseWeatherRange() (+8 more)
 
 ### Community 15 - "CollectorTestCase"
-Cohesion: 0.16
-Nodes (4): CollectorTestCase, A frozen measurement time is not a reading: one bootstrap row, then a gap., One attempt a minute: the pause never grows past the first minute., The Pi's monotonic clock starts at boot, so due times need the offset.
+Cohesion: 0.13
+Nodes (5): CollectorTestCase, published(), A frozen measurement time is not a reading: one bootstrap row, then a gap., A PVS restart renumbers every index; identity has to come from the serial., One attempt a minute: the pause never grows past the first minute.
 
 ### Community 16 - "month-check.mjs"
 Cohesion: 0.15
 Nodes (23): ref_workers_dist_shared_contract_js, buildSql(), check(), clamp(), contractRecords(), daylightHours(), dayOfYear(), declination() (+15 more)
 
 ### Community 17 - "PVSClient"
-Cohesion: 0.16
+Cohesion: 0.17
 Nodes (8): PVSAuthError, PVSClient, Derive the in-memory session credential from a focused serial read., Every read gets at most one session refresh, regardless of rejection format., Small uncached query used to spot PVS restarts and rising load., Focused identity diagnostics; exclude SSID, MAC and other settings., The PVS rejected the session with HTTP 401/403., One serialized read-only connection to a PVS varserver on the LAN.
 
 ### Community 18 - "page-render-check.mjs"
 Cohesion: 0.06
 Nodes (30): anchoredHistory, at, customHistory, disclosure, here, history, historyPayload, live (+22 more)
 
-### Community 19 - "Collector"
-Cohesion: 0.06
-Nodes (20): Collector, Exception, One small cloud event per hour: proof the collector itself is alive., Name the group and exception behind an empty or short minute., Drive PVS reads on a monotonic schedule and persist what must survive., PendingQueue, Oldest pending records first, with their stored payload unchanged., Isolate records the cloud rejected so the queue can move on. (+12 more)
+### Community 19 - "PendingQueue"
+Cohesion: 0.08
+Nodes (10): PendingQueue, Oldest pending records first, with their stored payload unchanged., Isolate records the cloud rejected so the queue can move on., Stable, serial-free panel ID for one inverter. The serial decides identity, and…, Keep one row per index, so the index fallback never reads a stale one., Last known inverter index per panel, so a renumbering is visible., One writer (the collector process) over one SQLite file., Move a pre-serial panel_map to the serial-keyed shape, keeping ids. (+2 more)
 
 ### Community 20 - "test_pvs.py"
-Cohesion: 0.16
-Nodes (18): base64, Read-only PVS varserver client: focused, serialized queries. Boundaries taken…, datetime, errno, http_cookiejar, http_server, now_utc(), Read-only PVS6 cadence and health pilot. Logs metadata, never power values. (+10 more)
+Cohesion: 0.11
+Nodes (24): base64, _build_opener(), Read-only PVS varserver client: focused, serialized queries. Boundaries taken…, _ids_from(), Ingest client: discardable latest-value PUTs and idempotent history batches.…, datetime, errno, http_cookiejar (+16 more)
 
 ### Community 21 - "test_collector.py"
-Cohesion: 0.09
-Nodes (25): argparse, Read-only SunPower PVS varserver collector: LAN polling, local queue, cloud…, Serialized PVS varserver collector: tiered reads, minute rollup, local queue,…, utc_now(), SQLite pending-upload queue and Pi-side anonymous panel mapping. Commit locally…, hashlib, io, json (+17 more)
+Cohesion: 0.10
+Nodes (22): argparse, SQLite pending-upload queue and Pi-side anonymous panel mapping. Commit locally…, hashlib, json, os, pathlib, pty, re (+14 more)
 
 ### Community 22 - "pypvs-evaluation.py"
-Cohesion: 0.15
-Nodes (12): aiohttp, logging, math, pypvs, pypvs_models_common, pypvs_models_inverter, pypvs_models_livedata, pypvs_models_pvs (+4 more)
-
-### Community 23 - "upload.py"
 Cohesion: 0.13
-Nodes (11): AuthError, _ids_from(), _parse_json(), Exception, Ingest client: discardable latest-value PUTs and idempotent history batches.…, Base class for ingest failures., The upload token was rejected; stop sending until an operator acts., The batch was rejected; isolate these record IDs and keep the rest. (+3 more)
+Nodes (13): aiohttp, Read-only SunPower PVS varserver collector: LAN polling, local queue, cloud…, logging, math, pypvs, pypvs_models_common, pypvs_models_inverter, pypvs_models_livedata (+5 more)
+
+### Community 23 - "RejectedError"
+Cohesion: 0.13
+Nodes (9): _parse_json(), Exception, Base class for ingest failures., Network trouble, timeout, 429, or 5xx: keep the records and retry later., The batch was rejected; isolate these record IDs and keep the rest., Return the accepted record IDs; the caller deletes exactly those., RejectedError, RetryableError (+1 more)
 
 ### Community 24 - "local-cloud-check.mjs"
 Cohesion: 0.14
@@ -289,12 +288,12 @@ Cohesion: 0.22
 Nodes (9): 1. Start the installer on the collector host, 2. Approve Cloudflare access in your browser, 3. Configure and deploy in the collector-host terminal, 4. Register GitHub login in your browser, 5. Check GitHub login in your browser, 6. Pull and start the collector on the same host, After installation: verify readings in your browser, Before you start (+1 more)
 
 ### Community 39 - "PVSError"
-Cohesion: 0.12
-Nodes (18): ArgumentParser, build_parser(), check_reads(), connect_pvs(), main(), One read-only pass over every group; prints values, stores nothing., Wait for the PVS instead of crash-looping when it is rebooting or down., gateway_info() (+10 more)
+Cohesion: 0.18
+Nodes (8): PVSError, A PVS read failed: transport, malformed response, or repeated auth failure., RuntimeError, fail(), authenticate(), StartupTests, __init__(), __init__()
 
 ### Community 40 - "Architecture"
-Cohesion: 0.25
-Nodes (8): Architecture, Authentication and private settings, Browser dashboard, Collection and delivery, Compatibility, Components and boundaries, Decisions, Installation and upgrade artifacts
+Cohesion: 0.22
+Nodes (9): Architecture, Authentication and private settings, Browser dashboard, Collection and delivery, Compatibility, Components and boundaries, Data contract and history, Decisions (+1 more)
 
 ### Community 41 - "CT coverage limits and home-use calibration"
 Cohesion: 0.25
@@ -316,9 +315,9 @@ Nodes (13): collector_event, collector_event_by_collector, latest_site, panel_kn
 Cohesion: 0.67
 Nodes (3): Local configuration and persistent data, Project layout, Source and generated output
 
-### Community 46 - "test_ingest_local.py"
-Cohesion: 0.12
-Nodes (21): datetime, live_payload(), PanelSample, One ``site_latest`` snapshot for the discardable live path., Deterministic record ID; replay keeps the same ID and content., record_id(), to_iso(), Insert records, ignoring ones already queued under the same ID. (+13 more)
+### Community 46 - "main.py"
+Cohesion: 0.10
+Nodes (25): datetime, Serialized PVS varserver collector: tiered reads, minute rollup, local queue,…, floor_slot(), live_payload(), PanelSample, One ``site_latest`` snapshot for the discardable live path., Deterministic record ID; replay keeps the same ID and content., record_id() (+17 more)
 
 ### Community 48 - "Manual installation: private dashboard without a custom domain"
 Cohesion: 0.29
@@ -340,9 +339,13 @@ Nodes (14): authorized(), collectorId(), Env, fetch(), json(), postRecords(), pu
 Cohesion: 0.33
 Nodes (6): DELAYED_THRESHOLD_SECONDS, freshness, LIVE_THRESHOLD_SECONDS, LiveRow, presentLatest(), toIso()
 
-### Community 56 - "RetryableError"
-Cohesion: 0.29
-Nodes (3): Network trouble, timeout, 429, or 5xx: keep the records and retry later., RetryableError, A PVS restart renumbers every index; identity has to come from the serial.
+### Community 55 - "Clock"
+Cohesion: 0.20
+Nodes (4): Clock, FakeOpener, Virtual monotonic clock so adapter tests never sleep in real time., Minimal stand-in for urllib's opener; records every requested path.
+
+### Community 56 - "Collector"
+Cohesion: 0.20
+Nodes (5): Collector, Exception, One small cloud event per hour: proof the collector itself is alive., Name the group and exception behind an empty or short minute., Drive PVS reads on a monotonic schedule and persist what must survive.
 
 ### Community 57 - "SDKChecks"
 Cohesion: 0.07
@@ -365,8 +368,8 @@ Cohesion: 0.80
 Nodes (4): calibrated(), calibrateHistory(), calibrateLive(), gridRatio()
 
 ### Community 63 - "CompatibilityTests"
-Cohesion: 0.15
-Nodes (5): _build_opener(), CompatibilityTests, do_GET(), local_opener(), Clearing a jar the opener does not use leaves the stale cookie in place.
+Cohesion: 0.22
+Nodes (3): CompatibilityTests, do_GET(), local_opener()
 
 ### Community 64 - "Contributing"
 Cohesion: 0.40
@@ -380,9 +383,9 @@ Nodes (6): Bark Alerts Implementation Plan, Task 1: Storage and notification beh
 Cohesion: 0.12
 Nodes (18): cell(), buttons, comparison, header, imageLinks, navigation, originalImage, phone (+10 more)
 
-### Community 73 - "SiteMinute"
-Cohesion: 0.18
-Nodes (3): Accumulates the site samples that belong to one UTC minute., SiteMinute, published()
+### Community 73 - "check_reads"
+Cohesion: 0.20
+Nodes (10): ArgumentParser, build_parser(), check_reads(), connect_pvs(), main(), One read-only pass over every group; prints values, stores nothing., Wait for the PVS instead of crash-looping when it is rebooting or down., gateway_info() (+2 more)
 
 ### Community 75 - "Reference projects, acknowledgements and collector comparison"
 Cohesion: 0.33
@@ -400,20 +403,24 @@ Nodes (4): Evidence limits, PVS Compatibility Implementation Plan, Scope and acc
 Cohesion: 0.40
 Nodes (5): Evidence and scope, Hardware acceptance, Implemented flow, PVS compatibility and read-only checks, Run the existing check
 
+### Community 91 - ".test_minute_history_reaches_the_endpoint_and_is_acknowledged"
+Cohesion: 0.16
+Nodes (6): Env, do_POST(), do_PUT(), _payload(), Virtual wall clock plus monotonic clock advanced by the collector's sleeps., The Pi's monotonic clock starts at boot, so due times need the offset.
+
 ## Knowledge Gaps
-- **357 isolated node(s):** `PATH`, `DASHBOARD_WORKER_NAME`, `INGEST_WORKER_NAME`, `D1_DATABASE_NAME`, `COLLECTOR_ID` (+352 more)
+- **358 isolated node(s):** `PATH`, `DASHBOARD_WORKER_NAME`, `INGEST_WORKER_NAME`, `D1_DATABASE_NAME`, `COLLECTOR_ID` (+353 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 592 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **29 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **26 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ADR-0001: Evaluate PyPVS for the collector` connect `SDKChecks` to `docs/README.md`, `PVSError`?**
-  _High betweenness centrality (0.292) - this node is a cross-community bridge._
+- **Why does `ADR-0001: Evaluate PyPVS for the collector` connect `SDKChecks` to `check_reads`, `docs/README.md`?**
+  _High betweenness centrality (0.287) - this node is a cross-community bridge._
 - **Why does `ok()` connect `notifications.ts` to `PVS Compatibility Implementation Plan`, `SDKChecks`, `PVS compatibility and read-only checks`, `Optional iPhone notifications with Bark`?**
-  _High betweenness centrality (0.232) - this node is a cross-community bridge._
-- **Why does `Context and requirements` connect `PVSError` to `SDKChecks`, `Collector`?**
-  _High betweenness centrality (0.217) - this node is a cross-community bridge._
+  _High betweenness centrality (0.231) - this node is a cross-community bridge._
+- **Why does `Context and requirements` connect `check_reads` to `Collector`, `SDKChecks`, `PVSError`?**
+  _High betweenness centrality (0.214) - this node is a cross-community bridge._
 - **Are the 7 inferred relationships involving `CollectorTestCase` (e.g. with `Collector` and `PVSError`) actually correct?**
   _`CollectorTestCase` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 8 inferred relationships involving `Collector` (e.g. with `PVSError` and `PendingQueue`) actually correct?**
