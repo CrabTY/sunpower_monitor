@@ -14,8 +14,8 @@ For a new installation, start with the [Release installer](quick-start.md). This
 Clone the official repository and select the reviewed release tag or full commit SHA you intend to install. Replace `YOUR_RELEASE_TAG_OR_COMMIT` below with that value. Use the same commit on the workstation and collector host:
 
 ```sh
-git clone https://github.com/CrabTY/sunpower_monitor.git
-cd sunpower_monitor
+git clone https://github.com/CrabTY/sunpower-monitor.git
+cd sunpower-monitor
 git checkout --detach YOUR_RELEASE_TAG_OR_COMMIT
 git rev-parse HEAD
 npm ci
@@ -89,8 +89,8 @@ Before configuring the collector, confirm that `GET` on the ingest version endpo
 On the Linux collector host, clone the repository and check out the exact commit printed in step 1. Create the restricted collector account if it does not already exist:
 
 ```sh
-git clone https://github.com/CrabTY/sunpower_monitor.git
-cd sunpower_monitor
+git clone https://github.com/CrabTY/sunpower-monitor.git
+cd sunpower-monitor
 git checkout --detach YOUR_FULL_COMMIT_SHA
 sudo useradd --system --home /nonexistent --shell /usr/sbin/nologin sunpower
 sudo install -d -o root -g sunpower -m 0750 /etc/sunpower-monitor

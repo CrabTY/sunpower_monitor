@@ -20,7 +20,7 @@ for (const [name, page] of Object.entries(pages)) {
   for (const [, asset] of page.matchAll(/src="(assets\/[^"]+)"/g)) assets.add(asset);
 }
 assert.doesNotMatch(pages['index.html'], /id="(setup|compare|architecture|references|calibration|calibration-guide)"/);
-assert.match(pages['getting-started.html'], /href="https:\/\/github.com\/CrabTY\/sunpower_monitor\/blob\/main\/docs\/ct-calibration.md"/);
+assert.match(pages['getting-started.html'], /href="https:\/\/github.com\/CrabTY\/sunpower-monitor\/blob\/main\/docs\/ct-calibration.md"/);
 const setupSections = Array.from(pages['getting-started.html'].matchAll(/<section\b[^>]*\bid="([^"]+)"/g), ([, id]) => id);
 assert.equal(setupSections.at(-1), 'calibration');
 for (const name of ['index.html', 'getting-started.html']) {
@@ -49,7 +49,7 @@ function link(href) {
 }
 const screenshot = link('assets/live.png');
 const internal = link('getting-started.html#first-use');
-const external = link('https://github.com/CrabTY/sunpower_monitor');
+const external = link('https://github.com/CrabTY/sunpower-monitor');
 const option = { dataset: { en: 'Home Assistant', zh: 'Home Assistant' } };
 const bodyClasses = new Set();
 const titleEn = pages['index.html'].match(/data-title-en="([^"]+)"/)[1];
@@ -79,7 +79,7 @@ assert.equal(language, 'en', 'A URL without a language defaults to English');
 assert.equal(new URL(window.location.href).searchParams.get('lang'), 'en');
 assert.equal(new URL(internal.attrs.href).searchParams.get('lang'), 'en');
 assert.equal(new URL(internal.attrs.href).hash, '#first-use');
-assert.equal(external.attrs.href, 'https://github.com/CrabTY/sunpower_monitor');
+assert.equal(external.attrs.href, 'https://github.com/CrabTY/sunpower-monitor');
 const offset = sections[0].top - header.height - 24;
 buttons[0].click();
 assert.equal(language, 'zh-CN');

@@ -28,11 +28,11 @@ Cloudflare's Wrangler login lives in a temporary private directory while the scr
 For a published release, download **one script** directly on the Pi/NAS and run it in an interactive terminal:
 
 ```sh
-curl -fL --output install.sh https://github.com/CrabTY/sunpower_monitor/releases/download/v0.1.0/install.sh
+curl -fL --output install.sh https://github.com/CrabTY/sunpower-monitor/releases/download/v0.1.0/install.sh
 bash install.sh
 ```
 
-Use the same release's `SHA256SUMS` to verify the download. The script downloads the exact source commit from `CrabTY/sunpower_monitor` into a temporary directory for the two Workers and pulls the collector by its multi-platform image digest. Both pins are recorded in the attached `release.json`; Docker selects AMD64 or ARM64. It does not build an image on your host.
+Use the same release's `SHA256SUMS` to verify the download. The script downloads the exact source commit from `CrabTY/sunpower-monitor` into a temporary directory for the two Workers and pulls the collector by its multi-platform image digest. Both pins are recorded in the attached `release.json`; Docker selects AMD64 or ARM64. It does not build an image on your host.
 
 ## 2. Approve Cloudflare access in your browser
 

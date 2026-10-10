@@ -2,14 +2,14 @@
 
 **A private solar dashboard with live power, energy history, and individual-panel monitoring for SunPower PVS6.**
 
-[![Checks](https://github.com/CrabTY/sunpower_monitor/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/CrabTY/sunpower_monitor/actions/workflows/check.yml)
-[![Security checks](https://github.com/CrabTY/sunpower_monitor/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/CrabTY/sunpower_monitor/actions/workflows/security.yml)
-[![GitHub Pages](https://github.com/CrabTY/sunpower_monitor/actions/workflows/pages.yml/badge.svg?branch=main)](https://crabty.github.io/sunpower_monitor/)
-[![Release](https://img.shields.io/github/v/release/CrabTY/sunpower_monitor)](https://github.com/CrabTY/sunpower_monitor/releases/latest)
-[![Live demo](https://img.shields.io/badge/demo-live-green)](https://crabty.github.io/sunpower_monitor/demo/?scenario=day)
+[![Checks](https://github.com/CrabTY/sunpower-monitor/actions/workflows/check.yml/badge.svg?branch=main)](https://github.com/CrabTY/sunpower-monitor/actions/workflows/check.yml)
+[![Security checks](https://github.com/CrabTY/sunpower-monitor/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/CrabTY/sunpower-monitor/actions/workflows/security.yml)
+[![GitHub Pages](https://github.com/CrabTY/sunpower-monitor/actions/workflows/pages.yml/badge.svg?branch=main)](https://crabty.github.io/sunpower-monitor/)
+[![Release](https://img.shields.io/github/v/release/CrabTY/sunpower-monitor)](https://github.com/CrabTY/sunpower-monitor/releases/latest)
+[![Live demo](https://img.shields.io/badge/demo-live-green)](https://crabty.github.io/sunpower-monitor/demo/?scenario=day)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Website](https://crabty.github.io/sunpower_monitor/) · [Live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day) · [Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md) · [Acknowledgements](#acknowledgements)
+[Website](https://crabty.github.io/sunpower-monitor/) · [Live demo](https://crabty.github.io/sunpower-monitor/demo/?scenario=day) · [Installation](#installation) · [Dashboard tour](#dashboard-tour) · [Compatibility](#gateway-compatibility) · [FAQ](#frequently-asked-questions) · [Documentation](docs/README.md) · [Acknowledgements](#acknowledgements)
 
 SunPower Monitor helps you see what your solar system is doing now, how its energy use changes over time, and how each panel performs. It reads your PVS6 on the home network, records history, and serves a dashboard you can open on a computer or phone, including when you are away from home.
 
@@ -44,7 +44,7 @@ You can use Cloudflare's `workers.dev` address without a custom domain. Home Ass
 
 For a published version, follow the [Quick Start](docs/quick-start.md):
 
-1. Download `install.sh` and `SHA256SUMS` from the same [GitHub Release](https://github.com/CrabTY/sunpower_monitor/releases) onto the collector host.
+1. Download `install.sh` and `SHA256SUMS` from the same [GitHub Release](https://github.com/CrabTY/sunpower-monitor/releases) onto the collector host.
 2. Verify the installer and run it in that host's terminal:
 
    ```sh
@@ -117,7 +117,7 @@ Only the collector contacts the PVS. It uploads over outbound HTTPS, so remote v
 ## Frequently asked questions
 
 **Can I use it without installing anything first?**
-Yes: [open the read-only live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day). It uses the same dashboard code with simulated readings, without a PVS, Cloudflare deployment, account, or household data. Developers can also [preview it locally](docs/preview.md).
+Yes: [open the read-only live demo](https://crabty.github.io/sunpower-monitor/demo/?scenario=day). It uses the same dashboard code with simulated readings, without a PVS, Cloudflare deployment, account, or household data. Developers can also [preview it locally](docs/preview.md).
 
 **Does it run entirely offline?**
 PVS collection happens locally, but the hosted dashboard requires Cloudflare and an Internet connection. Historical records queue on the collector during a connection outage. Latest live snapshots are not replayed as history.

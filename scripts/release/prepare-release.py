@@ -35,7 +35,7 @@ def main():
     installer.write_text(source)
     installer.chmod(0o755)
     manifest = {
-        "repository": "CrabTY/sunpower_monitor",
+        "repository": "CrabTY/sunpower-monitor",
         "tag": args.revision,
         "commit": args.commit,
         "collector_image": args.image,

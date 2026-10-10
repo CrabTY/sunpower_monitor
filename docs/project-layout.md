@@ -4,7 +4,7 @@ The private installation and public demo use this one source tree. Generated
 output and household configuration are kept separately from tracked source.
 
 ```text
-sunpower_monitor/
+sunpower-monitor/
 ├── collector/               Python collector, PVS client, queue and uploads
 ├── workers/
 │   ├── ingest/              Upload API, weather sync and daily rollups

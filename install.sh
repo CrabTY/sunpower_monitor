@@ -56,7 +56,7 @@ if [[ -f "$script_dir/package-lock.json" && -f "$script_dir/workers/schema.sql" 
 else
   mkdir -p "$scratch/source"
   echo "Downloading the source needed to deploy the Cloudflare Workers..."
-  curl -fsSL "https://github.com/CrabTY/sunpower_monitor/archive/$release_commit.tar.gz" |
+  curl -fsSL "https://github.com/CrabTY/sunpower-monitor/archive/$release_commit.tar.gz" |
     tar -xz -C "$scratch/source" --strip-components=1 || {
       echo "Source download failed. Check that this release is publicly available." >&2
       exit 1

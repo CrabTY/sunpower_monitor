@@ -20,7 +20,7 @@ These documents describe the current installation and code. Start with the guide
 
 ## Separate introduction site
 
-Open the [Chinese/English introduction website](https://crabty.github.io/sunpower_monitor/) or the [read-only live demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day). Their source lives in [site/](../site/), alongside its styles, script and simulated screenshots; the demo reuses `web/`. For local development, run `npm run preview` and open `http://127.0.0.1:4173/introduction/`, or run `npm run build:site` and serve `dist/site/` to include the demo.
+Open the [Chinese/English introduction website](https://crabty.github.io/sunpower-monitor/) or the [read-only live demo](https://crabty.github.io/sunpower-monitor/demo/?scenario=day). Their source lives in [site/](../site/), alongside its styles, script and simulated screenshots; the demo reuses `web/`. For local development, run `npm run preview` and open `http://127.0.0.1:4173/introduction/`, or run `npm run build:site` and serve `dist/site/` to include the demo.
 
 ## Images
 

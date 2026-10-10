@@ -18,7 +18,7 @@ jobs:
 
   publish:
     needs: security
-    if: github.repository == 'CrabTY/sunpower_monitor'
+    if: github.repository == 'CrabTY/sunpower-monitor'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -65,7 +65,7 @@ jobs:
           push: true
           tags: ghcr.io/crabty/sunpower-monitor-collector:${{ github.ref_name }}
           labels: |
-            org.opencontainers.image.source=https://github.com/CrabTY/sunpower_monitor
+            org.opencontainers.image.source=https://github.com/CrabTY/sunpower-monitor
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.version=${{ github.ref_name }}
       - name: Prepare fixed installer references

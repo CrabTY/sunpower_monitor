@@ -1,3 +1,10 @@
+## Repository
+
+- Canonical repository: `CrabTY/sunpower-monitor` at https://github.com/CrabTY/sunpower-monitor.
+- Introduction and simulated demo: https://crabty.github.io/sunpower-monitor/ and its `demo/` path; source in `site/` and `web/`, generated output in ignored `dist/site/`.
+- Documentation starts at `docs/README.md`; see `docs/project-layout.md` for directories, `CONTRIBUTING.md` for local checks, and `docs/operations.md` for deployment and releases.
+- Naming changes must reach repository/Pages links, installer source downloads, release metadata and workflow guards, documentation and related checks. Runtime service and image names already use `sunpower-monitor`.
+
 ## graphify
 
 This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.

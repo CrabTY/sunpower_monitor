@@ -224,7 +224,7 @@ For a host without Docker, use the provided [systemd unit](../deploy/pi/sunpower
 
 ```sh
 sudo install -d -o sunpower -g sunpower -m 0750 /opt/sunpower-monitor
-sudo -u sunpower git clone https://github.com/CrabTY/sunpower_monitor.git /opt/sunpower-monitor
+sudo -u sunpower git clone https://github.com/CrabTY/sunpower-monitor.git /opt/sunpower-monitor
 sudo -u sunpower git -C /opt/sunpower-monitor checkout --detach YOUR_FULL_COMMIT_SHA
 sudo install -m 0644 /opt/sunpower-monitor/deploy/pi/sunpower-monitor.service /etc/systemd/system/
 sudo systemctl daemon-reload
@@ -272,7 +272,7 @@ The SQL export contains telemetry, location, and history. Keep it outside the re
 
 ## AMD64 and ARM64 images
 
-The [release workflow](../.github/workflows/release.yml) checks a reviewed `vMAJOR.MINOR.PATCH` tag on main, builds AMD64 and ARM64, and publishes `ghcr.io/crabty/sunpower-monitor-collector:<tag>`. Its OCI source label names `CrabTY/sunpower_monitor`. It verifies the image index, then attaches `install.sh`, `release.json`, `image-index.json`, and `SHA256SUMS` to the GitHub Release. The generated installer pins the image by digest and downloads the exact source commit. The source-tree `install.sh` is a template; it stops before setup when no release image is set. Ordinary pushes, PRs and check runs do not publish.
+The [release workflow](../.github/workflows/release.yml) checks a reviewed `vMAJOR.MINOR.PATCH` tag on main, builds AMD64 and ARM64, and publishes `ghcr.io/crabty/sunpower-monitor-collector:<tag>`. Its OCI source label names `CrabTY/sunpower-monitor`. It verifies the image index, then attaches `install.sh`, `release.json`, `image-index.json`, and `SHA256SUMS` to the GitHub Release. The generated installer pins the image by digest and downloads the exact source commit. The source-tree `install.sh` is a template; it stops before setup when no release image is set. Ordinary pushes, PRs and check runs do not publish.
 
 For maintainers, package visibility and Actions write access are configured independently of repository visibility. Review all exposed image versions and provenance before making a package public, and verify anonymous Release downloads and image pulls before advertising the installer.
 

@@ -94,6 +94,7 @@ fi
             "--image", release_image, "--output", str(temp),
         ], check=True)
         manifest = json.loads((temp / "release.json").read_text())
+        assert manifest["repository"] == "CrabTY/sunpower-monitor"
         assert manifest["tag"] == revision and manifest["commit"] == commit
         assert manifest["collector_image"] == release_image
         assert manifest["installer_sha256"] == hashlib.sha256(installer.read_bytes()).hexdigest()
@@ -174,7 +175,7 @@ fi
         assert "Paste the ingest" not in output and "Paste the dashboard" not in output, output
         assert "Collector image reference" not in output, output
         assert f"Using collector image: {image}" in output, output
-        assert f"https://github.com/CrabTY/sunpower_monitor/archive/{commit}.tar.gz" in (temp / "curl.log").read_text()
+        assert f"https://github.com/CrabTY/sunpower-monitor/archive/{commit}.tar.gz" in (temp / "curl.log").read_text()
         assert "Homepage URL:\r\n     https://demo-solar-dashboard.example.workers.dev" in output, output
         assert "Generate a new client secret" in output, output
         assert output.index("[4/6]") < output.index("Register application") < output.index("[5/6]"), output

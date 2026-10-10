@@ -1,6 +1,6 @@
 # Local preview with simulated data
 
-Try the [project introduction](https://crabty.github.io/sunpower_monitor/) or [read-only simulated demo](https://crabty.github.io/sunpower_monitor/demo/?scenario=day) online. The steps below describe local development and reproduction.
+Try the [project introduction](https://crabty.github.io/sunpower-monitor/) or [read-only simulated demo](https://crabty.github.io/sunpower-monitor/demo/?scenario=day) online. The steps below describe local development and reproduction.
 
 The preview loads the current worktree's `web/` pages with fixed simulated API data for Live, History, Panels and Settings. It **does not export real history from the production D1 database** or request or modify production APIs. Use it to compare page states repeatedly; it cannot establish actual production or validate database queries.
 
@@ -55,4 +55,4 @@ This repository is already published on GitHub Pages with **Settings â†’ Pages â
 
 A manual `pages` run with `publish` unchecked verifies security checks, the build and a temporary Pages artifact. Checking `publish` also publishes the site. After initial publication, relevant `main` updates in a public repository publish automatically; failed security checks block publication. Pushes in private repositories validate the build without automatic publication.
 
-The homepage is `https://crabty.github.io/sunpower_monitor/`, with the demo under `demo/`. README and GitHub About use those verified addresses. For another repository, verify links against the workflow's actual `page_url`. GitHub Pages does not read Cloudflare's `_headers`; the demo's network restrictions use HTML CSP and browser replacements, while settings and real geolocation remain disabled.
+The homepage is `https://crabty.github.io/sunpower-monitor/`, with the demo under `demo/`. README and GitHub About use those verified addresses. For another repository, verify links against the workflow's actual `page_url`. GitHub Pages does not read Cloudflare's `_headers`; the demo's network restrictions use HTML CSP and browser replacements, while settings and real geolocation remain disabled.
